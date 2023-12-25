@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image" href="logo.jpg">
+    <title>Ripples</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* General styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #ffd700;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            width: 80%;
+            background-color: #3498db;
+            padding: 20px;
+            text-align: center;
+            position: relative; /* Added position relative for header-dots positioning */
+        }
+
+        .header-logo {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            max-width: 80px; /* Adjust the size of the logo */
+            height: auto;
+        }
+
+        .header-dots {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 48px; /* Larger font size for the icon */
+            color: #fff;
+            cursor: pointer; /* Add cursor pointer for interaction */
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 48px;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        /* Button styles */
+        .button {
+            display: inline-block;
+            padding: 40px 80px; /* Increased padding */
+            margin: 10px;
+            text-decoration: none;
+            font-size: 32px; /* Adjusted font size */
+            font-weight: bold;
+            color: #fff;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .blue {
+            background-color: #0022ff; /* Gold background */
+        }
+        .green {
+            background-color: #22ff00; /* Gold background */
+        }
+        .orange {
+            background-color: #ff8800; /* Gold background */
+        }
+        .purple {
+            background-color: #bf00ff; /* Gold background */
+        }
+        .pink {
+            background-color: #ff00ee; /* Gold background */
+        }
+
+        /* Rest of button styles... */
+
+        .gray {
+            background-color: #888; /* Color for Privacy Policy button */
+            padding: 10px 20px; /* Adjusted padding for smaller size */
+            font-size: 16px; /* Smaller font size */
+            border-radius: 5px; /* Slightly smaller border radius */
+        }
+
+        .gray:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Media query for smaller screens */
+        @media screen and (max-width: 768px) {
+            .button {
+                display: block;
+                width: 80%;
+                margin: 10px auto;
+                padding: 20px;
+                font-size: 24px;
+            }
+        }
+
+        /* Popup styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            color: #fff;
+            z-index: 9999;
+        }
+
+        .popup-content {
+            text-align: center;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            color: #fff;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="header-logo">
+        <img src="logo.png" alt="Your Logo" width="50px">
+    </div>
+    <div class="header-dots" id="settingsIcon">&#9881;</div>
+    <h1>Ripples® (Arnav Jain)</h1>
+</div>
+<div class="container">
+    <div class="button-container">
+        <a href="whattschat.html" class="button blue">Whattschat</a>
+        <a href="games.html" class="button green">Games</a>
+        <a href="r9ai.html" class="button orange">R9AI</a>
+        <a href="tools.html" class="button purple">Tools</a>
+        <a href="learn.html" class="button pink">Learn</a> <p>
+        <a href="privacy_policy.html" class="button gray">Privacy Policy</a> <!-- Added Privacy Policy button -->
+    </div>
+</div>
+
+<!-- Popup -->
+<div class="popup" id="settingsPopup">
+    <div class="popup-content">
+        <span class="close-btn" onclick="togglePopup('settingsPopup')">&#10006;</span>
+        <h2>Settings</h2>
+        <!-- Add your settings content here -->
+        <p>language options, cookie options, contact, [coming soon]</p>
+    </div>
+</div>
+
+<script>
+    // Function to toggle popup visibility
+    function togglePopup(popupId) {
+        const popup = document.getElementById(popupId);
+        popup.style.display = (popup.style.display === 'none' || popup.style.display === '') ? 'block' : 'none';
+    }
+
+    // Click event to show the popup when the settings icon is clicked
+    document.getElementById('settingsIcon').addEventListener('click', function() {
+        togglePopup('settingsPopup');
+    });
+</script>
+</body>
+</html>
