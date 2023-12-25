@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stock Market</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    canvas {
+      width: 800px; /* Set a fixed width for the graph */
+      height: 400px; /* Set a fixed height for the graph */
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+	<input type="text" id="stockInput" placeholder="Enter stock symbol">
+	<button onclick="loadStockData()">Load Stock</button>
+	
+	<label for="timeFrameSelect">Time Frame:</label>
+	<select id="timeFrameSelect" onchange="loadStockData()">
+		<option value="1">1 Month</option>
+		<option value="3">3 Months</option>
+		<option value="6">6 Months</option>
+		<option value="12">1 Year</option>
+		<option value="36">3 Years</option>
+		<option value="60">5 Years</option>
+	</select>
+	<canvas id="stockChart"></canvas>
+  <table id="stockTable">
+    <tr>
+      <th>Date</th>
+      <th>Open</th>
+      <th>High</th>
+      <th>Low</th>
+      <th>Close</th>
+      <th>Volume</th>
+    </tr>
+  </table>
+  
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const apiKey = 'LwOJltR_Q4RBuY7dAiKPArgd5r4KaNpF';
+
+    function loadStockData() {
+      const stockInput = document.getElementById('stockInput');
+      const ticker = stockInput.value.toUpperCase(); // Get the stock ticker and convert to uppercase
+      
+      const timeFrameSelect = document.getElementById('timeFrameSelect');
+      const selectedTimeFrame = timeFrameSelect.value;
+      
+      const currentDate = new Date();
+      const endDate = currentDate.toISOString().split('T')[0]; // Use the current date as the end date
+      
+      const startDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - selectedTimeFrame, 1);
+      const formattedStartDate = startDate.toISOString().split('T')[0]; // Set the start date based on the selected time frame
+      
+      const apiUrl = `https://api.polygon.io/v2/aggs/ticker/${ticker}/range/1/day/${formattedStartDate}/${endDate}?apiKey=${apiKey}`;
+
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          const stockData = data.results;
+          
+          const stockTable = document.getElementById('stockTable');
+
+          stockTable.innerHTML = ''; // Clear existing table data
+
+          stockData.forEach(stock => {
+            const row = stockTable.insertRow();
+            const date = new Date(stock.t);
+            const formattedDate = date.toLocaleString(); // Convert timestamp to human-readable format
+            row.insertCell().textContent = formattedDate;
+            row.insertCell().textContent = stock.o;
+            row.insertCell().textContent = stock.h;
+            row.insertCell().textContent = stock.l;
+            row.insertCell().textContent = stock.c;
+            row.insertCell().textContent = stock.v;
+          });
+
+          const dates = stockData.map(stock => stock.t);
+          const closingPrices = stockData.map(stock => stock.c);
+
+          const stockChart = document.getElementById('stockChart').getContext('2d');
+          new Chart(stockChart, {
+            type: 'line',
+            data: {
+              labels: dates,
+              datasets: [{
+                label: 'Closing Price',
+                data: closingPrices,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+              }]
+            },
+            options: {
+              responsive: false, // Set responsive to false to maintain fixed size
+              scales: {
+                y: {
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        })
+        .catch(error => console.log(error));
+    }
+  </script>
+</body>
+</html>

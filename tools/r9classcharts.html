@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Management System</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <h1>r9charts</h1>
+
+  <div>
+    <label for="name">Name:</label>
+    <input type="text" id="name" placeholder="Enter name">
+  </div>
+  <div>
+    <label for="behavior">Behavior Points:</label>
+    <input type="number" id="behavior" placeholder="Enter behavior points">
+  </div>
+  <div>
+    <label for="achievement">Achievement Points:</label>
+    <input type="number" id="achievement" placeholder="Enter achievement points">
+  </div>
+  <div>
+    <button onclick="addStudent()">Add Student</button>
+  </div>
+
+  <table id="studentsTable">
+    <tr>
+      <th>Name</th>
+      <th>Behavior Points</th>
+      <th>Achievement Points</th>
+    </tr>
+  </table>
+
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

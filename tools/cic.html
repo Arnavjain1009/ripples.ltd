@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Compound Interest Calculator</title>
+</head>
+<body>
+	<h1>Compound Interest Calculator</h1>
+
+	<form>
+		<label for="principal">initial money:</label>
+		<input type="number" id="principal" name="principal" required><br>
+
+		<label for="rate">Annual Interest Rate:</label>
+		<input type="number" id="rate" name="rate" required><br>
+
+		<label for="years">Number of Years:</label>
+		<input type="number" id="years" name="years" required><br>
+
+		<button type="button" onclick="calculate()">Calculate</button>
+	</form>
+
+	<p id="result"></p>
+
+	<script>
+		function calculate() {
+			var principal = parseFloat(document.getElementById("principal").value);
+			var rate = parseFloat(document.getElementById("rate").value);
+			var years = parseFloat(document.getElementById("years").value);
+
+			var amount = principal * Math.pow(1 + (rate / 100), years);
+
+			document.getElementById("result").innerHTML = "The amount after " + years + " years is: " + amount.toFixed(2);
+		}
+	</script>
+</body>
+</html>

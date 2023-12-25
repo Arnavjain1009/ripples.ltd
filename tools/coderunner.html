@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Client-side Code Execution</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    #container {
+      display: flex;
+      height: calc(100% - 100px); /* Subtracting the header height */
+      overflow: hidden; /* Hide any overflow */
+    }
+
+    #left {
+      flex: 1;
+      padding-right: 10px;
+    }
+
+    #right {
+      flex: 1;
+      padding-left: 10px;
+    }
+
+    #code-input {
+      width: 100%;
+      height: calc(70% - 10px); /* Half of the remaining space, subtracting margin */
+    }
+
+    #run-btn {
+      display: block;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    #preview-frame {
+      width: 100%;
+      height: calc(70% - 10px); /* Half of the remaining space, subtracting margin */
+      border: 1px solid #ccc;
+    }
+
+    #company-logo {
+      width: 50px;
+      height: 50px;
+      background-color: #ccc;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    #filler-image {
+      width: 100%;
+      height: calc(30% - 5px); /* Half of the remaining space, subtracting margin */
+      flex-grow: 0; /* Disable flex-grow */
+      object-fit: cover; /* Maintain aspect ratio and cover the container */
+    }
+  </style>
+</head>
+<body>
+  <h1>Client-side Code Execution</h1>
+  <div id="container">
+    <div id="left">
+      <textarea id="code-input" placeholder="Enter your HTML, CSS, and JavaScript code here..."></textarea>
+      <button id="run-btn">Run Code</button>
+    </div>
+    <div id="right">
+      <iframe id="preview-frame"></iframe>
+      <div id="result"></div>
+    </div>
+    <img id="company-logo" src="https://th.bing.com/th/id/OIP.KvkQyzB2iettiX7gim3z4AHaBI?w=368&h=58&c=7&r=0&o=5&dpr=2&pid=1.7" alt="Company Logo">
+  </div>
+  <img id="filler-image" src="https://th.bing.com/th/id/OIP.KvkQyzB2iettiX7gim3z4AHaBI?w=368&h=58&c=7&r=0&o=5&dpr=2&pid=1.7" alt="Filler Image">
+
+  <script>
+    function runCode() {
+      var code = document.getElementById("code-input").value;
+      var resultContainer = document.getElementById("result");
+      var previewFrame = document.getElementById("preview-frame");
+
+      try {
+        previewFrame.contentWindow.document.open();
+        previewFrame.contentWindow.document.write(code);
+        previewFrame.contentWindow.document.close();
+
+        resultContainer.textContent = "Code executed successfully!";
+      } catch (error) {
+        resultContainer.textContent = "Error: " + error;
+      }
+    }
+
+    document.getElementById("run-btn").addEventListener("click", runCode);
+  </script>
+</body>
+</html>

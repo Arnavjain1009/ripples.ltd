@@ -1,0 +1,13 @@
+hello?
+1: Button to play the buzzer sound
+2. Create an empty function called playSound().
+3. Import Audio from the expo-av library.
+4. Adding a library to the package.json file
+5. Create a function playSound and add the source link to uri. Note: URI (Uniform Resource Identifier) is where we add the source link for sound.
+We will be passing the URL of the sound file we want to play in the first object and in the second object, we will pass the shouldPlay status as true.
+We will be passing the URL of the sound file we want to play in the first object and in the second object, we will pass the shouldPlay status as true. Also, remember Javascript is synchronous by default. But here we want to wait for the sound object to load and then play the sound. Async/Await is the extension of promises which we get as support in the language. The keyword await makes JavaScript wait until a promise settles and returns its result. We will attach ‘await’ before our instruction. To let the computer know that playSound is an asynchronous function now, we will add ‘async’ while defining it.
+5. Create a function playSound and add the source link to uri. Note: URI (Uniform Resource Identifier) is where we add the source link for sound.
+1. Replace the Button with TouchableOpacity
+2. Adding style to the TouchableOpacity:
+3. Adding more styles to the Button appears as a rounded button.
+https://snack.expo.dev/@arya_khadakkar/c59-final

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Group Page</title>
+</head>
+<body>
+  <h1>Group Chat</h1>
+
+  <div id="group-info"></div>
+
+  <h2>Group Members:</h2>
+  <ul id="group-members"></ul>
+
+  <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-database.js"></script>
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyBP5fSB_kiakv0r-WMo7BkP2Ik70c26tT0",
+      authDomain: "whattschat-f522c.firebaseapp.com",
+      databaseURL: "https://whattschat-f522c-default-rtdb.firebaseio.com",
+      projectId: "whattschat-f522c",
+      storageBucket: "whattschat-f522c.appspot.com",
+      messagingSenderId: "746097682908",
+      appId: "1:746097682908:web:51a0278320ad4af5774719",
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    var database = firebase.database();
+    var groupInfoDiv = document.getElementById("group-info");
+    var groupMembersUl = document.getElementById("group-members");
+
+    var urlParams = new URLSearchParams(window.location.search);
+    var groupId = urlParams.get("groupId");
+    var groupName = urlParams.get("groupname");
+    var userId = urlParams.get("userid");
+    var secretKey = urlParams.get("secretkey");
+
+    // Check if the user is authenticated
+    if (authenticateUser(userId, secretKey)) {
+      // Retrieve group information from Firebase
+      var groupRef = database.ref("groups/" + groupId);
+      groupRef.on("value", function(snapshot) {
+        var group = snapshot.val();
+        if (group) {
+          groupInfoDiv.innerHTML = "<h2>Group Name: " + group.name + "</h2>";
+          groupMembersUl.innerHTML = "";
+          group.users.forEach(function(user) {
+            var listItem = document.createElement("li");
+            listItem.textContent = user;
+            groupMembersUl.appendChild(listItem);
+          });
+        }
+      });
+    } else {
+      alert("Authentication failed. Access denied.");
+    }
+
+    // Authentication function
+    function authenticateUser(userId, secretKey) {
+      // Perform your authentication logic here
+      // You can check the provided userId and secretKey against your authentication system
+      // Return true if authentication is successful, otherwise false
+      // Example:
+      // if (userId === "valid_user" && secretKey === "valid_secret") {
+      //   return true;
+      // } else {
+      //   return false;
+      // }
+      // For testing purposes, always return true
+      return true;
+    }
+  </script>
+</body>
+</html>

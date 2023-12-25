@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Whattschat</title>
+  <link rel="icon" type="image/svg+xml" href="https://www.shutterstock.com/image-vector/initial-letter-number-logo-r-600w-621114830.jpg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+    }
+    
+    .header {
+      background-color: #075e54;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+    }
+    
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+    
+    h3 {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+    
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    
+    button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      background-color: #075e54;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    
+    .flex-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <h1>Whattschat</h1>
+    <h3>My Whattschat home page</h3>
+    <p id="demo">Placeholder</p>
+  </div>
+
+  <div class="container">
+    <button class="button1" id="pcbtn" onclick=fnchat()>self notes</button>
+  
+    <h3>Select private chat from users</h3>
+    <select id="user-dropdown" name="year" onchange="redirecttoprivatechat()" style="margin: 0 auto;"></select>
+ 
+    <h3>Create group (beta)</h3>
+    <button onclick="createGroup()">Create Group</button>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-database.js"></script>
+  <script>
+
+
+    function acceptCookies() {
+          // Set a cookie to indicate that the user has accepted cookies
+          document.cookie = "cookies_accepted=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+          // Close the popup
+          document.getElementById("cookie-popup").style.display = "none";
+        }
+    
+        var firebaseConfig = {
+        apiKey: "AIzaSyBP5fSB_kiakv0r-WMo7BkP2Ik70c26tT0",
+      authDomain: "whattschat-f522c.firebaseapp.com",
+      databaseURL: "https://whattschat-f522c-default-rtdb.firebaseio.com",
+      projectId: "whattschat-f522c",
+      storageBucket: "whattschat-f522c.appspot.com",
+      messagingSenderId: "746097682908",
+      appId: "1:746097682908:web:51a0278320ad4af5774719",
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+     
+    var database;
+    database = firebase.database();
+
+
+    function redirecttoprivatechat() {
+    var selectedUserId = document.getElementById("user-dropdown").value;
+    
+      window.location.href = "/publicchat.html?userid="+myuserid+"&secretkey="+mysecretkey+"&selecteduserid=" + selectedUserId;
+    
+  }
+  function createGroup() {
+    var selectedUserId = document.getElementById("user-dropdown").value;
+    
+      window.location.href = "/whattschat/creategroup.html?userid="+myuserid+"&secretkey="+mysecretkey+"&selecteduserid=" + selectedUserId;
+    
+  }
+    
+      var url_string = window.location.href; // www.test.com?filename=test
+      var url = new URL(url_string);
+      var myuserid = url.searchParams.get("userid");
+      var mysecretkey = url.searchParams.get("secretkey");
+      var passwordmatched = false;
+      document.getElementById("pcbtn").setAttribute('onclick',"document.location='/publicchat.html?userid="+myuserid+"&secretkey="+mysecretkey+"'");
+      document.getElementById("demo").innerHTML = "Welcome " + myuserid;
+    
+      
+    
+      if (myuserid == null || myuserid == "") {
+            window.location.replace( "/whattschat/abc.html");
+          }
+      
+    //now connect to database and link to user; fetch secret key for given userid
+    MyValRef = database.ref("/users/");
+    var select = document.getElementById('user-dropdown');
+    
+    
+    MyValRef.orderByValue().on("value", function(snapshot) {
+      snapshot.forEach(function(data) {
+            var option = document.createElement('option');
+            option.text = option.value = data.key;
+            select.add(option, 0);
+        })
+      
+        });
+    
+      //now connect to database and link to user; fetch secret key for given userid
+      MyValRef = database.ref("/users/" + myuserid);
+    
+      MyValRef.orderByValue().on("value", function(snapshot) {
+        snapshot.forEach(function(data) {
+    
+           //now compare database s key with mysecret
+          if (mysecretkey == data.val()) {
+            passwordmatched = true;                
+          }         
+          });
+    
+          if (passwordmatched != true) {
+            window.location.replace( "/whattschat/abc.html");
+          }
+          else {
+        
+            MyValRef.off();
+            
+          }         
+      });
+    
+      
+    
+    
+      </script>
+    
+</body>
+
+</html>

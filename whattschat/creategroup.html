@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create Group</title>
+</head>
+<body>
+  <h4>remember to add yourself</h4>
+  <select id="user-dropdown" name="year"></select>
+  <button onclick="addToSelectedList()">Add to Selected List</button>
+  <br><br>
+  <h3>Selected Users:</h3>
+  <ul id="selected-users"></ul>
+  <button onclick="goToGroupPage()">Next</button>
+
+  <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-database.js"></script>
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyBP5fSB_kiakv0r-WMo7BkP2Ik70c26tT0",
+      authDomain: "whattschat-f522c.firebaseapp.com",
+      databaseURL: "https://whattschat-f522c-default-rtdb.firebaseio.com",
+      projectId: "whattschat-f522c",
+      storageBucket: "whattschat-f522c.appspot.com",
+      messagingSenderId: "746097682908",
+      appId: "1:746097682908:web:51a0278320ad4af5774719",
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    var database = firebase.database();
+    var userDropdown = document.getElementById("user-dropdown");
+    var usersRef = database.ref("users");
+    var url_string = window.location.href; // www.test.com?filename=test
+      var url = new URL(url_string);
+      var myuserid = url.searchParams.get("userid");
+      var mysecretkey = url.searchParams.get("secretkey");
+    
+    usersRef.on("value", function(snapshot) {
+      userDropdown.innerHTML = ""; // Clear previous options
+      snapshot.forEach(function(childSnapshot) {
+        var userId = childSnapshot.key;
+        var option = document.createElement("option");
+        option.value = userId;
+        option.text = userId;
+        userDropdown.appendChild(option);
+      });
+    });
+
+    var selectedUsers = [];
+
+    function addToSelectedList() {
+      var selectedUserId = userDropdown.value;
+      if (selectedUserId && !selectedUsers.includes(selectedUserId)) {
+        selectedUsers.push(selectedUserId);
+        var listItem = document.createElement("li");
+        listItem.textContent = selectedUserId;
+        document.getElementById("selected-users").appendChild(listItem);
+      }
+    }
+
+    function goToGroupPage() {
+      var groupName = prompt("Enter group name:");
+      if (groupName) {
+        // Save the group information to Firebase
+        var groupRef = database.ref("groups").push();
+        groupRef.set({
+          name: groupName,
+          users: selectedUsers
+        });
+
+        // Redirect to the group page
+        window.location.href = "group.html?groupId=" + groupRef.key+"&groupname="+groupName+"&userid="+myuserid+"&secretkey="+mysecretkey;
+      }
+    }
+  </script>
+</body>
+</html>

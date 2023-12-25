@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+ 
+  <title>My Contacts, in development</title>
+<body bgcolor="#ffb404">
+  <script src="path/to/library.js"></script>
+  <script src="path/to/library.js" onload="init()"></script>
+  <script>
+    function init() {
+      // Code that uses the Client object goes here
+    }
+  </script>
+  
+  </script>
+</head>
+<body>
+  <!-- Add the WhatsApp Web API -->
+<script src="https://whatsapp-web.js.org/"></script>
+
+<!-- Generate the QR code -->
+<script>
+const client = new window['whatsapp-web.js'].Client();
+client.on('qr', (qr) => {
+  // Display the QR code on the webpage
+  const qrCode = document.getElementById('qrCode');
+  qrCode.setAttribute('src', qr);
+});
+
+client.initialize();
+</script>
+
+<!-- Display the QR code on the webpage -->
+<img id="qrCode" alt="QR code" />
+<!-- Get the contacts from WhatsApp Web -->
+<script>
+  client.getContacts().then((contacts) => {
+    // Display the contacts on the webpage
+    const contactsList = document.getElementById('contactsList');
+    contacts.forEach((contact) => {
+      const listItem = document.createElement('li');
+      listItem.innerText = `${contact.name} (${contact.number})`;
+      contactsList.appendChild(listItem);
+    });
+  });
+  </script>
+  
+  <!-- Display the contacts on the webpage -->
+  <ul id="contactsList"></ul>
+  
+  
+
+  
+</body>
+</html>
