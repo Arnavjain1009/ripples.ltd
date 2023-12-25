@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+  <button onclick="window.location.href='https://reportaproblem.webador.co.uk'">report a problem</button>
+	<style>
+    input[type=radio] {
+    border: 0px;
+    width: 3em;
+    height: 3em;
+}
+		body {
+  background-color: #F4F4F4;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  background-color: #FFF;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  margin: 50px auto;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 0;
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 10;
+  padding: 10;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+button {
+  display: block;
+  margin: 20px auto;
+  font-size: 1.2em;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #0074D9;
+  color: #FFF;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #005FAB;
+}
+
+	</style>
+<head>
+  
+  <meta charset="UTF-8">
+  <title>11+math</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	
+  <div class="container">
+    <h1>11+math</h1>
+	<h1 id="outof28"></h1>
+    <p id="question"></p>
+	<div id="progress" style="position: fixed; top: 10px; right: 10px;"></div>
+
+	
+    <ul id="options"></ul>
+    <button id="nextBtn">Next/28</button>
+
+
+
+	
+  </div>
+
+  <script src="quiz.js"></script>
+
+<script>
+
+var questionsdone = 1;
+	// Define an array of objects that contains the questions and their options
+var questions = [
+{
+  question: "What is the value of 3x + 2y if x = 2 and y = 5?",
+  options: ["10", "11", "12", "16"],
+  answer: "16"
+},
+{
+  question: "If the area of a rectangle is 48 square units and the length is 8 units, what is the width?",
+  options: ["3", "4", "5", "6"],
+  answer: "6"
+},
+{
+  question: "Simplify: 3(4x + 2) - 2(3x - 1)",
+  options: ["12x + 4", "9x + 5", "6x + 8", "5x + 7"],
+  answer: "6x + 8"
+},
+{
+  question: "What is the value of x in the equation 5x - 7 = 18?",
+  options: ["5", "6", "7", "8"],
+  answer: "5"
+},
+
+{
+  question: "Simplify: 4x - 3(2x + 1)",
+  options: ["-2x - 3", "x - 3", "x - 6", "-2x - 5"],
+  answer: "-2x - 3"
+},
+{
+  question: "If 8 people can paint a house in 10 days, how many people are needed to paint the same house in 5 days?",
+  options: ["4", "8", "16", "32"],
+  answer: "16"
+},
+{
+  question: "What is the value of (4 + 2) ÷ (2 x 3)?",
+  options: ["1", "2", "3", "4"],
+  answer: "1"
+},
+{
+  question: "What is the value of 3x - 2y if x = 4 and y = 5?",
+  options: ["1", "2", "3", "4"],
+  answer: "2"
+},
+
+
+
+
+
+{
+  question: "If the area of a square is 49 square units, what is the length of one side?",
+  options: ["7", "14", "21", "28"],
+  answer: "7"
+},
+{
+  question: "Simplify: 5a + 2b - 3a - 4b",
+  options: ["2a - 2b", "2a + 2b", "2a - b", "2a + b"],
+  answer: "2a - 2b"
+},
+
+{
+  question: "What is the value of x in the equation 2x + 5 = 17?",
+  options: ["6", "8", "9", "10"],
+  answer: "6"
+},
+{
+question: "Simplify: 3x - 5y + 2x + 4y",
+options: ["-x - y", "x - y", "x + y", "5x - y"],
+answer: "5x - y"
+},
+
+{
+question: "If a = 4 and b = 7, what is the value of 2a - 3b?",
+options: ["-13", "-2", "5", "10"],
+answer: "-13"
+},
+
+{
+question: "Simplify: 2(x + 3) - 3(x - 1)",
+options: ["-x + 9", "5x - 3", "5 - x", "5x + 5"],
+answer: "-x + 9"
+},
+
+{
+question: "What is the value of 6(2x + 3) - 4(3x - 2)?",
+options: ["14x + 18", "23", "18x + 10", "26"],
+answer: "14x + 18"
+},
+
+{
+question: "Simplify: 3a + 4b - 2a + b",
+options: ["a + 5b", "a + 2b", "a + 3b", "a + 6b"],
+answer: "a + 5b"
+},
+
+{
+question: "What is the value of (x - 3)²?",
+options: ["x² - 6x + 9", "x² + 6x + 9", "x² - 6x - 9", "x² + 6x - 9"],
+answer: "x² - 6x + 9"
+},
+
+{
+question: "If x = 3 and y = 2, what is the value of 2x² + 3xy - 4y²?",
+options: ["-19", "-11", "20", "18"],
+answer: "18"
+},
+
+{
+question: "Simplify: 4a - 2b - 3a + b",
+options: ["a - b", "a + b", "a - 2b", "a + 2b"],
+answer: "a - b"
+},
+
+{
+question: "What is the value of (x + 4)(x - 4)?",
+options: ["x² - 16", "x² + 8", "x² - 8", "x² + 16"],
+answer: "x² - 16"
+},
+
+{
+question: "Simplify: 2x - 3(4 - x)",
+options: ["5x - 12", "-x + 12", "x - 6", "x + 6"],
+answer: "5x - 12"
+},
+
+{
+question: "What is the value of 5x - 2y if x = 3 and y = -5?",
+options: ["5", "11", "19", "25"],
+answer: "25"
+},
+
+{
+  question: "The perimeter of a rectangular garden is 30 meters. The length of the garden is twice the width. What is the area of the garden in square meters?",
+options: ["14", "28", "48", "56"],
+answer: "48"
+},
+{question: "A store is having a sale where all items are 20% off their regular price. If a shirt regularly costs $25, what is the sale price of the shirt?",
+options: ["$5", "$15", "$20", "$25"],
+answer: "$20"
+},
+{
+  question: "A survey of 120 students in a school shows that 70 of them like playing basketball and 50 like playing soccer. If 30 students like playing both sports, how many students like playing neither sport?",
+options: ["0", "10", "20", "30"],
+answer: "20"
+
+},
+{question: "A car is traveling at a constant speed of 50 miles per hour. How far will it travel in 2 hours and 30 minutes?",
+options: ["75 miles", "100 miles", "125 miles", "150 miles"],
+answer: "125 miles"
+},
+{
+  question: "A recipe calls for 2 cups of flour to make 12 cookies. If you want to make 30 cookies, how many cups of flour do you need?",
+options: ["5 cups", "3 cups", "3.5 cups", "4 cups"],
+answer: "5 cups"
+
+},
+{
+  question: "A company sells shirts for $15 each and pants for $25 each. If the company sells 20 shirts and 15 pants, what is the total revenue?",
+options: ["$475", "$675", "$775", "$925"],
+answer: "$675"
+
+},
+
+  // Add more questions and their options and answers here
+  // ...
+];
+
+
+
+var time = 13 * 60; 
+
+var timerEl = document.createElement("p"); // Create a new <p> element for the timer
+timerEl.textContent = "Time remaining: 23:00"; // Set the initial timer text
+document.querySelector(".container").appendChild(timerEl); // Add the timer to the HTML
+
+var timerId = setInterval(function() {
+  time--; // Decrement the time
+  var minutes = Math.floor(time / 60); // Calculate the remaining minutes
+  var seconds = time % 60; // Calculate the remaining seconds
+  timerEl.textContent = "Time remaining: " + minutes.toString().padStart(2, "0") + ":" + seconds.toString().padStart(2, "0"); // Update the timer text
+  
+  if (time <= 0) {
+    clearInterval(timerId); // Stop the timer
+    questionEl.textContent = "Quiz complete! You scored " + score + " out of " + questions.length + " questions."; // Display the final score
+    optionsEl.innerHTML = ""; // Remove the answer options
+    nextBtn.disabled = true; // Disable the "Next" button
+  }
+}, 1000); // Update the timer every second
+var currentQuestion = 0; // Set the current question index to 0
+var score = 0; // Set the score to 0
+
+// Get references to HTML elements
+var questionEl = document.getElementById("question");
+var optionsEl = document.getElementById("options");
+var nextBtn = document.getElementById("nextBtn");
+
+// Function to display the current question and its options
+function showQuestion() {
+  // Display the question
+  questionEl.textContent = questions[currentQuestion].question;
+
+  // Remove any existing options
+  optionsEl.innerHTML = "";
+
+  // Loop through the options and add them to the list
+  for (var i = 0; i < questions[currentQuestion].options.length; i++) {
+    var li = document.createElement("li");
+    var input = document.createElement("input");
+    input.type = "radio";
+    input.name = "option";
+    input.id = `radio-button-${i}`;
+    input.value = questions[currentQuestion].options[i];
+    
+    
+    const label = document.createElement('label');
+    label.innerHTML = "<font size=10px>" + questions[currentQuestion].options[i] + "</font>";
+    label.setAttribute('for', `radio-button-${i}`);
+
+    li.appendChild(input);
+    li.appendChild(label);
+    //li.appendChild(document.createTextNode(questions[currentQuestion].options[i]));
+    
+    //<font size=10px><label for="cue">9</font>
+    
+    optionsEl.appendChild(li);
+  }
+}
+
+// Function to check if the selected answer is correct
+function checkAnswer() {
+	var questionsdone = questionsdone+1;
+  var selectedOption = document.querySelector('input[name="option"]:checked').value;
+  if (selectedOption === questions[currentQuestion].answer) {
+    score++; // Increment the score if the answer is correct
+  }
+  var currentQuestionplus1 =currentQuestion + 2;
+  document.getElementById("outof28").innerHTML=currentQuestionplus1 + "/27";
+}
+
+// Function to go to the next question or end the quiz if all questions have been answered
+function nextQuestion() {
+  checkAnswer(); // Check the answer to the current question
+  currentQuestion++; // Increment the current question index
+
+  // If all questions have been answered, end the quiz and display the score
+  if (currentQuestion === questions.length) {
+    questionEl.textContent = "Quiz complete! You scored " + score + " out of " + questions.length + " questions.";
+    optionsEl.innerHTML = "";
+    nextBtn.disabled = true;
+  } else {
+    showQuestion(); // Display the next question and its options
+  }
+}
+
+// Call the showQuestion function to display the first question and its options
+showQuestion();
+
+// Add a click event listener to the "Next" button to go to the next question when clicked
+nextBtn.addEventListener("click", nextQuestion);
+
+
+</script>
+  
+</body>
+</html>

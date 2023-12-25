@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+<html>
+  <button onclick="window.location.href='https://reportaproblem.webador.co.uk'">report a problem</button>
+	<style>
+    input[type=radio] {
+    border: 0px;
+    width: 3em;
+    height: 3em;
+}
+		body {
+  background-color: #F4F4F4;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  background-color: #FFF;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  margin: 50px auto;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 0;
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 10;
+  padding: 10;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+button {
+  display: block;
+  margin: 20px auto;
+  font-size: 1.2em;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #0074D9;
+  color: #FFF;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #005FAB;
+}
+
+	</style>
+<head>
+  
+  <meta charset="UTF-8">
+  <title>11+math/30</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	
+  <div class="container">
+    <h1>11+english/30mrks</h1>
+	<h1 id="outof28"></h1>
+    <p>John had always been a shy and introverted person, preferring to spend most of his time alone rather than socializing with others. He had a few close friends, but even with them, he found it hard to open up and share his thoughts and feelings. It wasn't until John started taking acting classes that he realized how much he had been missing out on. Through acting, John was able to step outside of his comfort zone and try on different personas and characters. He found that he could express himself in ways he had never imagined before, and that the fear of being judged or rejected started to fade away. John started to feel more confident and self-assured, and he found that this newfound sense of self carried over into other areas of his life as well.
+    </p>
+    <p id="question"></p>
+	<div id="progress" style="position: fixed; top: 10px; right: 10px;"></div>
+
+	
+    <ul id="options"></ul>
+    <button id="nextBtn">Next/10Qs</button>
+
+
+
+	
+  </div>
+
+  <script src="quiz.js"></script>
+
+<script>
+
+var questionsdone = 1;
+	// Define an array of objects that contains the questions and their options
+var questions = [
+ // Question 1
+
+
+// Question 2
+{
+question: "What was John's personality like before he started taking acting classes?",
+options: ["Outgoing and extroverted", "Shy and introverted", "Confident and self-assured", "Aloof and indifferent"],
+answer: "Shy and introverted"
+},
+{
+question: "How did John feel about socializing with others?",
+options: ["He loved it", "He hated it", "He was indifferent to it", "He found it challenging"],
+answer: "He found it challenging"
+},
+{
+question: "What did John realize after he started taking acting classes?",
+options: ["That he wanted to become an actor", "That he needed to become more introverted", "That he was wasting his time", "That he had been missing out on something"],
+answer: "That he had been missing out on something"
+},
+{
+question: "What did John try on through acting?",
+options: ["Different clothes", "Different personas and characters", "Different hobbies", "Different careers"],
+answer: "Different personas and characters"
+},
+{
+question: "What did John find he could do through acting?",
+options: ["Express himself in ways he had never imagined before", "Bottle up his thoughts and feelings", "Ignore the opinions of others", "Be someone he was not"],
+answer: "Express himself in ways he had never imagined before"
+},
+{
+question: "What happened to John's fear of being judged or rejected as he continued to act?",
+options: ["It increased", "It stayed the same", "It decreased", "It disappeared completely"],
+answer: "It decreased"
+},
+{
+question: "How did John feel after he started acting?",
+options: ["Less confident and self-assured", "More confident and self-assured", "The same as before", "More indifferent"],
+answer: "More confident and self-assured"
+},
+{
+question: "What did John notice about his newfound sense of self?",
+options: ["It only applied to acting", "It had no effect on his life outside of acting", "It carried over into other areas of his life", "It disappeared as soon as he left the theater"],
+answer: "It carried over into other areas of his life"
+},
+{
+question: "What did John learn from his experience with acting?",
+options: ["That he should give up on his dreams", "That he was wasting his time", "That trying new things can have unexpected benefits", "That acting is not for him"],
+answer: "That trying new things can have unexpected benefits"
+},
+{
+question: "What was the main benefit of acting for John?",
+options: ["Becoming famous", "Becoming wealthy", "Expressing himself in new ways", "Meeting new people"],
+answer: "Expressing himself in new ways"
+}
+
+  // Add more questions and their options and answers here
+  // ...
+];
+
+
+
+var time = 5 * 60; 
+
+var timerEl = document.createElement("p"); // Create a new <p> element for the timer
+timerEl.textContent = "Time remaining: 23:00"; // Set the initial timer text
+document.querySelector(".container").appendChild(timerEl); // Add the timer to the HTML
+
+var timerId = setInterval(function() {
+  time--; // Decrement the time
+  var minutes = Math.floor(time / 60); // Calculate the remaining minutes
+  var seconds = time % 60; // Calculate the remaining seconds
+  timerEl.textContent = "Time remaining: " + minutes.toString().padStart(2, "0") + ":" + seconds.toString().padStart(2, "0"); // Update the timer text
+  
+  if (time <= 0) {
+    clearInterval(timerId); // Stop the timer
+    questionEl.textContent = "Quiz complete! You scored " + multiscore + " out of 30 questions." // Display the final score
+    optionsEl.innerHTML = ""; // Remove the answer options
+    nextBtn.disabled = true; // Disable the "Next" button
+  }
+}, 1000); // Update the timer every second
+var currentQuestion = 0; // Set the current question index to 0
+var score = 0; // Set the score to 0
+var multiscore = score+score+score;
+var multilength = questions.length*3;
+// Get references to HTML elements
+var questionEl = document.getElementById("question");
+var optionsEl = document.getElementById("options");
+var nextBtn = document.getElementById("nextBtn");
+
+// Function to display the current question and its options
+function showQuestion() {
+  // Display the question
+  questionEl.textContent = questions[currentQuestion].question;
+
+  // Remove any existing options
+  optionsEl.innerHTML = "";
+
+  // Loop through the options and add them to the list
+  for (var i = 0; i < questions[currentQuestion].options.length; i++) {
+    var li = document.createElement("li");
+    var input = document.createElement("input");
+    input.type = "radio";
+    input.name = "option";
+    input.id = `radio-button-${i}`;
+    input.value = questions[currentQuestion].options[i];
+    
+    
+    const label = document.createElement('label');
+    label.innerHTML = "<font size=10px>" + questions[currentQuestion].options[i] + "</font>";
+    label.setAttribute('for', `radio-button-${i}`);
+
+    li.appendChild(input);
+    li.appendChild(label);
+    //li.appendChild(document.createTextNode(questions[currentQuestion].options[i]));
+    
+    //<font size=10px><label for="cue">9</font>
+    
+    optionsEl.appendChild(li);
+  }
+}
+
+// Function to check if the selected answer is correct
+function checkAnswer() {
+	var questionsdone = questionsdone+1;
+  var selectedOption = document.querySelector('input[name="option"]:checked').value;
+  if (selectedOption === questions[currentQuestion].answer) {
+    score++; // Increment the score if the answer is correct
+  }
+  var currentQuestionplus1 =currentQuestion + 2;
+  document.getElementById("outof28").innerHTML=currentQuestionplus1 + "/10";
+}
+
+// Function to go to the next question or end the quiz if all questions have been answered
+function nextQuestion() {
+  checkAnswer(); // Check the answer to the current question
+  currentQuestion++; // Increment the current question index
+
+  // If all questions have been answered, end the quiz and display the score
+  if (currentQuestion === questions.length) {
+    questionEl.textContent = "Quiz complete! You scored " + score*3 + " out of 30 marks.";
+    optionsEl.innerHTML = "";
+    nextBtn.disabled = true;
+  } else {
+    showQuestion(); // Display the next question and its options
+  }
+}
+
+// Call the showQuestion function to display the first question and its options
+showQuestion();
+
+// Add a click event listener to the "Next" button to go to the next question when clicked
+nextBtn.addEventListener("click", nextQuestion);
+
+
+</script>
+  
+</body>
+</html>

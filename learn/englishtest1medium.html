@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html>
+  <button onclick="window.location.href='https://reportaproblem.webador.co.uk'">report a problem</button>
+	<style>
+    input[type=radio] {
+    border: 0px;
+    width: 3em;
+    height: 3em;
+}
+		body {
+  background-color: #F4F4F4;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  background-color: #FFF;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  margin: 50px auto;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 0;
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 10;
+  padding: 10;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+button {
+  display: block;
+  margin: 20px auto;
+  font-size: 1.2em;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #0074D9;
+  color: #FFF;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #005FAB;
+}
+
+	</style>
+<head>
+  
+  <meta charset="UTF-8">
+  <title>11+math/30</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	
+  <div class="container">
+    <h1>11+english/30mrks</h1>
+	<h1 id="outof28"></h1>
+    <p>Extract:
+
+      Once upon a time, there was a young girl named Lily who lived in a small village surrounded by a dense forest. Lily was always curious about the world beyond her village, but her parents warned her never to venture too far into the forest because she might get lost.
+
+One day, Lily's curiosity got the best of her, and she decided to explore the forest. She packed a small bag with some snacks and water and set off on her adventure.
+
+As she walked deeper into the forest, Lily noticed that the trees were getting thicker and the air was getting colder. She started to feel a little scared, but she didn't want to turn back just yet.
+
+Suddenly, she heard a rustling in the bushes behind her. She turned around to see a large, fierce-looking wolf staring back at her. Lily froze in fear, not knowing what to do.
+
+But just as the wolf was about to pounce, a group of friendly forest creatures appeared, including a wise old owl in the black sky, a mischievous squirrel, and a helpful beaver. Together, they chased away the wolf and kept Lily safe.
+
+Feeling grateful for the animals' help, Lily decided to return home and got hugged She realized that sometimes it's best to heed the advice of those who care about us and that there's always help available when we need it most.
+
+From that day on, Lily continued to explore the forest, but always with a newfound respect for the dangers that could lie ahead. She made sure to bring her new forest friends with her and together, they had many more exciting adventures.</p>
+    <p id="question"></p>
+	<div id="progress" style="position: fixed; top: 10px; right: 10px;"></div>
+
+	
+    <ul id="options"></ul>
+    <button id="nextBtn">Next/10Qs</button>
+
+
+
+	
+  </div>
+
+  <script src="quiz.js"></script>
+
+<script>
+
+var questionsdone = 1;
+	// Define an array of objects that contains the questions and their options
+var questions = [
+ // Question 1
+
+
+// Question 2
+{
+question: "What is the name of the main character in the story?",
+options: ["Sarah", "Lily", "Emma", "Grace"],
+answer: "Lily"
+},
+{
+question: "What was Lily's main motivation for exploring the forest?",
+options: ["To find hidden treasure", "To escape from her village", "Her curiosity", "To catch a glimpse of a rare animal"],
+answer: "Her curiosity"
+},
+{
+question: "Why did Lily's parents warn her not to venture too far into the forest?",
+options: ["Because there were wild animals living in the forest", "Because it was easy to get lost in the dense forest", "Because there were dangerous people in the forest", "Because they wanted to keep Lily at home"],
+answer: "Because it was easy to get lost in the dense forest"
+},
+{
+question: "What did Lily take with her when she set out to explore the forest?",
+options: ["A map", "A compass", "A backpack", "All of the above"],
+answer: "A backpack"
+},
+
+{
+question: "What did Lily discover when she came across a clearing in the forest?",
+options: ["A beautiful waterfall", "A hidden cave", "A group of friendly animals", "An abandoned cabin"],
+answer: "A group of friendly animals"
+},
+
+{
+question: "What did Lily do when she realized she was scared to look back",
+options: ["She sat down and cried", "She called out for help", "She tried to retrace her steps", "She decided to keep exploring"],
+answer: "She decided to keep on exploring"
+},
+
+{
+question: "What time of day did Lily finally emerge from the forest?",
+options: ["Morning", "Afternoon", "Evening", "Late at night"],
+answer: "Late at night"
+},
+
+{
+question: "What did Lily's parents do when she returned home?",
+options: ["They scolded her for going too far into the forest", "They hugged her tightly and thanked her for returning safely", "They grounded her for a week", "They didn't say anything"],
+answer: "They hugged her tightly and thanked her for returning safely"
+},
+
+{
+question: "What did Lily learn from her adventure in the forest?",
+options: ["That she was a skilled navigator", "That she could survive on her own in the wilderness", "That she would listen to her parents", "That she never wanted to leave home again"],
+answer: "That she would listen to her parents"
+},
+
+{
+question: "What did Lily plan to do the next time she explored the forest?",
+options: ["To bring a friend with her", "To explore a different part of the forest", "To stay closer to home", "To never go back again"],
+answer: "To bring a friend with her"
+},
+
+
+  // Add more questions and their options and answers here
+  // ...
+];
+
+
+
+var time = 6 * 60; 
+
+var timerEl = document.createElement("p"); // Create a new <p> element for the timer
+timerEl.textContent = "Time remaining: 23:00"; // Set the initial timer text
+document.querySelector(".container").appendChild(timerEl); // Add the timer to the HTML
+
+var timerId = setInterval(function() {
+  time--; // Decrement the time
+  var minutes = Math.floor(time / 60); // Calculate the remaining minutes
+  var seconds = time % 60; // Calculate the remaining seconds
+  timerEl.textContent = "Time remaining: " + minutes.toString().padStart(2, "0") + ":" + seconds.toString().padStart(2, "0"); // Update the timer text
+  
+  if (time <= 0) {
+    clearInterval(timerId); // Stop the timer
+    questionEl.textContent = "Quiz complete! You scored " + multiscore + " out of 30 questions." // Display the final score
+    optionsEl.innerHTML = ""; // Remove the answer options
+    nextBtn.disabled = true; // Disable the "Next" button
+  }
+}, 1000); // Update the timer every second
+var currentQuestion = 0; // Set the current question index to 0
+var score = 0; // Set the score to 0
+var multiscore = score+score+score;
+var multilength = questions.length*3;
+// Get references to HTML elements
+var questionEl = document.getElementById("question");
+var optionsEl = document.getElementById("options");
+var nextBtn = document.getElementById("nextBtn");
+
+// Function to display the current question and its options
+function showQuestion() {
+  // Display the question
+  questionEl.textContent = questions[currentQuestion].question;
+
+  // Remove any existing options
+  optionsEl.innerHTML = "";
+
+  // Loop through the options and add them to the list
+  for (var i = 0; i < questions[currentQuestion].options.length; i++) {
+    var li = document.createElement("li");
+    var input = document.createElement("input");
+    input.type = "radio";
+    input.name = "option";
+    input.id = `radio-button-${i}`;
+    input.value = questions[currentQuestion].options[i];
+    
+    
+    const label = document.createElement('label');
+    label.innerHTML = "<font size=10px>" + questions[currentQuestion].options[i] + "</font>";
+    label.setAttribute('for', `radio-button-${i}`);
+
+    li.appendChild(input);
+    li.appendChild(label);
+    //li.appendChild(document.createTextNode(questions[currentQuestion].options[i]));
+    
+    //<font size=10px><label for="cue">9</font>
+    
+    optionsEl.appendChild(li);
+  }
+}
+
+// Function to check if the selected answer is correct
+function checkAnswer() {
+	var questionsdone = questionsdone+1;
+  var selectedOption = document.querySelector('input[name="option"]:checked').value;
+  if (selectedOption === questions[currentQuestion].answer) {
+    score++; // Increment the score if the answer is correct
+  }
+  var currentQuestionplus1 =currentQuestion + 2;
+  document.getElementById("outof28").innerHTML=currentQuestionplus1 + "/10";
+}
+
+// Function to go to the next question or end the quiz if all questions have been answered
+function nextQuestion() {
+  checkAnswer(); // Check the answer to the current question
+  currentQuestion++; // Increment the current question index
+
+  // If all questions have been answered, end the quiz and display the score
+  if (currentQuestion === questions.length) {
+    questionEl.textContent = "Quiz complete! You scored " + score*3 + " out of 30 marks.";
+    optionsEl.innerHTML = "";
+    nextBtn.disabled = true;
+  } else {
+    showQuestion(); // Display the next question and its options
+  }
+}
+
+// Call the showQuestion function to display the first question and its options
+showQuestion();
+
+// Add a click event listener to the "Next" button to go to the next question when clicked
+nextBtn.addEventListener("click", nextQuestion);
+
+
+</script>
+  
+</body>
+</html>

@@ -1,0 +1,261 @@
+
+<!DOCTYPE html>
+<html>
+  <button onclick="window.location.href='https://reportaproblem.webador.co.uk'">report a problem</button>
+	<style>
+    input[type=radio] {
+    border: 0px;
+    width: 3em;
+    height: 3em;
+}
+		body {
+  background-color: #F4F4F4;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  background-color: #FFF;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  margin: 50px auto;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 0;
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 10;
+  padding: 10;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+button {
+  display: block;
+  margin: 20px auto;
+  font-size: 1.2em;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #0074D9;
+  color: #FFF;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #005FAB;
+}
+
+	</style>
+<head>
+  
+  <meta charset="UTF-8">
+  <title>11+math/30</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	
+  <div class="container">
+    <h1>11+english/30mrks</h1>
+	<h1 id="outof28"></h1>
+    <p>  John was an avid runner, and he had been training for months for the upcoming marathon. He had a rigorous training schedule that involved running several miles every day, lifting weights to build his strength, and eating a healthy diet to fuel his body. John was determined to do well in the marathon, and he knew that all of his hard work and dedication would pay off. On the day of the marathon, John felt confident and strong. He was ready to give it his all and cross the finish line with a smile on his face.
+    </p>
+    <p id="question"></p>
+	<div id="progress" style="position: fixed; top: 10px; right: 10px;"></div>
+
+	
+    <ul id="options"></ul>
+    <button id="nextBtn">Next/10Qs</button>
+
+
+
+	
+  </div>
+
+  <script src="quiz.js"></script>
+
+<script>
+
+var questionsdone = 1;
+	// Define an array of objects that contains the questions and their options
+var questions = [
+ // Question 1
+
+
+// Question 2
+
+{
+question: "What was John training for?",
+options: ["A marathon", "A triathlon", "A cycling race", "A swimming competition"],
+answer: "A marathon"
+},
+
+{
+question: "What did John's training schedule involve?",
+options: ["Running several miles every day, lifting weights, and eating a healthy diet", "Cycling for hours every day, swimming laps, and eating fast food", "Skipping meals, lifting weights, and doing yoga", "Sleeping for long hours, eating junk food, and watching TV"],
+answer: "Running several miles every day, lifting weights, and eating a healthy diet"
+},
+
+{
+question: "What was John determined to do in the marathon?",
+options: ["To cross the finish line with a smile on his face", "To give up halfway through the race", "To come in last place", "To break a world record"],
+answer: "To cross the finish line with a smile on his face"
+},
+
+{
+question: "How did John feel on the day of the marathon?",
+options: ["Confident and strong", "Nervous and scared", "Tired and weak", "Bored and uninterested"],
+answer: "Confident and strong"
+},
+
+{
+question: "What did John hope all of his hard work and dedication would do?",
+options: ["Pay off", "Go to waste", "Make him sick", "Make him injured"],
+answer: "Pay off"
+},
+
+{
+question: "What did John's wife do to support him?",
+options: ["She joined him in training for the marathon", "She cooked unhealthy meals for him", "She discouraged him from participating in the marathon", "She cheered him on and provided emotional support"],
+answer: "She cheered him on and provided emotional support"
+},
+
+{
+question: "What did John do to stay motivated during his training?",
+options: ["He visualized himself crossing the finish line", "He watched TV all day", "He ate unhealthy food", "He skipped workouts"],
+answer: "He visualized himself crossing the finish line"
+},
+
+{
+question: "What did John think about during the marathon when he felt tired or discouraged?",
+options: ["His family and friends", "His work responsibilities", "Negative thoughts", "The food he would eat after the race"],
+answer: "His family and friends"
+},
+
+{
+question: "How did John feel after he finished the marathon?",
+options: ["Exhausted but proud", "Disappointed and ashamed", "Angry and frustrated", "Bored and uninterested"],
+answer: "Exhausted but proud"
+},
+
+{
+question: "What did John realize after completing the marathon?",
+options: ["That hard work and dedication pay off", "That he should give up on his dreams", "That he should never participate in a marathon again", "That he should stop exercising altogether"],
+answer: "That hard work and dedication pay off"
+}
+  // Add more questions and their options and answers here
+  // ...
+];
+
+
+
+var time = 5 * 60; 
+
+var timerEl = document.createElement("p"); // Create a new <p> element for the timer
+timerEl.textContent = "Time remaining: 23:00"; // Set the initial timer text
+document.querySelector(".container").appendChild(timerEl); // Add the timer to the HTML
+
+var timerId = setInterval(function() {
+  time--; // Decrement the time
+  var minutes = Math.floor(time / 60); // Calculate the remaining minutes
+  var seconds = time % 60; // Calculate the remaining seconds
+  timerEl.textContent = "Time remaining: " + minutes.toString().padStart(2, "0") + ":" + seconds.toString().padStart(2, "0"); // Update the timer text
+  
+  if (time <= 0) {
+    clearInterval(timerId); // Stop the timer
+    questionEl.textContent = "Quiz complete! You scored " + multiscore + " out of 30 questions." // Display the final score
+    optionsEl.innerHTML = ""; // Remove the answer options
+    nextBtn.disabled = true; // Disable the "Next" button
+  }
+}, 1000); // Update the timer every second
+var currentQuestion = 0; // Set the current question index to 0
+var score = 0; // Set the score to 0
+var multiscore = score+score+score;
+var multilength = questions.length*3;
+// Get references to HTML elements
+var questionEl = document.getElementById("question");
+var optionsEl = document.getElementById("options");
+var nextBtn = document.getElementById("nextBtn");
+
+// Function to display the current question and its options
+function showQuestion() {
+  // Display the question
+  questionEl.textContent = questions[currentQuestion].question;
+
+  // Remove any existing options
+  optionsEl.innerHTML = "";
+
+  // Loop through the options and add them to the list
+  for (var i = 0; i < questions[currentQuestion].options.length; i++) {
+    var li = document.createElement("li");
+    var input = document.createElement("input");
+    input.type = "radio";
+    input.name = "option";
+    input.id = `radio-button-${i}`;
+    input.value = questions[currentQuestion].options[i];
+    
+    
+    const label = document.createElement('label');
+    label.innerHTML = "<font size=10px>" + questions[currentQuestion].options[i] + "</font>";
+    label.setAttribute('for', `radio-button-${i}`);
+
+    li.appendChild(input);
+    li.appendChild(label);
+    //li.appendChild(document.createTextNode(questions[currentQuestion].options[i]));
+    
+    //<font size=10px><label for="cue">9</font>
+    
+    optionsEl.appendChild(li);
+  }
+}
+
+// Function to check if the selected answer is correct
+function checkAnswer() {
+	var questionsdone = questionsdone+1;
+  var selectedOption = document.querySelector('input[name="option"]:checked').value;
+  if (selectedOption === questions[currentQuestion].answer) {
+    score++; // Increment the score if the answer is correct
+  }
+  var currentQuestionplus1 =currentQuestion + 2;
+  document.getElementById("outof28").innerHTML=currentQuestionplus1 + "/10";
+}
+
+// Function to go to the next question or end the quiz if all questions have been answered
+function nextQuestion() {
+  checkAnswer(); // Check the answer to the current question
+  currentQuestion++; // Increment the current question index
+
+  // If all questions have been answered, end the quiz and display the score
+  if (currentQuestion === questions.length) {
+    questionEl.textContent = "Quiz complete! You scored " + score*3 + " out of 30 marks.";
+    optionsEl.innerHTML = "";
+    nextBtn.disabled = true;
+  } else {
+    showQuestion(); // Display the next question and its options
+  }
+}
+
+// Call the showQuestion function to display the first question and its options
+showQuestion();
+
+// Add a click event listener to the "Next" button to go to the next question when clicked
+nextBtn.addEventListener("click", nextQuestion);
+
+
+</script>
+  
+</body>
+</html>

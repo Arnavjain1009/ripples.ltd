@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+  <button onclick="window.location.href='https://reportaproblem.webador.co.uk'">report a problem</button>
+	<style>
+    input[type=radio] {
+    border: 0px;
+    width: 3em;
+    height: 3em;
+}
+		body {
+  background-color: #F4F4F4;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  background-color: #FFF;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  margin: 50px auto;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 0;
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 10;
+  padding: 10;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+button {
+  display: block;
+  margin: 20px auto;
+  font-size: 1.2em;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #0074D9;
+  color: #FFF;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #005FAB;
+}
+
+	</style>
+<head>
+  
+  <meta charset="UTF-8">
+  <title>11+math</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	
+  <div class="container">
+    <h1>11+math</h1>
+	<h1 id="outof28"></h1>
+    <p id="question"></p>
+	<div id="progress" style="position: fixed; top: 10px; right: 10px;"></div>
+
+	
+    <ul id="options"></ul>
+    <button id="nextBtn">Next/30</button>
+
+
+
+	
+  </div>
+
+  <script src="quiz.js"></script>
+
+<script>
+
+var questionsdone = 1;
+	// Define an array of objects that contains the questions and their options
+var questions = [
+{question: "What is the value of 7 x 8?",
+options: ["45", "54", "56", "64"],
+answer: "56"},
+
+{question: "What is the square root of 144?",
+options: ["9", "12", "16", "18"],
+answer: "12"},
+
+{question: "What is the value of 3/5 + 2/5?",
+options: ["1/5", "3/5", "4/5", "1"],
+answer: "1"},
+
+{question: "What is the product of 9 and 7?",
+options: ["16", "63", "72", "81"],
+answer: "63"},
+
+{question: "What is the value of 10 - (4 + 3) x 2?",
+options: ["0", "2", "-4", "6"],
+answer: "-4"},
+
+{question: "What is the quotient of 36 divided by 4?",
+options: ["6", "8", "9", "12"],
+answer: "9"},
+
+{question: "What is the value of 2 to the power of 5?",
+options: ["4", "8", "16", "32"],
+answer: "32"},
+
+{question: "What is the area of a square with side length 5 cm?",
+options: ["10 cm²", "20 cm²", "25 cm²", "30 cm²"],
+answer: "25 cm²"},
+
+{question: "What is the sum of angles in a triangle?",
+options: ["90 degrees", "180 degrees", "270 degrees", "360 degrees"],
+answer: "180 degrees"},
+
+{question: "What is the value of 5/8 - 1/4?",
+options: ["1/8", "1/6", "1/4", "3/8"],
+answer: "3/8"},
+{question: "What is the value of 3x + 5y if x = 2 and y = 3?",
+options: ["11", "15", "19", "21"],
+answer: "21"},
+
+{question: "What is the value of 2x - 3y if x = 4 and y = 1?",
+options: ["-1", "2", "5", "8"],
+answer: "5"},
+
+{question: "What is the value of 6/8 ÷ 1/4?",
+options: ["5/4", "3/8", "10/8", "10/5"],
+answer: "3/8"},
+
+{question: "What is the value of (4 + 5) x (6 - 2)?",
+options: ["18", "33", "36", "45"],
+answer: "33"},
+
+{question: "What is the value of 7² - 4²?",
+options: ["23", "33", "41", "45"],
+answer: "33"},
+
+{question: "What is the value of √49?",
+options: ["4", "6", "7", "9"],
+answer: "7"},
+
+{question: "What is the value of 2/3 of 21?",
+options: ["9", "14", "16", "18"],
+answer: "14"},
+
+{question: "What is the value of 12 + 9 x 3?",
+options: ["39", "45", "48", "63"],
+answer: "39"},
+
+{question: "What is the value of 3² x 4³?",
+options: ["144", "432", "1728", "3456"],
+answer: "432"},
+
+{question: "What is the value of (3 + 4)²?",
+options: ["49", "51", "56", "64"],
+answer: "49"},
+
+{question: "What is the value of 6 x 8 - 8 x 3?",
+options: ["10", "24", "20", "26"],
+answer: "24"},
+
+{question: "What is the value of 3/4 - 1/3?",
+options: ["5/12", "1/6", "7/12", "11/12"],
+answer: "5/12"},
+
+{question: "What is the value of 2⁴ x 2³?",
+options: ["32", "64", "128", "256"],
+answer: "128"},
+
+{question: "What is the value of 1/5 of 60?",
+options: ["8", "10", "12", "15"],
+answer: "12"},
+
+{question: "What is the value of (4 x 10 + 9) ÷ 7?",
+options: ["2", "3", "4", "7"],
+answer: "7"},
+
+{question: "What is the value of 15 - (5 + 3) x 2?",
+options: ["-1", "5", "9", "13"],
+answer: "-1"},
+
+{question: "What is the value of 7/10 + 3/5?",
+options: ["1/2", "11/20", "7/10", "13/10"],
+answer: "13/10"},
+{question: "(hard)What is the sum of the first 20 even numbers?",
+options: ["200", "210", "400", "420"],
+answer: "420"},
+
+{question: "(hard)If 2x + y = 5 and x - y = 1, what is the value of x?",
+options: ["1", "2", "3", "4"],
+answer: "2"},
+
+{question: "(hard)What is the value of x in the equation 2x² + 5x + 3 = 0?",
+options: ["-3/2 and -1", "1/2 and -3", "3/2 and 1", "2 and -3/2"],
+answer: "-3/2 and -1"},
+
+
+
+
+
+  // Add more questions and their options and answers here
+  // ...
+];
+
+
+
+var time = 12 * 60; 
+
+var timerEl = document.createElement("p"); // Create a new <p> element for the timer
+timerEl.textContent = "Time remaining: 23:00"; // Set the initial timer text
+document.querySelector(".container").appendChild(timerEl); // Add the timer to the HTML
+
+var timerId = setInterval(function() {
+  time--; // Decrement the time
+  var minutes = Math.floor(time / 60); // Calculate the remaining minutes
+  var seconds = time % 60; // Calculate the remaining seconds
+  timerEl.textContent = "Time remaining: " + minutes.toString().padStart(2, "0") + ":" + seconds.toString().padStart(2, "0"); // Update the timer text
+  
+  if (time <= 0) {
+    clearInterval(timerId); // Stop the timer
+    questionEl.textContent = "Quiz complete! You scored " + score + " out of " + questions.length + " questions."; // Display the final score
+    optionsEl.innerHTML = ""; // Remove the answer options
+    nextBtn.disabled = true; // Disable the "Next" button
+  }
+}, 1000); // Update the timer every second
+var currentQuestion = 0; // Set the current question index to 0
+var score = 0; // Set the score to 0
+
+// Get references to HTML elements
+var questionEl = document.getElementById("question");
+var optionsEl = document.getElementById("options");
+var nextBtn = document.getElementById("nextBtn");
+
+// Function to display the current question and its options
+function showQuestion() {
+  // Display the question
+  questionEl.textContent = questions[currentQuestion].question;
+
+  // Remove any existing options
+  optionsEl.innerHTML = "";
+
+  // Loop through the options and add them to the list
+  for (var i = 0; i < questions[currentQuestion].options.length; i++) {
+    var li = document.createElement("li");
+    var input = document.createElement("input");
+    input.type = "radio";
+    input.name = "option";
+    input.id = `radio-button-${i}`;
+    input.value = questions[currentQuestion].options[i];
+    
+    
+    const label = document.createElement('label');
+    label.innerHTML = "<font size=10px>" + questions[currentQuestion].options[i] + "</font>";
+    label.setAttribute('for', `radio-button-${i}`);
+
+    li.appendChild(input);
+    li.appendChild(label);
+    //li.appendChild(document.createTextNode(questions[currentQuestion].options[i]));
+    
+    //<font size=10px><label for="cue">9</font>
+    
+    optionsEl.appendChild(li);
+  }
+}
+
+// Function to check if the selected answer is correct
+function checkAnswer() {
+	var questionsdone = questionsdone+1;
+  var selectedOption = document.querySelector('input[name="option"]:checked').value;
+  if (selectedOption === questions[currentQuestion].answer) {
+    score++; // Increment the score if the answer is correct
+  }
+  var currentQuestionplus1 =currentQuestion + 2;
+  document.getElementById("outof28").innerHTML=currentQuestionplus1 + "/30";
+}
+
+// Function to go to the next question or end the quiz if all questions have been answered
+function nextQuestion() {
+  checkAnswer(); // Check the answer to the current question
+  currentQuestion++; // Increment the current question index
+
+  // If all questions have been answered, end the quiz and display the score
+  if (currentQuestion === questions.length) {
+    questionEl.textContent = "Quiz complete! You scored " + score + " out of " + questions.length + " questions.";
+    optionsEl.innerHTML = "";
+    nextBtn.disabled = true;
+  } else {
+    showQuestion(); // Display the next question and its options
+  }
+}
+
+// Call the showQuestion function to display the first question and its options
+showQuestion();
+
+// Add a click event listener to the "Next" button to go to the next question when clicked
+nextBtn.addEventListener("click", nextQuestion);
+
+
+</script>
+  
+</body>
+</html>

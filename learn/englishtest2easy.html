@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<html>
+  <button onclick="window.location.href='https://reportaproblem.webador.co.uk'">report a problem</button>
+	<style>
+    input[type=radio] {
+    border: 0px;
+    width: 3em;
+    height: 3em;
+}
+		body {
+  background-color: #F4F4F4;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  background-color: #FFF;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  margin: 50px auto;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 0;
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 10;
+  padding: 10;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+button {
+  display: block;
+  margin: 20px auto;
+  font-size: 1.2em;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #0074D9;
+  color: #FFF;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #005FAB;
+}
+
+	</style>
+<head>
+  
+  <meta charset="UTF-8">
+  <title>11+math/30</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	
+  <div class="container">
+    <h1>11+english/30mrks</h1>
+	<h1 id="outof28"></h1>
+    <p>Extract:
+
+        Sarah had been training for a marathon for months. She had always been a runner and loved the challenge and the sense of accomplishment that came with running long distances. But training for a marathon was a whole different level of commitment and dedication. Sarah had to wake up early every day to fit in her training runs, often sacrificing social outings or time with friends and family. She also had to pay close attention to her diet and make sure she was fueling her body properly for the intense workouts. As the marathon drew closer, Sarah began to feel nervous and anxious. She wondered if she had trained enough and if she was really ready for the challenge ahead.</p>
+    <p id="question"></p>
+	<div id="progress" style="position: fixed; top: 10px; right: 10px;"></div>
+
+	
+    <ul id="options"></ul>
+    <button id="nextBtn">Next/10Qs</button>
+
+
+
+	
+  </div>
+
+  <script src="quiz.js"></script>
+
+<script>
+
+var questionsdone = 1;
+	// Define an array of objects that contains the questions and their options
+var questions = [
+ // Question 1
+
+ {
+question: "What was Sarah training for?",
+options: ["A 5K race", "A half marathon", "A marathon", "A sprint triathlon"],
+answer: "A marathon"
+},
+{
+question: "Why did Sarah enjoy running?",
+options: ["Because it was easy", "Because it was social", "Because it was challenging", "Because it was a good way to rest"],
+answer: "Because it was challenging"
+},
+{
+question: "What was different about training for a marathon compared to Sarah's previous running experiences?",
+options: ["She didn't have to wake up early", "She didn't have to pay attention to her diet", "She didn't have to sacrifice social outings or time with friends and family", "It required a higher level of commitment and dedication"],
+answer: "It required a higher level of commitment and dedication"
+},
+{
+question: "What sacrifices did Sarah have to make during her marathon training?",
+options: ["Her diet", "Her sleep", "Her work schedule", "Social outings or time with friends and family"],
+answer: "Social outings or time with friends and family"
+},
+{
+question: "What did Sarah have to pay close attention to during her marathon training?",
+options: ["Her social life", "Her sleep schedule", "Her work schedule", "Her diet"],
+answer: "Her diet"
+},
+{
+question: "How did Sarah feel as the marathon drew closer?",
+options: ["Confident and relaxed", "Nervous and anxious", "Excited and enthusiastic", "Bored and uninterested"],
+answer: "Nervous and anxious"
+},
+{
+question: "What was Sarah wondering as the marathon drew closer?",
+options: ["If she had trained enough", "If she had the right shoes", "If she would win the race", "If she would enjoy the experience"],
+answer: "If she had trained enough"
+},
+{
+question: "What did Sarah have to do every day to fit in her training runs?",
+options: ["Wake up early", "Stay up late", "Skip meals", "Cancel plans with friends"],
+answer: "Wake up early"
+},
+{
+question: "What was the sense of accomplishment that Sarah loved about running?",
+options: ["The feeling of winning", "The feeling of finishing a race", "The feeling of socializing", "The feeling of resting"],
+answer: "The feeling of finishing a race"
+},
+{
+question: "What was the reason Sarah began to feel nervous and anxious as the marathon drew closer?",
+options: ["She wondered if she had trained enough", "She wondered if she had the right shoes", "She wondered if she would win the race", "She wondered if she would enjoy the experience"],
+answer: "She wondered if she had trained enough"
+},
+// Question 2
+
+
+  // Add more questions and their options and answers here
+  // ...
+];
+
+
+
+var time = 5 * 60; 
+
+var timerEl = document.createElement("p"); // Create a new <p> element for the timer
+timerEl.textContent = "Time remaining: 23:00"; // Set the initial timer text
+document.querySelector(".container").appendChild(timerEl); // Add the timer to the HTML
+
+var timerId = setInterval(function() {
+  time--; // Decrement the time
+  var minutes = Math.floor(time / 60); // Calculate the remaining minutes
+  var seconds = time % 60; // Calculate the remaining seconds
+  timerEl.textContent = "Time remaining: " + minutes.toString().padStart(2, "0") + ":" + seconds.toString().padStart(2, "0"); // Update the timer text
+  
+  if (time <= 0) {
+    clearInterval(timerId); // Stop the timer
+    questionEl.textContent = "Quiz complete! You scored " + multiscore + " out of 30 questions." // Display the final score
+    optionsEl.innerHTML = ""; // Remove the answer options
+    nextBtn.disabled = true; // Disable the "Next" button
+  }
+}, 1000); // Update the timer every second
+var currentQuestion = 0; // Set the current question index to 0
+var score = 0; // Set the score to 0
+var multiscore = score+score+score;
+var multilength = questions.length*3;
+// Get references to HTML elements
+var questionEl = document.getElementById("question");
+var optionsEl = document.getElementById("options");
+var nextBtn = document.getElementById("nextBtn");
+
+// Function to display the current question and its options
+function showQuestion() {
+  // Display the question
+  questionEl.textContent = questions[currentQuestion].question;
+
+  // Remove any existing options
+  optionsEl.innerHTML = "";
+
+  // Loop through the options and add them to the list
+  for (var i = 0; i < questions[currentQuestion].options.length; i++) {
+    var li = document.createElement("li");
+    var input = document.createElement("input");
+    input.type = "radio";
+    input.name = "option";
+    input.id = `radio-button-${i}`;
+    input.value = questions[currentQuestion].options[i];
+    
+    
+    const label = document.createElement('label');
+    label.innerHTML = "<font size=10px>" + questions[currentQuestion].options[i] + "</font>";
+    label.setAttribute('for', `radio-button-${i}`);
+
+    li.appendChild(input);
+    li.appendChild(label);
+    //li.appendChild(document.createTextNode(questions[currentQuestion].options[i]));
+    
+    //<font size=10px><label for="cue">9</font>
+    
+    optionsEl.appendChild(li);
+  }
+}
+
+// Function to check if the selected answer is correct
+function checkAnswer() {
+	var questionsdone = questionsdone+1;
+  var selectedOption = document.querySelector('input[name="option"]:checked').value;
+  if (selectedOption === questions[currentQuestion].answer) {
+    score++; // Increment the score if the answer is correct
+  }
+  var currentQuestionplus1 =currentQuestion + 2;
+  document.getElementById("outof28").innerHTML=currentQuestionplus1 + "/10";
+}
+
+// Function to go to the next question or end the quiz if all questions have been answered
+function nextQuestion() {
+  checkAnswer(); // Check the answer to the current question
+  currentQuestion++; // Increment the current question index
+
+  // If all questions have been answered, end the quiz and display the score
+  if (currentQuestion === questions.length) {
+    questionEl.textContent = "Quiz complete! You scored " + score*3 + " out of 30 marks.";
+    optionsEl.innerHTML = "";
+    nextBtn.disabled = true;
+  } else {
+    showQuestion(); // Display the next question and its options
+  }
+}
+
+// Call the showQuestion function to display the first question and its options
+showQuestion();
+
+// Add a click event listener to the "Next" button to go to the next question when clicked
+nextBtn.addEventListener("click", nextQuestion);
+
+
+</script>
+  
+</body>
+</html>

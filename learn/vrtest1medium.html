@@ -1,0 +1,440 @@
+
+<!DOCTYPE html>
+<html>
+    <button onclick="window.location.href='https://reportaproblem.webador.co.uk'">report a problem</button>
+	<style>
+    input[type=radio] {
+    border: 0px;
+    width: 3em;
+    height: 3em;
+}
+		body {
+  background-color: #F4F4F4;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  background-color: #FFF;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  margin: 50px auto;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 0;
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 10;
+  padding: 10;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+button {
+  display: block;
+  margin: 20px auto;
+  font-size: 1.2em;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #0074D9;
+  color: #FFF;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #005FAB;
+}
+
+	</style>
+<head>
+  <meta charset="UTF-8">
+  <title>11+vr/40</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	
+  <div class="container">
+    <h1>11+verbal reasoning</h1>
+	<h1 id="outof28"></h1>
+    <p id="question"></p>
+	<div id="progress" style="position: fixed; top: 10px; right: 10px;"></div>
+
+	
+    <ul id="options"></ul>
+    <button id="nextBtn">Next/40</button>
+
+
+
+	
+  </div>
+
+  <script src="quiz.js"></script>
+
+<script>
+
+var questionsdone = 1;
+	// Define an array of objects that contains the questions and their options
+var questions = [
+ // Question 1
+{
+    question: "If the word 'EARLY' is written as 'LRAEY', how would you write the word 'HEART' in the same code?",
+options: ["ATRHE", "THREA", "RAHET", "HATRE"],
+answer: "THREA"
+
+},
+{
+    question: "If 'D' is coded as '5', 'E' is coded as '7', 'F' is coded as '9', then what will be the code for 'G'?",
+options: ["10", "11", "12", "13"],
+answer: "11"
+
+},
+{
+    question: "Which word does not belong in the following group, and why? CAT, DOG, BIRD, HORSE, PIG",
+options: ["CAT", "DOG", "BIRD", "HORSE", "PIG"],
+answer: "BIRD"
+
+},
+{
+
+    question: "Which number comes next in the series? 1, 4, 9, 16, 25, __",
+options: ["31", "36", "49", "64"],
+answer: "36"
+
+},
+{
+    question: "Which one of the following words is different from the rest? PEAR, APPLE, ORANGE, BANANA, LEMON",
+options: ["PEAR", "APPLE", "ORANGE", "BANANA", "LEMON"],
+answer: "LEMON"
+
+},
+{
+    question: "In a code language, 'SHARP' is written as 'TIBQS', then how would 'TRIM' be written in the same code?",
+options: ["USNJ", "USMJ", "USKI", "USNI"],
+answer: "USNI"
+
+},
+{
+    question: "Which one of the following words is spelled incorrectly?",
+options: ["Acquaintance", "Cemetery", "Embarrass", "Mischievous"],
+answer: "Embarrass"
+
+},
+{
+    question: "Choose the pair of words that are most similar in meaning: Remote and Nearby, Arrogant and Humble, Obese and Thin, Lively and Dull",
+options: ["Remote and Nearby", "Arrogant and Humble", "Obese and Thin", "Lively and Dull"],
+answer: "Remote and Nearby"
+
+},
+{
+    question: "Which one of the following numbers is an odd number?",
+options: ["28", "33", "42", "50"],
+answer: "33"
+
+},
+{
+    question: "Which one of the following words is a synonym of the word 'abundant'?",
+options: ["Scarce", "Plentiful", "Limited", "Meager"],
+answer: "Plentiful"
+
+},
+{
+    question: "Which one of the following is a synonym for the word 'hasty'?",
+options: ["Lazy", "Slow", "Quick", "Cautious"],
+answer: "Quick"
+
+},
+{
+    question: "If 'GOAT' is coded as '6921' and 'RAT' is coded as '735', how is 'ART' coded?",
+options: ["235", "325", "723", "732"],
+answer: "325"
+
+},
+{
+    question: "Which word does not belong in the following group, and why? RED, YELLOW, GREEN, BLUE, BLACK",
+options: ["RED", "YELLOW", "GREEN", "BLUE", "BLACK"],
+answer: "BLACK"
+
+},
+{
+    question: "Which one of the following words is an antonym for the word 'brave'?",
+options: ["Courageous", "Cowardly", "Valiant", "Fearless"],
+answer: "Cowardly"
+
+
+},
+{
+
+    question: "Which one of the following words is spelled correctly?",
+options: ["Hygiene", "Hiegene", "Hiegien", "Higene"],
+answer: "Hygiene"
+
+},
+{
+    question: "Which number comes next in the series? 2, 5, 10, 17, 26, __",
+options: ["37", "38", "39", "40"],
+answer: "37"
+
+},
+{
+    question: "Which one of the following words is a synonym for the word 'intelligent'?",
+options: ["Dull", "Stupid", "Clever", "Foolish"],
+answer: "Clever"
+
+},
+{
+    question: "In a code language, 'HAPPY' is written as '5@++9', then how would 'ANGRY' be written in the same code?",
+options: ["&3*69", "&3*96", "&9*63", "&9*36"],
+answer: "&3*69"
+
+},
+{
+    question: "Choose the pair of words that are most opposite in meaning: Warm and Cool, Fresh and Stale, Brave and Cowardly, Arrogant and Modest",
+options: ["Warm and Cool", "Fresh and Stale", "Brave and Cowardly", "Arrogant and Modest"],
+answer: "Fresh and Stale"
+
+},
+{
+    question: "Which one of the following words is a homophone for the word 'flower'?",
+options: ["Flour", "Floor", "Flier", "Flyer"],
+answer: "Flour"
+
+},
+{
+    question: "Which one of the following numbers is a multiple of both 2 and 3?",
+options: ["8", "12", "15", "17"],
+answer: "12"
+
+},
+{
+    question: "Which one of the following words is spelled incorrectly?",
+options: ["Maintenance", "Accommodation", "Perserverance", "Refrigerator"],
+answer: "Perserverance"
+
+},
+{
+    question: "Which one of the following words is an antonym for the word 'generous'?",
+options: ["Greedy", "Selfish", "Stingy", "Frugal"],
+answer: "Selfish"
+
+},
+{
+    question: "If the first two statements are true, is the final statement true as well? All elephants are gray. Dumbo is an elephant. Dumbo is gray.",
+options: ["True", "False"],
+answer: "True"
+
+},
+{
+    question: "What is the missing number in the sequence? 1, 3, 5, 7, __, 11",
+options: ["8", "9", "10", "12"],
+answer: "9"
+
+},
+{
+    question: "Which word is a synonym for the word 'resilient'?",
+options: ["Fragile", "Weak", "Flexible", "Inflexible"],
+answer:"Flexible"
+
+},
+{
+    question: "Which one of the following is a palindrome?",
+options: ["Racecar", "Airplane", "Submarine", "Spaceship"],
+answer: "Racecar"
+
+},
+{
+    question: "Which word does not belong in the following group, and why? Milk, Cheese, Butter, Bread, Yogurt",
+options: ["Milk", "Cheese", "Butter", "Bread", "Yogurt"],
+answer: "Bread"
+
+},
+{
+    question: "In a code language, 'SPRING' is written as 'QPQHMF', then how would 'WINTER' be written in the same code?",
+options: ["ZLBSFS", "VLBSFS", "VLASGS", "ZLASGS"],
+answer: "VLBSFS"
+
+},
+{
+    question: "Which one of the following words is an antonym for the word 'expand'?",
+options: ["Reduce", "Increase", "Extend", "Stretch"],
+answer: "Reduce"
+
+},
+{
+    question: "Which one of the following numbers is a prime number?",
+options: ["6", "11", "16", "18"],
+answer: "11"
+
+},
+{
+    question: "Which one of the following words is an antonym for the word 'sincere'?",
+options: ["Genuine", "Honest", "Insincere", "Authentic"],
+answer: "Insincere"
+
+},
+{
+    question: "Which letter comes next in the sequence? A, E, I, __, U",
+options: ["O", "Y", "Q", "W"],
+answer: "O"
+
+},
+{
+    question: "Which one of the following words is spelled correctly?",
+options: ["Occurrence", "Occurrance", "Occurence", "Occurunce"],
+answer: "Occurrence"
+
+},
+{
+    question: "What is the next number in the sequence? 1, 1, 2, 3, 5, 8, 13, __",
+options: ["21", "23", "24", "26"],
+answer: "21"
+
+},
+{
+    question: "Which one of the following words is a synonym for the word 'ecstatic'?",
+options: ["Happy", "Sad", "Angry", "Depressed"],
+answer: "Happy"
+
+},
+{
+    question: "Which word does not belong in the following group, and why? Guitar, Piano, Flute, Violin, Drum",
+options: ["Guitar", "Piano", "Flute", "Violin", "Drum"],
+answer: "Drum"
+
+},
+{
+    question: "What is the missing number in the sequence? 2, 4, 8, 16, __, 64",
+options: ["28", "32", "48", "56"],
+answer: "32"
+
+},
+{
+    question: "Which one of the following words is spelled incorrectly?",
+options: ["Embarrassment", "Acquaintance", "Perseverance", "Necessary"],
+answer: "Embarrassment"
+
+},
+{
+    question: "Which one of the following is a synonym for the word 'meticulous'?",
+options: ["Sloppy", "Careless", "Thorough", "Lazy"],
+answer: "Thorough"
+
+},
+
+// Question 2
+
+  // Add more questions and their options and answers here
+  // ...
+];
+
+
+
+var time = 12 * 60; 
+
+var timerEl = document.createElement("p"); // Create a new <p> element for the timer
+timerEl.textContent = "Time remaining: 8:00"; // Set the initial timer text
+document.querySelector(".container").appendChild(timerEl); // Add the timer to the HTML
+
+var timerId = setInterval(function() {
+  time--; // Decrement the time
+  var minutes = Math.floor(time / 60); // Calculate the remaining minutes
+  var seconds = time % 60; // Calculate the remaining seconds
+  timerEl.textContent = "Time remaining: " + minutes.toString().padStart(2, "0") + ":" + seconds.toString().padStart(2, "0"); // Update the timer text
+  
+  if (time <= 0) {
+    clearInterval(timerId); // Stop the timer
+    questionEl.textContent = "Quiz complete! You scored " + score + " out of " + questions.length + " questions."; // Display the final score
+    optionsEl.innerHTML = ""; // Remove the answer options
+    nextBtn.disabled = true; // Disable the "Next" button
+  }
+}, 1000); // Update the timer every second
+var currentQuestion = 0; // Set the current question index to 0
+var score = 0; // Set the score to 0
+
+// Get references to HTML elements
+var questionEl = document.getElementById("question");
+var optionsEl = document.getElementById("options");
+var nextBtn = document.getElementById("nextBtn");
+
+// Function to display the current question and its options
+function showQuestion() {
+  // Display the question
+  questionEl.textContent = questions[currentQuestion].question;
+
+  // Remove any existing options
+  optionsEl.innerHTML = "";
+
+  // Loop through the options and add them to the list
+  for (var i = 0; i < questions[currentQuestion].options.length; i++) {
+    var li = document.createElement("li");
+    var input = document.createElement("input");
+    input.type = "radio";
+    input.name = "option";
+    input.id = `radio-button-${i}`;
+    input.value = questions[currentQuestion].options[i];
+    
+    
+    const label = document.createElement('label');
+    label.innerHTML = "<font size=10px>" + questions[currentQuestion].options[i] + "</font>";
+    label.setAttribute('for', `radio-button-${i}`);
+
+    li.appendChild(input);
+    li.appendChild(label);
+    //li.appendChild(document.createTextNode(questions[currentQuestion].options[i]));
+    
+    //<font size=10px><label for="cue">9</font>
+    
+    optionsEl.appendChild(li);
+  }
+}
+
+// Function to check if the selected answer is correct
+function checkAnswer() {
+	var questionsdone = questionsdone+1;
+  var selectedOption = document.querySelector('input[name="option"]:checked').value;
+  if (selectedOption === questions[currentQuestion].answer) {
+    score++; // Increment the score if the answer is correct
+  }
+  var currentQuestionplus1 =currentQuestion + 2;
+  document.getElementById("outof28").innerHTML=currentQuestionplus1 + "/40";
+}
+
+// Function to go to the next question or end the quiz if all questions have been answered
+function nextQuestion() {
+  checkAnswer(); // Check the answer to the current question
+  currentQuestion++; // Increment the current question index
+
+  // If all questions have been answered, end the quiz and display the score
+  if (currentQuestion === questions.length) {
+    questionEl.textContent = "Quiz complete! You scored " + score + " out of " + questions.length + " questions.";
+    optionsEl.innerHTML = "";
+    nextBtn.disabled = true;
+  } else {
+    showQuestion(); // Display the next question and its options
+  }
+}
+
+// Call the showQuestion function to display the first question and its options
+showQuestion();
+
+// Add a click event listener to the "Next" button to go to the next question when clicked
+nextBtn.addEventListener("click", nextQuestion);
+
+
+</script>
+  
+</body>
+</html>

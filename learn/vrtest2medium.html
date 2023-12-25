@@ -1,0 +1,393 @@
+
+<!DOCTYPE html>
+<html>
+    <button onclick="window.location.href='https://reportaproblem.webador.co.uk'">report a problem</button>
+	<style>
+    input[type=radio] {
+    border: 0px;
+    width: 3em;
+    height: 3em;
+}
+		body {
+  background-color: #F4F4F4;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  background-color: #FFF;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  margin: 50px auto;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 0;
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 10;
+  padding: 10;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+button {
+  display: block;
+  margin: 20px auto;
+  font-size: 1.2em;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #0074D9;
+  color: #FFF;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #005FAB;
+}
+
+	</style>
+<head>
+  <meta charset="UTF-8">
+  <title>11+vr/40</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	
+  <div class="container">
+    <h1>11+verbal reasoning</h1>
+	<h1 id="outof28"></h1>
+    <p id="question"></p>
+	<div id="progress" style="position: fixed; top: 10px; right: 10px;"></div>
+
+	
+    <ul id="options"></ul>
+    <button id="nextBtn">Next/40</button>
+
+
+
+	
+  </div>
+
+  <script src="quiz.js"></script>
+
+<script>
+
+var questionsdone = 1;
+	// Define an array of objects that contains the questions and their options
+var questions = [
+ // Question 1
+ {
+question: "If 'CAT' is coded as 'DWS' and 'DOG' is coded as 'GRV', then how is 'PET' coded?",
+options: ["SGW", "SGV", "RGT", "RGS"],
+answer: "SGW"
+},
+{
+question: "Which one of the following words is an antonym for the word 'generous'?",
+options: ["Stingy", "Greedy", "Selfish", "Thrifty"],
+answer: "Stingy"
+},
+{
+question: "If 'Z' is coded as '1', 'A' is coded as '26', and 'M' is coded as '13', then what will be the code for 'N'?",
+options: ["12", "13", "14", "15"],
+answer: "14"
+},
+{
+question: "Which word does not belong in the following group, and why? BEE, BUTTERFLY, MOSQUITO, FLY, LADYBUG",
+options: ["BEE", "BUTTERFLY", "MOSQUITO", "FLY", "LADYBUG"],
+answer: "MOSQUITO"
+},
+{
+question: "In a code language, 'RIVER' is written as 'SEWLS', then how would 'MOUNTAIN' be written in the same code?",
+options: ["NPVOUJBO", "NPVOTJBN", "MPVOTJBO", "MPVOTJBN"],
+answer: "NPVOTJBN"
+},
+{
+question: "Which one of the following words is spelled incorrectly?",
+options: ["Harassment", "Commemorate", "Embarrassment", "Perseverence"],
+answer: "Perseverence"
+},
+{
+question: "Choose the pair of words that are most opposite in meaning: Polite and Rude, Sad and Happy, Honest and Dishonest, Generous and Stingy",
+options: ["Polite and Rude", "Sad and Happy", "Honest and Dishonest", "Generous and Stingy"],
+answer: "Honest and Dishonest"
+},
+{
+question: "Which one of the following words is a synonym for the word 'beautiful'?",
+options: ["Gorgeous", "Ugly", "Hideous", "Repulsive"],
+answer: "Gorgeous"
+},
+{
+question: "Which one of the following numbers is a prime number?",
+options: ["12", "15", "19", "21"],
+answer: "19"
+},
+{
+question: "If 'ACE' is coded as 'BDF' and 'GHI' is coded as 'JKL', then how is 'MNO' coded?",
+options: ["PQR", "STU", "VWX", "YZA"],
+answer: "PQR"
+},
+{
+question: "Which word does not belong in the following group, and why? JACKET, PANTS, SHIRT, SHOE, HAT",
+options: ["JACKET", "PANTS", "SHIRT", "SHOE", "HAT"],
+answer: "SHOE"
+},
+{
+question: "Which one of the following words is spelled correctly?",
+options: ["Conscience", "Concience", "Concsience", "Conscienece"],
+answer: "Conscience"
+},
+{
+question: "Which one of the following words is a synonym for the word 'unique'?",
+options: ["Original", "Ordinary", "Common", "Familiar"],
+answer: "Original"
+},
+{
+question: "If 'JUMP' is coded as 'KNQN', what will be the code for 'LINE'?",
+options: ["MJOF", "LJME", "JHND", "NLKG"],
+answer: "NLKG"
+},
+{
+question: "Which number comes next in the series? 3, 6, 9, 12, 15, __",
+options: ["16", "18", "20", "21"],
+answer: "18"
+},
+{
+question: "Which one of the following words is a homophone for the word 'peace'?",
+options: ["Piece", "Pace", "Peas", "Pees"],
+answer: "Piece"
+},
+{
+question: "In a code language, 'MANGO' is written as 'ONGAM', then how would 'LEMON' be written in the same code?",
+options: ["MONLE", "ONLEM", "NLEOM", "MLEON"],
+answer: "ONLEM"
+},
+{
+question: "Which one of the following words is spelled incorrectly?",
+options: ["Acommodation", "Embarrassment", "Necessary", "Convenience"],
+answer: "Acommodation"
+},
+{
+question: "Which one of the following numbers is a prime number?",
+options: ["21", "23", "24", "25"],
+answer: "23"
+},
+{
+question: "Choose the pair of words that are most similar in meaning: Confident and Shy, Rich and Poor, Efficient and Inefficient, Joyful and Sad",
+options: ["Confident and Shy", "Rich and Poor", "Efficient and Inefficient", "Joyful and Sad"],
+answer: "Efficient and Inefficient"
+},
+{
+question: "Which one of the following words is a synonym for the word 'excessive'?",
+options: ["Adequate", "Moderate", "Limited", "Abundant"],
+answer: "Abundant"
+},
+{
+question: "Which one of the following words does not belong in the following group, and why? Carrot, Onion, Tomato, Broccoli, Banana",
+options: ["Carrot", "Onion", "Tomato", "Broccoli", "Banana"],
+answer: "Banana"
+},
+{
+question: "If 'STAR' is coded as 'TUBS', how would you write 'COLD' in the same code?",
+options: ["ENME", "ENLD", "DNLD", "DNME"],
+answer: "DNLD"
+},
+{
+question: "Which one of the following words is spelled incorrectly?",
+options: ["Occurrence", "Privilege", "Necessity", "Acommodate"],
+answer: "Acommodate"
+},
+{
+question: "Which one of the following numbers is a perfect square?",
+options: ["28", "36", "44", "51"],
+answer: "36"
+},
+{
+question: "Choose the pair of words that are most opposite in meaning: Healthy and Sick, Soft and Hard, Bright and Dark, Hot and Cold",
+options: ["Healthy and Sick", "Soft and Hard", "Bright and Dark", "Hot and Cold"],
+answer: "Bright and Dark"
+},
+{
+question: "If the word 'LEMON' is written as 'NMEOL', how would you write the word 'BANANA' in the same code?",
+options: ["AABNNA", "BAANAN", "NABNAA", "NAABAN"],
+answer: "NABNAA"
+},
+{
+question: "If 'L' is coded as '12', 'N' is coded as '14', 'P' is coded as '16', then what will be the code for 'R'?",
+options: ["16", "17", "18", "19"],
+answer: "18"
+},
+{
+question: "Which word does not belong in the following group, and why? TULIP, DAISY, ROSE, BANANA, LILY",
+options: ["TULIP", "DAISY", "ROSE", "BANANA", "LILY"],
+answer: "BANANA"
+},
+{
+question: "Which number comes next in the series? 3, 8, 13, 18, 23, __",
+options: ["25", "28", "29", "30"],
+answer: "28"
+},
+{
+question: "Which one of the following words is different from the rest? HAPPY, SAD, ANGRY, JOYFUL, ECSTATIC",
+options: ["HAPPY", "SAD", "ANGRY", "JOYFUL", "ECSTATIC"],
+answer: "SAD"
+},
+{
+question: "In a code language, 'WATER' is written as 'YCVGT', then how would 'DRINK' be written in the same code?",
+options: ["FUMKP", "FTNKQ", "FUOLN", "FVLKP"],
+answer: "FUOLN"
+},
+{
+question: "Which one of the following words is spelled incorrectly?",
+options: ["Embarrassment", "Commemorate", "Connoisseur", "Exhilerate"],
+answer: "Exhilerate"
+},
+{
+question: "Choose the pair of words that are most similar in meaning: Confident and Timid, Fickle and Steadfast, Inquisitive and Curious, Accurate and Incorrect",
+options: ["Confident and Timid", "Fickle and Steadfast", "Inquisitive and Curious", "Accurate and Incorrect"],
+answer: "Inquisitive and Curious"
+},
+{
+question: "Which one of the following numbers is an even number?",
+options: ["23", "27", "30", "35"],
+answer: "30"
+},
+{
+question: "Which one of the following words is an antonym of the word 'victorious'?",
+options: ["Successful", "Triumphant", "Defeated", "Dominant"],
+answer: "Defeated"
+},
+{
+question: "Which one of the following is a synonym for the word 'sincere'?",
+options: ["Deceitful", "Dishonest", "Genuine", "Insincere"],
+answer: "Genuine"
+},
+{
+question: "If 'MIRROR' is coded as '87544' and 'GLASS' is coded as '43733', how is 'SIGNAL' coded?",
+options: ["947327", "949732", "947732", "947373"],
+answer: "947327"
+},
+{
+question: "Choose the pair of words that are most opposite in meaning: Cheap and Expensive, Angry and Calm, Tired and Energetic, Beautiful and Ugly",
+options: ["Cheap and Expensive", "Angry and Calm", "Tired and Energetic", "Beautiful and Ugly"],
+answer: "Cheap and Expensive"
+},
+{
+question: "Which one of the following words is a homophone for the word 'allowed'?",
+options: ["Aloud", "Allowed", "Alloud", "Alowd"],
+answer: "Aloud"
+},
+  // ...  40
+];
+
+
+
+var time = 12 * 60; 
+
+var timerEl = document.createElement("p"); // Create a new <p> element for the timer
+timerEl.textContent = "Time remaining: 8:00"; // Set the initial timer text
+document.querySelector(".container").appendChild(timerEl); // Add the timer to the HTML
+
+var timerId = setInterval(function() {
+  time--; // Decrement the time
+  var minutes = Math.floor(time / 60); // Calculate the remaining minutes
+  var seconds = time % 60; // Calculate the remaining seconds
+  timerEl.textContent = "Time remaining: " + minutes.toString().padStart(2, "0") + ":" + seconds.toString().padStart(2, "0"); // Update the timer text
+  
+  if (time <= 0) {
+    clearInterval(timerId); // Stop the timer
+    questionEl.textContent = "Quiz complete! You scored " + score + " out of " + questions.length + " questions."; // Display the final score
+    optionsEl.innerHTML = ""; // Remove the answer options
+    nextBtn.disabled = true; // Disable the "Next" button
+  }
+}, 1000); // Update the timer every second
+var currentQuestion = 0; // Set the current question index to 0
+var score = 0; // Set the score to 0
+
+// Get references to HTML elements
+var questionEl = document.getElementById("question");
+var optionsEl = document.getElementById("options");
+var nextBtn = document.getElementById("nextBtn");
+
+// Function to display the current question and its options
+function showQuestion() {
+  // Display the question
+  questionEl.textContent = questions[currentQuestion].question;
+
+  // Remove any existing options
+  optionsEl.innerHTML = "";
+
+  // Loop through the options and add them to the list
+  for (var i = 0; i < questions[currentQuestion].options.length; i++) {
+    var li = document.createElement("li");
+    var input = document.createElement("input");
+    input.type = "radio";
+    input.name = "option";
+    input.id = `radio-button-${i}`;
+    input.value = questions[currentQuestion].options[i];
+    
+    
+    const label = document.createElement('label');
+    label.innerHTML = "<font size=10px>" + questions[currentQuestion].options[i] + "</font>";
+    label.setAttribute('for', `radio-button-${i}`);
+
+    li.appendChild(input);
+    li.appendChild(label);
+    //li.appendChild(document.createTextNode(questions[currentQuestion].options[i]));
+    
+    //<font size=10px><label for="cue">9</font>
+    
+    optionsEl.appendChild(li);
+  }
+}
+
+// Function to check if the selected answer is correct
+function checkAnswer() {
+	var questionsdone = questionsdone+1;
+  var selectedOption = document.querySelector('input[name="option"]:checked').value;
+  if (selectedOption === questions[currentQuestion].answer) {
+    score++; // Increment the score if the answer is correct
+  }
+  var currentQuestionplus1 =currentQuestion + 2;
+  document.getElementById("outof28").innerHTML=currentQuestionplus1 + "/40";
+}
+
+// Function to go to the next question or end the quiz if all questions have been answered
+function nextQuestion() {
+  checkAnswer(); // Check the answer to the current question
+  currentQuestion++; // Increment the current question index
+
+  // If all questions have been answered, end the quiz and display the score
+  if (currentQuestion === questions.length) {
+    questionEl.textContent = "Quiz complete! You scored " + score + " out of " + questions.length + " questions.";
+    optionsEl.innerHTML = "";
+    nextBtn.disabled = true;
+  } else {
+    showQuestion(); // Display the next question and its options
+  }
+}
+
+// Call the showQuestion function to display the first question and its options
+showQuestion();
+
+// Add a click event listener to the "Next" button to go to the next question when clicked
+nextBtn.addEventListener("click", nextQuestion);
+
+
+</script>
+  
+</body>
+</html>

@@ -1,0 +1,268 @@
+
+<!DOCTYPE html>
+<html>
+  <button onclick="window.location.href='https://reportaproblem.webador.co.uk'">report a problem</button>
+	<style>
+    input[type=radio] {
+    border: 0px;
+    width: 3em;
+    height: 3em;
+}
+		body {
+  background-color: #F4F4F4;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  background-color: #FFF;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  margin: 50px auto;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 0;
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 10;
+  padding: 10;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+button {
+  display: block;
+  margin: 20px auto;
+  font-size: 1.2em;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #0074D9;
+  color: #FFF;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #005FAB;
+}
+
+	</style>
+<head>
+  
+  <meta charset="UTF-8">
+  <title>11+math/30</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	
+  <div class="container">
+    <h1>11+english/30mrks</h1>
+	<h1 id="outof28"></h1>
+    <p>Extract:
+
+        It was a balmy summer afternoon, and Jane was strolling along the boulevard, taking in the sights and sounds of the bustling city. She had always loved walking in the city, with its vibrant energy and endless possibilities. But today, as she made her way past the crowds and street vendors, she began to feel a sense of unease creeping over her.
+
+        It started as a faint whisper at the back of her mind, but soon grew into a gnawing feeling of dread. She tried to shake it off, telling herself that it was just her imagination playing tricks on her, but the feeling persisted. It was as if there was someone following her, watching her every move.
+        
+        She quickened her pace, hoping to leave the feeling behind, but the more she walked, the stronger it became. It was as if the city had turned against her, with its neon lights and honking cars closing in on her from all sides.
+        
+        Finally, she reached the entrance to the park, and hurried inside, hoping to find some respite from the chaos of the city. But even here, the feeling of unease didn't leave her. She felt as if the trees were closing in on her, and the rustling of leaves sounded like whispers.
+        
+        As she walked deeper into the park to hide, she saw a figure in the distance, standing motionless beneath a tree. At first, she thought it was a statue, but as she got closer, she realized it was a person. The figure was dressed in a dark cloak, and its face was hidden in the shadows.
+        
+        Jane hesitated for a moment, unsure if she should approach the figure. But something inside her compelled her forward, and she found herself standing before the mysterious stranger. They stood in silence for a moment, before the figure finally spoke.
+        
+        "Jane," it said, in a voice that sent shivers down her spine. "You have been chosen. You must come with me."
+        
+        Jane felt a surge of fear and confusion. She didn't know who this person was, or what they wanted with her. But she also felt a strange sense of curiosity, and a nagging feeling that she couldn't ignore.
+        
+        She took a deep breath, and followed the figure into the shadows, into a world that she never could have imagined.</p>
+    <p id="question"></p>
+	<div id="progress" style="position: fixed; top: 10px; right: 10px;"></div>
+
+	
+    <ul id="options"></ul>
+    <button id="nextBtn">Next/10Qs</button>
+
+
+
+	
+  </div>
+
+  <script src="quiz.js"></script>
+
+<script>
+
+var questionsdone = 1;
+	// Define an array of objects that contains the questions and their options
+var questions = [
+ // Question 1
+ {
+question: "What was the weather like when Jane was walking along the boulevard?",
+options: ["Rainy", "Sunny", "Windy", "Snowy"],
+answer: "Sunny"
+},
+{
+question: "Why did Jane feel a sense of unease as she was walking in the city?",
+options: ["She saw someone following her", "She didn't like the city", "It was too noisy", "It was too hot"],
+answer: "She saw someone following her"
+},
+{
+question: "What did Jane hope to find by entering the park?",
+options: ["A place to rest", "A place to find respite from the chaos of the city", "A place to buy food", "A place to meet someone"],
+answer: "A place to find respite from the chaos of the city"
+},
+{
+question: "What did Jane THINK she saw in the distance as she walked deeper into the park?",
+options: ["A statue", "A dog", "A bird", "A person"],
+answer: "A statue"
+},
+{
+question: "What was the person in the dark cloak saying to Jane?",
+options: ["He was asking her for directions", "He was trying to sell her something", "He was telling her she had been chosen", "He was warning her about something"],
+answer: "He was telling her she had been chosen"
+},
+{
+question: "What did Jane feel when the figure spoke to her?",
+options: ["Happiness", "Confusion", "Anger", "Excitement"],
+answer: "Confusion"
+},
+{
+question: "Where did the figure lead Jane?",
+options: ["Into the city", "Deeper into the shadows", "Out of the park", "To a nearby cafe"],
+answer: "Deeper into the shadows"
+},
+{
+question: "What did Jane feel as she followed the figure?",
+options: ["Fear and confusion", "Joy and excitement", "Hunger and thirst", "Peace and tranquility"],
+answer: "Fear and confusion"
+},
+{
+question: "What did Jane find in the world she entered with the figure?",
+options: ["A new job", "A new friend", "A world that she never could have imagined", "A secret society"],
+answer: "A world that she never could have imagined"
+},
+{
+question: "How did Jane feel about the experience in the end?",
+options: ["Happy and content", "Sad and disappointed", "Nervous and anxious", "Wanting to know more"],
+answer: "Wanting to know more"
+},
+
+// Question 2
+
+  // Add more questions and their options and answers here
+  // ...
+];
+
+
+
+var time = 7 * 60; 
+
+var timerEl = document.createElement("p"); // Create a new <p> element for the timer
+timerEl.textContent = "Time remaining: 23:00"; // Set the initial timer text
+document.querySelector(".container").appendChild(timerEl); // Add the timer to the HTML
+
+var timerId = setInterval(function() {
+  time--; // Decrement the time
+  var minutes = Math.floor(time / 60); // Calculate the remaining minutes
+  var seconds = time % 60; // Calculate the remaining seconds
+  timerEl.textContent = "Time remaining: " + minutes.toString().padStart(2, "0") + ":" + seconds.toString().padStart(2, "0"); // Update the timer text
+  
+  if (time <= 0) {
+    clearInterval(timerId); // Stop the timer
+    questionEl.textContent = "Quiz complete! You scored " + multiscore + " out of 30 questions." // Display the final score
+    optionsEl.innerHTML = ""; // Remove the answer options
+    nextBtn.disabled = true; // Disable the "Next" button
+  }
+}, 1000); // Update the timer every second
+var currentQuestion = 0; // Set the current question index to 0
+var score = 0; // Set the score to 0
+var multiscore = score+score+score;
+var multilength = questions.length*3;
+// Get references to HTML elements
+var questionEl = document.getElementById("question");
+var optionsEl = document.getElementById("options");
+var nextBtn = document.getElementById("nextBtn");
+
+// Function to display the current question and its options
+function showQuestion() {
+  // Display the question
+  questionEl.textContent = questions[currentQuestion].question;
+
+  // Remove any existing options
+  optionsEl.innerHTML = "";
+
+  // Loop through the options and add them to the list
+  for (var i = 0; i < questions[currentQuestion].options.length; i++) {
+    var li = document.createElement("li");
+    var input = document.createElement("input");
+    input.type = "radio";
+    input.name = "option";
+    input.id = `radio-button-${i}`;
+    input.value = questions[currentQuestion].options[i];
+    
+    
+    const label = document.createElement('label');
+    label.innerHTML = "<font size=10px>" + questions[currentQuestion].options[i] + "</font>";
+    label.setAttribute('for', `radio-button-${i}`);
+
+    li.appendChild(input);
+    li.appendChild(label);
+    //li.appendChild(document.createTextNode(questions[currentQuestion].options[i]));
+    
+    //<font size=10px><label for="cue">9</font>
+    
+    optionsEl.appendChild(li);
+  }
+}
+
+// Function to check if the selected answer is correct
+function checkAnswer() {
+	var questionsdone = questionsdone+1;
+  var selectedOption = document.querySelector('input[name="option"]:checked').value;
+  if (selectedOption === questions[currentQuestion].answer) {
+    score++; // Increment the score if the answer is correct
+  }
+  var currentQuestionplus1 =currentQuestion + 2;
+  document.getElementById("outof28").innerHTML=currentQuestionplus1 + "/10";
+}
+
+// Function to go to the next question or end the quiz if all questions have been answered
+function nextQuestion() {
+  checkAnswer(); // Check the answer to the current question
+  currentQuestion++; // Increment the current question index
+
+  // If all questions have been answered, end the quiz and display the score
+  if (currentQuestion === questions.length) {
+    questionEl.textContent = "Quiz complete! You scored " + score*3 + " out of 30 marks.";
+    optionsEl.innerHTML = "";
+    nextBtn.disabled = true;
+  } else {
+    showQuestion(); // Display the next question and its options
+  }
+}
+
+// Call the showQuestion function to display the first question and its options
+showQuestion();
+
+// Add a click event listener to the "Next" button to go to the next question when clicked
+nextBtn.addEventListener("click", nextQuestion);
+
+
+</script>
+  
+</body>
+</html>

@@ -1,0 +1,416 @@
+
+<!DOCTYPE html>
+<html>
+  <button onclick="window.location.href='https://reportaproblem.webador.co.uk'">report a problem</button>
+	<style>
+    input[type=radio] {
+    border: 0px;
+    width: 3em;
+    height: 3em;
+}
+		body {
+  background-color: #F4F4F4;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  background-color: #FFF;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  margin: 50px auto;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 0;
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 10;
+  padding: 10;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+button {
+  display: block;
+  margin: 20px auto;
+  font-size: 1.2em;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #0074D9;
+  color: #FFF;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #005FAB;
+}
+
+	</style>
+<head>
+  <meta charset="UTF-8">
+  <title>11+vr/40</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	
+  <div class="container">
+    <h1>11+verbal reasoning</h1>
+	<h1 id="outof28"></h1>
+    <p id="question"></p>
+	<div id="progress" style="position: fixed; top: 10px; right: 10px;"></div>
+
+	
+    <ul id="options"></ul>
+    <button id="nextBtn">Next/40</button>
+
+
+
+	
+  </div>
+
+  <script src="quiz.js"></script>
+
+<script>
+
+var questionsdone = 1;
+	// Define an array of objects that contains the questions and their options
+var questions = [
+ // Question 1
+
+
+// Question 2
+
+  // Add more questions and their options and answers here
+  // ...
+  {
+question: "What is the antonym of 'vindicate'?",
+options: ["Justify", "Clear", "Acquit", "Blame"],
+answer: "Blame"
+},
+{
+question: "What does the term 'euphemism' mean?",
+options: ["A mild expression", "A harsh expression", "A common expression", "A slang expression"],
+answer: "A mild expression"
+},
+{
+question: "What is the synonym of 'ascertain'?",
+options: ["Conceal", "Explore", "Decide", "Suspect"],
+answer: "Explore"
+},
+{
+question: "What is the antonym of 'devoid'?",
+options: ["Lacking", "Full", "Empty", "Deficient"],
+answer: "Full"
+},
+{
+question: "What does the term 'aesthetic' mean?",
+options: ["Artistic", "Tasteful", "Ugly", "Functional"],
+answer: "Artistic"
+},
+{question: "What does the term 'lament' mean?",
+options: ["Laugh", "Cry", "Sing", "Dance"],
+answer: "Cry"
+},
+
+{question: "What is the antonym of 'rigid'?",
+options: ["Flexible", "Strong", "Stiff", "Solid"],
+answer: "Flexible"
+},
+
+{question: "What does the term 'plausible' mean?",
+options: ["Unlikely", "Improbable", "Possible", "Certain"],
+answer: "Possible"
+},
+
+{question: "What is the synonym of 'frivolous'?",
+options: ["Serious", "Silly", "Stupid", "Naive"],
+answer: "Silly"
+},
+
+{question: "What is the antonym of 'yield'?",
+options: ["Surrender", "Give up", "Submit", "Resist"],
+answer: "Resist"
+},
+
+{question: "What does the term 'ambivalent' mean?",
+options: ["Indifferent", "Decisive", "Committed", "Determined"],
+answer: "Indifferent"
+},
+
+{question: "What is the synonym of 'opulent'?",
+options: ["Poor", "Wealthy", "Miserable", "Humble"],
+answer: "Wealthy"
+},
+
+{question: "What is the antonym of 'diligent'?",
+options: ["Careless", "Lazy", "Unreliable", "Incompetent"],
+answer: "Lazy"
+},
+
+{question: "What does the term 'inept' mean?",
+options: ["Skilled", "Capable", "Competent", "Incapable"],
+answer: "Incapable"
+},
+
+{question: "What is the synonym of 'innocuous'?",
+options: ["Harmful", "Dangerous", "Toxic", "Harmless"],
+answer: "Harmless"
+},
+
+{question: "What is the antonym of 'profound'?",
+options: ["Superficial", "Deep", "Intense", "Thoughtful"],
+answer: "Superficial"
+},
+
+{question: "What does the term 'reclusive' mean?",
+options: ["Outgoing", "Friendly", "Social", "Isolated"],
+answer: "Isolated"
+},
+
+{question: "What is the synonym of 'gregarious'?",
+options: ["Antisocial", "Unfriendly", "Shy", "Sociable"],
+answer: "Sociable"
+},
+
+{question: "What is the antonym of 'volatile'?",
+options: ["Stable", "Unpredictable", "Explosive", "Dangerous"],
+answer: "Stable"
+},
+
+{question: "What does the term 'nurture' mean?",
+options: ["Destroy", "Hurt", "Neglect", "Care for"],
+answer: "Care for"
+},
+{
+question: "What is the meaning of 'auspicious'?",
+options: ["Unlucky", "Promising", "Catastrophic", "Misleading"],
+answer: "Promising"
+},
+
+{
+question: "What is the meaning of 'pedestrian'?",
+options: ["Lively", "Exciting", "Ordinary", "Energetic"],
+answer: "Ordinary"
+},
+
+{
+question: "What is the meaning of 'acquiesce'?",
+options: ["Deny", "Accept", "Praise", "Ignore"],
+answer: "Accept"
+},
+
+{
+question: "What is the meaning of 'ameliorate'?",
+options: ["Worsen", "Improve", "Ignore", "Deny"],
+answer: "Improve"
+},
+
+{
+question: "What is the meaning of 'cogent'?",
+options: ["Unconvincing", "Weak", "Irrelevant", "Compelling"],
+answer: "Compelling"
+},
+
+{
+question: "What is the meaning of 'garrulous'?",
+options: ["Tight-lipped", "Quiet", "Talkative", "Secretive"],
+answer: "Talkative"
+},
+
+{
+question: "What is the meaning of 'mellifluous'?",
+options: ["Harsh", "Pleasant-sounding", "Boring", "Unattractive"],
+answer: "Pleasant-sounding"
+},
+
+{
+question: "What is the meaning of 'perfidious'?",
+options: ["Loyal", "Trustworthy", "Deceitful", "Honest"],
+answer: "Deceitful"
+},
+
+{
+question: "What is the meaning of 'pragmatic'?",
+options: ["Idealistic", "Practical", "Ineffective", "Unrealistic"],
+answer: "Practical"
+},
+
+{
+question: "What is the meaning of 'prosaic'?",
+options: ["Poetic", "Boring", "Interesting", "Mysterious"],
+answer: "Boring"
+},
+
+{
+question: "What is the meaning of 'trite'?",
+options: ["Original", "Uncommon", "Witty", "Overused"],
+answer: "Overused"
+},
+
+{
+question: "What is the meaning of 'veracity'?",
+options: ["Dishonesty", "Accuracy", "Inaccuracy", "Lack of trust"],
+answer: "Accuracy"
+},
+
+{
+question: "What is the meaning of 'abstruse'?",
+options: ["Simple", "Difficult to understand", "Complicated", "Straightforward"],
+answer: "Difficult to understand"
+},
+
+{
+question: "What is the meaning of 'glib'?",
+options: ["Articulate", "Eloquent", "Smooth-talking", "Inarticulate"],
+answer: "Smooth-talking"
+},
+
+{
+question: "What is the meaning of 'impecunious'?",
+options: ["Wealthy", "Affluent", "Poor", "Middle-class"],
+answer: "Poor"
+},
+{
+question: "What is the antonym of 'euphoria'?",
+options: ["Happiness", "Sadness", "Grief", "Melancholy"],
+answer: "Sadness"
+},
+
+{
+question: "What is the synonym of 'coalesce'?",
+options: ["Join", "Separate", "Divide", "Discard"],
+answer: "Join"
+},
+
+{
+question: "What does the term 'benevolent' mean?",
+options: ["Greedy", "Malevolent", "Unkind", "Kind"],
+answer: "Kind"
+},
+
+{
+question: "What is the antonym of 'evasive'?",
+options: ["Honest", "Direct", "Candid", "Frank"],
+answer: "Direct"
+},
+
+{
+question: "What is the synonym of 'abundant'?",
+options: ["Scarce", "Sparse", "Ample", "Limited"],
+answer: "Ample"
+},
+];
+//35done
+
+
+
+var time = 10 * 60; 
+
+var timerEl = document.createElement("p"); // Create a new <p> element for the timer
+timerEl.textContent = "Time remaining: 8:00"; // Set the initial timer text
+document.querySelector(".container").appendChild(timerEl); // Add the timer to the HTML
+
+var timerId = setInterval(function() {
+  time--; // Decrement the time
+  var minutes = Math.floor(time / 60); // Calculate the remaining minutes
+  var seconds = time % 60; // Calculate the remaining seconds
+  timerEl.textContent = "Time remaining: " + minutes.toString().padStart(2, "0") + ":" + seconds.toString().padStart(2, "0"); // Update the timer text
+  
+  if (time <= 0) {
+    clearInterval(timerId); // Stop the timer
+    questionEl.textContent = "Quiz complete! You scored " + score + " out of " + questions.length + " questions."; // Display the final score
+    optionsEl.innerHTML = ""; // Remove the answer options
+    nextBtn.disabled = true; // Disable the "Next" button
+  }
+}, 1000); // Update the timer every second
+var currentQuestion = 0; // Set the current question index to 0
+var score = 0; // Set the score to 0
+
+// Get references to HTML elements
+var questionEl = document.getElementById("question");
+var optionsEl = document.getElementById("options");
+var nextBtn = document.getElementById("nextBtn");
+
+// Function to display the current question and its options
+function showQuestion() {
+  // Display the question
+  questionEl.textContent = questions[currentQuestion].question;
+
+  // Remove any existing options
+  optionsEl.innerHTML = "";
+
+  // Loop through the options and add them to the list
+  for (var i = 0; i < questions[currentQuestion].options.length; i++) {
+    var li = document.createElement("li");
+    var input = document.createElement("input");
+    input.type = "radio";
+    input.name = "option";
+    input.id = `radio-button-${i}`;
+    input.value = questions[currentQuestion].options[i];
+    
+    
+    const label = document.createElement('label');
+    label.innerHTML = "<font size=10px>" + questions[currentQuestion].options[i] + "</font>";
+    label.setAttribute('for', `radio-button-${i}`);
+
+    li.appendChild(input);
+    li.appendChild(label);
+    //li.appendChild(document.createTextNode(questions[currentQuestion].options[i]));
+    
+    //<font size=10px><label for="cue">9</font>
+    
+    optionsEl.appendChild(li);
+  }
+}
+
+// Function to check if the selected answer is correct
+function checkAnswer() {
+	var questionsdone = questionsdone+1;
+  var selectedOption = document.querySelector('input[name="option"]:checked').value;
+  if (selectedOption === questions[currentQuestion].answer) {
+    score++; // Increment the score if the answer is correct
+  }
+  var currentQuestionplus1 =currentQuestion + 2;
+  document.getElementById("outof28").innerHTML=currentQuestionplus1 + "/40";
+}
+
+// Function to go to the next question or end the quiz if all questions have been answered
+function nextQuestion() {
+  checkAnswer(); // Check the answer to the current question
+  currentQuestion++; // Increment the current question index
+
+  // If all questions have been answered, end the quiz and display the score
+  if (currentQuestion === questions.length) {
+    questionEl.textContent = "Quiz complete! You scored " + score + " out of " + questions.length + " questions.";
+    optionsEl.innerHTML = "";
+    nextBtn.disabled = true;
+  } else {
+    showQuestion(); // Display the next question and its options
+  }
+}
+
+// Call the showQuestion function to display the first question and its options
+showQuestion();
+
+// Add a click event listener to the "Next" button to go to the next question when clicked
+nextBtn.addEventListener("click", nextQuestion);
+
+
+</script>
+  
+</body>
+</html>

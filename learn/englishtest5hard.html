@@ -1,0 +1,269 @@
+
+<!DOCTYPE html>
+<html>
+  <button onclick="window.location.href='https://reportaproblem.webador.co.uk'">report a problem</button>
+	<style>
+    input[type=radio] {
+    border: 0px;
+    width: 3em;
+    height: 3em;
+}
+		body {
+  background-color: #F4F4F4;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  background-color: #FFF;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  margin: 50px auto;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 0;
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 10;
+  padding: 10;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+button {
+  display: block;
+  margin: 20px auto;
+  font-size: 1.2em;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #0074D9;
+  color: #FFF;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #005FAB;
+}
+
+	</style>
+<head>
+  
+  <meta charset="UTF-8">
+  <title>11+math/30</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	
+  <div class="container">
+    <h1>11+english/30mrks</h1>
+	<h1 id="outof28"></h1>
+    <p>Extract:
+        It was a crisp autumn evening, and the leaves on the trees were a riot of colors. Emma had always loved this time of year, with its cozy sweaters, warm apple cider, and the promise of Halloween just around the corner. She was walking home from work, lost in thought, when she heard a strange noise coming from the bushes ahead.
+
+        At first, she thought it was just an animal, maybe a squirrel or a raccoon. But as the noise grew louder, she realized that it was something else entirely. It sounded like someone was crying, their sobs muffled by the leaves and branches.
+        
+        Emma hesitated for a moment, unsure if she should investigate. But something in the sound of the crying tugged at her heartstrings, and she felt compelled to help. She pushed her way through the bushes, and found herself in a small clearing, where she saw a girl huddled on the ground, her face buried in her hands.
+        
+        "Are you okay?" Emma asked, approaching cautiously. The girl looked up, startled, and Emma saw that she was no more than a teenager, with tears streaming down her face.
+        
+        "I'm fine," the girl said, but her voice was thick with emotion. "I just needed to be alone for a little while."
+        
+        Emma didn't believe her, but she also didn't want to pry. Instead, she sat down next to the girl, and together they watched as the sun set over the trees.
+       </p>
+    <p id="question"></p>
+	<div id="progress" style="position: fixed; top: 10px; right: 10px;"></div>
+
+	
+    <ul id="options"></ul>
+    <button id="nextBtn">Next/10Qs</button>
+
+
+
+	
+  </div>
+
+  <script src="quiz.js"></script>
+
+<script>
+
+var questionsdone = 1;
+	// Define an array of objects that contains the questions and their options
+var questions = [
+ // Question 1
+ 
+// Question 2
+{
+question: "What season was it when Emma heard the crying in the bushes?",
+options: ["Spring", "Summer", "Autumn", "Winter"],
+answer: "Autumn"
+},
+
+{
+question: "What was Emma doing when she heard the strange noise in the bushes?",
+options: ["Driving home", "Walking home from work", "Shopping", "Exercising"],
+answer: "Walking home from work"
+},
+
+{
+question: "What did Emma think was making the noise in the bushes at first?",
+options: ["A person crying", "A squirrel", "A raccoon", "A bird"],
+answer: "A squirrel"
+},
+
+{
+question: "What did Emma see when she pushed her way through the bushes?",
+options: ["A clearing", "A forest", "A pond", "A meadow"],
+answer: "A clearing"
+},
+
+{
+question: "How did the girl in the clearing react when Emma asked if she was okay?",
+options: ["She told Emma she was fine", "She ran away", "She screamed at Emma to leave her alone", "She hugged Emma"],
+answer: "She told Emma she was fine"
+},
+
+{
+question: "How old was the girl in the clearing?",
+options: ["A child", "A teenager", "An adult", "An elderly woman"],
+answer: "A teenager"
+},
+
+{
+question: "What did Emma and the girl do as they sat together in the clearing?",
+options: ["They talked about their problems", "They watched the sun set", "They sang a song", "They played a game"],
+answer: "They watched the sun set"
+},
+
+{
+question: "What was the girl doing when Emma found her in the clearing?",
+options: ["Crying", "Laughing", "Singing", "Sleeping"],
+answer: "Crying"
+},
+
+{
+question: "Why did Emma feel compelled to help the girl in the clearing?",
+options: ["Something in the sound of the crying tugged at her heartstrings", "She knew the girl", "She was lost and needed help", "She wanted to make a new friend"],
+answer: "Something in the sound of the crying tugged at her heartstrings"
+},
+{
+question: "What did the protagonist see that made them feel uneasy in the park?",
+options: ["A dark figure in a cloak", "A statue", "A friendly dog", "A group of children playing"],
+answer: "A dark figure in a cloak"
+}
+  // Add more questions and their options and answers here
+  // ...
+];
+
+
+
+var time = 7 * 60; 
+
+var timerEl = document.createElement("p"); // Create a new <p> element for the timer
+timerEl.textContent = "Time remaining: 23:00"; // Set the initial timer text
+document.querySelector(".container").appendChild(timerEl); // Add the timer to the HTML
+
+var timerId = setInterval(function() {
+  time--; // Decrement the time
+  var minutes = Math.floor(time / 60); // Calculate the remaining minutes
+  var seconds = time % 60; // Calculate the remaining seconds
+  timerEl.textContent = "Time remaining: " + minutes.toString().padStart(2, "0") + ":" + seconds.toString().padStart(2, "0"); // Update the timer text
+  
+  if (time <= 0) {
+    clearInterval(timerId); // Stop the timer
+    questionEl.textContent = "Quiz complete! You scored " + multiscore + " out of 30 questions." // Display the final score
+    optionsEl.innerHTML = ""; // Remove the answer options
+    nextBtn.disabled = true; // Disable the "Next" button
+  }
+}, 1000); // Update the timer every second
+var currentQuestion = 0; // Set the current question index to 0
+var score = 0; // Set the score to 0
+var multiscore = score+score+score;
+var multilength = questions.length*3;
+// Get references to HTML elements
+var questionEl = document.getElementById("question");
+var optionsEl = document.getElementById("options");
+var nextBtn = document.getElementById("nextBtn");
+
+// Function to display the current question and its options
+function showQuestion() {
+  // Display the question
+  questionEl.textContent = questions[currentQuestion].question;
+
+  // Remove any existing options
+  optionsEl.innerHTML = "";
+
+  // Loop through the options and add them to the list
+  for (var i = 0; i < questions[currentQuestion].options.length; i++) {
+    var li = document.createElement("li");
+    var input = document.createElement("input");
+    input.type = "radio";
+    input.name = "option";
+    input.id = `radio-button-${i}`;
+    input.value = questions[currentQuestion].options[i];
+    
+    
+    const label = document.createElement('label');
+    label.innerHTML = "<font size=10px>" + questions[currentQuestion].options[i] + "</font>";
+    label.setAttribute('for', `radio-button-${i}`);
+
+    li.appendChild(input);
+    li.appendChild(label);
+    //li.appendChild(document.createTextNode(questions[currentQuestion].options[i]));
+    
+    //<font size=10px><label for="cue">9</font>
+    
+    optionsEl.appendChild(li);
+  }
+}
+
+// Function to check if the selected answer is correct
+function checkAnswer() {
+	var questionsdone = questionsdone+1;
+  var selectedOption = document.querySelector('input[name="option"]:checked').value;
+  if (selectedOption === questions[currentQuestion].answer) {
+    score++; // Increment the score if the answer is correct
+  }
+  var currentQuestionplus1 =currentQuestion + 2;
+  document.getElementById("outof28").innerHTML=currentQuestionplus1 + "/10";
+}
+
+// Function to go to the next question or end the quiz if all questions have been answered
+function nextQuestion() {
+  checkAnswer(); // Check the answer to the current question
+  currentQuestion++; // Increment the current question index
+
+  // If all questions have been answered, end the quiz and display the score
+  if (currentQuestion === questions.length) {
+    questionEl.textContent = "Quiz complete! You scored " + score*3 + " out of 30 marks.";
+    optionsEl.innerHTML = "";
+    nextBtn.disabled = true;
+  } else {
+    showQuestion(); // Display the next question and its options
+  }
+}
+
+// Call the showQuestion function to display the first question and its options
+showQuestion();
+
+// Add a click event listener to the "Next" button to go to the next question when clicked
+nextBtn.addEventListener("click", nextQuestion);
+
+
+</script>
+  
+</body>
+</html>

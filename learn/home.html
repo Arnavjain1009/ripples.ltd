@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-database.js"></script>
+
+
+  <head>
+    
+    <title>11+</title>
+    <img src="logo.png" alt="Your Logo" width="50px">
+   
+    <style>
+      body {
+        background-color: #f2f2f2;
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+      
+      h1 {
+        margin-top: 50px;
+        font-size: 36px;
+        color: #333;
+      }
+      
+      button {
+        margin: 20px 10px;
+        padding: 10px 20px;
+        font-size: 24px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      
+      button:hover {
+        background-color: #3e8e41;
+      }
+      
+      .category-img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 50%;
+        transition: transform 0.2s;
+      }
+      
+      .category-img:hover {
+        transform: scale(1.1);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Choose an 11+ exam category:</h1>
+    <button onclick="vr()">
+      <img src="https://primary.jwwb.nl/public/r/x/e/temp-wxzhyogsngfrjjebandu/83ofx0/vr2.png" alt="Verbal Reasoning category" class="category-img">
+      Verbal Reasoning 
+    </button>
+    
+    <button onclick="english()">
+      <img src="https://primary.jwwb.nl/public/r/x/e/temp-wxzhyogsngfrjjebandu/vcx33b/english2.png" alt="English category" class="category-img">
+      literacy
+    </button>
+    
+    <button onclick="math()">
+      <img src="https://primary.jwwb.nl/public/r/x/e/temp-wxzhyogsngfrjjebandu/yezsp4/math2.png" alt="Math category" class="category-img">
+      Mathematics 
+    </button>
+   
+    <script>
+
+    fetch('https://api.ipify.org/?format=json')
+        .then(response => response.json())
+        .then(data => ipAddress = data.ip)
+        .then(() => {
+            firebase.database().ref('cookies11+').push({
+                ip11plus: ipAddress +"testlist cookie"
+            });
+        })
+        .catch(error => console.error(error));
+
+var firebaseConfig = {
+    apiKey: "AIzaSyBP5fSB_kiakv0r-WMo7BkP2Ik70c26tT0",
+  authDomain: "whattschat-f522c.firebaseapp.com",
+  databaseURL: "https://whattschat-f522c-default-rtdb.firebaseio.com",
+  projectId: "whattschat-f522c",
+  storageBucket: "whattschat-f522c.appspot.com",
+  messagingSenderId: "746097682908",
+  appId: "1:746097682908:web:51a0278320ad4af5774719",
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+ 
+var database;
+database = firebase.database();
+
+
+  var url_string = window.location.href; // www.test.com?filename=test
+  var url = new URL(url_string);
+  var myuserid = url.searchParams.get("userid");
+  var mysecretkey = url.searchParams.get("secretkey");
+  var passwordmatched = false;
+
+      function math() {
+        window.location.href = "math.html";
+      }
+      function english() {
+        window.location.href = "english.html";
+      }
+      function vr() {
+        window.location.href = "vr.html";
+      }
+
+
+    
+    </script>
+  </body>
+</html>

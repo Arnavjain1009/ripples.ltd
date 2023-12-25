@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<html>
+  <button onclick="window.location.href='https://reportaproblem.webador.co.uk'">report a problem</button>
+	<style>
+    input[type=radio] {
+    border: 0px;
+    width: 3em;
+    height: 3em;
+}
+		body {
+  background-color: #F4F4F4;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  background-color: #FFF;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  margin: 50px auto;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 0;
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 10;
+  padding: 10;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+button {
+  display: block;
+  margin: 20px auto;
+  font-size: 1.2em;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #0074D9;
+  color: #FFF;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #005FAB;
+}
+
+	</style>
+<head>
+  
+  <meta charset="UTF-8">
+  <title>11+math/30</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	
+  <div class="container">
+    <h1>11+english/30mrks</h1>
+	<h1 id="outof28"></h1>
+    <p>
+        In a small seaside village, there lived a young boy named Jack who loved to spend his days fishing in the ocean. Jack had a special talent for catching the biggest and most colorful fish, and he often boasted to the other villagers about his skills.
+
+One day, Jack set out on his boat for a long day of fishing, determined to catch the most impressive fish yet. As he cast his line into the water, he felt a strong tug on the other end. Jack pulled with all his might, but the fish was too strong and pulled him out to sea.
+
+After hours of being tossed around on the rough waves, Jack spotted a deserted island in the distance. He managed to swim to shore, but soon realized he was alone and stranded with no way to contact anyone for help.
+
+As the days passed, Jack struggled to find food and water on the island. He was about to lose hope when he heard a faint rustling in the bushes. To his surprise, a group of monkeys appeared, offering him fruit and showing him where to find fresh water.
+
+Grateful for their help, Jack formed a bond with the monkeys and they became his loyal companions on the island. With their help, he managed to build a shelter and gather enough food to survive.
+
+Months later, a passing ship spotted Jack's signal fire and rescued him from the island. When he returned home, Jack realized that sometimes the greatest adventure can lead to unexpected friendships and that the most important skill of all is the ability to adapt to any situation.
+     </p>
+    <p id="question"></p>
+	<div id="progress" style="position: fixed; top: 10px; right: 10px;"></div>
+
+	
+    <ul id="options"></ul>
+    <button id="nextBtn">Next/10Qs</button>
+
+
+
+	
+  </div>
+
+  <script src="quiz.js"></script>
+
+<script>
+
+var questionsdone = 1;
+	// Define an array of objects that contains the questions and their options
+var questions = [
+ // Question 1
+
+
+// Question 2
+{
+question: "What was Jack's special talent?",
+options: ["Swimming", "Fishing", "Sailing", "Hiking"],
+answer: "Fishing"
+},
+
+{
+question: "What happened to Jack when he cast his line into the water?",
+options: ["He caught the biggest fish of his life", "He lost his fishing rod", "He fell into the water", "He was pulled out to sea"],
+answer: "He was pulled out to sea"
+},
+
+{
+question: "How did Jack manage to survive on the deserted island?",
+options: ["He found a way to contact someone for help", "He built a boat to escape the island", "He formed a bond with a group of monkeys who showed him where to find food and water", "He swam back to shore"],
+answer: "He formed a bond with a group of monkeys who showed him where to find food and water"
+},
+
+{
+question: "What led to Jack's rescue from the island?",
+options: ["He built a signal fire", "He swam to the passing ship", "He sent a message in a bottle", "He used a satellite phone"],
+answer: "He built a signal fire"
+},
+
+{
+question: "What did Jack learn from his experience on the deserted island?",
+options: ["The importance of boasting about his skills", "The importance of relying on others for help", "The importance of staying close to shore while fishing", "The importance of taking unnecessary risks"],
+answer: "The importance of relying on others for help"
+},
+{
+question:  "What kind of fruit did the monkeys on the deserted island offer to Jack?",
+options: ["Apples", "Oranges", "Bananas", "Pineapples"],
+answer: "Bananas"
+},
+{
+question:  "How did Jack feel about being stranded on the deserted island at first?",
+options: ["Optimistic", "Pessimistic", "Excited", "Apathetic"],
+answer: "Pessimistic"
+},
+{
+question: "What was the main reason for Jack's trip out to sea on his boat?",
+options: ["To explore the ocean", "To catch the biggest fish he could", "To escape the village", "To sail to another country"],
+answer: "To catch the biggest fish he could"
+},
+{
+question:  "How did the monkeys show Jack where to find fresh water on the deserted island?",
+options: ["They pointed it out to him", "They led him to it", "They gave him a map", "They communicated with him telepathically"],
+answer: "They led him to it"
+},
+{
+question: "What was the reaction of the other villagers to Jack's return from the deserted island?",
+options: ["They were jealous of his adventure", "They were surprised to see him", "They were disappointed he didn't bring back any treasures", "They were happy to see him and welcomed him back"],
+answer: "They were happy to see him and welcomed him back"
+},
+
+  // Add more questions and their options and answers here
+  // ...
+];
+
+
+
+var time = 6 * 60; 
+
+var timerEl = document.createElement("p"); // Create a new <p> element for the timer
+timerEl.textContent = "Time remaining: 23:00"; // Set the initial timer text
+document.querySelector(".container").appendChild(timerEl); // Add the timer to the HTML
+
+var timerId = setInterval(function() {
+  time--; // Decrement the time
+  var minutes = Math.floor(time / 60); // Calculate the remaining minutes
+  var seconds = time % 60; // Calculate the remaining seconds
+  timerEl.textContent = "Time remaining: " + minutes.toString().padStart(2, "0") + ":" + seconds.toString().padStart(2, "0"); // Update the timer text
+  
+  if (time <= 0) {
+    clearInterval(timerId); // Stop the timer
+    questionEl.textContent = "Quiz complete! You scored " + multiscore + " out of 30 questions." // Display the final score
+    optionsEl.innerHTML = ""; // Remove the answer options
+    nextBtn.disabled = true; // Disable the "Next" button
+  }
+}, 1000); // Update the timer every second
+var currentQuestion = 0; // Set the current question index to 0
+var score = 0; // Set the score to 0
+var multiscore = score+score+score;
+var multilength = questions.length*3;
+// Get references to HTML elements
+var questionEl = document.getElementById("question");
+var optionsEl = document.getElementById("options");
+var nextBtn = document.getElementById("nextBtn");
+
+// Function to display the current question and its options
+function showQuestion() {
+  // Display the question
+  questionEl.textContent = questions[currentQuestion].question;
+
+  // Remove any existing options
+  optionsEl.innerHTML = "";
+
+  // Loop through the options and add them to the list
+  for (var i = 0; i < questions[currentQuestion].options.length; i++) {
+    var li = document.createElement("li");
+    var input = document.createElement("input");
+    input.type = "radio";
+    input.name = "option";
+    input.id = `radio-button-${i}`;
+    input.value = questions[currentQuestion].options[i];
+    
+    
+    const label = document.createElement('label');
+    label.innerHTML = "<font size=10px>" + questions[currentQuestion].options[i] + "</font>";
+    label.setAttribute('for', `radio-button-${i}`);
+
+    li.appendChild(input);
+    li.appendChild(label);
+    //li.appendChild(document.createTextNode(questions[currentQuestion].options[i]));
+    
+    //<font size=10px><label for="cue">9</font>
+    
+    optionsEl.appendChild(li);
+  }
+}
+
+// Function to check if the selected answer is correct
+function checkAnswer() {
+	var questionsdone = questionsdone+1;
+  var selectedOption = document.querySelector('input[name="option"]:checked').value;
+  if (selectedOption === questions[currentQuestion].answer) {
+    score++; // Increment the score if the answer is correct
+  }
+  var currentQuestionplus1 =currentQuestion + 2;
+  document.getElementById("outof28").innerHTML=currentQuestionplus1 + "/10";
+}
+
+// Function to go to the next question or end the quiz if all questions have been answered
+function nextQuestion() {
+  checkAnswer(); // Check the answer to the current question
+  currentQuestion++; // Increment the current question index
+
+  // If all questions have been answered, end the quiz and display the score
+  if (currentQuestion === questions.length) {
+    questionEl.textContent = "Quiz complete! You scored " + score*3 + " out of 30 marks.";
+    optionsEl.innerHTML = "";
+    nextBtn.disabled = true;
+  } else {
+    showQuestion(); // Display the next question and its options
+  }
+}
+
+// Call the showQuestion function to display the first question and its options
+showQuestion();
+
+// Add a click event listener to the "Next" button to go to the next question when clicked
+nextBtn.addEventListener("click", nextQuestion);
+
+
+</script>
+  
+</body>
+</html>

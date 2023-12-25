@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+<html>
+  <button onclick="window.location.href='https://reportaproblem.webador.co.uk'">report a problem</button>
+	<style>
+    input[type=radio] {
+    border: 0px;
+    width: 3em;
+    height: 3em;
+}
+		body {
+  background-color: #F4F4F4;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  background-color: #FFF;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  margin: 50px auto;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 0;
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 10;
+  padding: 10;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+button {
+  display: block;
+  margin: 20px auto;
+  font-size: 1.2em;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #0074D9;
+  color: #FFF;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #005FAB;
+}
+
+	</style>
+<head>
+  
+  <meta charset="UTF-8">
+  <title>11+math/30</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	
+  <div class="container">
+    <h1>11+english/30mrks</h1>
+	<h1 id="outof28"></h1>
+    <p>Extract:
+        It was a misty morning in the small town of Millfield, and Mary was walking to the market. The town was quiet, with only a few early risers out and about. As Mary passed by the old mill, she noticed a figure standing in the shadows. At first, she thought it was just a trick of the light, but as she got closer, she saw that it was a man.
+
+        He was tall and thin, with a pale face and dark hair. He wore a long coat that seemed to swallow him up, and he held a cane in one hand. Mary hesitated for a moment, unsure if she should approach him. But as she got closer, she saw that he was shivering, despite the warm coat.
+        
+        "Excuse me," Mary said, "are you okay? Do you need some help?"
+        
+        The man looked up at her, and his eyes seemed to glow in the dim light. "Yes," he said, in a low voice. "I am lost. Can you show me the way?"
+        
+        Mary felt a surge of fear, but also a twinge of pity. She didn't know who this man was, or what he wanted. But she couldn't just leave him there, lost and alone.
+        
+        "Sure," she said, with a small smile. "Where do you need to go?"
+        
+        The man hesitated, as if he didn't want to say. But finally, he spoke. "To the old cemetery, on the outskirts of town. I need to find a grave."
+        
+        Mary's heart skipped a beat. The old cemetery was rumored to be haunted, and few people ventured there, especially not alone. But she couldn't just leave the man there, lost and shivering.
+        
+        "Okay," she said, trying to sound brave. "I'll show you the way."
+       </p>
+    <p id="question"></p>
+	<div id="progress" style="position: fixed; top: 10px; right: 10px;"></div>
+
+	
+    <ul id="options"></ul>
+    <button id="nextBtn">Next/10Qs</button>
+
+
+
+	
+  </div>
+
+  <script src="quiz.js"></script>
+
+<script>
+
+var questionsdone = 1;
+	// Define an array of objects that contains the questions and their options
+var questions = [
+ // Question 1
+ 
+// Question 2
+{
+question: "What was the weather like in Millfield when Mary was walking to the market?",
+options: ["Sunny", "Rainy", "Snowy", "Misty"],
+answer: "Misty"
+},
+
+{
+question: "Where did Mary see the figure in the shadows?",
+options: ["The market", "The town square", "The old mill", "The cemetery"],
+answer: "The old mill"
+},
+
+{
+question: "What was the man wearing when Mary saw him at the old mill?",
+options: ["A t-shirt and shorts", "A long coat", "A hat and gloves", "A suit"],
+answer: "A long coat"
+},
+
+{
+question: "What did the man hold in one hand when Mary saw him at the old mill?",
+options: ["A cane", "A sword", "A gun", "A book"],
+answer: "A cane"
+},
+
+{
+question: "How did the man look when Mary saw him at the old mill?",
+options: ["Happy", "Sad", "Angry", "Shivering"],
+answer: "Shivering"
+},
+
+{
+question: "What did Mary ask the man when she saw him at the old mill?",
+options: ["If he was lost", "If he needed food", "If he wanted a ride", "If he was a ghost"],
+answer: "If he was okay and needed help"
+},
+
+{
+question: "What did the man say when Mary asked if he was lost?",
+options: ["No", "Yes", "Maybe", "I don't know"],
+answer: "Yes"
+},
+
+{
+question: "Where did the man say he needed to go?",
+options: ["The market", "The town square", "The old mill", "The cemetery"],
+answer: "The cemetery"
+},
+{
+question: "What did the old man give to the protagonist before sending him on his way?",
+options: ["A map", "A compass", "A flashlight", "A book"],
+answer: "A compass"
+},
+
+{
+question: "What did the protagonist hear as he walked deeper into the forest?",
+options: ["Birds singing", "Wolves howling", "Rivers flowing", "Wind blowing"],
+answer: "Wolves howling"
+},
+  // Add more questions and their options and answers here
+  // ...
+];
+
+
+
+var time = 7 * 60; 
+
+var timerEl = document.createElement("p"); // Create a new <p> element for the timer
+timerEl.textContent = "Time remaining: 23:00"; // Set the initial timer text
+document.querySelector(".container").appendChild(timerEl); // Add the timer to the HTML
+
+var timerId = setInterval(function() {
+  time--; // Decrement the time
+  var minutes = Math.floor(time / 60); // Calculate the remaining minutes
+  var seconds = time % 60; // Calculate the remaining seconds
+  timerEl.textContent = "Time remaining: " + minutes.toString().padStart(2, "0") + ":" + seconds.toString().padStart(2, "0"); // Update the timer text
+  
+  if (time <= 0) {
+    clearInterval(timerId); // Stop the timer
+    questionEl.textContent = "Quiz complete! You scored " + multiscore + " out of 30 questions." // Display the final score
+    optionsEl.innerHTML = ""; // Remove the answer options
+    nextBtn.disabled = true; // Disable the "Next" button
+  }
+}, 1000); // Update the timer every second
+var currentQuestion = 0; // Set the current question index to 0
+var score = 0; // Set the score to 0
+var multiscore = score+score+score;
+var multilength = questions.length*3;
+// Get references to HTML elements
+var questionEl = document.getElementById("question");
+var optionsEl = document.getElementById("options");
+var nextBtn = document.getElementById("nextBtn");
+
+// Function to display the current question and its options
+function showQuestion() {
+  // Display the question
+  questionEl.textContent = questions[currentQuestion].question;
+
+  // Remove any existing options
+  optionsEl.innerHTML = "";
+
+  // Loop through the options and add them to the list
+  for (var i = 0; i < questions[currentQuestion].options.length; i++) {
+    var li = document.createElement("li");
+    var input = document.createElement("input");
+    input.type = "radio";
+    input.name = "option";
+    input.id = `radio-button-${i}`;
+    input.value = questions[currentQuestion].options[i];
+    
+    
+    const label = document.createElement('label');
+    label.innerHTML = "<font size=10px>" + questions[currentQuestion].options[i] + "</font>";
+    label.setAttribute('for', `radio-button-${i}`);
+
+    li.appendChild(input);
+    li.appendChild(label);
+    //li.appendChild(document.createTextNode(questions[currentQuestion].options[i]));
+    
+    //<font size=10px><label for="cue">9</font>
+    
+    optionsEl.appendChild(li);
+  }
+}
+
+// Function to check if the selected answer is correct
+function checkAnswer() {
+	var questionsdone = questionsdone+1;
+  var selectedOption = document.querySelector('input[name="option"]:checked').value;
+  if (selectedOption === questions[currentQuestion].answer) {
+    score++; // Increment the score if the answer is correct
+  }
+  var currentQuestionplus1 =currentQuestion + 2;
+  document.getElementById("outof28").innerHTML=currentQuestionplus1 + "/10";
+}
+
+// Function to go to the next question or end the quiz if all questions have been answered
+function nextQuestion() {
+  checkAnswer(); // Check the answer to the current question
+  currentQuestion++; // Increment the current question index
+
+  // If all questions have been answered, end the quiz and display the score
+  if (currentQuestion === questions.length) {
+    questionEl.textContent = "Quiz complete! You scored " + score*3 + " out of 30 marks.";
+    optionsEl.innerHTML = "";
+    nextBtn.disabled = true;
+  } else {
+    showQuestion(); // Display the next question and its options
+  }
+}
+
+// Call the showQuestion function to display the first question and its options
+showQuestion();
+
+// Add a click event listener to the "Next" button to go to the next question when clicked
+nextBtn.addEventListener("click", nextQuestion);
+
+
+</script>
+  
+</body>
+</html>

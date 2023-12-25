@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+<html>
+  <button onclick="window.location.href='https://reportaproblem.webador.co.uk'">report a problem</button>
+	<style>
+    input[type=radio] {
+    border: 0px;
+    width: 3em;
+    height: 3em;
+}
+		body {
+  background-color: #F4F4F4;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  background-color: #FFF;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  margin: 50px auto;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 0;
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 10;
+  padding: 10;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+button {
+  display: block;
+  margin: 20px auto;
+  font-size: 1.2em;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #0074D9;
+  color: #FFF;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #005FAB;
+}
+
+	</style>
+<head>
+  
+  <meta charset="UTF-8">
+  <title>11+math/30</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	
+  <div class="container">
+    <h1>11+english/30mrks</h1>
+	<h1 id="outof28"></h1>
+    <p>Extract:
+        As the sun began to set over the horizon, John found himself lost in the dense forest. He had been hiking all day and had lost track of time, and now the fading light made it difficult for him to see. Panic started to set in as he realized that he didn't know how to find his way back to the trailhead. His phone had no signal, and he had forgotten to bring a map.
+
+        He tried retracing his steps, but every direction looked the same, and the forest seemed to stretch on endlessly. The rustling of leaves and the sound of nocturnal animals in the distance only added to his growing sense of dread.
+        
+        Just when he thought all hope was lost, he saw a faint light in the distance. At first, he thought it was just his imagination, but as he got closer, he realized it was a campfire. Relief flooded over him as he hurried towards the light.
+        
+        As he approached the campfire, he saw a group of people gathered around it. They were all dressed in strange clothes and spoke in a language he didn't recognize. They looked at him with suspicion as he stumbled into their midst, but one of them gestured for him to sit by the fire.
+        
+        John didn't know what to do. He was grateful for the warmth of the fire, but he felt uneasy in the company of strangers. As the night went on, he tried to communicate with them, but their language barrier proved too great.
+        
+        It was only when one of them pointed to the stars that John realized they were lost travelers like him. They had been wandering the forest for days, trying to find their way home. In that moment, John felt a sense of camaraderie with them, and they all sat around the fire, sharing stories of their adventures and misadventures.
+        
+        As the night wore on, John felt himself growing tired, and he lay down by the fire, his new companions surrounding him. As he drifted off to sleep, he knew that even though he was lost in the forest, he was no longer alone.
+       </p>
+    <p id="question"></p>
+	<div id="progress" style="position: fixed; top: 10px; right: 10px;"></div>
+
+	
+    <ul id="options"></ul>
+    <button id="nextBtn">Next/10Qs</button>
+
+
+
+	
+  </div>
+
+  <script src="quiz.js"></script>
+
+<script>
+
+var questionsdone = 1;
+	// Define an array of objects that contains the questions and their options
+var questions = [
+ // Question 1
+ 
+// Question 2
+{
+question: "What time of day was it when John found himself lost in the forest?",
+options: ["Morning", "Afternoon", "Evening", "Night"],
+answer: "Evening"
+},
+
+{
+question: "What did John realize when he saw the fading light in the distance?",
+options: ["It was a campfire", "It was a search party", "It was a lighthouse", "It was a mirage"],
+answer: "It was a campfire"
+},
+
+{
+question: "How did the strangers gathered around the campfire react to John's arrival?",
+options: ["They were friendly", "They were suspicious", "They were indifferent", "They were hostile"],
+answer: "They were suspicious"
+},
+
+{
+question: "What did John do to try to communicate with the strangers?",
+options: ["He mimed", "He spoke louder", "He wrote notes", "He sang a song"],
+answer: "He mimed"
+},
+
+{
+question: "What did the strangers point to that helped John understand their situation?",
+options: ["The fire", "The trees", "The moon", "The stars"],
+answer: "The stars"
+},
+
+{
+question: "What did John and the strangers do around the campfire?",
+options: ["They played games", "They told stories", "They sang songs", "They danced"],
+answer: "They told stories"
+},
+{
+question: "What was the reason for John's presence in the forest?",
+options: ["He was hiking", "He was lost", "He was camping", "He was hunting"],
+answer: "He was hiking"
+},
+
+{
+question: "What did John notice about the strangers' clothes?",
+options: ["They were torn and dirty", "They were brand new", "They were brightly colored", "They were made of wool"],
+answer: "They were torn and dirty"
+},
+
+{
+question: "What did John discover about the strangers' language?",
+options: ["It was a foreign language", "It was sign language", "It was a code language", "It was a dialect he knew"],
+answer: "It was a foreign language"
+},
+
+{
+question: "What did John finally realize about the strangers' situation?",
+options: ["They were lost too", "They were searching for someone", "They were hiding from danger", "They were stranded"],
+answer: "They were stranded"
+},
+  // Add more questions and their options and answers here
+  // ...
+];
+
+
+
+var time = 7 * 60; 
+
+var timerEl = document.createElement("p"); // Create a new <p> element for the timer
+timerEl.textContent = "Time remaining: 23:00"; // Set the initial timer text
+document.querySelector(".container").appendChild(timerEl); // Add the timer to the HTML
+
+var timerId = setInterval(function() {
+  time--; // Decrement the time
+  var minutes = Math.floor(time / 60); // Calculate the remaining minutes
+  var seconds = time % 60; // Calculate the remaining seconds
+  timerEl.textContent = "Time remaining: " + minutes.toString().padStart(2, "0") + ":" + seconds.toString().padStart(2, "0"); // Update the timer text
+  
+  if (time <= 0) {
+    clearInterval(timerId); // Stop the timer
+    questionEl.textContent = "Quiz complete! You scored " + multiscore + " out of 30 questions." // Display the final score
+    optionsEl.innerHTML = ""; // Remove the answer options
+    nextBtn.disabled = true; // Disable the "Next" button
+  }
+}, 1000); // Update the timer every second
+var currentQuestion = 0; // Set the current question index to 0
+var score = 0; // Set the score to 0
+var multiscore = score+score+score;
+var multilength = questions.length*3;
+// Get references to HTML elements
+var questionEl = document.getElementById("question");
+var optionsEl = document.getElementById("options");
+var nextBtn = document.getElementById("nextBtn");
+
+// Function to display the current question and its options
+function showQuestion() {
+  // Display the question
+  questionEl.textContent = questions[currentQuestion].question;
+
+  // Remove any existing options
+  optionsEl.innerHTML = "";
+
+  // Loop through the options and add them to the list
+  for (var i = 0; i < questions[currentQuestion].options.length; i++) {
+    var li = document.createElement("li");
+    var input = document.createElement("input");
+    input.type = "radio";
+    input.name = "option";
+    input.id = `radio-button-${i}`;
+    input.value = questions[currentQuestion].options[i];
+    
+    
+    const label = document.createElement('label');
+    label.innerHTML = "<font size=10px>" + questions[currentQuestion].options[i] + "</font>";
+    label.setAttribute('for', `radio-button-${i}`);
+
+    li.appendChild(input);
+    li.appendChild(label);
+    //li.appendChild(document.createTextNode(questions[currentQuestion].options[i]));
+    
+    //<font size=10px><label for="cue">9</font>
+    
+    optionsEl.appendChild(li);
+  }
+}
+
+// Function to check if the selected answer is correct
+function checkAnswer() {
+	var questionsdone = questionsdone+1;
+  var selectedOption = document.querySelector('input[name="option"]:checked').value;
+  if (selectedOption === questions[currentQuestion].answer) {
+    score++; // Increment the score if the answer is correct
+  }
+  var currentQuestionplus1 =currentQuestion + 2;
+  document.getElementById("outof28").innerHTML=currentQuestionplus1 + "/10";
+}
+
+// Function to go to the next question or end the quiz if all questions have been answered
+function nextQuestion() {
+  checkAnswer(); // Check the answer to the current question
+  currentQuestion++; // Increment the current question index
+
+  // If all questions have been answered, end the quiz and display the score
+  if (currentQuestion === questions.length) {
+    questionEl.textContent = "Quiz complete! You scored " + score*3 + " out of 30 marks.";
+    optionsEl.innerHTML = "";
+    nextBtn.disabled = true;
+  } else {
+    showQuestion(); // Display the next question and its options
+  }
+}
+
+// Call the showQuestion function to display the first question and its options
+showQuestion();
+
+// Add a click event listener to the "Next" button to go to the next question when clicked
+nextBtn.addEventListener("click", nextQuestion);
+
+
+</script>
+  
+</body>
+</html>

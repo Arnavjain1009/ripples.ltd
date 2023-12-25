@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+     <title>11+english</title>
+     <img src="logo.png" alt="Your Logo" width="50px">
+    
+    <style>
+      body {
+        background-color: #f2f2f2;
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+      
+      h1 {
+        margin-top: 50px;
+        font-size: 36px;
+        color: #333;
+      }
+      
+      button {
+        margin: 20px 10px;
+        padding: 10px 20px;
+        font-size: 24px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      
+      button:hover {
+        background-color: #3e8e41;
+      }
+      
+      .category-img {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 50%;
+        transition: transform 0.2s;
+      }
+      
+      .category-img:hover {
+        transform: scale(1.1);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Choose an 11+ english test:</h1>
+    <button onclick="englisheasy()">
+      <img src="https://www.gotoquiz.com/qi/the_easy_test-f.jpg" alt="Verbal Reasoning category" class="category-img">
+      easy
+    </button>
+    
+    <button onclick="englishmedium()">
+      <img src="https://digitalpromise.org/wp-content/plugins/dp-roadmap/assets/icons/meter_med.png" alt="English category" class="category-img">
+      medium
+    </button>
+    
+    <button onclick="englishhard()">
+      <img src="https://thumbs.dreamstime.com/z/difficult-rubber-stamp-grunge-design-dust-scratches-effects-can-be-easily-removed-clean-crisp-look-color-easily-83162818.jpg" alt="Math category" class="category-img">
+      hard
+    </button><br><br><br><br><br><br><br><br><br>
+
+
+
+    <button onclick="englisheasy2()">
+      <img src="https://www.gotoquiz.com/qi/the_easy_test-f.jpg" alt="Verbal Reasoning category" class="category-img">
+      easy2
+    </button>
+    
+    <button onclick="englishmedium2()">
+      <img src="https://digitalpromise.org/wp-content/plugins/dp-roadmap/assets/icons/meter_med.png" alt="English category" class="category-img">
+      medium2
+    </button>
+    
+    <button onclick="englishhard2()">
+      <img src="https://thumbs.dreamstime.com/z/difficult-rubber-stamp-grunge-design-dust-scratches-effects-can-be-easily-removed-clean-crisp-look-color-easily-83162818.jpg" alt="Math category" class="category-img">
+      hard2
+    </button>
+    <button onclick="englisheasy3()">
+      <img src="https://www.gotoquiz.com/qi/the_easy_test-f.jpg" alt="Verbal Reasoning category" class="category-img">
+      easy3
+    </button>
+    
+    <button onclick="englishmedium3()">
+      <img src="https://digitalpromise.org/wp-content/plugins/dp-roadmap/assets/icons/meter_med.png" alt="English category" class="category-img">
+      medium3
+    </button>
+    
+    <button onclick="englishhard3()">
+      <img src="https://thumbs.dreamstime.com/z/difficult-rubber-stamp-grunge-design-dust-scratches-effects-can-be-easily-removed-clean-crisp-look-color-easily-83162818.jpg" alt="Math category" class="category-img">
+      hard3
+    </button>
+    <button onclick="englisheasy4()">
+      <img src="https://www.gotoquiz.com/qi/the_easy_test-f.jpg" alt="Verbal Reasoning category" class="category-img">
+      easy4
+    </button>
+    
+    <button onclick="englishmedium4()">
+      <img src="https://digitalpromise.org/wp-content/plugins/dp-roadmap/assets/icons/meter_med.png" alt="English category" class="category-img">
+      medium4
+    </button>
+    
+    <button onclick="englishhard4()">
+      <img src="https://thumbs.dreamstime.com/z/difficult-rubber-stamp-grunge-design-dust-scratches-effects-can-be-easily-removed-clean-crisp-look-color-easily-83162818.jpg" alt="Math category" class="category-img">
+      hard4
+    </button>
+    <button onclick="englisheasy5()">
+      <img src="https://www.gotoquiz.com/qi/the_easy_test-f.jpg" alt="Verbal Reasoning category" class="category-img">
+      easy5
+    </button>
+    
+    <button onclick="englishmedium5()">
+      <img src="https://digitalpromise.org/wp-content/plugins/dp-roadmap/assets/icons/meter_med.png" alt="English category" class="category-img">
+      medium5
+    </button>
+    
+    <button onclick="englishhard5()">
+      <img src="https://thumbs.dreamstime.com/z/difficult-rubber-stamp-grunge-design-dust-scratches-effects-can-be-easily-removed-clean-crisp-look-color-easily-83162818.jpg" alt="Math category" class="category-img">
+      hard5
+    </button>
+
+    <script>
+
+     
+
+     // function math() {
+      //  window.location.href = "mathtest11plus.html";
+      //}
+
+
+      function englishhard() {
+  // Create the pop-up
+  var popupDiv = document.createElement("div");
+  popupDiv.style.position = "fixed";
+  popupDiv.style.top = "0";
+  popupDiv.style.left = "0";
+  popupDiv.style.width = "100%";
+  popupDiv.style.height = "100%";
+  popupDiv.style.backgroundColor = "rgba(0,0,0,0.5)";
+  popupDiv.style.display = "flex";
+  popupDiv.style.alignItems = "center";
+  popupDiv.style.justifyContent = "center";
+  popupDiv.style.zIndex = "9999";
+
+  // Create the paragraph
+  var paragraph = document.createElement("p");
+  paragraph.style.backgroundColor = "#fff";
+  paragraph.style.padding = "20px";
+  paragraph.style.borderRadius = "5px";
+  paragraph.innerText = "there are 10 questions and you will have 7 minutes (30 marks)||||| rules:no calculators,talking to others,any other distractions||other stationary allowed ";;
+
+  // Add the paragraph to the pop-up
+  popupDiv.appendChild(paragraph);
+
+  // Create the "ready" button
+  var button = document.createElement("button");
+  button.style.padding = "10px 20px";
+  button.style.fontSize = "24px";
+  button.style.backgroundColor = "#4CAF50";
+  button.style.color = "#fff";
+  button.style.border = "none";
+  button.style.borderRadius = "5px";
+  button.style.cursor = "pointer";
+  button.innerText = "Ready";
+
+  // Add the "ready" button to the pop-up
+  popupDiv.appendChild(button);
+
+  // Add event listener to the "ready" button to redirect to the new page
+  button.addEventListener("click", function() {
+    window.location.href = "englishtest1hard.html"
+  });
+
+  // Add the pop-up to the body
+  document.body.appendChild(popupDiv);
+}
+
+
+
+
+
+
+function englishmedium() {
+  // Create the pop-up
+  var popupDiv = document.createElement("div");
+  popupDiv.style.position = "fixed";
+  popupDiv.style.top = "0";
+  popupDiv.style.left = "0";
+  popupDiv.style.width = "100%";
+  popupDiv.style.height = "100%";
+  popupDiv.style.backgroundColor = "rgba(0,0,0,0.5)";
+  popupDiv.style.display = "flex";
+  popupDiv.style.alignItems = "center";
+  popupDiv.style.justifyContent = "center";
+  popupDiv.style.zIndex = "9999";
+
+  // Create the paragraph
+  var paragraph = document.createElement("p");
+  paragraph.style.backgroundColor = "#fff";
+  paragraph.style.padding = "20px";
+  paragraph.style.borderRadius = "5px";
+  paragraph.innerText = "there are 10 questions and you will have 6 minutes (30 marks)||||| rules:no calculators,talking to others,any other distractions||other stationary allowed ";;
+
+  // Add the paragraph to the pop-up
+  popupDiv.appendChild(paragraph);
+
+  // Create the "ready" button
+  var button = document.createElement("button");
+  button.style.padding = "10px 20px";
+  button.style.fontSize = "24px";
+  button.style.backgroundColor = "#4CAF50";
+  button.style.color = "#fff";
+  button.style.border = "none";
+  button.style.borderRadius = "5px";
+  button.style.cursor = "pointer";
+  button.innerText = "Ready";
+
+  // Add the "ready" button to the pop-up
+  popupDiv.appendChild(button);
+
+  // Add event listener to the "ready" button to redirect to the new page
+  button.addEventListener("click", function() {
+    window.location.href = "englishtest1medium.html"
+  });
+
+  // Add the pop-up to the body
+  document.body.appendChild(popupDiv);
+} 
+
+
+
+
+function englisheasy() {
+  // Create the pop-up
+  var popupDiv = document.createElement("div");
+  popupDiv.style.position = "fixed";
+  popupDiv.style.top = "0";
+  popupDiv.style.left = "0";
+  popupDiv.style.width = "100%";
+  popupDiv.style.height = "100%";
+  popupDiv.style.backgroundColor = "rgba(0,0,0,0.5)";
+  popupDiv.style.display = "flex";
+  popupDiv.style.alignItems = "center";
+  popupDiv.style.justifyContent = "center";
+  popupDiv.style.zIndex = "9999";
+
+  // Create the paragraph
+  var paragraph = document.createElement("p");
+  paragraph.style.backgroundColor = "#fff";
+  paragraph.style.padding = "20px";
+  paragraph.style.borderRadius = "5px";
+  paragraph.innerText = "there are 10 questions and you will have 5 minutes (30 marks)||||| rules:no calculators,talking to others,any other distractions||other stationary allowed ";;
+
+  // Add the paragraph to the pop-up
+  popupDiv.appendChild(paragraph);
+
+  // Create the "ready" button
+  var button = document.createElement("button");
+  button.style.padding = "10px 20px";
+  button.style.fontSize = "24px";
+  button.style.backgroundColor = "#4CAF50";
+  button.style.color = "#fff";
+  button.style.border = "none";
+  button.style.borderRadius = "5px";
+  button.style.cursor = "pointer";
+  button.innerText = "Ready";
+
+  // Add the "ready" button to the pop-up
+  popupDiv.appendChild(button);
+
+  // Add event listener to the "ready" button to redirect to the new page
+  button.addEventListener("click", function() {
+    window.location.href = "englishtest1easy.html"
+  });
+
+  // Add the pop-up to the body
+  document.body.appendChild(popupDiv);
+}
+
+
+
+
+
+
+function englishhard2() {
+  // Create the pop-up
+  var popupDiv = document.createElement("div");
+  popupDiv.style.position = "fixed";
+  popupDiv.style.top = "0";
+  popupDiv.style.left = "0";
+  popupDiv.style.width = "100%";
+  popupDiv.style.height = "100%";
+  popupDiv.style.backgroundColor = "rgba(0,0,0,0.5)";
+  popupDiv.style.display = "flex";
+  popupDiv.style.alignItems = "center";
+  popupDiv.style.justifyContent = "center";
+  popupDiv.style.zIndex = "9999";
+
+  // Create the paragraph
+  var paragraph = document.createElement("p");
+  paragraph.style.backgroundColor = "#fff";
+  paragraph.style.padding = "20px";
+  paragraph.style.borderRadius = "5px";
+  paragraph.innerText = "there are 10 questions and you will have 7 minutes (30 marks)||||| rules:no calculators,talking to others,any other distractions||other stationary allowed ";;
+
+  // Add the paragraph to the pop-up
+  popupDiv.appendChild(paragraph);
+
+  // Create the "ready" button
+  var button = document.createElement("button");
+  button.style.padding = "10px 20px";
+  button.style.fontSize = "24px";
+  button.style.backgroundColor = "#4CAF50";
+  button.style.color = "#fff";
+  button.style.border = "none";
+  button.style.borderRadius = "5px";
+  button.style.cursor = "pointer";
+  button.innerText = "Ready";
+
+  // Add the "ready" button to the pop-up
+  popupDiv.appendChild(button);
+
+  // Add event listener to the "ready" button to redirect to the new page
+  button.addEventListener("click", function() {
+    window.location.href = "englishtest2hard.html"
+  });
+
+  // Add the pop-up to the body
+  document.body.appendChild(popupDiv);
+}
+
+
+
+
+
+
+function englishmedium2() {
+  // Create the pop-up
+  var popupDiv = document.createElement("div");
+  popupDiv.style.position = "fixed";
+  popupDiv.style.top = "0";
+  popupDiv.style.left = "0";
+  popupDiv.style.width = "100%";
+  popupDiv.style.height = "100%";
+  popupDiv.style.backgroundColor = "rgba(0,0,0,0.5)";
+  popupDiv.style.display = "flex";
+  popupDiv.style.alignItems = "center";
+  popupDiv.style.justifyContent = "center";
+  popupDiv.style.zIndex = "9999";
+
+  // Create the paragraph
+  var paragraph = document.createElement("p");
+  paragraph.style.backgroundColor = "#fff";
+  paragraph.style.padding = "20px";
+  paragraph.style.borderRadius = "5px";
+  paragraph.innerText = "there are 10 questions and you will have 6 minutes (30 marks)||||| rules:no calculators,talking to others,any other distractions||other stationary allowed ";;
+
+  // Add the paragraph to the pop-up
+  popupDiv.appendChild(paragraph);
+
+  // Create the "ready" button
+  var button = document.createElement("button");
+  button.style.padding = "10px 20px";
+  button.style.fontSize = "24px";
+  button.style.backgroundColor = "#4CAF50";
+  button.style.color = "#fff";
+  button.style.border = "none";
+  button.style.borderRadius = "5px";
+  button.style.cursor = "pointer";
+  button.innerText = "Ready";
+
+  // Add the "ready" button to the pop-up
+  popupDiv.appendChild(button);
+
+  // Add event listener to the "ready" button to redirect to the new page
+  button.addEventListener("click", function() {
+    window.location.href = "englishtest2medium.html"
+  });
+
+  // Add the pop-up to the body
+  document.body.appendChild(popupDiv);
+} 
+
+
+
+
+function englisheasy2() {
+  // Create the pop-up
+  var popupDiv = document.createElement("div");
+  popupDiv.style.position = "fixed";
+  popupDiv.style.top = "0";
+  popupDiv.style.left = "0";
+  popupDiv.style.width = "100%";
+  popupDiv.style.height = "100%";
+  popupDiv.style.backgroundColor = "rgba(0,0,0,0.5)";
+  popupDiv.style.display = "flex";
+  popupDiv.style.alignItems = "center";
+  popupDiv.style.justifyContent = "center";
+  popupDiv.style.zIndex = "9999";
+
+  // Create the paragraph
+  var paragraph = document.createElement("p");
+  paragraph.style.backgroundColor = "#fff";
+  paragraph.style.padding = "20px";
+  paragraph.style.borderRadius = "5px";
+  paragraph.innerText = "there are 10 questions and you will have 5 minutes (30 marks)||||| rules:no calculators,talking to others,any other distractions||other stationary allowed ";;
+
+  // Add the paragraph to the pop-up
+  popupDiv.appendChild(paragraph);
+
+  // Create the "ready" button
+  var button = document.createElement("button");
+  button.style.padding = "10px 20px";
+  button.style.fontSize = "24px";
+  button.style.backgroundColor = "#4CAF50";
+  button.style.color = "#fff";
+  button.style.border = "none";
+  button.style.borderRadius = "5px";
+  button.style.cursor = "pointer";
+  button.innerText = "Ready";
+
+  // Add the "ready" button to the pop-up
+  popupDiv.appendChild(button);
+
+  // Add event listener to the "ready" button to redirect to the new page
+  button.addEventListener("click", function() {
+    window.location.href = "englishtest2easy.html"
+  });
+
+  // Add the pop-up to the body
+  document.body.appendChild(popupDiv);
+}
+
+
+
+
+
+function englishhard3() {
+  // Create the pop-up
+  var popupDiv = document.createElement("div");
+  popupDiv.style.position = "fixed";
+  popupDiv.style.top = "0";
+  popupDiv.style.left = "0";
+  popupDiv.style.width = "100%";
+  popupDiv.style.height = "100%";
+  popupDiv.style.backgroundColor = "rgba(0,0,0,0.5)";
+  popupDiv.style.display = "flex";
+  popupDiv.style.alignItems = "center";
+  popupDiv.style.justifyContent = "center";
+  popupDiv.style.zIndex = "9999";
+
+  // Create the paragraph
+  var paragraph = document.createElement("p");
+  paragraph.style.backgroundColor = "#fff";
+  paragraph.style.padding = "20px";
+  paragraph.style.borderRadius = "5px";
+  paragraph.innerText = "there are 10 questions and you will have 7 minutes (30 marks)||||| rules:no calculators,talking to others,any other distractions||other stationary allowed ";;
+
+  // Add the paragraph to the pop-up
+  popupDiv.appendChild(paragraph);
+
+  // Create the "ready" button
+  var button = document.createElement("button");
+  button.style.padding = "10px 20px";
+  button.style.fontSize = "24px";
+  button.style.backgroundColor = "#4CAF50";
+  button.style.color = "#fff";
+  button.style.border = "none";
+  button.style.borderRadius = "5px";
+  button.style.cursor = "pointer";
+  button.innerText = "Ready";
+
+  // Add the "ready" button to the pop-up
+  popupDiv.appendChild(button);
+
+  // Add event listener to the "ready" button to redirect to the new page
+  button.addEventListener("click", function() {
+    window.location.href = "englishtest3hard.html"
+  });
+
+  // Add the pop-up to the body
+  document.body.appendChild(popupDiv);
+}
+
+
+
+
+
+
+function englishmedium3() {
+  // Create the pop-up
+  var popupDiv = document.createElement("div");
+  popupDiv.style.position = "fixed";
+  popupDiv.style.top = "0";
+  popupDiv.style.left = "0";
+  popupDiv.style.width = "100%";
+  popupDiv.style.height = "100%";
+  popupDiv.style.backgroundColor = "rgba(0,0,0,0.5)";
+  popupDiv.style.display = "flex";
+  popupDiv.style.alignItems = "center";
+  popupDiv.style.justifyContent = "center";
+  popupDiv.style.zIndex = "9999";
+
+  // Create the paragraph
+  var paragraph = document.createElement("p");
+  paragraph.style.backgroundColor = "#fff";
+  paragraph.style.padding = "20px";
+  paragraph.style.borderRadius = "5px";
+  paragraph.innerText = "there are 10 questions and you will have 6 minutes (30 marks)||||| rules:no calculators,talking to others,any other distractions||other stationary allowed ";;
+
+  // Add the paragraph to the pop-up
+  popupDiv.appendChild(paragraph);
+
+  // Create the "ready" button
+  var button = document.createElement("button");
+  button.style.padding = "10px 20px";
+  button.style.fontSize = "24px";
+  button.style.backgroundColor = "#4CAF50";
+  button.style.color = "#fff";
+  button.style.border = "none";
+  button.style.borderRadius = "5px";
+  button.style.cursor = "pointer";
+  button.innerText = "Ready";
+
+  // Add the "ready" button to the pop-up
+  popupDiv.appendChild(button);
+
+  // Add event listener to the "ready" button to redirect to the new page
+  button.addEventListener("click", function() {
+    window.location.href = "englishtest3medium.html"
+  });
+
+  // Add the pop-up to the body
+  document.body.appendChild(popupDiv);
+} 
+
+
+
+
+function englisheasy3() {
+  // Create the pop-up
+  var popupDiv = document.createElement("div");
+  popupDiv.style.position = "fixed";
+  popupDiv.style.top = "0";
+  popupDiv.style.left = "0";
+  popupDiv.style.width = "100%";
+  popupDiv.style.height = "100%";
+  popupDiv.style.backgroundColor = "rgba(0,0,0,0.5)";
+  popupDiv.style.display = "flex";
+  popupDiv.style.alignItems = "center";
+  popupDiv.style.justifyContent = "center";
+  popupDiv.style.zIndex = "9999";
+
+  // Create the paragraph
+  var paragraph = document.createElement("p");
+  paragraph.style.backgroundColor = "#fff";
+  paragraph.style.padding = "20px";
+  paragraph.style.borderRadius = "5px";
+  paragraph.innerText = "there are 10 questions and you will have 5 minutes (30 marks)||||| rules:no calculators,talking to others,any other distractions||other stationary allowed ";;
+
+  // Add the paragraph to the pop-up
+  popupDiv.appendChild(paragraph);
+
+  // Create the "ready" button
+  var button = document.createElement("button");
+  button.style.padding = "10px 20px";
+  button.style.fontSize = "24px";
+  button.style.backgroundColor = "#4CAF50";
+  button.style.color = "#fff";
+  button.style.border = "none";
+  button.style.borderRadius = "5px";
+  button.style.cursor = "pointer";
+  button.innerText = "Ready";
+
+  // Add the "ready" button to the pop-up
+  popupDiv.appendChild(button);
+
+  // Add event listener to the "ready" button to redirect to the new page
+  button.addEventListener("click", function() {
+    window.location.href = "englishtest3easy.html"
+  });
+
+  // Add the pop-up to the body
+  document.body.appendChild(popupDiv);
+}
+
+
+
+
+
+function englishhard4() {
+  // Create the pop-up
+  var popupDiv = document.createElement("div");
+  popupDiv.style.position = "fixed";
+  popupDiv.style.top = "0";
+  popupDiv.style.left = "0";
+  popupDiv.style.width = "100%";
+  popupDiv.style.height = "100%";
+  popupDiv.style.backgroundColor = "rgba(0,0,0,0.5)";
+  popupDiv.style.display = "flex";
+  popupDiv.style.alignItems = "center";
+  popupDiv.style.justifyContent = "center";
+  popupDiv.style.zIndex = "9999";
+
+  // Create the paragraph
+  var paragraph = document.createElement("p");
+  paragraph.style.backgroundColor = "#fff";
+  paragraph.style.padding = "20px";
+  paragraph.style.borderRadius = "5px";
+  paragraph.innerText = "there are 10 questions and you will have 7 minutes (30 marks)||||| rules:no calculators,talking to others,any other distractions||other stationary allowed ";;
+
+  // Add the paragraph to the pop-up
+  popupDiv.appendChild(paragraph);
+
+  // Create the "ready" button
+  var button = document.createElement("button");
+  button.style.padding = "10px 20px";
+  button.style.fontSize = "24px";
+  button.style.backgroundColor = "#4CAF50";
+  button.style.color = "#fff";
+  button.style.border = "none";
+  button.style.borderRadius = "5px";
+  button.style.cursor = "pointer";
+  button.innerText = "Ready";
+
+  // Add the "ready" button to the pop-up
+  popupDiv.appendChild(button);
+
+  // Add event listener to the "ready" button to redirect to the new page
+  button.addEventListener("click", function() {
+    window.location.href = "englishtest4hard.html"
+  });
+
+  // Add the pop-up to the body
+  document.body.appendChild(popupDiv);
+}
+
+
+
+
+
+
+function englishmedium4() {
+  // Create the pop-up
+  var popupDiv = document.createElement("div");
+  popupDiv.style.position = "fixed";
+  popupDiv.style.top = "0";
+  popupDiv.style.left = "0";
+  popupDiv.style.width = "100%";
+  popupDiv.style.height = "100%";
+  popupDiv.style.backgroundColor = "rgba(0,0,0,0.5)";
+  popupDiv.style.display = "flex";
+  popupDiv.style.alignItems = "center";
+  popupDiv.style.justifyContent = "center";
+  popupDiv.style.zIndex = "9999";
+
+  // Create the paragraph
+  var paragraph = document.createElement("p");
+  paragraph.style.backgroundColor = "#fff";
+  paragraph.style.padding = "20px";
+  paragraph.style.borderRadius = "5px";
+  paragraph.innerText = "there are 10 questions and you will have 6 minutes (30 marks)||||| rules:no calculators,talking to others,any other distractions||other stationary allowed ";;
+
+  // Add the paragraph to the pop-up
+  popupDiv.appendChild(paragraph);
+
+  // Create the "ready" button
+  var button = document.createElement("button");
+  button.style.padding = "10px 20px";
+  button.style.fontSize = "24px";
+  button.style.backgroundColor = "#4CAF50";
+  button.style.color = "#fff";
+  button.style.border = "none";
+  button.style.borderRadius = "5px";
+  button.style.cursor = "pointer";
+  button.innerText = "Ready";
+
+  // Add the "ready" button to the pop-up
+  popupDiv.appendChild(button);
+
+  // Add event listener to the "ready" button to redirect to the new page
+  button.addEventListener("click", function() {
+    window.location.href = "englishtest4medium.html"
+  });
+
+  // Add the pop-up to the body
+  document.body.appendChild(popupDiv);
+} 
+
+
+
+
+function englisheasy4() {
+  // Create the pop-up
+  var popupDiv = document.createElement("div");
+  popupDiv.style.position = "fixed";
+  popupDiv.style.top = "0";
+  popupDiv.style.left = "0";
+  popupDiv.style.width = "100%";
+  popupDiv.style.height = "100%";
+  popupDiv.style.backgroundColor = "rgba(0,0,0,0.5)";
+  popupDiv.style.display = "flex";
+  popupDiv.style.alignItems = "center";
+  popupDiv.style.justifyContent = "center";
+  popupDiv.style.zIndex = "9999";
+
+  // Create the paragraph
+  var paragraph = document.createElement("p");
+  paragraph.style.backgroundColor = "#fff";
+  paragraph.style.padding = "20px";
+  paragraph.style.borderRadius = "5px";
+  paragraph.innerText = "there are 10 questions and you will have 5 minutes (30 marks)||||| rules:no calculators,talking to others,any other distractions||other stationary allowed ";;
+
+  // Add the paragraph to the pop-up
+  popupDiv.appendChild(paragraph);
+
+  // Create the "ready" button
+  var button = document.createElement("button");
+  button.style.padding = "10px 20px";
+  button.style.fontSize = "24px";
+  button.style.backgroundColor = "#4CAF50";
+  button.style.color = "#fff";
+  button.style.border = "none";
+  button.style.borderRadius = "5px";
+  button.style.cursor = "pointer";
+  button.innerText = "Ready";
+
+  // Add the "ready" button to the pop-up
+  popupDiv.appendChild(button);
+
+  // Add event listener to the "ready" button to redirect to the new page
+  button.addEventListener("click", function() {
+    window.location.href = "englishtest4easy.html"
+  });
+
+  // Add the pop-up to the body
+  document.body.appendChild(popupDiv);
+}
+
+
+
+
+
+function englishhard5() {
+  // Create the pop-up
+  var popupDiv = document.createElement("div");
+  popupDiv.style.position = "fixed";
+  popupDiv.style.top = "0";
+  popupDiv.style.left = "0";
+  popupDiv.style.width = "100%";
+  popupDiv.style.height = "100%";
+  popupDiv.style.backgroundColor = "rgba(0,0,0,0.5)";
+  popupDiv.style.display = "flex";
+  popupDiv.style.alignItems = "center";
+  popupDiv.style.justifyContent = "center";
+  popupDiv.style.zIndex = "9999";
+
+  // Create the paragraph
+  var paragraph = document.createElement("p");
+  paragraph.style.backgroundColor = "#fff";
+  paragraph.style.padding = "20px";
+  paragraph.style.borderRadius = "5px";
+  paragraph.innerText = "there are 10 questions and you will have 7 minutes (30 marks)||||| rules:no calculators,talking to others,any other distractions||other stationary allowed ";;
+
+  // Add the paragraph to the pop-up
+  popupDiv.appendChild(paragraph);
+
+  // Create the "ready" button
+  var button = document.createElement("button");
+  button.style.padding = "10px 20px";
+  button.style.fontSize = "24px";
+  button.style.backgroundColor = "#4CAF50";
+  button.style.color = "#fff";
+  button.style.border = "none";
+  button.style.borderRadius = "5px";
+  button.style.cursor = "pointer";
+  button.innerText = "Ready";
+
+  // Add the "ready" button to the pop-up
+  popupDiv.appendChild(button);
+
+  // Add event listener to the "ready" button to redirect to the new page
+  button.addEventListener("click", function() {
+    window.location.href = "englishtest5hard.html"
+  });
+
+  // Add the pop-up to the body
+  document.body.appendChild(popupDiv);
+}
+
+
+
+
+
+
+function englishmedium5() {
+  // Create the pop-up
+  var popupDiv = document.createElement("div");
+  popupDiv.style.position = "fixed";
+  popupDiv.style.top = "0";
+  popupDiv.style.left = "0";
+  popupDiv.style.width = "100%";
+  popupDiv.style.height = "100%";
+  popupDiv.style.backgroundColor = "rgba(0,0,0,0.5)";
+  popupDiv.style.display = "flex";
+  popupDiv.style.alignItems = "center";
+  popupDiv.style.justifyContent = "center";
+  popupDiv.style.zIndex = "9999";
+
+  // Create the paragraph
+  var paragraph = document.createElement("p");
+  paragraph.style.backgroundColor = "#fff";
+  paragraph.style.padding = "20px";
+  paragraph.style.borderRadius = "5px";
+  paragraph.innerText = "there are 10 questions and you will have 6 minutes (30 marks)||||| rules:no calculators,talking to others,any other distractions||other stationary allowed ";;
+
+  // Add the paragraph to the pop-up
+  popupDiv.appendChild(paragraph);
+
+  // Create the "ready" button
+  var button = document.createElement("button");
+  button.style.padding = "10px 20px";
+  button.style.fontSize = "24px";
+  button.style.backgroundColor = "#4CAF50";
+  button.style.color = "#fff";
+  button.style.border = "none";
+  button.style.borderRadius = "5px";
+  button.style.cursor = "pointer";
+  button.innerText = "Ready";
+
+  // Add the "ready" button to the pop-up
+  popupDiv.appendChild(button);
+
+  // Add event listener to the "ready" button to redirect to the new page
+  button.addEventListener("click", function() {
+    window.location.href = "englishtest5medium.html"
+  });
+
+  // Add the pop-up to the body
+  document.body.appendChild(popupDiv);
+} 
+
+
+
+
+function englisheasy5() {
+  // Create the pop-up
+  var popupDiv = document.createElement("div");
+  popupDiv.style.position = "fixed";
+  popupDiv.style.top = "0";
+  popupDiv.style.left = "0";
+  popupDiv.style.width = "100%";
+  popupDiv.style.height = "100%";
+  popupDiv.style.backgroundColor = "rgba(0,0,0,0.5)";
+  popupDiv.style.display = "flex";
+  popupDiv.style.alignItems = "center";
+  popupDiv.style.justifyContent = "center";
+  popupDiv.style.zIndex = "9999";
+
+  // Create the paragraph
+  var paragraph = document.createElement("p");
+  paragraph.style.backgroundColor = "#fff";
+  paragraph.style.padding = "20px";
+  paragraph.style.borderRadius = "5px";
+  paragraph.innerText = "there are 10 questions and you will have 5 minutes (30 marks)||||| rules:no calculators,talking to others,any other distractions||other stationary allowed ";;
+
+  // Add the paragraph to the pop-up
+  popupDiv.appendChild(paragraph);
+
+  // Create the "ready" button
+  var button = document.createElement("button");
+  button.style.padding = "10px 20px";
+  button.style.fontSize = "24px";
+  button.style.backgroundColor = "#4CAF50";
+  button.style.color = "#fff";
+  button.style.border = "none";
+  button.style.borderRadius = "5px";
+  button.style.cursor = "pointer";
+  button.innerText = "Ready";
+
+  // Add the "ready" button to the pop-up
+  popupDiv.appendChild(button);
+
+  // Add event listener to the "ready" button to redirect to the new page
+  button.addEventListener("click", function() {
+    window.location.href = "englishtest5easy.html"
+  });
+
+  // Add the pop-up to the body
+  document.body.appendChild(popupDiv);
+}
+
+
+
+
+
+
+
+    </script>
+  </body>
+</html>

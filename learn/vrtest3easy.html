@@ -1,0 +1,437 @@
+
+<!DOCTYPE html>
+<html>
+    <button onclick="window.location.href='https://reportaproblem.webador.co.uk'">report a problem</button>
+	<style>
+    input[type=radio] {
+    border: 0px;
+    width: 3em;
+    height: 3em;
+}
+		body {
+  background-color: #F4F4F4;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  background-color: #FFF;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  margin: 50px auto;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 0;
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 10;
+  padding: 10;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+button {
+  display: block;
+  margin: 20px auto;
+  font-size: 1.2em;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #0074D9;
+  color: #FFF;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #005FAB;
+}
+
+	</style>
+<head>
+  <meta charset="UTF-8">
+  <title>11+vr/40</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	
+  <div class="container">
+    <h1>11+verbal reasoning</h1>
+	<h1 id="outof28"></h1>
+    <p id="question"></p>
+	<div id="progress" style="position: fixed; top: 10px; right: 10px;"></div>
+
+	
+    <ul id="options"></ul>
+    <button id="nextBtn">Next/40</button>
+
+
+
+	
+  </div>
+
+  <script src="quiz.js"></script>
+
+<script>
+
+var questionsdone = 1;
+	// Define an array of objects that contains the questions and their options
+var questions = [
+ // Question 1
+
+// Question 2
+
+  // Add more questions and their options and answers here
+  // ...
+  {
+question: "Which one of the following words means the opposite of 'prosperity'?",
+options: ["Poverty", "Success", "Wealth", "Happiness"],
+answer: "Poverty"
+},
+
+{
+question: "Which one of the following words means the opposite of 'vague'?",
+options: ["Precise", "Unclear", "Indistinct", "Ambiguous"],
+answer: "Precise"
+},
+
+{
+question: "Which one of the following words means the opposite of 'chaotic'?",
+options: ["Orderly", "Confused", "Disorganized", "Random"],
+answer: "Orderly"
+},
+
+{
+question: "Which one of the following words means the opposite of 'definite'?",
+options: ["Ambiguous", "Certain", "Clear", "Obvious"],
+answer: "Ambiguous"
+},
+
+{
+question: "Which one of the following words means the opposite of 'diligent'?",
+options: ["Lazy", "Persistent", "Hardworking", "Industrious"],
+answer: "Lazy"
+},
+
+{
+question: "Which one of the following words means the opposite of 'animosity'?",
+options: ["Friendliness", "Enmity", "Hatred", "Rancor"],
+answer: "Friendliness"
+},
+
+{
+question: "Which one of the following words means the opposite of 'prolific'?",
+options: ["Creative", "Barren", "Fertile", "Productive"],
+answer: "Barren"
+},
+
+{
+question: "Which one of the following words means the opposite of 'incoherent'?",
+options: ["Loud", "Clear", "Muddled", "Intelligible"],
+answer: "Intelligible"
+},
+
+{
+question: "Which one of the following words means the opposite of 'amplify'?",
+options: ["Decrease", "Reduce", "Magnify", "Augment"],
+answer: "Reduce"
+},
+
+{
+question: "Which one of the following words means the opposite of 'meticulous'?",
+options: ["Careless", "Precise", "Thorough", "Exacting"],
+answer: "Careless"
+},
+
+{
+question: "Which one of the following words means the opposite of 'diligent'?",
+options: ["Industrious", "Lazy", "Efficient", "Persistent"],
+answer: "Lazy"
+},
+
+{
+question: "Which one of the following words means the opposite of 'gregarious'?",
+options: ["Unsociable", "Social", "Friendly", "Outgoing"],
+answer: "Unsociable"
+},
+
+{
+question: "Which one of the following words means the opposite of 'pessimistic'?",
+options: ["Negative", "Optimistic", "Hopeful", "Cynical"],
+answer: "Optimistic"
+},
+
+{
+question: "Which one of the following words means the opposite of 'modest'?",
+options: ["Arrogant", "Unassuming", "Humble", "Shy"],
+answer: "Arrogant"
+},
+
+{
+question: "Which one of the following words means the opposite of 'diffident'?",
+options: ["Confident", "Doubtful", "Shy", "Timid"],
+answer: "Confident"
+},
+
+{
+question: "Which one of the following words means the opposite of 'verbose'?",
+options: ["Concise", "Eloquent", "Fluent", "Rhetorical"],
+answer: "Concise"
+},
+
+{
+question: "Which one of the following words means the opposite of 'complacent'?",
+options: ["Contented", "Pleased", "Satisfied", "Dissatisfied"],
+answer: "Dissatisfied"
+},
+
+{
+question: "Which one of the following words means the opposite of 'banal'?",
+options: ["Commonplace", "Original", "Ordinary", "Trivial"],
+answer: "Original"
+},
+
+{
+question: "Which one of the following words means the opposite of 'voracious'?",
+options: ["Avaricious", "Hungry", "Insatiable", "Satisfied"],
+answer: "Satisfied"
+},
+
+{
+question: "Which one of the following words means the opposite of 'audacious'?",
+options: ["Bold", "Timid", "Brave", "Daring"],
+answer: "Timid"
+},
+{
+question: "Which one of the following words means the opposite of 'inflammable'?",
+options: ["Burnable", "Non-flammable", "Combustible", "Flammable"],
+answer: "Non-flammable"
+},
+
+{
+question: "Which one of the following words means the opposite of 'candid'?",
+options: ["Honest", "Insincere", "Open", "Frank"],
+answer: "Insincere"
+},
+
+{
+question: "Which one of the following words means the opposite of 'placid'?",
+options: ["Calm", "Anxious", "Serene", "Tranquil"],
+answer: "Anxious"
+},
+
+{
+question: "Which one of the following words means the opposite of 'conceal'?",
+options: ["Disclose", "Cover", "Hide", "Occlude"],
+answer: "Disclose"
+},
+
+{
+question: "Which one of the following words means the opposite of 'converge'?",
+options: ["Disperse", "Accumulate", "Concentrate", "Centralize"],
+answer: "Disperse"
+},
+
+{
+question: "Which one of the following words means the opposite of 'tedious'?",
+options: ["Boring", "Stimulating", "Dull", "Uninteresting"],
+answer: "Stimulating"
+},
+
+{
+question: "Which one of the following words means the opposite of 'prolific'?",
+options: ["Abundant", "Barren", "Productive", "Bountiful"],
+answer: "Barren"
+},
+
+{
+question: "Which one of the following words means the opposite of 'euphoric'?",
+options: ["Depressed", "Elated", "Cheerful", "Jovial"],
+answer: "Depressed"
+},
+
+{
+question: "Which one of the following words means the opposite of 'taciturn'?",
+options: ["Silent", "Vocal", "Reticent", "Reserved"],
+answer: "Vocal"
+},
+
+{
+question: "Which one of the following words means the opposite of 'ambiguous'?",
+options: ["Clear", "Confusing", "Cryptic", "Indecipherable"],
+answer: "Clear"
+},
+
+{
+question: "Which one of the following words means the opposite of 'ephemeral'?",
+options: ["Enduring", "Temporary", "Transient", "Evanescent"],
+answer: "Enduring"
+},
+
+{
+question: "Which one of the following words means the opposite of 'ambivalent'?",
+options: ["Indecisive", "Certain", "Positive", "Confident"],
+answer: "Certain"
+},
+
+{
+question: "Which one of the following words means the opposite of 'lenient'?",
+options: ["Harsh", "Merciful", "Tolerant", "Flexible"],
+answer: "Harsh"
+},
+
+{
+question: "Which one of the following words means the opposite of 'evasive'?",
+options: ["Direct", "Honest", "Open", "Clear"],
+answer: "Direct"
+},
+
+{
+question: "Which one of the following words means the opposite of 'affluent'?",
+options: ["Poor", "Wealthy", "Rich", "Prosperous"],
+answer: "Poor"
+},
+{
+question: "Which one of the following words means the opposite of 'friendly'?",
+options: ["Aggressive", "Pleasant", "Kind", "Approachable"],
+answer: "Aggressive"
+},
+
+{
+question: "Which one of the following words means the opposite of 'diligent'?",
+options: ["Careful", "Lazy", "Meticulous", "Thorough"],
+answer: "Lazy"
+},
+
+{
+question: "Which one of the following words means the opposite of 'courageous'?",
+options: ["Fearful", "Brave", "Bold", "Confident"],
+answer: "Fearful"
+},
+
+{
+question: "Which one of the following words means the opposite of 'liberty'?",
+options: ["Freedom", "Equality", "Slavery", "Justice"],
+answer: "Slavery"
+},
+
+{
+question: "Which one of the following words means the opposite of 'ambiguous'?",
+options: ["Clear", "Vague", "Obvious", "Plain"],
+answer: "Clear"
+},
+
+
+
+];
+
+
+
+var time = 11 * 60; 
+
+var timerEl = document.createElement("p"); // Create a new <p> element for the timer
+timerEl.textContent = "Time remaining: 8:00"; // Set the initial timer text
+document.querySelector(".container").appendChild(timerEl); // Add the timer to the HTML
+
+var timerId = setInterval(function() {
+  time--; // Decrement the time
+  var minutes = Math.floor(time / 60); // Calculate the remaining minutes
+  var seconds = time % 60; // Calculate the remaining seconds
+  timerEl.textContent = "Time remaining: " + minutes.toString().padStart(2, "0") + ":" + seconds.toString().padStart(2, "0"); // Update the timer text
+  
+  if (time <= 0) {
+    clearInterval(timerId); // Stop the timer
+    questionEl.textContent = "Quiz complete! You scored " + score + " out of " + questions.length + " questions."; // Display the final score
+    optionsEl.innerHTML = ""; // Remove the answer options
+    nextBtn.disabled = true; // Disable the "Next" button
+  }
+}, 1000); // Update the timer every second
+var currentQuestion = 0; // Set the current question index to 0
+var score = 0; // Set the score to 0
+
+// Get references to HTML elements
+var questionEl = document.getElementById("question");
+var optionsEl = document.getElementById("options");
+var nextBtn = document.getElementById("nextBtn");
+
+// Function to display the current question and its options
+function showQuestion() {
+  // Display the question
+  questionEl.textContent = questions[currentQuestion].question;
+
+  // Remove any existing options
+  optionsEl.innerHTML = "";
+
+  // Loop through the options and add them to the list
+  for (var i = 0; i < questions[currentQuestion].options.length; i++) {
+    var li = document.createElement("li");
+    var input = document.createElement("input");
+    input.type = "radio";
+    input.name = "option";
+    input.id = `radio-button-${i}`;
+    input.value = questions[currentQuestion].options[i];
+    
+    
+    const label = document.createElement('label');
+    label.innerHTML = "<font size=10px>" + questions[currentQuestion].options[i] + "</font>";
+    label.setAttribute('for', `radio-button-${i}`);
+
+    li.appendChild(input);
+    li.appendChild(label);
+    //li.appendChild(document.createTextNode(questions[currentQuestion].options[i]));
+    
+    //<font size=10px><label for="cue">9</font>
+    
+    optionsEl.appendChild(li);
+  }
+}
+
+// Function to check if the selected answer is correct
+function checkAnswer() {
+	var questionsdone = questionsdone+1;
+  var selectedOption = document.querySelector('input[name="option"]:checked').value;
+  if (selectedOption === questions[currentQuestion].answer) {
+    score++; // Increment the score if the answer is correct
+  }
+  var currentQuestionplus1 =currentQuestion + 2;
+  document.getElementById("outof28").innerHTML=currentQuestionplus1 + "/40";
+}
+
+// Function to go to the next question or end the quiz if all questions have been answered
+function nextQuestion() {
+  checkAnswer(); // Check the answer to the current question
+  currentQuestion++; // Increment the current question index
+
+  // If all questions have been answered, end the quiz and display the score
+  if (currentQuestion === questions.length) {
+    questionEl.textContent = "Quiz complete! You scored " + score + " out of " + questions.length + " questions.";
+    optionsEl.innerHTML = "";
+    nextBtn.disabled = true;
+  } else {
+    showQuestion(); // Display the next question and its options
+  }
+}
+
+// Call the showQuestion function to display the first question and its options
+showQuestion();
+
+// Add a click event listener to the "Next" button to go to the next question when clicked
+nextBtn.addEventListener("click", nextQuestion);
+
+
+</script>
+  
+</body>
+</html>

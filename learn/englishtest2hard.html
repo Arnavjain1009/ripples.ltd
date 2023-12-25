@@ -1,0 +1,274 @@
+
+<!DOCTYPE html>
+<html>
+  <button onclick="window.location.href='https://reportaproblem.webador.co.uk'">report a problem</button>
+	<style>
+    input[type=radio] {
+    border: 0px;
+    width: 3em;
+    height: 3em;
+}
+		body {
+  background-color: #F4F4F4;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  background-color: #FFF;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  margin: 50px auto;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 0;
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 10;
+  padding: 10;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+button {
+  display: block;
+  margin: 20px auto;
+  font-size: 1.2em;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #0074D9;
+  color: #FFF;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #005FAB;
+}
+
+	</style>
+<head>
+  
+  <meta charset="UTF-8">
+  <title>11+math/30</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	
+  <div class="container">
+    <h1>11+english/30mrks</h1>
+	<h1 id="outof28"></h1>
+    <p>Extract:
+        The sun was setting over the vast expanse of the ocean, casting a golden hue over the horizon. Susan stood on the beach, feeling the cool sand between her toes and the salty breeze in her hair. It was her first solo trip to the seaside, and she was excited to explore all that the small coastal town had to offer.
+
+        As she walked along the shoreline, she noticed a strange rock formation jutting out of the water, almost like a small island. Curiosity getting the best of her, she decided to wade out to get a closer look.
+        
+        As she approached the rocks, she noticed that they were covered in strange markings that she couldn't quite decipher. It was as if they had been carved by some unknown civilization, with symbols and figures that were both familiar and foreign.
+        
+        As she stood there, admiring the beauty of the rock formation, she heard a faint whisper in the wind. It was almost as if someone was trying to communicate with her, but she couldn't make out the words.
+        
+        Suddenly, a strong gust of wind knocked her off balance, and she found herself being pulled under the water. She struggled to stay afloat, but the current was too strong, and she was pulled further out to sea.
+        
+        Just when she thought she couldn't hold on any longer, a hand reached out and pulled her to safety. It was a fisherman who had been out at sea, and had spotted her struggling in the water.
+        
+        As she caught her breath, she noticed that the fisherman was looking at her with a mixture of awe and fear. It was then that she realized that the markings on the rock formation were not just any symbols, but ones that had been passed down through generations of fishermen as a warning of the dangers of the sea.
+        
+        She thanked the fisherman for saving her life, and made her way back to the shore, humbled by the power of the ocean and the mysteries that lay hidden beneath its surface.
+       </p>
+    <p id="question"></p>
+	<div id="progress" style="position: fixed; top: 10px; right: 10px;"></div>
+
+	
+    <ul id="options"></ul>
+    <button id="nextBtn">Next/10Qs</button>
+
+
+
+	
+  </div>
+
+  <script src="quiz.js"></script>
+
+<script>
+
+var questionsdone = 1;
+	// Define an array of objects that contains the questions and their options
+var questions = [
+ // Question 1
+ 
+// Question 2
+{
+question: "What was Susan's reason for visiting the seaside?",
+options: ["To swim in the ocean", "To explore a new town", "To go fishing", "To relax on the beach"],
+answer: "To explore a new town"
+},
+
+{
+question: "What did Susan notice as she walked along the shoreline?",
+options: ["A group of seagulls", "A strange rock formation", "A school of fish", "A pier"],
+answer: "A strange rock formation"
+},
+
+{
+question: "What did Susan hear in the wind while admiring the rock formation?",
+options: ["A distant melody", "A loud noise", "A faint whisper", "A crashing wave"],
+answer: "A faint whisper"
+},
+
+{
+question: "What happened to Susan when she got too close to the rocks?",
+options: ["She slipped and fell", "She was pulled under the water", "She discovered a hidden cave", "She saw a group of dolphins"],
+answer: "She was pulled under the water"
+},
+
+{
+question: "Who saved Susan from drowning?",
+options: ["A lifeguard", "A fisherman", "A surfer", "A diver"],
+answer: "A fisherman"
+},
+
+{
+question: "What was the fisherman's reaction to Susan after saving her?",
+options: ["He was angry", "He was frightened", "He was grateful", "He was indifferent"],
+answer: "He was grateful"
+},
+
+{
+question: "What were the markings on the rock formation?",
+options: ["Random scratches", "Names of sailors", "Ancient symbols", "Messages in a bottle"],
+answer: "Ancient symbols"
+},
+
+{
+question: "What did the markings represent?",
+options: ["A warning of danger", "A map to hidden treasure", "A love story", "A recipe for a secret potion"],
+answer: "A warning of danger"
+},
+
+{
+question: "How did Susan feel after the experience?",
+options: ["Excited", "Humbled", "Angry", "Frustrated"],
+answer: "Humbled"
+},
+
+{
+question: "What was the lesson that Susan learned from the incident?",
+options: ["To never go to the seaside again", "To always respect the power of the ocean", "To ignore warnings from strangers", "To become a fisherman"],
+answer: "To always respect the power of the ocean"
+}
+  // Add more questions and their options and answers here
+  // ...
+];
+
+
+
+var time = 7 * 60; 
+
+var timerEl = document.createElement("p"); // Create a new <p> element for the timer
+timerEl.textContent = "Time remaining: 23:00"; // Set the initial timer text
+document.querySelector(".container").appendChild(timerEl); // Add the timer to the HTML
+
+var timerId = setInterval(function() {
+  time--; // Decrement the time
+  var minutes = Math.floor(time / 60); // Calculate the remaining minutes
+  var seconds = time % 60; // Calculate the remaining seconds
+  timerEl.textContent = "Time remaining: " + minutes.toString().padStart(2, "0") + ":" + seconds.toString().padStart(2, "0"); // Update the timer text
+  
+  if (time <= 0) {
+    clearInterval(timerId); // Stop the timer
+    questionEl.textContent = "Quiz complete! You scored " + multiscore + " out of 30 questions." // Display the final score
+    optionsEl.innerHTML = ""; // Remove the answer options
+    nextBtn.disabled = true; // Disable the "Next" button
+  }
+}, 1000); // Update the timer every second
+var currentQuestion = 0; // Set the current question index to 0
+var score = 0; // Set the score to 0
+var multiscore = score+score+score;
+var multilength = questions.length*3;
+// Get references to HTML elements
+var questionEl = document.getElementById("question");
+var optionsEl = document.getElementById("options");
+var nextBtn = document.getElementById("nextBtn");
+
+// Function to display the current question and its options
+function showQuestion() {
+  // Display the question
+  questionEl.textContent = questions[currentQuestion].question;
+
+  // Remove any existing options
+  optionsEl.innerHTML = "";
+
+  // Loop through the options and add them to the list
+  for (var i = 0; i < questions[currentQuestion].options.length; i++) {
+    var li = document.createElement("li");
+    var input = document.createElement("input");
+    input.type = "radio";
+    input.name = "option";
+    input.id = `radio-button-${i}`;
+    input.value = questions[currentQuestion].options[i];
+    
+    
+    const label = document.createElement('label');
+    label.innerHTML = "<font size=10px>" + questions[currentQuestion].options[i] + "</font>";
+    label.setAttribute('for', `radio-button-${i}`);
+
+    li.appendChild(input);
+    li.appendChild(label);
+    //li.appendChild(document.createTextNode(questions[currentQuestion].options[i]));
+    
+    //<font size=10px><label for="cue">9</font>
+    
+    optionsEl.appendChild(li);
+  }
+}
+
+// Function to check if the selected answer is correct
+function checkAnswer() {
+	var questionsdone = questionsdone+1;
+  var selectedOption = document.querySelector('input[name="option"]:checked').value;
+  if (selectedOption === questions[currentQuestion].answer) {
+    score++; // Increment the score if the answer is correct
+  }
+  var currentQuestionplus1 =currentQuestion + 2;
+  document.getElementById("outof28").innerHTML=currentQuestionplus1 + "/10";
+}
+
+// Function to go to the next question or end the quiz if all questions have been answered
+function nextQuestion() {
+  checkAnswer(); // Check the answer to the current question
+  currentQuestion++; // Increment the current question index
+
+  // If all questions have been answered, end the quiz and display the score
+  if (currentQuestion === questions.length) {
+    questionEl.textContent = "Quiz complete! You scored " + score*3 + " out of 30 marks.";
+    optionsEl.innerHTML = "";
+    nextBtn.disabled = true;
+  } else {
+    showQuestion(); // Display the next question and its options
+  }
+}
+
+// Call the showQuestion function to display the first question and its options
+showQuestion();
+
+// Add a click event listener to the "Next" button to go to the next question when clicked
+nextBtn.addEventListener("click", nextQuestion);
+
+
+</script>
+  
+</body>
+</html>

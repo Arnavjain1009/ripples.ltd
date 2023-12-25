@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+<html>
+  <button onclick="window.location.href='https://reportaproblem.webador.co.uk'">report a problem</button>
+	<style>
+    input[type=radio] {
+    border: 0px;
+    width: 3em;
+    height: 3em;
+}
+		body {
+  background-color: #F4F4F4;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  background-color: #FFF;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  margin: 50px auto;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 0;
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 10;
+  padding: 10;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+button {
+  display: block;
+  margin: 20px auto;
+  font-size: 1.2em;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #0074D9;
+  color: #FFF;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #005FAB;
+}
+
+	</style>
+<head>
+  
+  <meta charset="UTF-8">
+  <title>11+math/30</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	
+  <div class="container">
+    <h1>11+english/30mrks</h1>
+	<h1 id="outof28"></h1>
+    <p>
+        In a bustling city on the coast of Africa, there lived a young girl named Aisha who had always been interested in science and technology. Aisha had a talent for building machines and inventing new gadgets, and she dreamed of one day becoming an engineer.
+        Despite the lack of opportunities for girls in her community, Aisha refused to let anyone stand in the way of her dreams. She spent every spare moment tinkering with gadgets, and even created a solar-powered lamp that she donated to a local school without electricity.
+        
+        When Aisha turned eighteen, she applied for a scholarship to study engineering at a university in the United States. Despite the odds being against her, Aisha was accepted, and she set off on a journey that would change her life forever.
+        
+        In the U.S., Aisha was challenged in new ways, but she refused to give up. She worked hard and proved herself to be an exceptional student, eventually earning her degree in mechanical engineering.
+        
+        Today, Aisha is a successful engineer and inventor, and she uses her skills to help her community. She has created water filtration systems, solar-powered generators, and other inventions that have improved the lives of people in her hometown. Aisha's journey is a testament to the power of determination and hard work, and she serves as an inspiration to young girls everywhere.
+     </p>
+    <p id="question"></p>
+	<div id="progress" style="position: fixed; top: 10px; right: 10px;"></div>
+
+	
+    <ul id="options"></ul>
+    <button id="nextBtn">Next/10Qs</button>
+
+
+
+	
+  </div>
+
+  <script src="quiz.js"></script>
+
+<script>
+
+var questionsdone = 1;
+	// Define an array of objects that contains the questions and their options
+var questions = [
+ // Question 1
+
+
+// Question 2
+
+
+  // Add more questions and their options and answers here
+  // ...
+  {
+question:"What is the name of the young girl in the story?",
+options: ["Amira", "Aisha", "Fatima", "Zahra"],
+answer: "Aisha",
+  },
+  {
+question:"What is Aisha interested in?",
+options: ["Sports and fitness", "Art and literature", "Science and technology", "Cooking and baking"],
+answer: "Science and technology",
+
+
+  },
+  {
+question:"What does Aisha dream of becoming?",
+options: ["A doctor", "A teacher", "An engineer", "A lawyer"],
+answer: "An engineer",
+  },
+  {
+question:"What did Aisha create and donate to a local school?",
+options: ["A wind-powered generator", "A solar-powered lamp", "A water filtration system", "An electric car"],
+answer: "A solar-powered lamp",
+  },
+  {
+question:"Where did Aisha apply for a scholarship to study engineering?",
+options: ["Canada", "Australia", "The United States", "The United Kingdom"],
+answer: "The United States",
+  },
+  {
+question:"Was Aisha accepted for the scholarship?",
+options: ["Yes", "No"],
+answer: "Yes",
+  },
+  {
+question:"What degree did Aisha earn in the U.S.?",
+options: ["Mechanical engineering", "Civil engineering", "Electrical engineering", "Chemical engineering"],
+answer: "Mechanical engineering",
+  },
+  {
+question:"What has Aisha created to help her community?",
+options: ["Artificial intelligence systems", "Augmented reality devices", "Water filtration systems", "Virtual reality headsets"],
+answer: "Water filtration systems",
+  },
+  {
+question:"What is the lesson that Aisha's journey teaches us?",
+options: ["The power of determination and hard work", "The importance of luck and opportunity", "The value of money and wealth", "The significance of beauty and fashion"],
+answer: "The power of determination and hard work",
+  },
+  {
+question:"Who can Aisha be an inspiration to?",
+options: ["Only boys", "Only girls", "Both boys and girls", "Only adults"],
+answer: "Both boys and girls",
+  },
+  
+  
+];
+
+
+
+var time = 6 * 60; 
+
+var timerEl = document.createElement("p"); // Create a new <p> element for the timer
+timerEl.textContent = "Time remaining: 23:00"; // Set the initial timer text
+document.querySelector(".container").appendChild(timerEl); // Add the timer to the HTML
+
+var timerId = setInterval(function() {
+  time--; // Decrement the time
+  var minutes = Math.floor(time / 60); // Calculate the remaining minutes
+  var seconds = time % 60; // Calculate the remaining seconds
+  timerEl.textContent = "Time remaining: " + minutes.toString().padStart(2, "0") + ":" + seconds.toString().padStart(2, "0"); // Update the timer text
+  
+  if (time <= 0) {
+    clearInterval(timerId); // Stop the timer
+    questionEl.textContent = "Quiz complete! You scored " + multiscore + " out of 30 questions." // Display the final score
+    optionsEl.innerHTML = ""; // Remove the answer options
+    nextBtn.disabled = true; // Disable the "Next" button
+  }
+}, 1000); // Update the timer every second
+var currentQuestion = 0; // Set the current question index to 0
+var score = 0; // Set the score to 0
+var multiscore = score+score+score;
+var multilength = questions.length*3;
+// Get references to HTML elements
+var questionEl = document.getElementById("question");
+var optionsEl = document.getElementById("options");
+var nextBtn = document.getElementById("nextBtn");
+
+// Function to display the current question and its options
+function showQuestion() {
+  // Display the question
+  questionEl.textContent = questions[currentQuestion].question;
+
+  // Remove any existing options
+  optionsEl.innerHTML = "";
+
+  // Loop through the options and add them to the list
+  for (var i = 0; i < questions[currentQuestion].options.length; i++) {
+    var li = document.createElement("li");
+    var input = document.createElement("input");
+    input.type = "radio";
+    input.name = "option";
+    input.id = `radio-button-${i}`;
+    input.value = questions[currentQuestion].options[i];
+    
+    
+    const label = document.createElement('label');
+    label.innerHTML = "<font size=10px>" + questions[currentQuestion].options[i] + "</font>";
+    label.setAttribute('for', `radio-button-${i}`);
+
+    li.appendChild(input);
+    li.appendChild(label);
+    //li.appendChild(document.createTextNode(questions[currentQuestion].options[i]));
+    
+    //<font size=10px><label for="cue">9</font>
+    
+    optionsEl.appendChild(li);
+  }
+}
+
+// Function to check if the selected answer is correct
+function checkAnswer() {
+	var questionsdone = questionsdone+1;
+  var selectedOption = document.querySelector('input[name="option"]:checked').value;
+  if (selectedOption === questions[currentQuestion].answer) {
+    score++; // Increment the score if the answer is correct
+  }
+  var currentQuestionplus1 =currentQuestion + 2;
+  document.getElementById("outof28").innerHTML=currentQuestionplus1 + "/10";
+}
+
+// Function to go to the next question or end the quiz if all questions have been answered
+function nextQuestion() {
+  checkAnswer(); // Check the answer to the current question
+  currentQuestion++; // Increment the current question index
+
+  // If all questions have been answered, end the quiz and display the score
+  if (currentQuestion === questions.length) {
+    questionEl.textContent = "Quiz complete! You scored " + score*3 + " out of 30 marks.";
+    optionsEl.innerHTML = "";
+    nextBtn.disabled = true;
+  } else {
+    showQuestion(); // Display the next question and its options
+  }
+}
+
+// Call the showQuestion function to display the first question and its options
+showQuestion();
+
+// Add a click event listener to the "Next" button to go to the next question when clicked
+nextBtn.addEventListener("click", nextQuestion);
+
+
+</script>
+  
+</body>
+</html>

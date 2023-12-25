@@ -1,0 +1,268 @@
+
+<!DOCTYPE html>
+<html>
+  <button onclick="window.location.href='https://reportaproblem.webador.co.uk'">report a problem</button>
+	<style>
+    input[type=radio] {
+    border: 0px;
+    width: 3em;
+    height: 3em;
+}
+		body {
+  background-color: #F4F4F4;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  background-color: #FFF;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  margin: 50px auto;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 0;
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 10;
+  padding: 10;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+button {
+  display: block;
+  margin: 20px auto;
+  font-size: 1.2em;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #0074D9;
+  color: #FFF;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #005FAB;
+}
+
+	</style>
+<head>
+  
+  <meta charset="UTF-8">
+  <title>11+math/30</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	
+  <div class="container">
+    <h1>11+english/30mrks</h1>
+	<h1 id="outof28"></h1>
+    <p>
+        In the heart of the Amazon rainforest, there was a young girl named Ana who had always been fascinated by the lush greenery and the diverse wildlife that surrounded her. Ana had grown up learning from her father, a botanist, and had inherited his love for the natural world. She spent her days wandering through the dense jungle, observing the different species of plants and animals, and recording her findings in a journal.
+        One day, as Ana was wandering through the forest, she stumbled upon a hidden waterfall, tucked away behind a veil of dense foliage. The sound of the rushing water and the misty air that surrounded the falls took her breath away. Ana knew that this was a discovery that needed to be shared with the world.
+        
+        Over the next few weeks, Ana worked tirelessly to document the waterfall's beauty and to find a way to protect it from the dangers of deforestation. She wrote letters to local government officials, organized protests, and even managed to gather a team of volunteers to help preserve the area.
+        
+        Thanks to Ana's efforts, the waterfall became a protected natural landmark, and her work inspired a new generation of conservationists to protect the Amazon rainforest.
+     </p>
+    <p id="question"></p>
+	<div id="progress" style="position: fixed; top: 10px; right: 10px;"></div>
+
+	
+    <ul id="options"></ul>
+    <button id="nextBtn">Next/10Qs</button>
+
+
+
+	
+  </div>
+
+  <script src="quiz.js"></script>
+
+<script>
+
+var questionsdone = 1;
+	// Define an array of objects that contains the questions and their options
+var questions = [
+ // Question 1
+
+
+// Question 2
+{
+question: "What was the name of the young girl in the Amazon rainforest?",
+options: ["Maria", "Ana", "Sophia", "Lena"],
+answer: "Ana"
+},
+
+{
+question: "What was Ana's father's profession?",
+options: ["A biologist", "A botanist", "A geologist", "A zoologist"],
+answer: "A botanist"
+},
+
+{
+question: "What did Ana spend her days doing in the jungle?",
+options: ["Hunting for food", "Fishing in the river", "Observing plants and animals", "Building a shelter"],
+answer: "Observing plants and animals"
+},
+
+{
+question: "What did Ana stumble upon while wandering through the forest?",
+options: ["A hidden lake", "A secret cave", "A hidden waterfall", "A sacred temple"],
+answer: "A hidden waterfall"
+},
+
+{
+question: "What did Ana do to protect the waterfall from deforestation?",
+options: ["She wrote letters to local officials", "She organized protests", "She gathered a team of volunteers", "All of the above"],
+answer: "All of the above"
+},
+
+{
+question: "What became of the waterfall thanks to Ana's efforts?",
+options: ["It was destroyed", "It became a tourist attraction", "It became a protected natural landmark", "It dried up"],
+answer: "It became a protected natural landmark"
+},
+
+{
+question: "What did Ana's work inspire in others?",
+options: ["A love for deforestation", "A new generation of conservationists", "A desire to build more dams", "An interest in mining"],
+answer: "A new generation of conservationists"
+},
+{
+question: "What inspired Ana to take action to protect the hidden waterfall?",
+options: ["She wanted to keep it a secret", "She was afraid it would dry up", "She was impressed by its beauty", "She didn't take any action"],
+answer: "She was impressed by its beauty"
+},
+
+
+{
+question: "What did Ana do to protect the waterfall from deforestation?",
+options: ["She did nothing", "She wrote letters to government officials", "She cut down trees around the waterfall", "She built a fence around the waterfall"],
+answer: "She wrote letters to government officials"
+},
+
+
+{
+question: "How did Ana's efforts impact the Amazon rainforest?",
+options: ["They had no impact", "They led to the waterfall being destroyed", "They inspired a new generation of conservationists", "They caused more deforestation"],
+answer: "They inspired a new generation of conservationists"
+},
+
+  // Add more questions and their options and answers here
+  // ...
+];
+
+
+
+var time = 6 * 60; 
+
+var timerEl = document.createElement("p"); // Create a new <p> element for the timer
+timerEl.textContent = "Time remaining: 23:00"; // Set the initial timer text
+document.querySelector(".container").appendChild(timerEl); // Add the timer to the HTML
+
+var timerId = setInterval(function() {
+  time--; // Decrement the time
+  var minutes = Math.floor(time / 60); // Calculate the remaining minutes
+  var seconds = time % 60; // Calculate the remaining seconds
+  timerEl.textContent = "Time remaining: " + minutes.toString().padStart(2, "0") + ":" + seconds.toString().padStart(2, "0"); // Update the timer text
+  
+  if (time <= 0) {
+    clearInterval(timerId); // Stop the timer
+    questionEl.textContent = "Quiz complete! You scored " + multiscore + " out of 30 questions." // Display the final score
+    optionsEl.innerHTML = ""; // Remove the answer options
+    nextBtn.disabled = true; // Disable the "Next" button
+  }
+}, 1000); // Update the timer every second
+var currentQuestion = 0; // Set the current question index to 0
+var score = 0; // Set the score to 0
+var multiscore = score+score+score;
+var multilength = questions.length*3;
+// Get references to HTML elements
+var questionEl = document.getElementById("question");
+var optionsEl = document.getElementById("options");
+var nextBtn = document.getElementById("nextBtn");
+
+// Function to display the current question and its options
+function showQuestion() {
+  // Display the question
+  questionEl.textContent = questions[currentQuestion].question;
+
+  // Remove any existing options
+  optionsEl.innerHTML = "";
+
+  // Loop through the options and add them to the list
+  for (var i = 0; i < questions[currentQuestion].options.length; i++) {
+    var li = document.createElement("li");
+    var input = document.createElement("input");
+    input.type = "radio";
+    input.name = "option";
+    input.id = `radio-button-${i}`;
+    input.value = questions[currentQuestion].options[i];
+    
+    
+    const label = document.createElement('label');
+    label.innerHTML = "<font size=10px>" + questions[currentQuestion].options[i] + "</font>";
+    label.setAttribute('for', `radio-button-${i}`);
+
+    li.appendChild(input);
+    li.appendChild(label);
+    //li.appendChild(document.createTextNode(questions[currentQuestion].options[i]));
+    
+    //<font size=10px><label for="cue">9</font>
+    
+    optionsEl.appendChild(li);
+  }
+}
+
+// Function to check if the selected answer is correct
+function checkAnswer() {
+	var questionsdone = questionsdone+1;
+  var selectedOption = document.querySelector('input[name="option"]:checked').value;
+  if (selectedOption === questions[currentQuestion].answer) {
+    score++; // Increment the score if the answer is correct
+  }
+  var currentQuestionplus1 =currentQuestion + 2;
+  document.getElementById("outof28").innerHTML=currentQuestionplus1 + "/10";
+}
+
+// Function to go to the next question or end the quiz if all questions have been answered
+function nextQuestion() {
+  checkAnswer(); // Check the answer to the current question
+  currentQuestion++; // Increment the current question index
+
+  // If all questions have been answered, end the quiz and display the score
+  if (currentQuestion === questions.length) {
+    questionEl.textContent = "Quiz complete! You scored " + score*3 + " out of 30 marks.";
+    optionsEl.innerHTML = "";
+    nextBtn.disabled = true;
+  } else {
+    showQuestion(); // Display the next question and its options
+  }
+}
+
+// Call the showQuestion function to display the first question and its options
+showQuestion();
+
+// Add a click event listener to the "Next" button to go to the next question when clicked
+nextBtn.addEventListener("click", nextQuestion);
+
+
+</script>
+  
+</body>
+</html>
