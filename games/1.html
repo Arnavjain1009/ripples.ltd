@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Prisoner's Dilemma Game</title>
+  <style>
+    /* Some basic styling */
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+    #players {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .player {
+      flex: 1 1 45%;
+      padding: 20px;
+      border: 1px solid #ccc;
+      margin: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 10px;
+    }
+
+    @media screen and (max-width: 600px) {
+      .player {
+        flex: 1 1 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Prisoner's Dilemma Game</h1>
+  <div id="nameInputs">
+    <label for="player1Name">Enter Player 1 Name: </label>
+    <input type="text" id="player1Name"><br><br>
+    <label for="player2Name">Enter Player 2 Name: </label>
+    <input type="text" id="player2Name"><br><br>
+    <button onclick="startGame()">Start Game</button>
+  </div>
+
+  <div id="gameArea" style="display: none;">
+    <div id="players">
+      <div class="player" id="player1">
+        <h2 id="player1Title"></h2>
+        <p>Total Points: <span id="player1Points">0</span></p>
+        <p>Choice: <span id="player1Choice"></span></p>
+        <button onclick="makeChoice('cooperate', 'player1')">Cooperate</button>
+        <button onclick="makeChoice('defect', 'player1')">Defect</button>
+      </div>
+      <div class="player" id="player2">
+        <h2 id="player2Title"></h2>
+        <p>Total Points: <span id="player2Points">0</span></p>
+        <p>Choice: <span id="player2Choice"></span></p>
+        <button onclick="makeChoice('cooperate', 'player2')">Cooperate</button>
+        <button onclick="makeChoice('defect', 'player2')">Defect</button>
+      </div>
+    </div>
+    <p id="result"></p>
+  </div>
+
+  <script>
+    let player1Choice = '';
+    let player2Choice = '';
+    let player1Points = 0;
+    let player2Points = 0;
+    let round = 1;
+
+    function startGame() {
+      const player1Name = document.getElementById('player1Name').value;
+      const player2Name = document.getElementById('player2Name').value;
+
+      if (player1Name.trim() !== '' && player2Name.trim() !== '') {
+        document.getElementById('nameInputs').style.display = 'none';
+        document.getElementById('gameArea').style.display = 'block';
+
+        document.getElementById('player1Title').innerText = player1Name;
+        document.getElementById('player2Title').innerText = player2Name;
+
+        document.getElementById('result').innerText = `Round ${round}: Make your choices!`;
+      } else {
+        alert('Please enter both players\' names!');
+      }
+    }
+
+    function makeChoice(choice, player) {
+      if (player === 'player1') {
+        player1Choice = choice;
+        document.getElementById('player1Choice').innerText = choice.toUpperCase();
+      } else {
+        player2Choice = choice;
+        document.getElementById('player2Choice').innerText = choice.toUpperCase();
+      }
+      if (player1Choice !== '' && player2Choice !== '') {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      if (player1Choice === 'cooperate' && player2Choice === 'cooperate') {
+        player1Points += 3;
+        player2Points += 3;
+        document.getElementById('result').innerText = "Both players cooperated! Both get 3 points.";
+      } else if (player1Choice === 'defect' && player2Choice === 'defect') {
+        player1Points += 1;
+        player2Points += 1;
+        document.getElementById('result').innerText = "Both players defected! Both get 1 point.";
+      } else if (player1Choice === 'defect' && player2Choice === 'cooperate') {
+        player1Points += 5;
+        document.getElementById('result').innerText = "Player 1 defected and Player 2 cooperated! Player 1 gets 5 points, Player 2 gets 0 points.";
+      } else if (player1Choice === 'cooperate' && player2Choice === 'defect') {
+        player2Points += 5;
+        document.getElementById('result').innerText = "Player 1 cooperated and Player 2 defected! Player 2 gets 5 points, Player 1 gets 0 points.";
+      }
+
+      document.getElementById('player1Points').innerText = player1Points;
+      document.getElementById('player2Points').innerText = player2Points;
+
+      round++;
+      if (round <= 10) {
+        player1Choice = '';
+        player2Choice = '';
+        document.getElementById('player1Choice').innerText = '';
+        document.getElementById('player2Choice').innerText = '';
+        document.getElementById('result').innerText = `Round ${round}: Make your choices!`;
+      } else {
+        endGame();
+      }
+    }
+
+    function endGame() {
+      document.getElementById('result').innerText = "Game Over!";
+      // You can add any additional logic here for end of game actions
+    }
+  </script>
+</body>
+</html>
