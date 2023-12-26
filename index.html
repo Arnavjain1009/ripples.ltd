@@ -1,186 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image" href="logo.jpg">
-    <title>Ripples</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ripples (arnav jain) v19</title>
+   
     <style>
-        /* General styles */
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #ffd700;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
+            background-color: #FFD700;
         }
-
-        .header {
-            width: 80%;
-            background-color: #3498db;
-            padding: 20px;
+        header {
             text-align: center;
-            position: relative; /* Added position relative for header-dots positioning */
+            padding: 20px 0;
+            background-color: #333;
+            color: white;
+            width: 100%;
         }
-
-        .header-logo {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            max-width: 80px; /* Adjust the size of the logo */
-            height: auto;
+        .buttons-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            gap: 15px;
+            padding: 20px 0;
+            width: 100%;
+            max-width: 800px;
+            box-sizing: border-box;
         }
-
-        .header-dots {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            font-size: 48px; /* Larger font size for the icon */
-            color: #fff;
-            cursor: pointer; /* Add cursor pointer for interaction */
-        }
-
-        h1 {
-            color: #fff;
-            font-size: 48px;
-            margin: 0;
-        }
-
-        .container {
-            text-align: center;
-            margin-top: 50px;
-        }
-
-        /* Button styles */
         .button {
-            display: inline-block;
-            padding: 40px 80px; /* Increased padding */
-            margin: 10px;
-            text-decoration: none;
-            font-size: 32px; /* Adjusted font size */
-            font-weight: bold;
-            color: #fff;
-            border-radius: 8px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .blue {
-            background-color: #0022ff; /* Gold background */
-        }
-        .green {
-            background-color: #22ff00; /* Gold background */
-        }
-        .orange {
-            background-color: #ff8800; /* Gold background */
-        }
-        .purple {
-            background-color: #bf00ff; /* Gold background */
-        }
-        .pink {
-            background-color: #ff00ee; /* Gold background */
-        }
-
-        /* Rest of button styles... */
-
-        .gray {
-            background-color: #888; /* Color for Privacy Policy button */
-            padding: 10px 20px; /* Adjusted padding for smaller size */
-            font-size: 16px; /* Smaller font size */
-            border-radius: 5px; /* Slightly smaller border radius */
-        }
-
-        .gray:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Media query for smaller screens */
-        @media screen and (max-width: 768px) {
-            .button {
-                display: block;
-                width: 80%;
-                margin: 10px auto;
-                padding: 20px;
-                font-size: 24px;
-            }
-        }
-
-        /* Popup styles */
-        .popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 10px;
-            color: #fff;
-            z-index: 9999;
-        }
-
-        .popup-content {
+            flex: 1 1 200px;
+            padding: 15px 30px;
             text-align: center;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 10px; /* Adjust this value for squared corners */
+            transition: background-color 0.3s ease;
+            box-sizing: border-box;
+            color: white;
         }
+        .button.green { background-color: #4CAF50; }
+        .button.orange { background-color: #FFA500; }
+        .button.blue { background-color: #3498DB; }
+        .button.purple { background-color: #9B59B6; }
+        .button.pink { background-color: #E91E63; }
+        .button.gray { background-color: #808080; }
+        .button:hover { opacity: 0.8; }
 
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
-            color: #fff;
-            font-size: 24px;
+        /* Media query for larger screens (desktop) */
+        @media (min-width: 1024px) {
+            .button {
+                flex: 1 1 250px; /* Adjust button width for larger screens */
+                padding: 20px 40px; /* Adjust button padding for larger screens */
+                font-size: 20px; /* Adjust button font size for larger screens */
+            }
         }
     </style>
 </head>
 <body>
-<div class="header">
-    <div class="header-logo">
-        <img src="logo.png" alt="Your Logo" width="50px">
-    </div>
-    <div class="header-dots" id="settingsIcon">&#9881;</div>
-    <h1>Ripples® (Arnav Jain)v18</h1>
-</div>
-<div class="container">
-    <div class="button-container">
-        
+    <header>
+        <h1>ripples.ltd</h1>
+        <h3>[arnav jain v19]</h3>
+    </header>
+    <div class="buttons-container">
         <a href="games/home.html" class="button green">Games</a>
-        <h4> </h4>
         <a href="r9ai/r9gpt.html" class="button orange">R9AI</a>
-        <h4> </h4>
         <a href="whattschat/abc.html" class="button blue">Whattschat</a>
-        <h4> </h4>
         <a href="tools/home.html" class="button purple">Tools</a>
-        <h4> </h4>
-        <a href="learn/home.html" class="button pink">Learn</a> <p>
-            <h4> </h4>
-        <a href="privacy.html" class="button gray">Privacy Policy</a> <!-- Added Privacy Policy button -->
+        <a href="learn/home.html" class="button pink">Learn</a>
+        <a href="privacy.html" class="button gray">Privacy Policy</a>
     </div>
-</div>
-
-<!-- Popup -->
-<div class="popup" id="settingsPopup">
-    <div class="popup-content">
-        <span class="close-btn" onclick="togglePopup('settingsPopup')">&#10006;</span>
-        <h2>Settings</h2>
-        <!-- Add your settings content here -->
-        <p>language options, cookie options, contact, [coming soon]</p>
-    </div>
-</div>
-
-<script>
-    // Function to toggle popup visibility
-    function togglePopup(popupId) {
-        const popup = document.getElementById(popupId);
-        popup.style.display = (popup.style.display === 'none' || popup.style.display === '') ? 'block' : 'none';
-    }
-
-    // Click event to show the popup when the settings icon is clicked
-    document.getElementById('settingsIcon').addEventListener('click', function() {
-        togglePopup('settingsPopup');
-    });
-</script>
 </body>
 </html>
