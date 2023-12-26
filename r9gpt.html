@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>r9GPT</title>
+  
+  <link rel="icon" type="image/svg+xml" href="https://i.pinimg.com/originals/53/e9/45/53e945c516cebdffd987b6c2df159db1.jpg" />
+  <meta name="viewport" content="width=device-width/2, initial-scale=1.0" />
+  <h1>r9GPT</h1>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div id="app">
+     <!-- New div for history container -->
+    <div id="chat_container"></div>
+    <form>
+      <textarea name="prompt" cols="1" rows="1" placeholder="Ask r9GPT"></textarea>
+      <button type="submit"><img src="assets/send.svg"></button>
+    </form>
+    <h1 id="tokencountssg">Welcome</h1>
+    <button onclick="window.location.href='gettokens.html'">Get Tokens</button>
+  </div>
+  
+  <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-database.js"></script>
+  <script type="module" src="script.js"></script>
+  <script>
+  </script>
+</body>
+</html>
