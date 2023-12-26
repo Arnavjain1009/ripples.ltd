@@ -20,7 +20,7 @@ var myuserid = "publicipadress";
 var mysecretkey = url.searchParams.get("secretkey");
 var passwordmatched = false;
 
-/*async function setIPAddress() {
+async function setIPAddress() {
   var ipAddress = '';
   var liveToknCnt = 0;
 
@@ -69,7 +69,7 @@ async function getDataFromFirebase() {
       resolve(data);
     });
   });
-}*/
+}
 
 var mydata = "";
 
@@ -96,13 +96,13 @@ async function main(prompt) {
   // Scroll to bottom of chat container
   chatContainer.scrollTop = chatContainer.scrollHeight;
 
-  //const TknCount = await setIPAddress();
-  const TknCount = 100000;
+const TknCount = await setIPAddress();
+
   document.getElementById('tokencountssg').innerHTML = "Tokens Left: " + TknCount;
   
-  //const data1 = await getDataFromFirebase();
-  //mydata = data1;
-  mydata= "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";
+  const data1 = await getDataFromFirebase();
+  mydata = data1;
+  
 
   const response = await fetch('https://api.openai.com/v1/chat/completions', {
 
@@ -136,7 +136,7 @@ async function main(prompt) {
       return firebase.database().ref('R9cookies').once('value');
     })
 
-  /*firebase.database().ref('history/' + myuserid).push(chat);
+  firebase.database().ref('history/' + myuserid).push(chat);
 
   firebase.database().ref('history/' + myuserid).once('value', snapshot => {
     const history = snapshot.val();
@@ -145,7 +145,7 @@ async function main(prompt) {
 
       });
     }
-  });*/
+  });
 
 }
 
