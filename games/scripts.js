@@ -1,7 +1,7 @@
 // Simulated game data (replace this with real data from a database or API)
 const games = [
     { name: 'prisoners dilemna', image: 'https://th.bing.com/th/id/OIP.R5EV8zLOIVML0RpKpXoSyAHaEK?rs=1&pid=ImgDetMain', url: '1.html' },
-    { name: 'coming later', image: '', url: '2.html' },
+    { name: 'christmas matching', image: 'https://th.bing.com/th/id/OIP.APjDZ0hpOsnvw1vdvxyiQwHaKe?rs=1&pid=ImgDetMain', url: '2.html' },
     { name: 'coming later', image: '', url: '3.html' },
     { name: 'coming later', image: '', url: '4.html' },
     { name: 'coming later', image: '', url: '5.html' },

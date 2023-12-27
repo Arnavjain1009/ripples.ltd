@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Christmas Memory Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    .game-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .game-board {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 80%;
+      margin: 0 auto;
+    }
+
+    .card {
+      width: 100px;
+      height: 100px;
+      margin: 5px;
+      background-color: #f0f0f0;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-container">
+    <div class="game-board" id="gameBoard"></div>
+    <button onclick="startGame()">Start Game</button>
+  </div>
+
+  <script>
+    const icons = ['🎄', '🎅', '🎁', '⛄', '❄️', '🔔', '🕯️', '🦌'];
+    let cards = [];
+    let flippedCards = [];
+    let matches = 0;
+    let hasFlippedCard = false;
+    let lockBoard = false;
+    let countdownTimer;
+
+    function startGame() {
+      resetGame();
+      shuffleCards();
+      createBoard();
+      startTimer();
+    }
+
+    
+    function startTimer() {
+      let secondsRemaining = 60; // Set timer to 1 minute (60 seconds)
+
+      countdownTimer = setInterval(() => {
+        secondsRemaining--;
+
+        if (secondsRemaining <= 0) {
+          clearInterval(countdownTimer);
+          alert('You lost! Time is up.');
+        }
+      }, 1000);
+    }
+
+    function resetGame() {
+      cards = [];
+      flippedCards = [];
+      matches = 0;
+      hasFlippedCard = false;
+      lockBoard = false;
+      clearInterval(countdownTimer);
+      const gameBoard = document.getElementById('gameBoard');
+      gameBoard.innerHTML = '';
+    }
+
+    function shuffleCards() {
+      const totalPairs = icons.concat(icons);
+      while (totalPairs.length > 0) {
+        const randomIndex = Math.floor(Math.random() * totalPairs.length);
+        const randomIcon = totalPairs.splice(randomIndex, 1)[0];
+        cards.push({ icon: randomIcon, isFlipped: false });
+      }
+    }
+
+    function createBoard() {
+      const gameBoard = document.getElementById('gameBoard');
+      cards.forEach((card, index) => {
+        const cardElement = document.createElement('div');
+        cardElement.classList.add('card');
+        cardElement.dataset.index = index;
+        cardElement.innerHTML = `<span class="card-text"></span>`;
+        cardElement.addEventListener('click', flipCard);
+        gameBoard.appendChild(cardElement);
+      });
+    }
+
+    function flipCard() {
+      if (lockBoard) return;
+      if (this === flippedCards[0]) return;
+
+      const index = this.dataset.index;
+      const card = cards[index];
+
+      card.isFlipped = true;
+      this.innerHTML = `<span class="card-text">${card.icon}</span>`;
+
+      if (!hasFlippedCard) {
+        hasFlippedCard = true;
+        flippedCards[0] = this;
+        return;
+      }
+
+      flippedCards[1] = this;
+      checkForMatch();
+    }
+
+    function checkForMatch() {
+      const firstCardIndex = flippedCards[0].dataset.index;
+      const secondCardIndex = flippedCards[1].dataset.index;
+
+      if (cards[firstCardIndex].icon === cards[secondCardIndex].icon) {
+        disableCards();
+        matches++;
+        if (matches === icons.length) {
+          setTimeout(() => alert('Congratulations! You won!'), 500);
+        }
+      } else {
+        unflipCards();
+      }
+    }
+
+    function disableCards() {
+      flippedCards[0].removeEventListener('click', flipCard);
+      flippedCards[1].removeEventListener('click', flipCard);
+      resetBoard();
+    }
+
+    function unflipCards() {
+      lockBoard = true;
+      setTimeout(() => {
+        flippedCards[0].innerHTML = '';
+        flippedCards[1].innerHTML = '';
+        resetBoard();
+      }, 1000);
+    }
+
+    function resetBoard() {
+      [hasFlippedCard, lockBoard] = [false, false];
+      flippedCards = [];
+    }
+
+    startGame();
+  </script>
+</body>
+</html>
