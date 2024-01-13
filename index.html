@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ripples (arnav jain) v27</title>
-     <link rel="icon" type="image/svg+xml" href="https://raw.githubusercontent.com/Arnavjain1009/ripples.ltd/main/logo.png" />
+    <title>Ripples by arnav jain v30</title>
+    <link rel="icon" type="image/svg+xml" href="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800" />
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -15,13 +16,25 @@
             align-items: center;
             background-color: #FFD700;
         }
+
         header {
             text-align: center;
             padding: 20px 0;
             background-color: #333;
             color: white;
             width: 100%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
+
+        header img {
+            max-width: 10%; /* Default size for desktop */
+            height: auto;
+            margin-bottom: 10px;
+        }
+
         .buttons-container {
             display: flex;
             flex-wrap: wrap;
@@ -33,6 +46,7 @@
             max-width: 800px;
             box-sizing: border-box;
         }
+
         .button {
             flex: 1 1 200px;
             padding: 15px 30px;
@@ -44,6 +58,7 @@
             box-sizing: border-box;
             color: white;
         }
+
         .button.green { background-color: #4CAF50; }
         .button.orange { background-color: #FFA500; }
         .button.blue { background-color: #3498DB; }
@@ -53,16 +68,26 @@
         .button.black{ background-color: #333}
         .button:hover { opacity: 0.8; }
 
-        /* Media query for larger screens (desktop) */
-        @media (min-width: 1024px) {
-            .button {
-                flex: 1 1 250px; /* Adjust button width for larger screens */
-                padding: 20px 40px; /* Adjust button padding for larger screens */
-                font-size: 20px; /* Adjust button font size for larger screens */
+        @media (min-width: 768px) {
+            header img {
+                max-width: 10%; /* Keep the same size on desktop */
             }
         }
 
-        /* Popup styles */
+        @media (max-width: 767px) {
+            header img {
+                max-width: 30%; /* Adjust this value for a larger logo on smaller screens */
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .button {
+                flex: 1 1 250px;
+                padding: 20px 40px;
+                font-size: 20px;
+            }
+        }
+
         .popup {
             position: fixed;
             top: 50%;
@@ -75,18 +100,22 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             z-index: 9999;
         }
+
         .popup-content {
             display: flex;
             flex-direction: column;
             align-items: center;
             position: relative;
         }
+
         .popup-content h2 {
             margin-bottom: 10px;
         }
+
         .popup-content p {
             margin-bottom: 20px;
         }
+
         .popup-content .close-btn {
             position: absolute;
             top: 10px;
@@ -95,65 +124,35 @@
             font-size: 24px;
             color: #333;
         }
+
         .popup-content .button {
             background-color: #4CAF50;
-            padding: 8px 16px; /* Adjusted button padding */
+            padding: 8px 16px;
             border-radius: 5px;
             text-decoration: none;
             color: white;
             transition: background-color 0.3s ease;
-            margin-top: 20px; /* Added margin top */
+            margin-top: 20px;
         }
+
         .popup-content .button:hover {
             background-color: #45a049;
         }
     </style>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Create a function to show the popup
-            function showPopup() {
-                // Create a popup element
-                const popup = document.createElement('div');
-                popup.classList.add('popup');
-
-                // Add content to the popup
-                popup.innerHTML = `
-                    <div class="popup-content">
-                        <span class="close-btn">&times;</span>
-                        <h2>Happy New Year!</h2>
-                        <p>Click the button below to explore and celebrate!</p>
-                        <a href="/games/2.html" class="button green">play matching cards</a>
-                    </div>
-                `;
-
-                // Append the popup to the body
-                document.body.appendChild(popup);
-
-                // Close popup when 'X' is clicked
-                const closeBtn = popup.querySelector('.close-btn');
-                closeBtn.addEventListener('click', function() {
-                    document.body.removeChild(popup);
-                });
-            }
-
-            // Call the showPopup function
-            showPopup();
-        });
-    </script>
 </head>
 <body>
     <header>
-        <h1>ripples.ltd</h1>
-        <h3>[arnav jain v27]</h3>
+        <img src="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800" alt="Ripples Ltd Logo">
+        <h4>by arnav jain v35</h4>
     </header>
+
     <div class="buttons-container">
-        <a href="games/home.html" class="button green">Games</a>
-        <a href="r9ai/r9gpt.html" class="button orange">R9AI</a>
-        <a href="whattschat/abc.html" class="button blue">Whattschat</a>
-        <a href="tools/home.html" class="button purple">Tools</a>
-        <a href="learn/home.html" class="button pink">Learn</a>
-        <a href="r9store/index.html" class="button black">indian store</a>
+        <a href="games/home.html" class="button green">R9GAMES</a>
+        <a href="r9ai/r9gpt.html" class="button orange">R9GPT</a>
+        <a href="whattschat/abc.html" class="button blue">R9CHAT</a>
+        <a href="tools/home.html" class="button purple">R9TOOLS</a>
+        <a href="learn/home.html" class="button pink">R9LEARN</a>
+        <a href="r9store/index.html" class="button black">R9DELI</a>
         <a href="privacy.html" class="button gray">Privacy Policy</a>
     </div>
 </body>
