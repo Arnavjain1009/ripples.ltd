@@ -1,15 +1,85 @@
-<!DOCTYPE html>                                                              <link rel="icon" type="image/svg+xml" href=" https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800" />
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-  <title>Group Page</title>
+  <title>Group Chat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    h1 {
+      text-align: center;
+      padding: 4vw;
+      background-color: #075e54;
+      color: #ffffff;
+      margin: 0;
+    }
+
+    #chat-container {
+      flex: 1;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 2vh;
+      overflow-y: auto;
+    }
+
+    #chat-messages {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      max-height: 50vh;
+      background-color: #f2f2f2;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+    }
+
+    li {
+      border-bottom: 1px solid #cccccc;
+      padding: 2vh;
+    }
+
+    #message-input-container {
+      display: flex;
+      align-items: center;
+      margin-top: 2vh;
+    }
+
+    #message-input {
+      flex: 1;
+      padding: 2vh;
+      border: 1px solid #cccccc;
+      font-size: 3vw;
+    }
+
+    #send-button {
+      padding: 2vh;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      width: 20vw;
+      height: 7vh;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Group Chat</h1>
-
-  <div id="group-info"></div>
-
-  <h2>Group Members:</h2>
-  <ul id="group-members"></ul>
+  <h1 id="group-name">Group Chat</h1>
+  <div id="chat-container">
+    <ul id="chat-messages"></ul>
+    <div id="message-input-container">
+      <input type="text" id="message-input" placeholder="Type your message...">
+      <button onclick="sendMessage()" id="send-button">Send</button>
+    </div>
+  </div>
 
   <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-database.js"></script>
@@ -24,53 +94,51 @@
       appId: "1:746097682908:web:51a0278320ad4af5774719",
     };
 
-    // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
 
     var database = firebase.database();
-    var groupInfoDiv = document.getElementById("group-info");
-    var groupMembersUl = document.getElementById("group-members");
+    var url_string = window.location.href;
+    var url = new URL(url_string);
+    var groupId = url.searchParams.get("groupId");
+    var myuserid = url.searchParams.get("userid"); // Get user ID from URL
 
-    var urlParams = new URLSearchParams(window.location.search);
-    var groupId = urlParams.get("groupId");
-    var groupName = urlParams.get("groupname");
-    var userId = urlParams.get("userid");
-    var secretKey = urlParams.get("secretkey");
+    var groupTitle = document.getElementById("group-name");
 
-    // Check if the user is authenticated
-    if (authenticateUser(userId, secretKey)) {
-      // Retrieve group information from Firebase
-      var groupRef = database.ref("groups/" + groupId);
-      groupRef.on("value", function(snapshot) {
-        var group = snapshot.val();
-        if (group) {
-          groupInfoDiv.innerHTML = "<h2>Group Name: " + group.name + "</h2>";
-          groupMembersUl.innerHTML = "";
-          group.users.forEach(function(user) {
-            var listItem = document.createElement("li");
-            listItem.textContent = user;
-            groupMembersUl.appendChild(listItem);
-          });
-        }
-      });
-    } else {
-      alert("Authentication failed. Access denied.");
-    }
+    // Fetch the group name from the database based on groupId
+    var groupRef = database.ref("groups/" + groupId);
+    groupRef.once("value", function(snapshot) {
+      var groupData = snapshot.val();
+      if (groupData && groupData.groupName) {
+        groupTitle.innerText = "Group Chat - " + groupData.groupName;
+      } else {
+        groupTitle.innerText = "Group Chat";
+      }
+    });
 
-    // Authentication function
-    function authenticateUser(userId, secretKey) {
-      // Perform your authentication logic here
-      // You can check the provided userId and secretKey against your authentication system
-      // Return true if authentication is successful, otherwise false
-      // Example:
-      // if (userId === "valid_user" && secretKey === "valid_secret") {
-      //   return true;
-      // } else {
-      //   return false;
-      // }
-      // For testing purposes, always return true
-      return true;
+    var messagesRef = database.ref("groups/" + groupId + "/messages");
+    var chatMessages = document.getElementById("chat-messages");
+
+    messagesRef.on("child_added", function(snapshot) {
+      var message = snapshot.val();
+      var listItem = document.createElement("li");
+      listItem.textContent = message.sender + ": " + message.text;
+      chatMessages.appendChild(listItem);
+    });
+
+    function sendMessage() {
+      var messageInput = document.getElementById("message-input");
+      var messageText = messageInput.value.trim();
+
+      if (messageText !== "") {
+        messagesRef.push({
+          sender: myuserid, // Use user ID as sender
+          text: messageText
+        });
+
+        messageInput.value = "";
+      }
     }
   </script>
 </body>
+
 </html>

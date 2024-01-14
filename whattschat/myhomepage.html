@@ -7,6 +7,43 @@
    
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
+    /* Add this to your existing styles */
+
+/* Add this to your existing styles */
+/* Add this to your existing styles */
+
+.group-list-container {
+  margin-top: 10px;
+  transition: background-color 0.3s;
+  background-color: #145e076b; /* Add smooth transition */
+}
+
+.group-list-container:hover {
+  background-color: #cce5ff; /* Change to your desired hover color */
+}
+
+.group-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.group-list li {
+  transition: background-color 0.3s; /* Add smooth transition */
+}
+
+.group-list li:hover {
+  background-color: #e6f7ff; /* Change to your desired hover color */
+}
+
+.group-list li a {
+  display: block; /* Make the link fill the entire list item */
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  padding: 10px; /* Add padding to maintain the clickable area */
+  border-radius: 5px; /* Optional: Add border-radius for a rounded appearance */
+}
+
     body {
       margin: 0;
       padding: 0;
@@ -85,7 +122,17 @@
  
     <h3>Create group (beta)</h3>
     <button onclick="createGroup()">Create Group</button>
+    <h3>Groups:</h3>
+    <div class="group-list-container" id="group-list-container">
+      <ul id="group-list" class="group-list"></ul>
+    </div>
+    
+    
   </div>
+  
+  
+  
+ 
 
   <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-database.js"></script>
@@ -156,6 +203,25 @@
       
         });
     
+        document.getElementById("demo").innerHTML = "Welcome " + myuserid;
+
+var groupList = document.getElementById("group-list");
+var groupsRef = database.ref("groups");
+
+groupsRef.on("value", function(snapshot) {
+  groupList.innerHTML = "";
+  snapshot.forEach(function(childSnapshot) {
+    var group = childSnapshot.val();
+    var listItem = document.createElement("li");
+    listItem.innerHTML = '<a href="group.html?groupId=' + childSnapshot.key + '&groupname=' + group.name +
+      '&userid=' + myuserid + '&secretkey=' + mysecretkey + '">' + group.name + '</a>';
+    groupList.appendChild(listItem);
+  });
+});
+
+    function createGroup() {
+      window.location.href = "creategroup.html?userid=" + myuserid + "&secretkey=" + mysecretkey;
+    }
       //now connect to database and link to user; fetch secret key for given userid
       MyValRef = database.ref("/users/" + myuserid);
     
