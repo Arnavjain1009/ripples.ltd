@@ -1,91 +1,48 @@
 <!DOCTYPE html>
-<html>
-  <link rel="icon" type="image/svg+xml" href="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800" />
+<html lang="en">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>R9CHAT</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/svg+xml"
+    href="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800" />
   <style>
-    /* Add this to your existing styles */
-  
-    .group-list-container {
-      margin-top: 10px;
-      transition: background-color 0.3s;
-      background-color: #075e54; /* Add smooth transition */
-    }
-  
-    .group-list-container:hover {
-      background-color: #cce5ff; /* Change to your desired hover color */
-    }
-  
-    .group-list {
-      list-style-type: none;
-      padding: 0;
-      margin: 0; /* Add this line to remove default margin */
-    }
-  
-    .group-container {
-      margin-bottom: 0; /* Adjust the margin to ensure no extra spacing */
-      position: relative; /* Position relative for absolute positioning of the lines */
-    }
-  
-    .group-container::before{
-      content: "";
-      position: absolute;
-      left: 0;
-      width: 100%;
-      height: 2.5px; /* Height of the black lines */
-      background-color: black; /* Color of the black lines */
-    }
-    .group-container::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      width: 100%;
-      height: 2.5px; /* Height of the black lines */
-      background-color: black; /* Color of the black lines */
-    }
-    .group-container::before {
-      top: 0;
-    }
-  
-    .group-container::after {
-      bottom: 0;
-    }
-  
-    .group-list li {
-      transition: background-color 0.3s; /* Add smooth transition */
-      margin: 0; /* Add this line to remove default margin */
-    }
-  
-    .group-list li:hover {
-      background-color: #e6f7ff; /* Change to your desired hover color */
-    }
-  
-    .group-list li a {
-      display: block; /* Make the link fill the entire list item */
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
-      padding: 10px; /* Add padding to maintain the clickable area */
-      border-radius: 5px; /* Optional: Add border-radius for a rounded appearance */
-    }
-  
     body {
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f7f7f7;
+      font-family: 'Arial', sans-serif;
+      background: #f7f7f7;
+      transition: background 0.5s ease-in-out;
     }
-  
+
     .header {
       background-color: #075e54;
       color: #fff;
-      padding: 10px;
       text-align: center;
-      margin-bottom: 20px; /* Adjust the margin to ensure no extra spacing */
+      padding: 20px;
+      margin-bottom: 20px;
+      position: relative;
     }
-  
+
+    .logo {
+      position: absolute;
+      top: 50%;
+      left: 20px;
+      transform: translateY(-50%);
+      max-height: 50px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    h3 {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+
     .container {
       max-width: 600px;
       margin: 0 auto;
@@ -93,18 +50,38 @@
       background-color: #fff;
       border-radius: 5px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s;
     }
-  
-    h1 {
-      margin: 0;
-      font-size: 24px;
+
+    .container:hover {
+      background-color: #e6f7ff;
     }
-  
-    h3 {
-      font-size: 18px;
-      margin: 10px 0;
+
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
     }
-  
+
+    button {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .button1 {
+      background-color: #075e54;
+      color: #fff;
+    }
+
+    button:hover {
+      background-color: #066444;
+    }
+
     select {
       width: 100%;
       padding: 10px;
@@ -113,36 +90,70 @@
       border-radius: 5px;
       font-size: 16px;
     }
-  
-    .button-container {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
-  
-    button {
-      width: 48%; /* Adjust the width to your preference */
-      padding: 10px;
+
+    .group-list-container {
+      margin-top: 10px;
+      transition: background-color 0.3s;
       background-color: #075e54;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
     }
-  
-    .flex-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+
+    .group-list-container:hover {
+      background-color: #066444;
+    }
+
+    .group-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .group-container {
+      margin-bottom: 0;
+      position: relative;
+    }
+
+    .group-container::before,
+    .group-container::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 2.5px;
+      background-color: black;
+    }
+
+    .group-container::before {
+      top: 0;
+    }
+
+    .group-container::after {
+      bottom: 0;
+    }
+
+    .group-list li {
+      transition: background-color 0.3s;
+      margin: 0;
+    }
+
+    .group-list li:hover {
+      background-color: #066444;
+    }
+
+    .group-list li a {
+      display: block;
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      padding: 10px;
+      border-radius: 5px;
     }
   </style>
-  
-  
 </head>
 
 <body>
   <div class="header">
+    <img src="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800"
+      alt="Logo" class="logo">
     <h1>R9CHAT</h1>
     <h3>My R9CHAT home page</h3>
     <p id="demo">Placeholder</p>
@@ -150,19 +161,19 @@
 
   <div class="container">
     <div class="button-container">
-      <button class="button1" id="pcbtn" onclick=fnchat()>self notes</button>
-
+      <button class="button1" id="pcbtn" onclick="fnchat()">self notes</button>
       <button onclick="createGroup()">Create Group</button>
     </div>
 
     <h3>Select private chat from users</h3>
-    <select id="user-dropdown" name="year" onchange="redirecttoprivatechat()" style="margin-bottom: 10px;"></select>
+    <select id="user-dropdown" name="year" onchange="redirecttoprivatechat()"></select>
 
     <h3>Groups:</h3>
     <div class="group-list-container" id="group-list-container">
       <ul id="group-list" class="group-list"></ul>
     </div>
   </div>
+
 
   <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-database.js"></script>
@@ -256,6 +267,33 @@
         MyValRef.off();
       }
     });
+    var currentBackgroundIndex = 0;
+
+function getRandomNaturePhotoUrl() {
+  return `https://source.unsplash.com/1920x1080/?nature`;
+}
+
+function changeBackground() {
+  const photoUrl = getRandomNaturePhotoUrl();
+
+  document.body.style.background = `url("${photoUrl}")`;
+
+  // Add a transition effect for smooth background change
+  document.body.style.transition = 'background 0.5s ease-in-out';
+
+  // Wait for the image to load and then remove the transition
+  const img = new Image();
+  img.src = photoUrl;
+  img.onload = () => {
+    document.body.style.transition = 'none';
+  };
+
+  setTimeout(changeBackground, 10000); // Change background every 10 seconds
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  changeBackground();
+});
   </script>
 </body>
 

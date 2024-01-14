@@ -20,12 +20,13 @@
             height: 100vh;
             margin-top: 0;
             position: relative;
-            transition: background 1s ease-in-out;
+            transition: background 0.5s ease-in-out;
+            overflow: hidden; /* Hide potential scroll bar */
         }
 
         header {
             text-align: center;
-            padding: 20px 0; /* Reduced padding */
+            padding: 20px 0;
             background-color: rgba(0, 0, 0, 0.7);
             color: white;
             width: 100%;
@@ -35,26 +36,26 @@
             align-items: center;
             box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
             z-index: 2;
-            transition: height 1s ease-in-out, backdrop-filter 1s ease-in-out; /* Added transition for height change and backdrop-filter */
-            backdrop-filter: blur(0); /* Initial blur value */
+            transition: height 1s ease-in-out, backdrop-filter 0.5s ease-in-out;
+            backdrop-filter: blur(0);
         }
 
         header img {
-            max-width: 100px; /* Reduced the max-width of the logo */
+            max-width: 120px;
             height: auto;
-            margin-bottom: 10px; /* Reduced margin */
+            margin-bottom: 10px;
             border-radius: 50%;
-            transition: transform 0.5s ease-in-out;
+            transition: transform 0.5s ease-in-out, margin-bottom 0.5s ease-in-out;
         }
 
         header h1 {
             margin: 0;
-            font-size: 24px; /* Reduced font size */
+            font-size: 24px;
             opacity: 0.9;
         }
 
         header img:hover {
-            transform: rotate(360deg);
+            transform: rotate(360deg) scale(1.8); /* Increased scale on hover */
         }
 
         .buttons-container {
@@ -68,8 +69,9 @@
             box-sizing: border-box;
             position: relative;
             z-index: 2;
-            transition: transform 0.5s ease-in-out, height 1s ease-in-out; /* Added transition for button position and height change */
+            transition: transform 0.5s ease-in-out, height 1s ease-in-out;
             height: 100vh;
+            overflow: hidden; /* Hide potential scroll bar */
         }
 
         .button {
@@ -81,30 +83,30 @@
             border-radius: 8px;
             transition: background-color 0.3s ease, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
             box-sizing: border-box;
-            color: rgba(255, 255, 255, 0.8); /* Set the text color to a transparent white */
-            background-color: rgba(0, 0, 0, 0.5); /* Set the background color to a transparent black */
+            color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(0, 0, 0, 0.5);
             box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .button:hover {
-            background-color: rgba(0, 0, 0, 0.7); /* Adjust the hover background color */
+            background-color: rgba(0, 0, 0, 0.8); /* Adjusted the hover background color */
             transform: translateY(-5px);
-            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3); /* Adjusted the hover box-shadow */
         }
 
         @media (min-width: 768px) {
             header img {
-                max-width: 100px;
+                max-width: 120px;
             }
 
             header h1 {
-                font-size: 32px; /* Increased font size for larger screens */
+                font-size: 32px;
             }
         }
 
         @media (max-width: 767px) {
             header img {
-                max-width: 50%; 
+                max-width: 50%;
             }
         }
 
@@ -117,7 +119,6 @@
         }
     </style>
     <script>
-        // JavaScript to change the background image and apply blur effect
         const images = [
             'https://source.unsplash.com/1920x1080/?nature,water',
             'https://source.unsplash.com/1920x1080/?mountain,forest',
@@ -146,16 +147,15 @@
             const randomGradient = getRandomGradient();
             currentIndex = (currentIndex + 1) % images.length;
             document.body.style.backgroundImage = randomGradient;
-            document.querySelector('header').style.backdropFilter = 'blur(10px)'; // Adjust the blur value
+            document.querySelector('header').style.backdropFilter = 'blur(10px)';
             setTimeout(() => {
                 document.querySelector('header').style.backdropFilter = 'blur(0)';
-            }, 1000); // Reset the blur after 1 second
-            document.querySelector('.buttons-container').style.transform = 'translateY(-10px)'; // Adjust the shift value
+            }, 500); // Adjusted the reset time
+            document.querySelector('.buttons-container').style.transform = 'translateY(-10px)';
             setTimeout(() => {
                 document.querySelector('.buttons-container').style.transform = 'translateY(0)';
-            }, 500); // Reset the shift after 0.5 seconds
+            }, 300); // Adjusted the reset time
 
-            // Load the image and change the background after it's loaded
             const tempImage = new Image();
             tempImage.src = images[currentIndex];
             tempImage.onload = () => {
@@ -164,23 +164,57 @@
             };
         }
 
+        function animateLogo(button) {
+            const logo = document.querySelector('header img');
+            const logoContainer = document.querySelector('header');
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+
+            const logoRect = logo.getBoundingClientRect();
+            const logoX = logoRect.left + logoRect.width / 2;
+            const logoY = logoRect.top + logoRect.height / 2;
+
+            const translateX = centerX - logoX;
+            const translateY = centerY - logoY;
+
+            logo.style.transition = 'transform 1s ease-in-out';
+            logo.style.transform = `translate(-50%, -50%) scale(2.5) translate(0, ${translateY}px) rotate(360deg)`;
+
+            document.querySelector('header').style.backdropFilter = 'blur(30px)'; // Increased blur for a more dramatic effect
+            document.querySelector('header').style.transition = 'backdrop-filter 0.5s ease-in-out';
+            setTimeout(() => {
+                document.querySelector('header').style.backdropFilter = 'blur(0)';
+            }, 500); // Adjusted the reset time
+
+            setTimeout(() => {
+                window.location.href = button.getAttribute('href');
+            }, 1000);
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             changeBackground();
+
+            const buttons = document.querySelectorAll('.button');
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    animateLogo(button);
+                });
+            });
         });
     </script>
 </head>
 <body>
     <header>
         <img src="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800" alt="Ripples Ltd Logo">
-        <h1>Ripples by Arnav Jain v38</h1>
+        <h1>Ripples by Arnav Jain v40</h1>
     </header>
 
     <div class="buttons-container">
-        <a href="games/home.html" class="button green">R9GAMES</a>
-        <a href="r9ai/r9gpt.html" class="button orange">R9GPT</a>
         <a href="whattschat/abc.html" class="button blue">R9CHAT</a>
-        <a href="tools/home.html" class="button purple">R9TOOLS</a>
         <a href="learn/home.html" class="button pink">R9LEARN</a>
+        <a href="r9ai/r9gpt.html" class="button orange">R9GPT</a>     
+        <a href="tools/home.html" class="button purple">R9TOOLS</a>
+        <a href="games/home.html" class="button green">R9GAMES</a>
         <a href="r9store/index.html" class="button black">R9DELI</a>
         <a href="privacy.html" class="button gray">Privacy Policy</a>
     </div>
