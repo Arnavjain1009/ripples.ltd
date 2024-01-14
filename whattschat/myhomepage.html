@@ -1,63 +1,91 @@
-
-<!DOCTYPE html>                                                              <link rel="icon" type="image/svg+xml" href=" https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800" />
+<!DOCTYPE html>
 <html>
+  <link rel="icon" type="image/svg+xml" href="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800" />
 
 <head>
   <title>R9CHAT</title>
-   
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     /* Add this to your existing styles */
-
-/* Add this to your existing styles */
-/* Add this to your existing styles */
-
-.group-list-container {
-  margin-top: 10px;
-  transition: background-color 0.3s;
-  background-color: #145e076b; /* Add smooth transition */
-}
-
-.group-list-container:hover {
-  background-color: #cce5ff; /* Change to your desired hover color */
-}
-
-.group-list {
-  list-style-type: none;
-  padding: 0;
-}
-
-.group-list li {
-  transition: background-color 0.3s; /* Add smooth transition */
-}
-
-.group-list li:hover {
-  background-color: #e6f7ff; /* Change to your desired hover color */
-}
-
-.group-list li a {
-  display: block; /* Make the link fill the entire list item */
-  text-decoration: none;
-  color: #333;
-  font-weight: bold;
-  padding: 10px; /* Add padding to maintain the clickable area */
-  border-radius: 5px; /* Optional: Add border-radius for a rounded appearance */
-}
-
+  
+    .group-list-container {
+      margin-top: 10px;
+      transition: background-color 0.3s;
+      background-color: #075e54; /* Add smooth transition */
+    }
+  
+    .group-list-container:hover {
+      background-color: #cce5ff; /* Change to your desired hover color */
+    }
+  
+    .group-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0; /* Add this line to remove default margin */
+    }
+  
+    .group-container {
+      margin-bottom: 0; /* Adjust the margin to ensure no extra spacing */
+      position: relative; /* Position relative for absolute positioning of the lines */
+    }
+  
+    .group-container::before{
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 2.5px; /* Height of the black lines */
+      background-color: black; /* Color of the black lines */
+    }
+    .group-container::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 2.5px; /* Height of the black lines */
+      background-color: black; /* Color of the black lines */
+    }
+    .group-container::before {
+      top: 0;
+    }
+  
+    .group-container::after {
+      bottom: 0;
+    }
+  
+    .group-list li {
+      transition: background-color 0.3s; /* Add smooth transition */
+      margin: 0; /* Add this line to remove default margin */
+    }
+  
+    .group-list li:hover {
+      background-color: #e6f7ff; /* Change to your desired hover color */
+    }
+  
+    .group-list li a {
+      display: block; /* Make the link fill the entire list item */
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      padding: 10px; /* Add padding to maintain the clickable area */
+      border-radius: 5px; /* Optional: Add border-radius for a rounded appearance */
+    }
+  
     body {
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
       background-color: #f7f7f7;
     }
-    
+  
     .header {
       background-color: #075e54;
       color: #fff;
       padding: 10px;
       text-align: center;
+      margin-bottom: 20px; /* Adjust the margin to ensure no extra spacing */
     }
-    
+  
     .container {
       max-width: 600px;
       margin: 0 auto;
@@ -66,17 +94,17 @@
       border-radius: 5px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
-    
+  
     h1 {
       margin: 0;
       font-size: 24px;
     }
-    
+  
     h3 {
       font-size: 18px;
       margin: 10px 0;
     }
-    
+  
     select {
       width: 100%;
       padding: 10px;
@@ -85,12 +113,16 @@
       border-radius: 5px;
       font-size: 16px;
     }
-    
-    button {
-      display: block;
-      width: 100%;
-      padding: 10px;
+  
+    .button-container {
+      display: flex;
+      justify-content: space-between;
       margin-bottom: 10px;
+    }
+  
+    button {
+      width: 48%; /* Adjust the width to your preference */
+      padding: 10px;
       background-color: #075e54;
       color: #fff;
       border: none;
@@ -98,13 +130,15 @@
       font-size: 16px;
       cursor: pointer;
     }
-    
+  
     .flex-container {
       display: flex;
       flex-direction: column;
       align-items: center;
     }
   </style>
+  
+  
 </head>
 
 <body>
@@ -115,39 +149,31 @@
   </div>
 
   <div class="container">
-    <button class="button1" id="pcbtn" onclick=fnchat()>self notes</button>
-  
+    <div class="button-container">
+      <button class="button1" id="pcbtn" onclick=fnchat()>self notes</button>
+
+      <button onclick="createGroup()">Create Group</button>
+    </div>
+
     <h3>Select private chat from users</h3>
-    <select id="user-dropdown" name="year" onchange="redirecttoprivatechat()" style="margin: 0 auto;"></select>
- 
-    <h3>Create group (beta)</h3>
-    <button onclick="createGroup()">Create Group</button>
+    <select id="user-dropdown" name="year" onchange="redirecttoprivatechat()" style="margin-bottom: 10px;"></select>
+
     <h3>Groups:</h3>
     <div class="group-list-container" id="group-list-container">
       <ul id="group-list" class="group-list"></ul>
     </div>
-    
-    
   </div>
-  
-  
-  
- 
 
   <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-database.js"></script>
   <script>
-
-
     function acceptCookies() {
-          // Set a cookie to indicate that the user has accepted cookies
-          document.cookie = "cookies_accepted=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
-          // Close the popup
-          document.getElementById("cookie-popup").style.display = "none";
-        }
-    
-        var firebaseConfig = {
-        apiKey: "AIzaSyBP5fSB_kiakv0r-WMo7BkP2Ik70c26tT0",
+      document.cookie = "cookies_accepted=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
+      document.getElementById("cookie-popup").style.display = "none";
+    }
+
+    var firebaseConfig = {
+      apiKey: "AIzaSyBP5fSB_kiakv0r-WMo7BkP2Ik70c26tT0",
       authDomain: "whattschat-f522c.firebaseapp.com",
       databaseURL: "https://whattschat-f522c-default-rtdb.firebaseio.com",
       projectId: "whattschat-f522c",
@@ -155,100 +181,82 @@
       messagingSenderId: "746097682908",
       appId: "1:746097682908:web:51a0278320ad4af5774719",
     };
-    // Initialize Firebase
+
     firebase.initializeApp(firebaseConfig);
-     
     var database;
     database = firebase.database();
 
-
     function redirecttoprivatechat() {
-    var selectedUserId = document.getElementById("user-dropdown").value;
-    
-      window.location.href = "/publicchat.html?userid="+myuserid+"&secretkey="+mysecretkey+"&selecteduserid=" + selectedUserId;
-    
-  }
-  function createGroup() {
-    var selectedUserId = document.getElementById("user-dropdown").value;
-    
-      window.location.href = "/whattschat/creategroup.html?userid="+myuserid+"&secretkey="+mysecretkey+"&selecteduserid=" + selectedUserId;
-    
-  }
-    
-      var url_string = window.location.href; // www.test.com?filename=test
-      var url = new URL(url_string);
-      var myuserid = url.searchParams.get("userid");
-      var mysecretkey = url.searchParams.get("secretkey");
-      var passwordmatched = false;
-      document.getElementById("pcbtn").setAttribute('onclick',"document.location='/publicchat.html?userid="+myuserid+"&secretkey="+mysecretkey+"'");
-      document.getElementById("demo").innerHTML = "Welcome " + myuserid;
-    
-      
-    
-      if (myuserid == null || myuserid == "") {
-            window.location.replace( "/whattschat/abc.html");
-          }
-      
-    //now connect to database and link to user; fetch secret key for given userid
-    MyValRef = database.ref("/users/");
-    var select = document.getElementById('user-dropdown');
-    
-    
-    MyValRef.orderByValue().on("value", function(snapshot) {
-      snapshot.forEach(function(data) {
-            var option = document.createElement('option');
-            option.text = option.value = data.key;
-            select.add(option, 0);
-        })
-      
-        });
-    
-        document.getElementById("demo").innerHTML = "Welcome " + myuserid;
-
-var groupList = document.getElementById("group-list");
-var groupsRef = database.ref("groups");
-
-groupsRef.on("value", function(snapshot) {
-  groupList.innerHTML = "";
-  snapshot.forEach(function(childSnapshot) {
-    var group = childSnapshot.val();
-    var listItem = document.createElement("li");
-    listItem.innerHTML = '<a href="group.html?groupId=' + childSnapshot.key + '&groupname=' + group.name +
-      '&userid=' + myuserid + '&secretkey=' + mysecretkey + '">' + group.name + '</a>';
-    groupList.appendChild(listItem);
-  });
-});
+      var selectedUserId = document.getElementById("user-dropdown").value;
+      window.location.href = "/publicchat.html?userid=" + myuserid + "&secretkey=" + mysecretkey + "&selecteduserid=" + selectedUserId;
+    }
 
     function createGroup() {
-      window.location.href = "creategroup.html?userid=" + myuserid + "&secretkey=" + mysecretkey;
+      var selectedUserId = document.getElementById("user-dropdown").value;
+      window.location.href = "/whattschat/creategroup.html?userid=" + myuserid + "&secretkey=" + mysecretkey + "&selecteduserid=" + selectedUserId;
     }
-      //now connect to database and link to user; fetch secret key for given userid
-      MyValRef = database.ref("/users/" + myuserid);
-    
-      MyValRef.orderByValue().on("value", function(snapshot) {
-        snapshot.forEach(function(data) {
-    
-           //now compare database s key with mysecret
-          if (mysecretkey == data.val()) {
-            passwordmatched = true;                
-          }         
-          });
-    
-          if (passwordmatched != true) {
-            window.location.replace( "/whattschat/abc.html");
-          }
-          else {
-        
-            MyValRef.off();
-            
-          }         
+
+    var url_string = window.location.href;
+    var url = new URL(url_string);
+    var myuserid = url.searchParams.get("userid");
+    var mysecretkey = url.searchParams.get("secretkey");
+    var passwordmatched = false;
+    document.getElementById("pcbtn").setAttribute('onclick', "document.location='/publicchat.html?userid=" + myuserid + "&secretkey=" + mysecretkey + "'");
+    document.getElementById("demo").innerHTML = "Welcome " + myuserid;
+
+    if (myuserid == null || myuserid == "") {
+      window.location.replace("/whattschat/abc.html");
+    }
+
+    MyValRef = database.ref("/users/");
+    var select = document.getElementById('user-dropdown');
+
+    MyValRef.orderByValue().on("value", function(snapshot) {
+      snapshot.forEach(function(data) {
+        var option = document.createElement('option');
+        option.text = option.value = data.key;
+        select.add(option, 0);
+      })
+    });
+
+    document.getElementById("demo").innerHTML = "Welcome " + myuserid;
+
+    var groupList = document.getElementById("group-list");
+    var groupsRef = database.ref("groups");
+
+    groupsRef.on("value", function(snapshot) {
+      groupList.innerHTML = "";
+      snapshot.forEach(function(childSnapshot) {
+        var group = childSnapshot.val();
+        var listItem = document.createElement("li");
+        listItem.innerHTML = '<a href="group.html?groupId=' + childSnapshot.key + '&groupname=' + group.name +
+          '&userid=' + myuserid + '&secretkey=' + mysecretkey + '">' + group.name + '</a>';
+
+        var groupContainer = document.createElement("div");
+        groupContainer.className = "group-container";
+        groupContainer.appendChild(listItem);
+        groupContainer.style.marginBottom = "0"; // Ensure no extra spacing
+
+        groupList.appendChild(groupContainer);
       });
-    
-      
-    
-    
-      </script>
-    
+    });
+
+    MyValRef = database.ref("/users/" + myuserid);
+
+    MyValRef.orderByValue().on("value", function(snapshot) {
+      snapshot.forEach(function(data) {
+        if (mysecretkey == data.val()) {
+          passwordmatched = true;
+        }
+      });
+
+      if (passwordmatched != true) {
+        window.location.replace("/whattschat/abc.html");
+      } else {
+        MyValRef.off();
+      }
+    });
+  </script>
 </body>
 
 </html>

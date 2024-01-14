@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .calculator-container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+    <title>Loan Calculator</title>
+</head>
+<body>
+
+    <div class="calculator-container">
+        <h2>Loan Calculator</h2>
+        <form id="loanForm">
+            <label for="annualSalary">Annual Salary (£):</label>
+            <input type="number" id="annualSalary" required>
+
+            <label for="currentDebt">Current Debt (£):</label>
+            <input type="number" id="currentDebt" required>
+
+            <label for="depositAmount">Deposit Amount (£):</label>
+            <input type="number" id="depositAmount" required>
+
+            <label for="loanType">Loan Type:</label>
+            <select id="loanType" required>
+                <option value="car">Car Loan</option>
+                <option value="house">House Loan</option>
+                <option value="investment">Investment Loan</option>
+            </select>
+
+            <label for="loanDuration">Loan Duration (years):</label>
+            <input type="number" id="loanDuration" required>
+
+            <button type="button" onclick="calculateLoan()">Calculate</button>
+        </form>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calculateLoan() {
+            const annualSalary = parseFloat(document.getElementById('annualSalary').value);
+            const currentDebt = parseFloat(document.getElementById('currentDebt').value);
+            const depositAmount = parseFloat(document.getElementById('depositAmount').value);
+            const loanType = document.getElementById('loanType').value;
+            const loanDuration = parseFloat(document.getElementById('loanDuration').value);
+
+            const loanEligibility = (annualSalary * 3) - currentDebt + depositAmount;
+            const loanAmount = Math.max(loanEligibility, 0);
+
+            const resultElement = document.getElementById('result');
+            resultElement.innerHTML = `
+                <p>You may be eligible to borrow up to: £${loanAmount.toFixed(2)}</p>
+                <p>Loan Type: ${loanType}</p>
+                <p>Loan Duration: ${loanDuration} years</p>
+            `;
+        }
+    </script>
+</body>
+</html>

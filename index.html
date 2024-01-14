@@ -3,48 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ripples by arnav jain v30</title>
+    <title>Ripples by Arnav Jain v38</title>
     <link rel="icon" type="image/svg+xml" href="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800" />
 
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            background-color: #FFD700;
+            background: url('https://source.unsplash.com/1920x1080/?nature,water') fixed;
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            margin-top: 0;
+            position: relative;
+            transition: background 1s ease-in-out;
         }
 
         header {
             text-align: center;
-            padding: 20px 0;
-            background-color: #333;
+            padding: 20px 0; /* Reduced padding */
+            background-color: rgba(0, 0, 0, 0.7);
             color: white;
             width: 100%;
             position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 2;
+            transition: height 1s ease-in-out, backdrop-filter 1s ease-in-out; /* Added transition for height change and backdrop-filter */
+            backdrop-filter: blur(0); /* Initial blur value */
         }
 
         header img {
-            max-width: 10%; /* Default size for desktop */
+            max-width: 100px; /* Reduced the max-width of the logo */
             height: auto;
-            margin-bottom: 10px;
+            margin-bottom: 10px; /* Reduced margin */
+            border-radius: 50%;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px; /* Reduced font size */
+            opacity: 0.9;
+        }
+
+        header img:hover {
+            transform: rotate(360deg);
         }
 
         .buttons-container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-around;
-            align-items: center;
+            justify-content: center;
             gap: 15px;
             padding: 20px 0;
             width: 100%;
             max-width: 800px;
             box-sizing: border-box;
+            position: relative;
+            z-index: 2;
+            transition: transform 0.5s ease-in-out, height 1s ease-in-out; /* Added transition for button position and height change */
+            height: 100vh;
         }
 
         .button {
@@ -53,30 +78,33 @@
             text-align: center;
             text-decoration: none;
             font-size: 18px;
-            border-radius: 10px; /* Adjust this value for squared corners */
-            transition: background-color 0.3s ease;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
             box-sizing: border-box;
-            color: white;
+            color: rgba(255, 255, 255, 0.8); /* Set the text color to a transparent white */
+            background-color: rgba(0, 0, 0, 0.5); /* Set the background color to a transparent black */
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
         }
 
-        .button.green { background-color: #4CAF50; }
-        .button.orange { background-color: #FFA500; }
-        .button.blue { background-color: #3498DB; }
-        .button.purple { background-color: #9B59B6; }
-        .button.pink { background-color: #E91E63; }
-        .button.gray { background-color: #808080; }
-        .button.black{ background-color: #333}
-        .button:hover { opacity: 0.8; }
+        .button:hover {
+            background-color: rgba(0, 0, 0, 0.7); /* Adjust the hover background color */
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+        }
 
         @media (min-width: 768px) {
             header img {
-                max-width: 10%; /* Keep the same size on desktop */
+                max-width: 100px;
+            }
+
+            header h1 {
+                font-size: 32px; /* Increased font size for larger screens */
             }
         }
 
         @media (max-width: 767px) {
             header img {
-                max-width: 30%; /* Adjust this value for a larger logo on smaller screens */
+                max-width: 50%; 
             }
         }
 
@@ -87,63 +115,64 @@
                 font-size: 20px;
             }
         }
-
-        .popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            z-index: 9999;
-        }
-
-        .popup-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-        }
-
-        .popup-content h2 {
-            margin-bottom: 10px;
-        }
-
-        .popup-content p {
-            margin-bottom: 20px;
-        }
-
-        .popup-content .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
-            font-size: 24px;
-            color: #333;
-        }
-
-        .popup-content .button {
-            background-color: #4CAF50;
-            padding: 8px 16px;
-            border-radius: 5px;
-            text-decoration: none;
-            color: white;
-            transition: background-color 0.3s ease;
-            margin-top: 20px;
-        }
-
-        .popup-content .button:hover {
-            background-color: #45a049;
-        }
     </style>
+    <script>
+        // JavaScript to change the background image and apply blur effect
+        const images = [
+            'https://source.unsplash.com/1920x1080/?nature,water',
+            'https://source.unsplash.com/1920x1080/?mountain,forest',
+            'https://source.unsplash.com/1920x1080/?sunset,beach'
+        ];
+        
+        let currentIndex = 0;
+
+        function getRandomGradient() {
+            const angle = Math.floor(Math.random() * 360);
+            const color1 = getRandomColor();
+            const color2 = getRandomColor();
+            return `linear-gradient(${angle}deg, ${color1}, ${color2})`;
+        }
+
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        function changeBackground() {
+            const randomGradient = getRandomGradient();
+            currentIndex = (currentIndex + 1) % images.length;
+            document.body.style.backgroundImage = randomGradient;
+            document.querySelector('header').style.backdropFilter = 'blur(10px)'; // Adjust the blur value
+            setTimeout(() => {
+                document.querySelector('header').style.backdropFilter = 'blur(0)';
+            }, 1000); // Reset the blur after 1 second
+            document.querySelector('.buttons-container').style.transform = 'translateY(-10px)'; // Adjust the shift value
+            setTimeout(() => {
+                document.querySelector('.buttons-container').style.transform = 'translateY(0)';
+            }, 500); // Reset the shift after 0.5 seconds
+
+            // Load the image and change the background after it's loaded
+            const tempImage = new Image();
+            tempImage.src = images[currentIndex];
+            tempImage.onload = () => {
+                document.body.style.backgroundImage = `url('${images[currentIndex]}')`;
+                setTimeout(changeBackground, 10000);
+            };
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            changeBackground();
+        });
+    </script>
 </head>
 <body>
     <header>
         <img src="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800" alt="Ripples Ltd Logo">
-        <h4>by arnav jain v35</h4>
+        <h1>Ripples by Arnav Jain v38</h1>
     </header>
 
     <div class="buttons-container">
