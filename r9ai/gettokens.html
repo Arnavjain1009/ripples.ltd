@@ -1,20 +1,76 @@
-
-<!DOCTYPE html>                                                              <link rel="icon" type="image/svg+xml" href=" https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800" />
-<script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-database.js"></script>
-  
-  
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <title>get tokens</title>
-  
-  <link rel="icon" type="image/svg+xml" href="https://cdn.shopify.com/s/files/1/0017/4165/2023/products/1-token_1024x1024_b9c1be88-32a7-42c8-82d0-c33965b47671_1200x1200.jpg?v=1549623780" />
-  <meta name="viewport" content="width=device-width/2, initial-scale=1.0" />
-  <h1>get tokens</h1>
-  <link rel="stylesheet" href="style.css">
-  <button onclick="setIPAddress()">get 10 tokens</button>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Tokens</title>
+    <link rel="icon" type="image/svg+xml" href="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800" />
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 600px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            margin-top: 0;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #tokencountssg,
+        #getmoretokens {
+            margin-top: 20px;
+        }
+
+        #chat_container {
+            margin-top: 20px;
+        }
+    </style>
 </head>
+
+<body>
+    <div class="container">
+        <h1>Get Tokens</h1>
+        <button onclick="setIPAddress()">Get 10 Tokens</button>
+        <div id="tokencountssg"></div>
+        <div id="getmoretokens" onclick="gettokens.html"></div>
+        <div id="chat_container"></div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-database.js"></script>
+
 <script>
    
   
