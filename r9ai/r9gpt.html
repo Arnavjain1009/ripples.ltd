@@ -126,7 +126,7 @@
   <script type="module" src="script.js"></script>
 </body>
 
-</html>-->
+</html>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -250,4 +250,141 @@
 </body>
 
 </html>
+-->
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>r9GPT Redesigned</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/svg+xml" href="https://i.pinimg.com/originals/53/e9/45/53e945c516cebdffd987b6c2df159db1.jpg" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: #2c3e50; /* Dark background color */
+      color: #ecf0f1; /* Light text color */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    #banner {
+      width: 100%;
+      background-color: #3498db; /* Banner color */
+      color: #fff;
+      text-align: center;
+      padding: 20px 0;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    #banner a {
+      text-decoration: none;
+      color: #fff;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 36px;
+    }
+
+    #app {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px 0;
+    }
+
+    #chat_container {
+      max-height: 300px;
+      overflow-y: auto;
+      width: 80%;
+      border: 2px solid #3498db;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      padding: 15px;
+      background-color: #fff;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    textarea {
+      resize: none;
+      padding: 12px;
+      margin-bottom: 20px;
+      width: 80%;
+      border: 2px solid #3498db;
+      border-radius: 12px;
+      font-size: 18px;
+    }
+
+    button {
+      background-color: #2ecc71;
+      color: white;
+      border: none;
+      padding: 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 80%;
+      font-size: 18px;
+    }
+
+    button:hover {
+      background-color: #27ae60;
+    }
+
+    #tokencountssg {
+      margin-top: 30px;
+      font-size: 24px;
+      color: #ecf0f1;
+    }
+
+    button.get-tokens {
+      width: 80%;
+      margin-top: 20px;
+    }
+
+    #logo {
+      width: 50px; /* Adjusted logo size */
+      height: auto;
+      margin-bottom: 10px; /* Added margin */
+    }
+  </style>
+</head>
+
+<body>
+  <div id="banner">
+    <a href="https://ripples.ltd" target="_blank">
+      <img id="logo" src="https://i.pinimg.com/originals/53/e9/45/53e945c516cebdffd987b6c2df159db1.jpg" alt="Ripples Logo">
+    </a>
+    <h1>r9GPT Redesigned</h1>
+  </div>
+
+  <div id="app">
+    <div id="chat_container"></div>
+    <form>
+      <textarea name="prompt" placeholder="Ask r9GPT"></textarea>
+      <button type="submit">Send</button>
+      <button class="get-tokens" onclick="window.location.href='https://ripples.ltd/r9ai/gettokens.html'">Get Tokens</button>
+    </form>
+    <h1 id="tokencountssg">Welcome</h1>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-database.js"></script>
+  <script type="module" src="script.js"></script>
+</body>
+
+</html>
