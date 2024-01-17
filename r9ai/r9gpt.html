@@ -12,7 +12,6 @@
       margin: 0;
       padding: 0;
       font-family: 'Arial', sans-serif;
-      background: #2c3e50; /* Dark background color */
       color: #ecf0f1; /* Light text color */
       display: flex;
       flex-direction: column;
@@ -22,14 +21,13 @@
     }
 
     #banner {
-      width: 100%;
-      background-color: #3498db; /* Banner color */
-      color: #fff;
-      text-align: center;
-      padding: 20px 0;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
+  width: 100%;
+  background-color: rgba(44, 62, 80, 0.7); /* Tinted transparent banner color */
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
     #banner a {
       text-decoration: none;
       color: #fff;
@@ -40,12 +38,17 @@
       font-size: 36px;
     }
 
+
     #app {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 20px 0;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+  background-color: rgba(44, 62, 80, 0.7); /* Tinted transparent app container color */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
 
     #chat_container {
       max-height: 300px;
@@ -60,11 +63,15 @@
     }
 
     form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 20px;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  background-color: rgba(44, 62, 80, 0.7); /* Tinted transparent form background color */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
     textarea {
       resize: none;
@@ -120,12 +127,24 @@
       height: auto;
       margin-bottom: 10px;
     }
+
+    /* Dynamic background from Unsplash */
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: url('https://source.unsplash.com/1920x1080/?nature') center/cover no-repeat;
+    }
   </style>
 </head>
 
 <body>
   <div id="banner">
-    <a href="https://ripples.ltd" target="_blank">
+    <a href="/index.html" target="_blank">
       <img id="logo" src="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800" alt="Ripples Logo">
     </a>
     <h1>r9GPT by Arnav Jain</h1>
