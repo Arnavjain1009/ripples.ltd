@@ -1,20 +1,29 @@
-<!DOCTYPE html>                                                              <link rel="icon" type="image/svg+xml" href=" https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800" />
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>R9GAMES</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <header>
-    <h1>Gaming Homepage</h1>
-    <input type="text" id="searchBar" placeholder="Search games...">
-  </header>
-  
-  <main id="gamesContainer">
-    <!-- Games will be populated here -->
-  </main>
 
-  <script src="scripts.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R9GAMES</title>
+    <link rel="icon" type="image/svg+xml" href="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="background"></div>
+    <header>
+        <div class="container">
+            <h1>Gaming Paradise</h1>
+            <input type="text" id="searchBar" placeholder="Search games...">
+        </div>
+        <div id="logo" onclick="spinAndRedirect()"></div>
+    </header>
+
+    <main id="gamesContainer" class="container">
+        <!-- Games will be populated here -->
+    </main>
+
+    <script src="scripts.js"></script>
 </body>
+
 </html>
