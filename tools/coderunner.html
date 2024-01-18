@@ -1,97 +1,127 @@
-<!DOCTYPE html>                                                              <link rel="icon" type="image/svg+xml" href=" https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800" />
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-  <title>Client-side Code Execution</title>
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Client-side Code Execution</title>
+    <link rel="icon" type="image/svg+xml" href="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('https://source.unsplash.com/1920x1080/?nature');
+            background-size: cover;
+            background-position: center;
+        }
 
-    #container {
-      display: flex;
-      height: calc(100% - 100px); /* Subtracting the header height */
-      overflow: hidden; /* Hide any overflow */
-    }
+        h1 {
+            text-align: center;
+            margin: 20px;
+            font-size: 2.5em;
+            color: #fff;
+        }
 
-    #left {
-      flex: 1;
-      padding-right: 10px;
-    }
+        #container {
+            display: flex;
+            height: 100%;
+            flex-direction: column; /* Adjust to column layout for mobile */
+            overflow: hidden;
+        }
 
-    #right {
-      flex: 1;
-      padding-left: 10px;
-    }
+        #left, #right {
+            flex: 1;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            margin: 10px; /* Add margin for better spacing */
+        }
 
-    #code-input {
-      width: 100%;
-      height: calc(70% - 10px); /* Half of the remaining space, subtracting margin */
-    }
+        #code-input {
+            width: 100%;
+            height: 50%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
 
-    #run-btn {
-      display: block;
-      margin-top: 0;
-      margin-bottom: 0;
-    }
+        #run-btn {
+            display: block;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-    #preview-frame {
-      width: 100%;
-      height: calc(70% - 10px); /* Half of the remaining space, subtracting margin */
-      border: 1px solid #ccc;
-    }
+        #preview-frame, #result {
+            width: 100%;
+            height: 50%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
 
-    #company-logo {
-      width: 50px;
-      height: 50px;
-      background-color: #ccc;
-      position: absolute;
-      top: 10px;
-      right: 10px;
-    }
+        #company-logo {
+            width: 50px;
+            height: 50px;
+            background-image: url('https://th.bing.com/th/id/OIP.KvkQyzB2iettiX7gim3z4AHaBI?w=368&h=58&c=7&r=0&o=5&dpr=2&pid=1.7');
+            background-size: contain;
+            cursor: pointer;
+            transition: transform 0.5s ease-in-out;
+            margin: 10px; /* Add margin for better spacing */
+        }
 
-    #filler-image {
-      width: 100%;
-      height: calc(30% - 5px); /* Half of the remaining space, subtracting margin */
-      flex-grow: 0; /* Disable flex-grow */
-      object-fit: cover; /* Maintain aspect ratio and cover the container */
-    }
-  </style>
+        #company-logo:hover {
+            transform: rotate(360deg);
+        }
+
+        #filler-image {
+            width: 100%;
+            height: 30%;
+            flex-grow: 0;
+            object-fit: cover;
+        }
+    </style>
 </head>
+
 <body>
-  <h1>Client-side Code Execution</h1>
-  <div id="container">
-    <div id="left">
-      <textarea id="code-input" placeholder="Enter your HTML, CSS, and JavaScript code here..."></textarea>
-      <button id="run-btn">Run Code</button>
+    <h1>Client-side Code Execution</h1>
+    <div id="container">
+        <div id="left">
+            <textarea id="code-input" placeholder="Enter your HTML, CSS, and JavaScript code here..."></textarea>
+            <button id="run-btn" onclick="runCode()">Run Code</button>
+        </div>
+        <div id="right">
+            <iframe id="preview-frame"></iframe>
+            <div id="result"></div>
+        </div>
+        <div id="company-logo" onclick="window.location.href='https://ripples.ltd'"></div>
     </div>
-    <div id="right">
-      <iframe id="preview-frame"></iframe>
-      <div id="result"></div>
-    </div>
-    <img id="company-logo" src="https://th.bing.com/th/id/OIP.KvkQyzB2iettiX7gim3z4AHaBI?w=368&h=58&c=7&r=0&o=5&dpr=2&pid=1.7" alt="Company Logo">
-  </div>
-  <img id="filler-image" src="https://th.bing.com/th/id/OIP.KvkQyzB2iettiX7gim3z4AHaBI?w=368&h=58&c=7&r=0&o=5&dpr=2&pid=1.7" alt="Filler Image">
+    <img id="filler-image" src="https://th.bing.com/th/id/OIP.KvkQyzB2iettiX7gim3z4AHaBI?w=368&h=58&c=7&r=0&o=5&dpr=2&pid=1.7" alt="Filler Image">
 
-  <script>
-    function runCode() {
-      var code = document.getElementById("code-input").value;
-      var resultContainer = document.getElementById("result");
-      var previewFrame = document.getElementById("preview-frame");
+    <script>
+        function runCode() {
+            var code = document.getElementById("code-input").value;
+            var resultContainer = document.getElementById("result");
+            var previewFrame = document.getElementById("preview-frame");
 
-      try {
-        previewFrame.contentWindow.document.open();
-        previewFrame.contentWindow.document.write(code);
-        previewFrame.contentWindow.document.close();
+            try {
+                previewFrame.contentWindow.document.open();
+                previewFrame.contentWindow.document.write(code);
+                previewFrame.contentWindow.document.close();
 
-        resultContainer.textContent = "Code executed successfully!";
-      } catch (error) {
-        resultContainer.textContent = "Error: " + error;
-      }
-    }
-
-    document.getElementById("run-btn").addEventListener("click", runCode);
-  </script>
+                resultContainer.textContent = "Code executed successfully!";
+            } catch (error) {
+                resultContainer.textContent = "Error: " + error;
+            }
+        }
+    </script>
 </body>
+
 </html>

@@ -1,75 +1,110 @@
-<!DOCTYPE html>                                                              <link rel="icon" type="image/svg+xml" href=" https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800" />
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>ripples</title>
- 
-	<link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-	<style>
-		body {
-			font-family: Arial, sans-serif;
-			margin: 0;
-			padding: 0;
-      	}
-		
-		h1 {
-			text-align: center;
-			margin: 20px;
-			font-size: 2em;
-		}
-		
-		h2, h3, h4 {
-			margin: 20px;
-			font-size: 2em;
-			font-weight: bold;
-			color: #b9d627;
-			text-align: center;
-		}
-		
-		p {
-			margin: 20px;
-			font-size: 1em;
-			color: #862ae2;
-			text-align: center;
-		}
-		
-		.button1, .button2 {
-			display: block;
-			margin: 20px auto;
-			padding: 10px;
-			background-color: #ca9f14;
-			color: #fff;
-			font-size: 1.2em;
-			border-radius: 5px;
-			text-align: center;
-			width: 80%;
-			max-width: 300px;
-		}
-		
-		.footer {
-			margin: 20px;
-			font-size: 0.8em;
-			text-align: center;
-			color: #fff;
-		}
-		
-		.link {
-			color: #fff;
-			text-decoration: none;
-		}
-	</style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ripples Tools</title>
+    <link rel="icon" type="image/svg+xml" href="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://source.unsplash.com/1920x1080/?nature');
+            background-size: cover;
+            background-position: center;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 20px;
+            font-size: 2.5em;
+            color: #000; /* Black text color */
+        }
+
+        h2, h3, h4 {
+            margin: 20px;
+            font-size: 2em;
+            font-weight: bold;
+            color: #b9d627;
+            text-align: center;
+        }
+
+        p {
+            margin: 20px;
+            font-size: 1.2em;
+            color: #862ae2;
+            text-align: center;
+        }
+
+        .button1, .button2 {
+            display: block;
+            margin: 20px auto;
+            padding: 15px;
+            background-color: rgba(202, 159, 20, 0.8); /* Transparent button with yellow accent */
+            color: #000;
+            font-size: 1.4em;
+            border-radius: 8px;
+            text-align: center;
+            width: 80%;
+            max-width: 300px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .footer {
+            margin: 20px;
+            font-size: 1em;
+            text-align: center;
+            color: #000;
+        }
+
+        .link {
+            color: #000;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        #logo {
+            width: 70px;
+            height: 70px;
+            background-image: url('https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png');
+            background-size: contain;
+            cursor: pointer;
+            transition: transform 0.5s ease-in-out; /* Added transition for rotation effect */
+        }
+
+        #logo:hover {
+            transform: rotate(360deg);
+        }
+
+        .logo-container {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000; /* Ensure it's above other elements */
+        }
+    </style>
 </head>
+
 <body>
-	<h1>tools</h1>
-	<h2>𝕔𝕣𝕖𝕒𝕥𝕖𝕕 𝕓𝕪 arnav jain</h2>
-	<button class="button1" onclick="document.location='r9stocks.html'">R9STOCKS</button>
-	<button class="button2" onclick="document.location='r9classcharts.html'">R9CHARTS</button>
-	<button class="button1" onclick="document.location='coderunner.html'">R9CODERUNNER</button>
-	<button class="button1" onclick="document.location='/whattschat/banned.html'">R9ANONYBROWSER</button>
-	<button class="button1" onclick="document.location='calculators.html'">R9CALCULATORS</button>
-	
-	<div class="footer">
-		<a href="privacy.html" class="link" target="_blank">Privacy & Cookies Policy</a>
-		</div>
+    <div class="logo-container">
+        <div id="logo" onclick="window.location.href='https://ripples.ltd'"></div>
+    </div>
+
+    <h1>R9Tools</h1>
+    <h2>Created by Arnav Jain</h2>
+
+    <button class="button1" onclick="document.location='r9stocks.html'">R9STOCKS</button>
+    <button class="button2" onclick="document.location='r9classcharts.html'">R9CHARTS</button>
+    <button class="button1" onclick="document.location='coderunner.html'">R9CODERUNNER</button>
+    <button class="button1" onclick="document.location='/whattschat/banned.html'">R9ANONYBROWSER</button>
+    <button class="button1" onclick="document.location='calculators.html'">R9CALCULATORS</button>
+
+    <div class="footer">
+        <a href="privacy.html" class="link" target="_blank">Privacy & Cookies Policy</a>
+    </div>
 </body>
+
 </html>

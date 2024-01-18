@@ -52,30 +52,24 @@ h1 {
 }
 
 #searchBar {
-    padding: 15px;
-    width: 70%;
-    border: none;
-    border-radius: 25px;
-    margin-top: 20px;
-    font-size: 1.2em;
-    color: #555;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none;
 }
 
 #logo {
-    width: 70px;
-    height: 70px;
+    width: 100px;
+    height: 100px;
     background-image: url('https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png');
     background-size: contain;
     cursor: pointer;
 }
-
 #logo:hover {
     transform: scale(1.1); /* Optional: Add a scale effect on hover */
 }
 
 /* Main Content Styles */
 main {
+    overflow-y: auto; /* Add a vertical scrollbar when needed */
+    max-height: calc(100vh - 150px); /* Adjusted max height to leave room for the header and search bar */
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-gap: 30px;
