@@ -1,38 +1,125 @@
-<!DOCTYPE html>                                                              <link rel="icon" type="image/svg+xml" href=" https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800" />
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-  <title>Student Management System</title>
-  <link rel="stylesheet" type="text/css" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Student Management System</title>
+    <link rel="icon" type="image/svg+xml" href="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://source.unsplash.com/1920x1080/?nature'); /* Replace with your background image URL */
+            background-size: cover;
+            background-position: center;
+            color: #fff; /* White text color */
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50; /* Green button color */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #fff;
+            padding: 10px;
+            background-color: #fff; /* White background for actual data */
+            color: #000; /* Black text for actual data */
+        }
+
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+
+        #header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        #logo {
+            width: 40px; /* Adjust the size as needed */
+            height: 40px; /* Adjust the size as needed */
+            background-image: url('https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800');
+            background-size: contain;
+            cursor: pointer;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        #logo:hover {
+            transform: rotate(360deg);
+        }
+    </style>
 </head>
+
 <body>
-  <h1>r9charts</h1>
+    <div id="header">
+        <div id="logo" onclick="window.location.href='https://ripples.ltd'"></div>
+        <h1>r9charts</h1>
+    </div>
 
-  <div>
-    <label for="name">Name:</label>
-    <input type="text" id="name" placeholder="Enter name">
-  </div>
-  <div>
-    <label for="behavior">Behavior Points:</label>
-    <input type="number" id="behavior" placeholder="Enter behavior points">
-  </div>
-  <div>
-    <label for="achievement">Achievement Points:</label>
-    <input type="number" id="achievement" placeholder="Enter achievement points">
-  </div>
-  <div>
-    <button onclick="addStudent()">Add Student</button>
-  </div>
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" placeholder="Enter name">
+    </div>
+    <div>
+        <label for="behavior">Behavior Points:</label>
+        <input type="number" id="behavior" placeholder="Enter behavior points">
+    </div>
+    <div>
+        <label for="achievement">Achievement Points:</label>
+        <input type="number" id="achievement" placeholder="Enter achievement points">
+    </div>
+    <div>
+        <button onclick="addStudent()">Add Student</button>
+    </div>
 
-  <table id="studentsTable">
-    <tr>
-      <th>Name</th>
-      <th>Behavior Points</th>
-      <th>Achievement Points</th>
-    </tr>
-  </table>
+    <table id="studentsTable">
+        <tr>
+            <th>Name</th>
+            <th>Behavior Points</th>
+            <th>Achievement Points</th>
+        </tr>
+    </table>
 
-  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
-  <script src="app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
+    <script src="app.js"></script>
 </body>
+
 </html>

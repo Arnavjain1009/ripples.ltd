@@ -1,55 +1,106 @@
-<!DOCTYPE html>                                                              <link rel="icon" type="image/svg+xml" href=" https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800" />
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-  <title>Stock Market</title>
-  <style>
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Stock Market</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://source.unsplash.com/1920x1080/?nature'); /* Replace with actual background image URL */
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-    th, td {
-      padding: 8px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
-    }
-    
-    canvas {
-      width: 800px; /* Set a fixed width for the graph */
-      height: 400px; /* Set a fixed height for the graph */
-      margin-top: 20px;
-    }
-  </style>
+        input, button, select {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        canvas {
+            width: 100%; /* Make the graph responsive to the screen width */
+            max-width: 800px; /* Set a maximum width for the graph */
+            height: 400px;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        select {
+            width: auto;
+        }
+
+        #company-logo {
+            width: 100px; /* Set the desired width */
+            height: 100px; /* Set the desired height */
+            background-image: url('https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800'); /* Replace with actual logo URL */
+            background-size: contain;
+            cursor: pointer;
+            transition: transform 0.5s ease-in-out;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+
+        #company-logo:hover {
+            transform: rotate(360deg);
+        }
+    </style>
 </head>
-<body>
-	<input type="text" id="stockInput" placeholder="Enter stock symbol">
-	<button onclick="loadStockData()">Load Stock</button>
-	
-	<label for="timeFrameSelect">Time Frame:</label>
-	<select id="timeFrameSelect" onchange="loadStockData()">
-		<option value="1">1 Month</option>
-		<option value="3">3 Months</option>
-		<option value="6">6 Months</option>
-		<option value="12">1 Year</option>
-		<option value="36">3 Years</option>
-		<option value="60">5 Years</option>
-	</select>
-	<canvas id="stockChart"></canvas>
-  <table id="stockTable">
-    <tr>
-      <th>Date</th>
-      <th>Open</th>
-      <th>High</th>
-      <th>Low</th>
-      <th>Close</th>
-      <th>Volume</th>
-    </tr>
-  </table>
-  
-  
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
+<body>
+    <div id="company-logo" onclick="window.location.href='https://ripples.ltd'"></div>
+    <canvas id="stockChart"></canvas>
+    <input type="text" id="stockInput" placeholder="Enter stock symbol">
+    <button onclick="loadStockData()">Load Stock</button>
+
+    <label for="timeFrameSelect">Time Frame:</label>
+    <select id="timeFrameSelect" onchange="loadStockData()">
+        <option value="1">1 Month</option>
+        <option value="3">3 Months</option>
+        <option value="6">6 Months</option>
+        <option value="12">1 Year</option>
+        <option value="36">3 Years</option>
+        <option value="60">5 Years</option>
+    </select>
+
+    <table id="stockTable">
+        <tr>
+            <th>Date</th>
+            <th>Open</th>
+            <th>High</th>
+            <th>Low</th>
+            <th>Close</th>
+            <th>Volume</th>
+        </tr>
+    </table>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
     const apiKey = 'LwOJltR_Q4RBuY7dAiKPArgd5r4KaNpF';
 
     function loadStockData() {
@@ -68,10 +119,14 @@
       const apiUrl = `https://api.polygon.io/v2/aggs/ticker/${ticker}/range/1/day/${formattedStartDate}/${endDate}?apiKey=${apiKey}`;
 
       fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-          const stockData = data.results;
-          
+                .then(response => response.json())
+                .then(data => {
+                    const stockData = data.results;
+
+                    if (!stockData || stockData.length === 0) {
+                        alert("Sorry, no data available for this stock. Try TSLA.");
+                        return;
+                    }
           const stockTable = document.getElementById('stockTable');
 
           stockTable.innerHTML = ''; // Clear existing table data

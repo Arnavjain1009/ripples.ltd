@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ripples by Arnav Jain v50</title>
+    <title>Ripples by Arnav Jain v41</title>
     <link rel="icon" type="image/svg+xml" href="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800" />
 
     <style>
@@ -71,12 +72,27 @@
             z-index: 2;
             transition: transform 0.5s ease-in-out, height 1s ease-in-out;
             height: 100vh;
-            overflow: hidden; /* Hide potential scroll bar */
+      
+        }
+        .buttons-container2 {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px 0;
+            width: 100%;
+            max-width: 800px;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 2;
+            transition: transform 0.5s ease-in-out, height 1s ease-in-out;
+            height: 50vh;
+      
         }
 
         .button {
-            flex: 1 1 200px;
-            padding: 15px 30px;
+            flex: 1 1 calc(50% - 15px); /* Adjusted button size for smaller screens */
+            padding: 15px;
             text-align: center;
             text-decoration: none;
             font-size: 18px;
@@ -102,121 +118,134 @@
             header h1 {
                 font-size: 32px;
             }
+
+            .button {
+                flex: 1 1 calc(33.333% - 15px); /* Adjusted button size for medium screens */
+            }
         }
 
         @media (max-width: 767px) {
             header img {
                 max-width: 50%;
             }
+
+            .button {
+                flex: 1 1 calc(50% - 15px); /* Adjusted button size for small screens */
+            }
         }
 
         @media (min-width: 1024px) {
             .button {
-                flex: 1 1 250px;
-                padding: 20px 40px;
-                font-size: 20px;
+                flex: 1 1 calc(25% - 15px); /* Adjusted button size for large screens */
             }
         }
     </style>
-    <script>
-        const images = [
-            'https://source.unsplash.com/1920x1080/?nature,water',
-            'https://source.unsplash.com/1920x1080/?mountain,forest',
-            'https://source.unsplash.com/1920x1080/?sunset,beach'
-        ];
-        
-        let currentIndex = 0;
 
-        function getRandomGradient() {
-            const angle = Math.floor(Math.random() * 360);
-            const color1 = getRandomColor();
-            const color2 = getRandomColor();
-            return `linear-gradient(${angle}deg, ${color1}, ${color2})`;
+<script>
+    const images = [
+        'https://source.unsplash.com/1920x1080/?nature,water',
+        'https://source.unsplash.com/1920x1080/?mountain,forest',
+        'https://source.unsplash.com/1920x1080/?sunset,beach'
+    ];
+
+    let currentIndex = 0;
+
+    function getRandomGradient() {
+        const angle = Math.floor(Math.random() * 360);
+        const color1 = getRandomColor();
+        const color2 = getRandomColor();
+        return `linear-gradient(${angle}deg, ${color1}, ${color2})`;
+    }
+
+    function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
         }
+        return color;
+    }
 
-        function getRandomColor() {
-            const letters = '0123456789ABCDEF';
-            let color = '#';
-            for (let i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
-        }
+    function changeBackground() {
+        const randomGradient = getRandomGradient();
+        currentIndex = (currentIndex + 1) % images.length;
+        document.body.style.backgroundImage = randomGradient;
+        document.querySelector('header').style.backdropFilter = 'blur(10px)';
+        setTimeout(() => {
+            document.querySelector('header').style.backdropFilter = 'blur(0)';
+        }, 500); // Adjusted the reset time
+        document.querySelector('.buttons-container').style.transform = 'translateY(-10px)';
+        setTimeout(() => {
+            document.querySelector('.buttons-container').style.transform = 'translateY(0)';
+        }, 300); // Adjusted the reset time
 
-        function changeBackground() {
-            const randomGradient = getRandomGradient();
-            currentIndex = (currentIndex + 1) % images.length;
-            document.body.style.backgroundImage = randomGradient;
-            document.querySelector('header').style.backdropFilter = 'blur(10px)';
-            setTimeout(() => {
-                document.querySelector('header').style.backdropFilter = 'blur(0)';
-            }, 500); // Adjusted the reset time
-            document.querySelector('.buttons-container').style.transform = 'translateY(-10px)';
-            setTimeout(() => {
-                document.querySelector('.buttons-container').style.transform = 'translateY(0)';
-            }, 300); // Adjusted the reset time
+        const tempImage = new Image();
+        tempImage.src = images[currentIndex];
+        tempImage.onload = () => {
+            document.body.style.backgroundImage = `url('${images[currentIndex]}')`;
+            setTimeout(changeBackground, 10000);
+        };
+    }
 
-            const tempImage = new Image();
-            tempImage.src = images[currentIndex];
-            tempImage.onload = () => {
-                document.body.style.backgroundImage = `url('${images[currentIndex]}')`;
-                setTimeout(changeBackground, 10000);
-            };
-        }
+    function animateLogo(button) {
+        const logo = document.querySelector('header img');
+        const logoContainer = document.querySelector('header');
 
-        function animateLogo(button) {
-            const logo = document.querySelector('header img');
-            const logoContainer = document.querySelector('header');
-            const centerX = window.innerWidth / 2;
-            const centerY = window.innerHeight / 2;
+        // Get the current rotation angle (in degrees)
+        const currentRotation = parseInt(logo.style.transform.replace('rotate(', '').replace('deg)', '') || '0');
 
-            const logoRect = logo.getBoundingClientRect();
-            const logoX = logoRect.left + logoRect.width / 2;
-            const logoY = logoRect.top + logoRect.height / 2;
+        // Set the new rotation angle (add 360 degrees for a full spin)
+        const newRotation = currentRotation + 360;
 
-            const translateX = centerX - logoX;
-            const translateY = centerY - logoY;
+        // Apply the spin animation to the logo
+        logo.style.transition = 'transform 1s ease-in-out';
+        logo.style.transform = `translate(-50%, -50%) scale(2.5) rotate(${newRotation}deg)`;
 
-            logo.style.transition = 'transform 1s ease-in-out';
-            logo.style.transform = `translate(-50%, -50%) scale(2.5) translate(0, ${translateY}px) rotate(360deg)`;
+        // Apply backdrop filter animation
+        logoContainer.style.backdropFilter = 'blur(30px)'; // Increased blur for a more dramatic effect
+        logoContainer.style.transition = 'backdrop-filter 0.5s ease-in-out';
 
-            document.querySelector('header').style.backdropFilter = 'blur(30px)'; // Increased blur for a more dramatic effect
-            document.querySelector('header').style.transition = 'backdrop-filter 0.5s ease-in-out';
-            setTimeout(() => {
-                document.querySelector('header').style.backdropFilter = 'blur(0)';
-            }, 500); // Adjusted the reset time
+        // Wait for the transition to end before redirecting
+        logo.addEventListener('transitionend', function transitionEnd() {
+            logo.removeEventListener('transitionend', transitionEnd); // Remove the listener to avoid multiple calls
+            // Redirect after the animation completes
+            window.location.href = button.getAttribute('href');
+        });
+    }
 
-            setTimeout(() => {
-                window.location.href = button.getAttribute('href');
-            }, 1000);
-        }
+    document.addEventListener('DOMContentLoaded', () => {
+        changeBackground();
 
-        document.addEventListener('DOMContentLoaded', () => {
-            changeBackground();
-
-            const buttons = document.querySelectorAll('.button');
-            buttons.forEach(button => {
-                button.addEventListener('click', () => {
-                    animateLogo(button);
-                });
+        const buttons = document.querySelectorAll('.button');
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                animateLogo(button);
             });
         });
-    </script>
+    });
+</script>
+
+
 </head>
+
 <body>
     <header>
         <img src="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800" alt="Ripples Ltd Logo">
-        <h1>Ripples by Arnav Jain v50</h1>
+        <h1>Ripples by Arnav Jain v40</h1>
     </header>
 
     <div class="buttons-container">
         <a href="whattschat/abc.html" class="button blue">R9CHAT</a>
         <a href="learn/home.html" class="button pink">R9LEARN</a>
-        <a href="r9ai/r9gpt.html" class="button orange">R9GPT</a>     
+        <a href="r9ai/r9gpt.html" class="button orange">R9GPT</a>
         <a href="tools/home.html" class="button purple">R9TOOLS</a>
         <a href="games/home.html" class="button green">R9GAMES</a>
         <a href="r9store/index.html" class="button black">R9DELI</a>
-        <a href="privacy.html" class="button gray">Privacy Policy</a>
+       
     </div>
+    <div class="buttons-container2">
+    <a href="privacy.html">Privacy Policy</a>
+</div>
 </body>
+
 </html>
