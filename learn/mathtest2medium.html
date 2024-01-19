@@ -69,6 +69,101 @@
         }
     </style>
 <head>
+ <style>
+        /* Add this style for the settings icon */
+        #settings-icon {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            cursor: pointer;
+            z-index: 3;
+            font-size: 24px;
+        }
+
+        /* Add this style for the settings popup */
+        #settings-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            z-index: 4;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        /* Add this style to center the links in the popup */
+        #settings-popup a {
+            display: block;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 18px;
+            color: #333;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        /* Add this style for the close button */
+        #close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            color: #555;
+            transition: color 0.3s ease;
+        }
+
+        /* Add hover effect for links and close button */
+        #settings-popup a:hover, #close-button:hover {
+            color: #777;
+        }
+</style>
+
+
+
+ <script>
+    // Add this script for handling settings popup
+    document.addEventListener('DOMContentLoaded', () => {
+        const settingsIcon = document.getElementById('settings-icon');
+        const settingsPopup = document.getElementById('settings-popup');
+        const closeButton = document.getElementById('close-button');
+
+        settingsIcon.addEventListener('click', () => {
+            settingsPopup.style.display = 'block';
+        });
+
+        closeButton.addEventListener('click', () => {
+            settingsPopup.style.display = 'none';
+        });
+
+        document.addEventListener('click', (event) => {
+            if (event.target !== settingsIcon && event.target !== settingsPopup && event.target !== closeButton) {
+                settingsPopup.style.display = 'none';
+            }
+        });
+    });
+</script>
+
+
+
+   
+ <div id="settings-icon">⚙️</div>
+
+    <!-- Add the settings popup -->
+    <div id="settings-popup">
+        <!-- Close button -->
+        <div id="close-button">✖️</div>
+
+        <!-- Links in the popup -->
+        <a href="/privacy.html">Privacy Policy</a>
+         <a href="https://reportaproblem.webador.co.uk">Contact</a> <a href="https://ripples.ltd">back to home</a>    
+       
+    </div>
     
   <meta charset="UTF-8">
   <title>11+math</title>
