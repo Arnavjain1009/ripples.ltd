@@ -1,10 +1,78 @@
 <!DOCTYPE html>
+<html>
+<head>
+<style>
+/* CSS for the popup */
+.popup {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 20px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+    animation: slideUp 3s ease forwards; /* Animation to move upwards */
+}
+
+@keyframes slideUp {
+    0% { bottom: -100px; opacity: 0; }
+    100% { bottom: 0; opacity: 1; }
+}
+
+.popup img {
+    width: 41px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.popup a {
+    display: inline-block;
+    background-color: #007bff; /* Button color */
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.popup a:hover {
+    background-color: #0056b3; /* Button color on hover */
+}
+</style>
+</head>
+<body>
+
+<!-- Popup content -->
+<div id="popup" class="popup">
+    <p>Download our app!</p>
+    <img src="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=61&height=60" alt="Ripples Ltd Logo">
+    <a href="https://play.google.com/store/apps/details?id=co.median.android.wqnqaq">Download Now</a>
+    <p>^^^^^^^^^^^^^^^^^^^^^^^^^</p>
+</div>
+
+<script>
+// Function to display the popup
+function displayPopup() {
+    var popup = document.getElementById('popup');
+    popup.style.display = 'block';
+}
+
+// Call the displayPopup function after 1 second (1000 milliseconds)
+setTimeout(displayPopup, 5000);
+</script>
+
+</body>
+</html>
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Ripples by Arnav Jain - R9GPT, R9Chat, R9Learn, Arnav Jain v50</title>
+    <title>Ripples by Arnav Jain - R9GPT, R9Chat, R9Learn, Arnav Jain v41</title>
     <meta name="description" content="Explore Ripples by Arnav Jain, featuring R9GPT, R9Chat, R9Learn, and more. Discover a world of technology and innovation.">
     <link rel="icon" type="image/svg+xml"
         href="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800" />
@@ -188,7 +256,7 @@
     <div class="container">
         <header>
             <img src="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800" alt="Ripples Ltd Logo">
-            <h1>Ripples by Arnav Jain v50</h1>
+            <h1>Ripples by Arnav Jain v40</h1>
         </header>
 
         <div class="buttons-container">

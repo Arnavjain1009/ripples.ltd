@@ -179,7 +179,26 @@ form.addEventListener('submit', async (e) => {
       alert("r9gpt has created the ai you are using")
       window.location.href = "r9gpt.html"
     }
+    if (prompt.includes("you")) {
 
+      alert("r9gpt has created the ai you are using")
+      window.location.href = "r9gpt.html"
+    }
+    if (prompt.includes("your")) {
+
+      alert("r9gpt has created the ai you are using")
+      window.location.href = "r9gpt.html"
+    }
+    if (prompt.includes("name")) {
+
+      alert("r9gpt has created the ai you are using")
+      window.location.href = "r9gpt.html"
+    }
+    if (prompt.includes("made")) {
+
+      alert("r9gpt has created the ai you are using")
+      window.location.href = "r9gpt.html"
+    }
 
 
 
