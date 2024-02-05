@@ -65,16 +65,15 @@
         function displayPopup() {
             var popup = document.getElementById('popup');
             // Check if not in app form
-            if (!isInAppForm()) {
+            if (isInAppForm()) {
                 popup.style.display = 'block';
             }
         }
 
         // Function to check if in app form
         function isInAppForm() {
-            // Here you would implement logic to determine if the page is being displayed in an app form
-            // For demonstration purposes, I'll use a simple check
-            return false; // Assuming it's not in app form
+            // Assuming the user agent string contains 'WebView' if in app form
+            return navigator.userAgent.includes('WebView');
         }
 
         // Call the displayPopup function after 1 second (1000 milliseconds)
