@@ -65,7 +65,7 @@
         function displayPopup() {
             var popup = document.getElementById('popup');
             // Check if not in app form
-            if (isInAppForm()) {
+            if (!isInAppForm()) {
                 popup.style.display = 'block';
             }
         }
