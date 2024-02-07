@@ -1,6 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
+    <style>
+        /* CSS for the overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent grey */
+            z-index: 9999;
+        }
 
+        /* CSS for the popup */
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #ccc; /* Semi-grey background */
+            padding: 20px;
+            border-radius: 20px; /* Rounded corners */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 10000;
+        }
+
+        .popup img {
+            width: 41px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .popup a {
+            display: inline-block;
+            background-color: #007bff; /* Button color */
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .popup a:hover {
+            background-color: #0056b3; /* Button color on hover */
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Overlay to disable interactions -->
+    <div class="overlay"></div>
+
+    <!-- Popup content -->
+    <div id="popup" class="popup">
+        <p>This website uses cookies</p>
+        <a href="#" id="acceptButton">Accept</a>
+        <a href="https://reportaproblem.webador.com" id="denyButton">Deny</a>
+    </div>
+
+    <script>
+        // Function to hide the overlay and enable interactions
+        function hideOverlay() {
+            var overlay = document.querySelector('.overlay');
+            overlay.style.display = 'none';
+        }
+
+        // Function to display the popup
+        function displayPopup() {
+            var popup = document.getElementById('popup');
+            popup.style.display = 'block';
+        }
+
+        // Function to hide the popup
+        function hidePopup() {
+            var popup = document.getElementById('popup');
+            popup.style.display = 'none';
+            hideOverlay(); // Also hide the overlay
+        }
+
+        // Redirect to privacy page
+        function redirectToPrivacy() {
+            window.location.href = "privacy.html";
+        }
+
+        // Add event listener to accept button
+        document.getElementById("acceptButton").addEventListener("click", function() {
+            hidePopup();
+        });
+
+        // Add event listener to deny button
+        document.getElementById("denyButton").addEventListener("click", function() {
+            window.location.href = "https://reportaproblem.webador.com";
+        });
+
+        // Call the displayPopup function
+        displayPopup();
+    </script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -49,37 +144,6 @@
         }
     </style>
 </head>
-
-<body>
-
-    <!-- Popup content -->
-    <div id="popup" class="popup">
-        <p>Download our app!</p>
-        <img src="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=61&height=60" alt="Ripples Ltd Logo">
-        <a href="https://play.google.com/store/apps/details?id=co.median.android.wqnqaq">Download Now</a>
-        <p>^^^^^^^^^^^^^^^^^^^^^^^^^</p>
-    </div>
-
-    <script>
-        // Function to display the popup if not in app form
-        function displayPopup() {
-            var popup = document.getElementById('popup');
-            // Check if not in app form
-            if (!isInAppForm()) {
-                popup.style.display = 'block';
-            }
-        }
-
-        // Function to check if in app form
-        function isInAppForm() {
-            // Assuming the user agent string contains 'WebView' if in app form
-            return navigator.userAgent.includes('WebView');
-        }
-
-        // Call the displayPopup function after 1 second (1000 milliseconds)
-        setTimeout(displayPopup, 5000);
-    </script>
-</body>
 
 </html>
 
@@ -269,8 +333,68 @@
 <body>
     <div class="container">
         <header>
-            <img src="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800" alt="Ripples Ltd Logo">
-            <h1>Ripples by Arnav Jain v40</h1>
+            <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rotating 3D Logo</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+
+    .logo-container {
+      perspective: 1000px;
+      cursor: pointer; /* Add cursor pointer */
+    }
+
+    .logo {
+      width: 200px;
+      height: auto;
+      animation: spin 10s infinite linear;
+      transition: transform 0.3s; /* Add transition for smooth expansion */
+    }
+
+    .logo.expanded {
+      transform: scale(1.5); /* Expand logo when clicked */
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+      }
+      to {
+        transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="logo-container">
+    <a href="https://play.google.com/store/apps/details?id=co.median.android.wqnqaq&pcampaignid=web_share" target="_blank">
+      <img src="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800" alt="Logo" class="logo">
+    </a>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const logo = document.querySelector('.logo');
+
+      logo.addEventListener('click', function() {
+        logo.classList.toggle('expanded'); // Toggle 'expanded' class on click
+      });
+    });
+  </script>
+</body>
+</html>
+<h1>Ripples by Arnav Jain v40</h1>
             <div id="settings-icon">⚙️</div> <!-- Moved settings icon to the header -->
         </header>
 
