@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-<div id="settings-icon">⚙️</div>
+<div id="settings-icon">☰</div>
 
 <!-- Add the settings popup -->
 <div id="settings-popup">
@@ -294,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function redirecttoprivatechat() {
       var selectedUserId = document.getElementById("user-dropdown").value;
-      window.location.href = "/https://www.ripples.ltd/whattschat/publicchat.html?userid=" + myuserid + "&secretkey=" + mysecretkey + "&selecteduserid=" + selectedUserId;
+      window.location.href = "publicchat.html?userid=" + myuserid + "&secretkey=" + mysecretkey + "&selecteduserid=" + selectedUserId;
     }
 
     function createGroup() {
@@ -307,7 +307,7 @@ document.addEventListener('DOMContentLoaded', () => {
     var myuserid = url.searchParams.get("userid");
     var mysecretkey = url.searchParams.get("secretkey");
     var passwordmatched = false;
-    document.getElementById("pcbtn").setAttribute('onclick', "document.location='/https://www.ripples.ltd/whattschat/publicchat.html?userid=" + myuserid + "&secretkey=" + mysecretkey + "'");
+    document.getElementById("pcbtn").setAttribute('onclick', "document.location='publicchat.html?userid=" + myuserid + "&secretkey=" + mysecretkey + "'");
     document.getElementById("demo").innerHTML = "Welcome " + myuserid;
 
     if (myuserid == null || myuserid == "") {
