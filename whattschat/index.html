@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+    /* Add this style for the settings icon */
+    #settings-icon {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        cursor: pointer;
+        z-index: 3;
+        font-size: 24px;
+    }
+
+    /* Add this style for the settings popup */
+    #settings-popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.95);
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+        border-radius: 15px;
+        z-index: 4;
+        max-width: 400px;
+        text-align: center;
+    }
+
+    /* Add this style to center the links in the popup */
+    #settings-popup a {
+        display: block;
+        margin-bottom: 15px;
+        text-align: center;
+        font-size: 18px;
+        color: #333;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    /* Add this style for the close button */
+    #close-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        font-size: 20px;
+        color: #555;
+        transition: color 0.3s ease;
+    }
+
+    /* Add hover effect for links and close button */
+    #settings-popup a:hover, #close-button:hover {
+        color: #777;
+    }
+</style>
+
+
+
+<script>
+// Add this script for handling settings popup
+document.addEventListener('DOMContentLoaded', () => {
+    const settingsIcon = document.getElementById('settings-icon');
+    const settingsPopup = document.getElementById('settings-popup');
+    const closeButton = document.getElementById('close-button');
+
+    settingsIcon.addEventListener('click', () => {
+        settingsPopup.style.display = 'block';
+    });
+
+    closeButton.addEventListener('click', () => {
+        settingsPopup.style.display = 'none';
+    });
+
+    document.addEventListener('click', (event) => {
+        if (event.target !== settingsIcon && event.target !== settingsPopup && event.target !== closeButton) {
+            settingsPopup.style.display = 'none';
+        }
+    });
+});
+</script>
+
+
+
+
+<div id="settings-icon">⚙️</div>
+
+<!-- Add the settings popup -->
+<div id="settings-popup">
+    <!-- Close button -->
+    <div id="close-button">✖️</div>
+
+    <!-- Links in the popup -->
+    <a href="/privacy.html">Privacy Policy</a>
+     <a href="https://reportaproblem.webador.co.uk">Contact</a> <a href="https://ripples.ltd">back to home</a>    
+   
+</div>
+<head>
+    <title>R9CHAT</title>
+    <link rel="icon" type="image/svg+xml"
+        href="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800" />
+
+    <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-database.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            transition: background 0.5s ease-in-out;
+            /* Background transition effect */
+        }
+
+        h1,
+        h3 {
+            color: #fff;
+            /* Set text color to white */
+        }
+
+        .content-box {
+            background: rgba(0, 0, 0, 0.7);
+            /* Black background with some opacity */
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        table {
+            margin: 20px auto;
+            width: 100%;
+        }
+
+        table td {
+            padding: 5px;
+        }
+
+        label {
+            display: block;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #fff;
+            /* Set label color to white */
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            border: none;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 100%;
+        }
+
+        input[type="button"] {
+            background-color: #333;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            padding: 10px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        input[type="button"]:hover {
+            background-color: #666;
+        }
+
+        header img {
+            max-width: 100%;
+            height: auto;
+            max-height: 60px;
+            cursor: pointer;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        header img:hover {
+            transform: rotate(360deg);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="content-box">
+        <header>
+            <a href="/index.html" target="_blank">
+                <img
+                    src="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800"
+                    alt="Logo">
+            </a>
+        </header>
+
+        <h1>R9CHAT </h1>
+        <h2></h2>
+        <h3>CREATED BY ARNAV JAIN [usable]</h3>
+
+        <table>
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                            <td>
+                                <label for="username1">create username:</label>
+                                <input type="text" id="username1" name="username1">
+                                <label for="password1">create password:</label>
+                                <input type="password" id="password1" name="password1">
+                                <input type="button" class="button1" value="SIGN UP" onclick="fnSignUP()">
+                            </td>
+                            <td>
+                                <label for="username2">enter username:</label>
+                                <input type="text" id="username2" name="username2">
+                                <label for="password2">enter password:</label>
+                                <input type="password" id="password2" name="password2">
+                                <input type="button" id="loginbtn" class="button1" value="LOG IN" onclick="fnLogin()">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <br><br>
+
+    <script>
+        var currentBackgroundIndex = 0;
+
+        function getRandomNaturePhotoUrl() {
+            return `https://source.unsplash.com/1920x1080/?nature`;
+        }
+
+        function changeBackground() {
+            const photoUrl = getRandomNaturePhotoUrl();
+
+            document.body.style.background = `url("${photoUrl}")`;
+
+            // Add a transition effect for smooth background change
+            document.body.style.transition = 'background 0.5s ease-in-out';
+
+            // Wait for the image to load and then remove the transition
+            const img = new Image();
+            img.src = photoUrl;
+            img.onload = () => {
+                document.body.style.transition = 'none';
+            };
+
+            setTimeout(changeBackground, 10000); // Change background every 10 seconds
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            changeBackground();
+            // ... existing script remains unchanged ...
+        });
+    </script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyBP5fSB_kiakv0r-WMo7BkP2Ik70c26tT0",
+            authDomain: "whattschat-f522c.firebaseapp.com",
+            databaseURL: "https://whattschat-f522c-default-rtdb.firebaseio.com",
+            projectId: "whattschat-f522c",
+            storageBucket: "whattschat-f522c.appspot.com",
+            messagingSenderId: "746097682908",
+            appId: "1:746097682908:web:51a0278320ad4af5774719",
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        var database;
+        database = firebase.database();
+    </script>
+
+    <script>
+        var userISfound, passwordmatched;
+        var useridpassed = "NONE";
+
+        function fnLogin() {
+
+            var myuserid = document.getElementById("username2").value;
+            var mypassword = document.getElementById("password2").value;
+
+            var MyValRef = database.ref("/users/");
+
+            if (document.getElementById("loginbtn").value == "Proceed to R9CHAT") {
+
+                if (useridpassed != myuserid) {
+
+                    window.location.replace("banned.html");
+
+                    return;
+                }
+
+                MyValRef = database.ref("/users/" + myuserid);
+                var myUUID = CreateUUID();
+                MyValRef.update({
+                    mykey: myUUID
+                });
+
+                document.getElementById("loginbtn").value = "LOG IN";
+
+                window.open("myhomepage.html?userid=" + myuserid + "&secretkey=" + myUUID);
+                return;
+            }
+
+            userISfound = false;
+
+            MyValRef.orderByValue().on("value", function (snapshot) {
+                snapshot.forEach(function (data) {
+                    if (myuserid == data.key) {
+
+                        userISfound = true;
+                    }
+                });
+
+                if (userISfound != true) {
+                    alert("User ID Error!!");
+                } else {
+                    fnCheckPassword(myuserid, mypassword);
+                }
+                MyValRef.off();
+            });
+
+
+        }
+
+        function fnCheckPassword(myuserid, mypassword) {
+            var MyValRef = database.ref("/users/" + myuserid);
+
+            passwordmatched = false;
+
+            MyValRef.orderByValue().on("value", function (snapshot) {
+                snapshot.forEach(function (data) {
+                    console.log(data.val());
+                    if (mypassword == data.val()) {
+                        passwordmatched = true;
+                        useridpassed = myuserid;
+                    }
+                });
+
+                if (passwordmatched != true) {
+                    alert("User ID or Password is incorrect, Please retry!!");
+                } else {
+                    document.getElementById("loginbtn").value = "Proceed to R9CHAT";
+                    MyValRef.off();
+                    //window.open( "myhomepage.html?userid="+ myuserid , "");
+                }
+            });
+        }
+
+        function fnSignUP() {
+            var myuserid = document.getElementById("username1").value;
+            var mypassword = document.getElementById("password1").value;
+
+            if (mypassword == "") {
+                alert("Password is blank");
+                return;
+            }
+
+            if (myuserid == "") {
+                alert("UserID is blank");
+                return;
+            }
+
+            database.ref("/users/" + myuserid).update({
+                password: mypassword
+            });
+
+            database.ref("/users/" + myuserid).off();
+
+            alert("username: " + myuserid + " was created successfully, thank you " + myuserid);
+
+        }
+
+        function CreateUUID() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                var r = Math.random() * 16 | 0,
+                    v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
+    </script>
+
+</body>
+
+</html>
