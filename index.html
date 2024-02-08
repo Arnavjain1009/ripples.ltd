@@ -9,7 +9,7 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent grey */
-            z-index: 9999;
+            z-index: 000;
         }
 
         /* CSS for the popup */
@@ -22,7 +22,7 @@
             padding: 20px;
             border-radius: 20px; /* Rounded corners */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            z-index: 10000;
+            z-index: 1;
         }
 
         .popup img {
@@ -97,28 +97,50 @@
         // Call the displayPopup function
         displayPopup();
     </script>
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Ripples by Arnav Jain - R9GPT, R9Chat, R9Learn, Arnav Jain v41</title>
     <meta name="description" content="Explore Ripples by Arnav Jain, featuring R9GPT, R9Chat, R9Learn, and more. Discover a world of technology and innovation.">
     <link rel="icon" type="image/svg+xml"
-        href="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800" />
+        href="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=1000&height=1000" />
     <style>
         /* CSS for the popup */
-        .popup {
-            display: none;
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 20px; /* Rounded corners */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            z-index: 9999;
-            animation: slideUp 3s ease forwards; /* Animation to move upwards */
-        }
+   /* CSS for the popup */
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    z-index: 4;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Adjustments for mobile */
+@media (max-width: 767px) {
+    .popup {
+        width: calc(100% - 40px); /* Maximizing width */
+        max-width: none; /* Remove max-width */
+        border-radius: 0; /* Remove border radius */
+        padding: 10px; /* Adjust padding */
+        box-shadow: none; /* Remove box shadow */
+    }
+}
+
+/* Adjustments for desktop */
+@media (min-width: 768px) {
+    .popup {
+        width: 60%; /* Adjust width as needed */
+        max-width: 600px; /* Limit max width */
+    }
+}
 
         @keyframes slideUp {
             0% { bottom: -100px; opacity: 0; }
@@ -229,20 +251,19 @@
             z-index: 2;
             transition: transform 0.5s ease-in-out, height 1s ease-in-out;
         }
-
         .button {
-            flex: 1 1 calc(50% - 15px);
-            padding: 15px;
-            text-align: center;
-            text-decoration: none;
-            font-size: 18px;
-            border-radius: 8px;
-            transition: background-color 0.3s ease, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-            box-sizing: border-box;
-            color: rgba(255, 255, 255, 0.8);
-            background-color: rgba(0, 0, 0, 0.5);
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2)
-        }
+    flex: 1 1 calc(50% - 15px);
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 50px; /* Changed border-radius to 50px for more rounded corners */
+    transition: background-color 0.3s ease, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    box-sizing: border-box;
+    color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
 
         .button:hover {
             background-color: rgba(0, 0, 0, 0.8);
@@ -380,7 +401,7 @@
 <body>
   <div class="logo-container">
     <a href="https://play.google.com/store/apps/details?id=co.median.android.wqnqaq&pcampaignid=web_share" target="_blank">
-      <img src="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800" alt="Logo" class="logo">
+      <img src="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=1001&height=1000" alt="Logo" class="logo">
     </a>
   </div>
 
@@ -396,7 +417,7 @@
 </body>
 </html>
 <h1>Ripples by Arnav Jain v40</h1>
-            <div id="settings-icon">⚙️</div> <!-- Moved settings icon to the header -->
+            <div id="settings-icon">☰</div> <!-- Moved settings icon to the header -->
         </header>
 
         <div class="buttons-container">
@@ -441,3 +462,34 @@
 </body>
 
 </html>
+<style>
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.7);
+    transform: scale(0);
+    animation: rippleEffect 0.6s linear;
+}
+
+@keyframes rippleEffect {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("click", function(event) {
+        const ripple = document.createElement("div");
+        ripple.classList.add("ripple");
+        ripple.style.top = event.clientY - ripple.offsetHeight / 2 + "px";
+        ripple.style.left = event.clientX - ripple.offsetWidth / 2 + "px";
+        document.body.appendChild(ripple);
+        setTimeout(function() {
+            ripple.remove();
+        }, 600);
+    });
+});
+
+    </script>
