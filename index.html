@@ -14,16 +14,16 @@
 
         /* CSS for the popup */
         .popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #ccc; /* Semi-grey background */
-            padding: 20px;
-            border-radius: 20px; /* Rounded corners */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            z-index: 1;
-        }
+    position: fixed;
+    bottom: 20px; /* Adjust this value to change the distance from the bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(204, 204, 204, 0.7); /* Semi-transparent grey background */
+    padding: 20px;
+    border-radius: 20px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
 
         .popup img {
             width: 41px;
@@ -33,8 +33,8 @@
 
         .popup a {
             display: inline-block;
-            background-color: #007bff; /* Button color */
-            color: #fff;
+            background-color: #ffaa000f; /* Button color */
+            color: rgba(204, 204, 204, 0.7);
             padding: 10px 20px;
             border-radius: 5px;
             text-decoration: none;
@@ -110,12 +110,13 @@
    /* CSS for the popup */
 .popup {
     display: none;
-    position: fixed;
-    top: 50%;
+    position: bottom;
+    top: 70%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.95);
+    padding-block: 20px;
+   
+    background-color: rgba(204, 204, 204, 0.7);
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
     border-radius: 15px;
     z-index: 4;
@@ -123,16 +124,7 @@
     text-align: center;
 }
 
-/* Adjustments for mobile */
-@media (max-width: 767px) {
-    .popup {
-        width: calc(100% - 40px); /* Maximizing width */
-        max-width: none; /* Remove max-width */
-        border-radius: 0; /* Remove border radius */
-        padding: 10px; /* Adjust padding */
-        box-shadow: none; /* Remove box shadow */
-    }
-}
+
 
 /* Adjustments for desktop */
 @media (min-width: 768px) {
@@ -155,11 +147,12 @@
 
         .popup a {
             display: inline-block;
-            background-color: #007bff; /* Button color */
+            background-color: #1bb8b8; /* Button color */
             color: #fff;
             padding: 10px 20px;
             border-radius: 5px;
-            text-decoration: none;
+            text-decoration-color: black;
+
         }
 
         .popup a:hover {
@@ -462,34 +455,3 @@
 </body>
 
 </html>
-<style>
-.ripple {
-    position: absolute;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.7);
-    transform: scale(0);
-    animation: rippleEffect 0.6s linear;
-}
-
-@keyframes rippleEffect {
-    to {
-        transform: scale(4);
-        opacity: 0;
-    }
-}
-</style>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-    document.addEventListener("click", function(event) {
-        const ripple = document.createElement("div");
-        ripple.classList.add("ripple");
-        ripple.style.top = event.clientY - ripple.offsetHeight / 2 + "px";
-        ripple.style.left = event.clientX - ripple.offsetWidth / 2 + "px";
-        document.body.appendChild(ripple);
-        setTimeout(function() {
-            ripple.remove();
-        }, 600);
-    });
-});
-
-    </script>
