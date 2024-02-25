@@ -14,7 +14,7 @@ const games = [
   { name: 'snake(computer)', image: 'https://th.bing.com/th/id/OIP.3YhJp0_rp77XlltFgkgBeAHaNK?rs=1&pid=ImgDetMain', url: '3.html' },
   { name: 'easy-breakout(computer)', image: 'https://images.crazygames.com/ataribreakout.png?auto=format,compress&q=75&cs=strip&ch=DPR&w=1200&h=630&fit=crop', url: '4.html' },
   { name: 'the backrooms(mobile)', image: 'https://th.bing.com/th/id/OIP.7jkTgWMUi_C7N5DNiy0Y8wHaD4?rs=1&pid=ImgDetMain', url: '5.html' },
-  { name: 'Coming Later', image: '', url: '6.html' },
+  { name: 'Tetris(computer)', image: 'https://cdn.dribbble.com/users/2475489/screenshots/9239848/media/ff48675e4dd24c950af1dda5ac3c6019.gif', url: '6.html' },
   { name: 'Coming Later', image: '', url: '7.html' },
   { name: 'Coming Later', image: '', url: '8.html' },
   { name: 'Coming Later', image: '', url: '9.html' },
