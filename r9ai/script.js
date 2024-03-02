@@ -13,7 +13,6 @@ firebase.initializeApp(firebaseConfig);
 var database;
 database = firebase.database();
 
-
 var url_string = window.location.href; // www.test.com?filename=test
 var url = new URL(url_string);
 var myuserid = "publicipadress";
@@ -62,7 +61,6 @@ async function setIPAddress() {
 }
 
 async function getDataFromFirebase() {
-
   return new Promise(resolve => {
     firebase.database().ref('/cc/cc2').on('value', snapshot => {
       const data = snapshot.val();
@@ -96,61 +94,55 @@ async function main(prompt) {
   // Scroll to bottom of chat container
   chatContainer.scrollTop = chatContainer.scrollHeight;
 
-const TknCount = await setIPAddress();
+  const TknCount = await setIPAddress();
 
   document.getElementById('tokencountssg').innerHTML = "Tokens Left: " + TknCount;
-  
-  const data1 = await getDataFromFirebase();
-  mydata = data1;
-  
 
-  const response = await fetch('https://api.openai.com/v1/chat/completions', {
-
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + mydata,
-    },
-    body: JSON.stringify({
-      "model": "gpt-3.5-turbo",
-      "messages": [{ "role": "user", "content": prompt }]
-    }),
-
-  });
-
-  const data = await response.json();
-  const message = data.choices[0].message.content;
-
-  messageContainer.textContent = message;
-  const chat = {
-    prompt: prompt,
-    response: message
-  };
-  var ipAddress1 = '';
-  var liveToknCnt = 0;
-
-  await fetch('https://api.ipify.org/?format=json')
-    .then(response => response.json())
-    .then(data => {
-      ipAddress1 = data.ip;
-      return firebase.database().ref('R9cookies').once('value');
-    })
-
-  firebase.database().ref('history/' + myuserid).push(chat);
-
+  // Fetch all history data from the database
   firebase.database().ref('history/' + myuserid).once('value', snapshot => {
     const history = snapshot.val();
     if (history) {
-      Object.values(history).forEach(chat => {
+      // Check if any previous chat matches the prompt
+      const previousChat = Object.values(history).find(chat => chat.prompt === prompt);
+      if (previousChat) {
+        // If a match is found, display the stored response
+        messageContainer.textContent = previousChat.response;
+      } else {
+        // If no match is found, proceed with API request
+        getDataFromFirebase().then(data1 => {
+          mydata = data1;
 
-      });
+          fetch('https://api.openai.com/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + mydata,
+            },
+            body: JSON.stringify({
+              "model": "gpt-3.5-turbo",
+              "messages": [{ "role": "user", "content": prompt }]
+            }),
+          }).then(response => response.json())
+            .then(data => {
+              const message = data.choices[0].message.content;
+
+              // Update message container with response
+              messageContainer.textContent = message;
+
+              // Save the conversation to the database
+              const chat = {
+                prompt: prompt,
+                response: message
+              };
+              firebase.database().ref('history/' + myuserid).push(chat);
+            }).catch(error => {
+              console.error('Error:', error);
+            });
+        });
+      }
     }
   });
-
 }
-
-
-
 
 const form = document.querySelector('form');
 const chatContainer = document.getElementById('chat_container');
@@ -200,22 +192,7 @@ form.addEventListener('submit', async (e) => {
       window.location.href = "r9gpt.html"
     }
 
-
-
     main(prompt);
-
-    // Clear the prompt input
-    e.target.prompt.value = '';
-  }
-});
-
-form.addEventListener('submit', async (e) => {
-
-
-  if (e.target.prompt.value != "") {
-    e.preventDefault();
-
-    main(e.target.prompt.value);
 
     // Clear the prompt input
     e.target.prompt.value = '';

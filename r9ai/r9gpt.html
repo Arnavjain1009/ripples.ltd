@@ -2,263 +2,265 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>r9GPT</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/svg+xml" href="https://i.pinimg.com/originals/53/e9/45/53e945c516cebdffd987b6c2df159db1.jpg" />
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Arial', sans-serif;
-      color: #ecf0f1; /* Light text color */
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>r9GPT</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="https://i.pinimg.com/originals/53/e9/45/53e945c516cebdffd987b6c2df159db1.jpg" />
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            color: #ecf0f1; /* Light text color */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
 
-    #banner {
-  width: 100%;
-  background-color: rgba(44, 62, 80, 0.7); /* Tinted transparent banner color */
-  color: #fff;
-  text-align: center;
-  padding: 20px 0;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-    #banner a {
-      text-decoration: none;
-      color: #fff;
-    }
+        /* Banner Styles */
+        #banner {
+            width: 100%;
+            background-color: rgba(44, 62, 80, 0.7); /* Tinted transparent banner color */
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
 
-    h1 {
-      margin: 0;
-      font-size: 36px;
-    }
+        #banner a {
+            text-decoration: none;
+            color: #fff;
+        }
 
+        h1 {
+            margin: 0;
+            font-size: 36px;
+        }
 
-    #app {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px 0;
-  background-color: rgba(44, 62, 80, 0.7); /* Tinted transparent app container color */
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-}
+        /* App Container Styles */
+        #app {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0;
+            background-color: rgba(44, 62, 80, 0.7); /* Tinted transparent app container color */
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
 
-    #chat_container {
-      max-height: 300px;
-      overflow-y: auto;
-      width: 80%;
-      border: 2px solid #3498db;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      padding: 15px;
-      background-color: #fff;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    }
+        /* Chat Container Styles */
+        #chat_container {
+            max-height: 300px;
+            overflow-y: auto;
+            width: 80%;
+            border: 2px solid #3498db;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #fff;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
 
-    form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-  background-color: rgba(44, 62, 80, 0.7); /* Tinted transparent form background color */
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+        /* Form Styles */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+            background-color: rgba(44, 62, 80, 0.7); /* Tinted transparent form background color */
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
 
-    textarea {
-      resize: none;
-      padding: 12px;
-      margin-bottom: 20px;
-      width: 80%;
-      border: 2px solid #3498db;
-      border-radius: 12px;
-      font-size: 18px;
-    }
+        textarea {
+            resize: none;
+            padding: 12px;
+            margin-bottom: 20px;
+            width: 80%;
+            border: 2px solid #3498db;
+            border-radius: 12px;
+            font-size: 18px;
+        }
 
-    button {
-      background-color: #2ecc71;
-      color: white;
-      border: none;
-      padding: 16px;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      width: 80%;
-      font-size: 18px;
-    }
+        button {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 80%;
+            font-size: 18px;
+        }
 
-    button:hover {
-      background-color: #27ae60;
-    }
+        button:hover {
+            background-color: #27ae60;
+        }
 
-    #tokencountssg {
-      margin-top: 30px;
-      font-size: 24px;
-      color: #ecf0f1;
-    }
+        #tokencountssg {
+            margin-top: 30px;
+            font-size: 24px;
+            color: #ecf0f1;
+        }
 
-    button.more-tokens {
-      background-color: #3498db; /* Different color for "More Tokens" button */
-      color: white;
-      border: none;
-      padding: 12px;
-      border-radius: 8px; /* Smaller border radius */
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      width: 60%; /* Smaller width */
-      font-size: 16px; /* Smaller font size */
-      margin-top: 10px; /* Added top margin */
-    }
+        /* More Tokens Button Styles */
+        button.more-tokens {
+            background-color: #3498db; /* Different color for "More Tokens" button */
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px; /* Smaller border radius */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 60%; /* Smaller width */
+            font-size: 16px; /* Smaller font size */
+            margin-top: 10px; /* Added top margin */
+        }
 
-    button.more-tokens:hover {
-      background-color: #2980b9; /* Darker on hover */
-    }
+        button.more-tokens:hover {
+            background-color: #2980b9; /* Darker on hover */
+        }
 
-    #logo {
-      width: 100px;
-      height: auto;
-      margin-bottom: 10px;
-    }
+        #logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+        }
 
-    /* Dynamic background from Unsplash */
-    body::after {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      background: url('https://source.unsplash.com/1920x1080/?nature') center/cover no-repeat;
-    }
-  </style>
+        /* Dynamic background from Unsplash */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: url('https://source.unsplash.com/1920x1080/?nature') center/cover no-repeat;
+        }
+
+        /* Settings Icon Styles */
+        #settings-icon {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            cursor: pointer;
+            z-index: 3;
+            font-size: 24px;
+        }
+
+        /* Settings Popup Styles */
+        #settings-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            z-index: 4;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        /* Settings Popup Link Styles */
+        #settings-popup a {
+            display: block;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 18px;
+            color: #333;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        /* Close Button Styles */
+        #close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            color: #555;
+            transition: color 0.3s ease;
+        }
+
+        /* Hover Effect for Links and Close Button */
+        #settings-popup a:hover,
+        #close-button:hover {
+            color: #777;
+        }
+    </style>
 </head>
 
-<style>
-  /* Add this style for the settings icon */
-  #settings-icon {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      cursor: pointer;
-      z-index: 3;
-      font-size: 24px;
-  }
-
-  /* Add this style for the settings popup */
-  #settings-popup {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      padding: 20px;
-      background-color: rgba(255, 255, 255, 0.95);
-      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
-      border-radius: 15px;
-      z-index: 4;
-      max-width: 400px;
-      text-align: center;
-  }
-
-  /* Add this style to center the links in the popup */
-  #settings-popup a {
-      display: block;
-      margin-bottom: 15px;
-      text-align: center;
-      font-size: 18px;
-      color: #333;
-      text-decoration: none;
-      transition: color 0.3s ease;
-  }
-
-  /* Add this style for the close button */
-  #close-button {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      cursor: pointer;
-      font-size: 20px;
-      color: #555;
-      transition: color 0.3s ease;
-  }
-
-  /* Add hover effect for links and close button */
-  #settings-popup a:hover, #close-button:hover {
-      color: #777;
-  }
-</style>
-
-
-
-<script>
-// Add this script for handling settings popup
-document.addEventListener('DOMContentLoaded', () => {
-  const settingsIcon = document.getElementById('settings-icon');
-  const settingsPopup = document.getElementById('settings-popup');
-  const closeButton = document.getElementById('close-button');
-
-  settingsIcon.addEventListener('click', () => {
-      settingsPopup.style.display = 'block';
-  });
-
-  closeButton.addEventListener('click', () => {
-      settingsPopup.style.display = 'none';
-  });
-
-  document.addEventListener('click', (event) => {
-      if (event.target !== settingsIcon && event.target !== settingsPopup && event.target !== closeButton) {
-          settingsPopup.style.display = 'none';
-      }
-  });
-});
-</script>
-
-
-
-
-<div id="settings-icon">☰</div>
-
-<!-- Add the settings popup -->
-<div id="settings-popup">
-  <!-- Close button -->
-  <div id="close-button">✖️</div>
-
-  <!-- Links in the popup -->
-  <a href="/privacy.html">Privacy Policy</a>
-   <a href="https://reportaproblem.webador.co.uk">Contact</a> <a href="https://ripples.ltd">back to home</a>    
- 
-</div>
 <body>
-  <div id="banner">
-    <a href="/index.html" target="_blank">
-      <img id="logo" src="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800" alt="Ripples Logo">
-    </a>
-    <h1>r9GPT by Arnav Jain</h1>
-    
-  </div>
+    <!-- Settings Icon -->
+    <div id="settings-icon">☰</div>
 
-  <div id="app">
-    <div id="chat_container"></div>
-    <form>
-      <textarea name="prompt" placeholder="Ask r9GPT"></textarea>
-      <button type="submit">Send</button>
-       </form>
-    <button class="more-tokens" onclick="window.location.href='gettokens.html'">More Tokens</button>
-    <h1 id="tokencountssg">Welcome</h1>
-  </div>
+    <!-- Settings Popup -->
+    <div id="settings-popup">
+        <!-- Close button -->
+        <div id="close-button">✖️</div>
 
-  <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-database.js"></script>
-  <script type="module" src="script.js"></script>
+        <!-- Links in the popup -->
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="https://reportaproblem.webador.co.uk">Contact</a>
+        <a href="https://ripples.ltd">Back to Home</a>
+    </div>
+
+    <div id="banner">
+        <a href="/index.html" target="_blank">
+            <img id="logo" src="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800" alt="Ripples Logo">
+        </a>
+        <h1>r9GPT by Arnav Jain</h1>
+    </div>
+
+    <div id="app">
+        <div id="chat_container"></div>
+        <form>
+            <textarea name="prompt" placeholder="Ask r9GPT"></textarea>
+            <button type="submit">Send</button>
+        </form>
+        <button class="more-tokens" onclick="window.location.href='gettokens.html'">More Tokens</button>
+        <h1 id="tokencountssg">Welcome</h1>
+    </div>
+
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-database.js"></script>
+    <script type="module" src="script.js"></script>
+
+    <!-- Settings Popup Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const settingsIcon = document.getElementById('settings-icon');
+            const settingsPopup = document.getElementById('settings-popup');
+            const closeButton = document.getElementById('close-button');
+
+            settingsIcon.addEventListener('click', () => {
+                settingsPopup.style.display = 'block';
+            });
+
+            closeButton.addEventListener('click', () => {
+                settingsPopup.style.display = 'none';
+            });
+
+            document.addEventListener('click', (event) => {
+                if (event.target !== settingsIcon && event.target !== settingsPopup && event.target !== closeButton) {
+                    settingsPopup.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
