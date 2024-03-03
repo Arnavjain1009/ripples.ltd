@@ -1,46 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Basic Tetris</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      margin: 0;
-      padding: 0;
-      background-color: #00008b; /* Background color - blue */
-      color: #ffffff; /* Text color - white */
-    }
-    #gameContainer {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
     }
     #gameCanvas {
-      border: 2px solid white; /* White border around the grid */
-      margin-bottom: 20px;
-    }
-    #score {
-      font-weight: bold;
-    }
-    #highScoreIcon {
-      margin-top: 10px;
-      font-size: 24px;
+      border: 2px solid black;
+      margin: 0 auto;
     }
   </style>
 </head>
 <body>
-  <div id="gameContainer">
-    <h1>Basic Tetris</h1>
-    <p>Controls: Swipe to move, Tap to rotate</p>
-    <p>Score: <span id="score">0</span></p>
-    <canvas id="gameCanvas" width="200" height="400"></canvas>
-    <div id="highScoreIcon">🏆</div>
-  </div>
+  <h1>Basic Tetris</h1>
+  <p>Controls: Arrow keys to move, Spacebar to rotate</p>
+  <p>Score: <span id="score">0</span></p>
+  <canvas id="gameCanvas" width="200" height="400"></canvas>
   <script>
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
@@ -124,22 +101,21 @@
         });
       }
     }
-// Move the piece down
-function moveDown() {
-  piece.y++;
-  if (collides()) {
-    piece.y--;
-    setTimeout(() => {
-      merge();
-      checkRows();
-      piece = {
-        ...randomShape(),
-        x: Math.floor(cols / 2) - 1,
-        y: 0
-      };
-    }, 333); // Delay of one-third of a second (333 milliseconds)
-  }
-}
+
+    // Move the piece down
+    function moveDown() {
+      piece.y++;
+      if (collides()) {
+        piece.y--;
+        merge();
+        checkRows();
+        piece = {
+          ...randomShape(),
+          x: Math.floor(cols / 2) - 1,
+          y: 0
+        };
+      }
+    }
 
     // Move the piece left
     function moveLeft() {
@@ -204,72 +180,26 @@ function moveDown() {
       }
     }
 
-    // Touch controls
-    let touchStartX, touchStartY;
-    let touchMoved = false;
-
-    canvas.addEventListener('touchstart', function(e) {
-      e.preventDefault();
-      touchStartX = e.touches[0].clientX;
-      touchStartY = e.touches[0].clientY;
-      touchMoved = false;
-    });
-
-    canvas.addEventListener('touchmove', function(e) {
-      e.preventDefault();
-      touchMoved = true;
-    });
-
-    canvas.addEventListener('touchend', function(e) {
-      e.preventDefault();
-      const touchEndX = e.changedTouches[0].clientX;
-      const touchEndY = e.changedTouches[0].clientY;
-      
-      if (!touchMoved) {
+    // Keyboard controls
+    document.addEventListener('keydown', event => {
+      if (event.key === 'ArrowLeft') {
+        moveLeft();
+      } else if (event.key === 'ArrowRight') {
+        moveRight();
+      } else if (event.key === 'ArrowDown') {
+        moveDown();
+      } else if (event.key === ' ') {
         rotate();
-      } else {
-        const dx = touchEndX - touchStartX;
-        const dy = touchEndY - touchStartY;
-
-        if (Math.abs(dx) > Math.abs(dy)) {
-          // Horizontal swipe
-          if (dx > 0) {
-            moveRight();
-          } else {
-            moveLeft();
-          }
-        } else {
-          // Vertical swipe
-          if (dy > 0) {
-            moveDown();
-          }
-        }
       }
-    });
-
-    // Tap anywhere to rotate
-    document.addEventListener('click', function() {
-      rotate();
     });
 
     // Main game loop
-    function gameLoop() {
-      draw();
-      if (!isGameOver()) {
-        moveDown();
-        setTimeout(gameLoop, 500); // Adjust timeout to slow down the game
-      } else {
-        // Game over logic
-        ctx.fillStyle = 'red';
-        ctx.font = '30px Arial';
-        ctx.fillText('Game Over', canvas.width / 2 - 80, canvas.height / 2);
-      }
-    }
+function gameLoop() {
+  draw();
+  moveDown();
+  setTimeout(gameLoop, 500); // Adjust timeout to slow down the game
+}
 
-    // Check if the game is over
-    function isGameOver() {
-      return collides();
-    }
 
     // Start the game
     reset();

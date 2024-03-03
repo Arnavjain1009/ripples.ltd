@@ -154,43 +154,7 @@ form.addEventListener('submit', async (e) => {
     const prompt = e.target.prompt.value.toLowerCase();
 
     // Check if prompt contains the keyword "openai"
-    if (prompt.includes("openai")) {
-      alert("please do not refer to openai we are r9gpt")
-      window.location.href = "r9gpt.html"
-    }
-    if (prompt.includes("chatgpt")) {
-      alert("please do not refer to chatgpt we are r9gpt")
-      window.location.href = "r9gpt.html"
-    }
-    if (prompt.includes("r9gpt")) {
-      alert("r9gpt has created the ai you are using")
-      window.location.href = "r9gpt.html"
-    }
-    if (prompt.includes("who created you")) {
 
-      alert("r9gpt has created the ai you are using")
-      window.location.href = "r9gpt.html"
-    }
-    if (prompt.includes("you")) {
-
-      alert("r9gpt has created the ai you are using")
-      window.location.href = "r9gpt.html"
-    }
-    if (prompt.includes("your")) {
-
-      alert("r9gpt has created the ai you are using")
-      window.location.href = "r9gpt.html"
-    }
-    if (prompt.includes("name")) {
-
-      alert("r9gpt has created the ai you are using")
-      window.location.href = "r9gpt.html"
-    }
-    if (prompt.includes("made")) {
-
-      alert("r9gpt has created the ai you are using")
-      window.location.href = "r9gpt.html"
-    }
 
     main(prompt);
 
