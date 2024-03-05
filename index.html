@@ -1,191 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-    <style>
-        /* CSS for the overlay */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent grey */
-            z-index: 000;
-        }
-
-        /* CSS for the popup */
-        .popup {
-    position: fixed;
-    bottom: 20px; /* Adjust this value to change the distance from the bottom */
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(204, 204, 204, 0.7); /* Semi-transparent grey background */
-    padding: 20px;
-    border-radius: 20px; /* Rounded corners */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 1;
-}
-
-        .popup img {
-            width: 41px;
-            height: 40px;
-            margin-right: 10px;
-        }
-
-        .popup a {
-            display: inline-block;
-            background-color: #ffaa000f; /* Button color */
-            color: rgba(204, 204, 204, 0.7);
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-        }
-
-        .popup a:hover {
-            background-color: #0056b3; /* Button color on hover */
-        }
-    </style>
-</head>
-
-<body>
-
-    <!-- Overlay to disable interactions -->
-    <div class="overlay"></div>
-    
-    <!-- Popup content -->
-    <div id="popup" class="popup">
-        <p>This website uses cookies</p>
-        <a href="#" id="acceptButton">Accept</a>
-        <a href="https://free-4575561.webadorsite.com/" id="denyButton">Deny</a>
-        <a href="privacy.html">privacy policy</a>
-    </div>
-    
-    <script>
-        // Function to hide the overlay and enable interactions
-        function hideOverlay() {
-            var overlay = document.querySelector('.overlay');
-            overlay.style.display = 'none';
-        }
-
-        // Function to display the popup
-        function displayPopup() {
-            var popup = document.getElementById('popup');
-            popup.style.display = 'block';
-        }
-
-        // Function to hide the popup
-        function hidePopup() {
-            var popup = document.getElementById('popup');
-            popup.style.display = 'none';
-            hideOverlay(); // Also hide the overlay
-        }
-
-        // Redirect to privacy page
-        function redirectToPrivacy() {
-            window.location.href = "privacy.html";
-        }
-
-        // Add event listener to accept button
-        document.getElementById("acceptButton").addEventListener("click", function() {
-            hidePopup();
-        });
-
-        // Add event listener to deny button
-        document.getElementById("denyButton").addEventListener("click", function() {
-            window.location.href = "//free-4575561.webadorsite.com/";
-        });
-
-        // Call the displayPopup function
-        displayPopup();
-    </script>
-    
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ripples by Arnav Jain - R9GPT, R9Chat, R9Learn, Arnav Jain v80</title>
     <meta name="description" content="Explore Ripples by Arnav Jain, featuring R9GPT, R9Chat, R9Learn, and more. Discover a world of technology and innovation.">
-    <link rel="icon" type="image/svg+xml"
-        href="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=1000&height=1000" />
-    <style>
-        /* CSS for the popup */
-   /* CSS for the popup */
-.popup {
-    display: none;
-    position: bottom;
-    top: 65%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-   
-    background-color: rgba(204, 204, 204, 0.7);
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
-    border-radius: 15px;
-    z-index: 4;
-    max-width: 400px;
-    text-align: center;
-}
-
-
-
-/* Adjustments for desktop */
-@media (min-width: 768px) {
-    .popup {
-        width: 60%; /* Adjust width as needed */
-        max-width: 600px; /* Limit max width */
-    }
-}
-
-        @keyframes slideUp {
-            0% { bottom: -100px; opacity: 0; }
-            100% { bottom: 0; opacity: 1; }
-        }
-
-        .popup img {
-            width: 41px;
-            height: 40px;
-            margin-right: 10px;
-        }
-
-        .popup a {
-            display: inline-block;
-            background-color: #1bb8b8; /* Button color */
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration-color: black;
-
-        }
-
-        .popup a:hover {
-            background-color: #0056b3; /* Button color on hover */
-        }
-    </style>
-</head>
-
-</html>
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Ripples by Arnav Jain - R9GPT, R9Chat, R9Learn, Arnav Jain v80</title>
-    <meta name="description" content="Explore Ripples by Arnav Jain, featuring R9GPT, R9Chat, R9Learn, and more. Discover a world of technology and innovation.">
-    <link rel="icon" type="image/svg+xml"
-        href="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800" />
+    <link rel="icon" type="image/svg+xml" href="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=1000&height=1000" />
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
+            height: 100vh;
             background: url('https://source.unsplash.com/1920x1080/?nature,water') fixed;
             background-size: cover;
             background-position: center;
-            height: 100vh;
-            margin-top: 0;
             position: relative;
-            transition: background 0.5s ease-in-out;
-            overflow: hidden
+            overflow: hidden;
         }
 
         header {
@@ -210,17 +43,21 @@
             height: auto;
             margin-bottom: 10px;
             border-radius: 50%;
-            transition: transform 0.5s ease-in-out, margin-bottom 0.5s ease-in-out
+            transition: transform 0.5s ease-in-out, margin-bottom 0.5s ease-in-out;
+            animation: rotateLogo 10s linear infinite; /* Added animation */
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 24px;
-            opacity: 0.9
+        @keyframes rotateLogo {
+            0% {
+                transform: rotateY(0deg);
+            }
+            100% {
+                transform: rotateY(360deg);
+            }
         }
 
         header img:hover {
-            transform: rotate(360deg) scale(1.8)
+            transform: rotate(360deg) scale(1.8);
         }
 
         .container {
@@ -245,52 +82,52 @@
             transition: transform 0.5s ease-in-out, height 1s ease-in-out;
         }
         .button {
-    flex: 1 1 calc(50% - 15px);
-    padding: 15px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 18px;
-    border-radius: 50px; /* Changed border-radius to 50px for more rounded corners */
-    transition: background-color 0.3s ease, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    box-sizing: border-box;
-    color: rgba(255, 255, 255, 0.8);
-    background-color: rgba(0, 0, 0, 0.5);
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-}
+            flex: 1 1 calc(50% - 15px);
+            padding: 15px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 50px; /* Changed border-radius to 50px for more rounded corners */
+            transition: background-color 0.3s ease, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            box-sizing: border-box;
+            color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(0, 0, 0, 0.5);
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+        }
 
         .button:hover {
             background-color: rgba(0, 0, 0, 0.8);
             transform: translateY(-5px);
-            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3)
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
         }
 
         @media (min-width: 768px) {
             header img {
-                max-width: 120px
+                max-width: 120px;
             }
 
             header h1 {
-                font-size: 32px
+                font-size: 32px;
             }
 
             .button {
-                flex: 1 1 calc(33.333% - 15px)
+                flex: 1 1 calc(33.333% - 15px);
             }
         }
 
         @media (max-width: 767px) {
             header img {
-                max-width: 50%
+                max-width: 50%;
             }
 
             .button {
-                flex: 1 1 calc(50% - 15px)
+                flex: 1 1 calc(50% - 15px);
             }
         }
 
         @media (min-width: 1024px) {
             .button {
-                flex: 1 1 calc(25% - 15px)
+                flex: 1 1 calc(25% - 15px);
             }
         }
 
@@ -300,7 +137,7 @@
             left: 10px;
             cursor: pointer;
             z-index: 3;
-            font-size: 24px
+            font-size: 24px;
         }
 
         #settings-popup {
@@ -315,7 +152,7 @@
             border-radius: 15px;
             z-index: 4;
             max-width: 400px;
-            text-align: center
+            text-align: center;
         }
 
         #settings-popup a {
@@ -325,7 +162,7 @@
             font-size: 18px;
             color: #333;
             text-decoration: none;
-            transition: color 0.3s ease
+            transition: color 0.3s ease;
         }
 
         #close-button {
@@ -335,81 +172,39 @@
             cursor: pointer;
             font-size: 20px;
             color: #555;
-            transition: color 0.3s ease
+            transition: color 0.3s ease;
         }
 
         #settings-popup a:hover,
         #close-button:hover {
-            color: #777
+            color: #777;
+        }
+
+        .circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-image: url('https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png');
+            background-size: cover;
+            position: absolute;
+            top: -30px;
+            animation: drop 2s linear infinite;
+        }
+
+        @keyframes drop {
+            to {
+                top: 100vh;
+            }
         }
     </style>
 </head>
-
 <body>
     <div class="container">
         <header>
-            <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: #f0f0f0;
-    }
-
-    .logo-container {
-      perspective: 1000px;
-      cursor: pointer; /* Add cursor pointer */
-    }
-
-    .logo {
-      width: 200px;
-      height: auto;
-      animation: spin 10s infinite linear;
-      transition: transform 0.3s; /* Add transition for smooth expansion */
-    }
-
-    .logo.expanded {
-      transform: scale(1.5); /* Expand logo when clicked */
-    }
-
-    @keyframes spin {
-      from {
-        transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
-      }
-      to {
-        transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="logo-container">
-    <a href="https://play.google.com/store/apps/details?id=co.median.android.wqnqaq&pcampaignid=web_share" target="_blank">
-      <img src="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=1001&height=1000" alt="Logo" class="logo">
-    </a>
-  </div>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const logo = document.querySelector('.logo');
-
-      logo.addEventListener('click', function() {
-        logo.classList.toggle('expanded'); // Toggle 'expanded' class on click
-      });
-    });
-  </script>
-</body>
-</html>
-<h1>Ripples by Arnav Jain v80</h1>
+            <a href="https://play.google.com/store/apps/details?id=co.median.android.wqnqaq&pcampaignid=web_share" target="_blank">
+                <img src="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=1001&height=1000" alt="Logo">
+            </a>
+            <h1>Ripples by Arnav Jain v80</h1>
             <div id="settings-icon">☰</div> <!-- Moved settings icon to the header -->
         </header>
 
@@ -452,6 +247,21 @@
             });
         });
     </script>
-</body>
 
+    <script>
+        // JavaScript to create circles dropping from the top of the screen
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.container');
+            const numCircles = 20; // Change this value to adjust the number of circles
+
+            for (let i = 0; i < numCircles; i++) {
+                const circle = document.createElement('div');
+                circle.classList.add('circle');
+                circle.style.left = `${Math.random() * 100}vw`; // Random horizontal position
+                circle.style.animationDuration = `${Math.random() * 2 + 1}s`; // Random animation duration
+                container.appendChild(circle);
+            }
+        });
+    </script>
+</body>
 </html>
