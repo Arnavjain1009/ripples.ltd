@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropping Circles Background</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            background-image: url('https://source.unsplash.com/featured/?nature');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .circle {
+            position: absolute;
+            background-image: url('https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=1000&height=1000');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 80px; /* Set the width of the circles */
+            height: 80px; /* Set the height of the circles */
+            border-radius: 50%;
+            animation: dropCircle 2s ease-in-out infinite;
+        }
+
+        @keyframes dropCircle {
+            0% {
+                transform: translateY(-100%);
+            }
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container"></div>
+
+    <script>
+        function createCircle() {
+            const circle = document.createElement('div');
+            circle.classList.add('circle');
+
+            circle.style.left = Math.random() * innerWidth + 'px';
+            circle.style.animationDuration = Math.random() * 3 + 2 + 's';
+
+            document.querySelector('.container').appendChild(circle);
+
+            setTimeout(() => {
+                circle.remove();
+            }, 5000);
+        }
+
+        setInterval(createCircle, 150);
+    </script>
+</body>
+</html>
