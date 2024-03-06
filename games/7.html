@@ -1,113 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>r9gpt prototype</title>
-<h1>r9gpt beta</h1>
-<button onclick="window.location.href='https://www.ripples.ltd/r9ai/r9gpt.html'">finished ai</button>
-<style>
-    #chat-window {
-        width: 300px;
-        height: 400px;
-        border: 1px solid #ccc;
-        overflow-y: scroll;
-        padding: 10px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
 
-    .message {
-        margin-bottom: 10px;
-    }
+        .chat-container {
+            max-width: 500px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
-    .user-message {
-        text-align: right;
-        color: blue;
-    }
+        .chat-box {
+            height: 300px;
+            overflow-y: scroll;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
 
-    .bot-message {
-        text-align: left;
-        color: green;
-    }
+        input[type="text"] {
+            width: calc(100% - 70px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
 
-    input[type="text"] {
-        width: 200px;
-        padding: 5px;
-        margin-top: 10px;
-    }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-    button {
-        padding: 5px 10px;
-        margin-top: 10px;
-    }
-</style>
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
+    <div class="chat-container">
+        <div class="chat-box" id="chat-box"></div>
+        <input type="text" id="user-input" placeholder="Type your message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+    <script>
+        function sendMessage() {
+            var userInput = document.getElementById("user-input").value;
+            var chatBox = document.getElementById("chat-box");
 
-<div id="chat-window"></div>
-<input type="text" id="user-input" placeholder="Type your message...">
-<button onclick="sendMessage()">Send</button>
+            // Display user message
+            var userMessage = '<div style="text-align: right; margin-bottom: 10px;"><strong>You:</strong> ' + userInput + '</div>';
+            chatBox.innerHTML += userMessage;
 
-<script>
-const chatWindow = document.getElementById("chat-window");
-const userInput = document.getElementById("user-input");
+            // Fetch AI response from Wikipedia API
+            fetch('https://en.wikipedia.org/api/rest_v1/page/summary/' + userInput)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.extract) {
+                        // Display AI response
+                        var aiMessage = '<div style="margin-bottom: 10px;"><strong>AI:</strong> ' + data.extract + '</div>';
+                        chatBox.innerHTML += aiMessage;
+                    } else {
+                        var errorMessage = '<div style="color: red;">only capable enough for one real word.</div>';
+                        chatBox.innerHTML += errorMessage;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
 
-function sendMessage() {
-    const userMessage = userInput.value.trim();
-    if (userMessage === "") return;
-    
-    displayMessage(userMessage, "user");
-    getResponse(userMessage);
-    userInput.value = "";
-}
-
-function displayMessage(message, sender) {
-    const messageElement = document.createElement("div");
-    messageElement.classList.add("message");
-    messageElement.textContent = `${sender}: ${message}`;
-    if (sender === "user") {
-        messageElement.classList.add("user-message");
-    } else {
-        messageElement.classList.add("bot-message");
-    }
-    chatWindow.appendChild(messageElement);
-    chatWindow.scrollTop = chatWindow.scrollHeight;
-}
-
-function getResponse(message) {
-    const keywords = ['time', 'weather', 'news'];
-    let response = "I'm sorry, I don't understand. Please ask about time, weather, or news.";
-
-    for (let keyword of keywords) {
-        if (message.toLowerCase().includes(keyword)) {
-            response = generateResponse(keyword);
-            break;
+            // Clear user input field
+            document.getElementById("user-input").value = "";
         }
-    }
-
-    setTimeout(() => {
-        displayMessage(response, "AI");
-    }, 500); // Simulate a slight delay before receiving the response
-}
-
-function generateResponse(keyword) {
-    // Generate a response based on the keyword
-    const timePhrases = ["It's time to seize the day!", "Time's ticking, make every moment count!"];
-    const weatherPhrases = ["Sunny vibes are on the horizon!", "The weather's dancing to a sunny beat!"];
-    const newsPhrases = ["Grab your popcorn, we're diving into the news reel!", "Stay tuned for the latest scoop!"];
-
-    switch (keyword) {
-        case 'time':
-            return timePhrases[Math.floor(Math.random() * timePhrases.length)];
-        case 'weather':
-            return weatherPhrases[Math.floor(Math.random() * weatherPhrases.length)];
-        case 'news':
-            return newsPhrases[Math.floor(Math.random() * newsPhrases.length)];
-        default:
-            return "I'm sorry, I don't have information about that.";
-    }
-}
-
-</script>
-
+    </script>
 </body>
 </html>
