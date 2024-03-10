@@ -3,66 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Popup Buttons</title>
+<title>Display IP Address</title>
 <style>
-.popup {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.5);
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
 }
 
-.popup-content {
-  background-color: white;
-  margin: 20% auto;
+.container {
+  max-width: 500px;
+  margin: 50px auto;
   padding: 20px;
-  border: 1px solid #888;
-  width: 60%;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.close {
-  color: black;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+h1 {
+  color: #333;
 }
 
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+p {
+  color: #666;
 }
 </style>
 </head>
 <body>
-
-<button class="button" onclick="showPopup('letter.png', 'Write a heartfelt letter to your mom expressing your gratitude and love.')">My Letter 💌</button>
-<button class="button" onclick="showPopup('memories.png', 'Recall and cherish beautiful memories with your mom through photos and descriptions.')">Our Memories 📸</button>
-<button class="button" onclick="showPopup('gifts.png', 'Choose special gifts for your mom to show your appreciation and love.')">My Love ❤️</button>
-
-<div id="popup" class="popup">
-  <span class="close" onclick="closePopup()">&#10060;</span>
-  <div id="popup-content" class="popup-content"></div>
+<div class="container">
+  <h1>Your IP Address:</h1>
+  <p id="ip-address">Fetching...</p>
 </div>
-
 <script>
-function showPopup(imageSrc, content) {
-  var popup = document.getElementById("popup");
-  var popupContent = document.getElementById("popup-content");
-  popupContent.innerHTML = "<img src='" + imageSrc + "'><p>" + content + "</p>";
-  popup.style.display = "block";
-}
-
-function closePopup() {
-  var popup = document.getElementById("popup");
-  popup.style.display = "none";
-}
+document.addEventListener('DOMContentLoaded', function() {
+  fetch('https://api64.ipify.org?format=json')
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById('ip-address').textContent = data.ip;
+    })
+    .catch(error => {
+      console.error('Error fetching IP address:', error);
+      document.getElementById('ip-address').textContent = 'Failed to fetch IP address';
+    });
+});
 </script>
 </body>
 </html>

@@ -354,29 +354,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function fnSignUP() {
-            var myuserid = document.getElementById("username1").value;
-            var mypassword = document.getElementById("password1").value;
+        var myuserid = document.getElementById("username1").value.toLowerCase(); // Convert username to lowercase
+        var mypassword = document.getElementById("password1").value;
 
-            if (mypassword == "") {
-                alert("Password is blank");
-                return;
-            }
-
-            if (myuserid == "") {
-                alert("UserID is blank");
-                return;
-            }
-
-            database.ref("/users/" + myuserid).update({
-                password: mypassword
-            });
-
-            database.ref("/users/" + myuserid).off();
-
-            alert("username: " + myuserid + " was created successfully, thank you " + myuserid);
-
+        if (mypassword == "") {
+            alert("Password is blank");
+            return;
         }
 
+        if (myuserid == "") {
+            alert("UserID is blank");
+            return;
+        }
+
+        // Check if user already exists (case-insensitive)
+        database.ref("/users/" + myuserid).once("value")
+            .then(function(snapshot) {
+                if (snapshot.exists()) {
+                    alert("Account already exists. Unable to create.");
+                } else {
+                    // Create new user account
+                    database.ref("/users/" + myuserid).set({
+                        password: mypassword
+                    });
+
+                    alert("Username: " + myuserid + " was created successfully. Thank you, " + myuserid);
+                }
+            })
+            .catch(function(error) {
+                console.error("Error checking user:", error);
+            });
+    }
         function CreateUUID() {
             return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
                 var r = Math.random() * 16 | 0,
