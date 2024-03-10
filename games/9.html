@@ -1,91 +1,315 @@
 <!DOCTYPE html>
-<html>
-<body>
-
-
-<iframe src="https://arnavjain1009.github.io/sdhgfvbnfghntym/" height="400" width="100%" title="Iframe Example"></iframe>
-
-</body>
-</html><style>
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.9);
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .loading-logo {
-            animation: rotateLogo 0.33s linear infinite;
-            max-width: 100px;
-            height: auto;
-        }
-
-        @keyframes rotateLogo {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="loading-overlay" id="loading-overlay">
-        <img src="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=1000&height=1000" alt="Loading..." class="loading-logo">
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const loadingOverlay = document.getElementById('loading-overlay');
-
-            // Show loading animation on page load
-            loadingOverlay.style.display = 'flex';
-
-            // Hide loading animation after 1 second (adjust the duration as needed)
-            setTimeout(() => {
-                loadingOverlay.style.display = 'none';
-            }, 333); // 1 second duration
-        });
-    </script>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website with Loading Animation</title>
-    <style>
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.9);
-            z-index: 9999;
-            display: none;
-            justify-content: center;
-            align-items: center;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Mother's Day!</title>
+<style>
+/* CSS styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: url('background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #333;
+  text-align: center;
+}
 
-        .loading-logo {
-            animation: rotateLogo 0.33s linear infinite;
-            max-width: 100px;
-            height: auto;
-        }
+.container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
 
-        @keyframes rotateLogo {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
+.heading {
+  font-size: 42px;
+  margin-bottom: 20px;
+  color: #FF4081;
+}
 
+.greeting {
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+#heart {
+  font-size: 100px;
+  animation: pulse 1s infinite alternate;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 10px;
+  background-color: #FF4081;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.button:hover {
+  background-color: #F50057;
+  transform: scale(1.1);
+}
+
+.feature {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.feature img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.feature img:hover {
+  transform: scale(1.1);
+}
+
+.feature p {
+  font-size: 18px;
+}
+
+.scroll-down {
+  margin-top: 50px;
+  font-size: 24px;
+}
+
+.scroll-down span {
+  cursor: pointer;
+  border-bottom: 2px solid #FF4081;
+  transition: border-bottom 0.3s ease;
+}
+
+.scroll-down span:hover {
+  border-bottom: 2px solid #F50057;
+}
+
+.quote {
+  font-style: italic;
+  margin-top: 20px;
+}
+
+.additional-feature {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.additional-feature img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.additional-feature img:hover {
+  transform: rotate(360deg);
+}
+
+.gallery {
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.gallery img {
+  width: 200px;
+  height: 200px;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+  cursor: pointer; /* Added cursor pointer */
+}
+
+.gallery img:hover {
+  transform: scale(1.1);
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.9);
+}
+
+.modal-content {
+  margin: 10% auto;
+  padding: 20px;
+  width: 80%;
+  max-width: 600px;
+  background-color: #fefefe;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.gallery-modal img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.footer {
+  margin-top: 50px;
+  font-size: 18px;
+  color: #555;
+}
+
+.footer a {
+  color: #FF4081;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 600px) {
+  .gallery img {
+    width: 150px;
+    height: 150px;
+  }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1 class="heading">Happy Mother's Day!</h1>
+  <p class="greeting">Thank you for everything you do!</p>
+  <span id="heart">❤️MUMMA💖</span>
+  <div class="feature">
+    <button class="button" onclick="showPopup('letter.png', 'Write a heartfelt letter to your mom expressing your gratitude and love.')">My Letter 💌</button>
+    <button class="button" onclick="showPopup('memories.png', 'Recall and cherish beautiful memories with your mom through photos and descriptions.')">Our Memories 📸</button>
+    <button class="button" onclick="showPopup('gifts.png', 'Choose special gifts for your mom to show your appreciation and love.')"> my love❤️</button>
+  </div>
+  <div class="scroll-down">
+    Scroll down to celebrate the amazing <span onclick="scrollToMom()">Mom</span>!
+  </div>
+  <p class="quote">"A mother is the truest friend we have, when trials heavy and sudden fall upon us; when adversity takes the place of prosperity; when friends desert us; when trouble thickens around us, still will she cling to us, and endeavor by her kind precepts and counsels to dissipate the clouds of darkness, and cause peace to return to our hearts.”"</p>
+  <div class="additional-feature">
+    <img src="https://primary.jwwb.nl/public/s/u/k/temp-yvrbihmllstbavaxngtg/earn.jpg" alt="earn" onclick="animateHug()">
+    <img src="https://primary.jwwb.nl/public/s/u/k/temp-yvrbihmllstbavaxngtg/00x0j0/feed-1.jpg" alt="feed" onclick="animateCook()">
+  </div>
+  <div class="additional-feature">
+    <img src="https://primary.jwwb.nl/public/s/u/k/temp-yvrbihmllstbavaxngtg/lv0fob/grow.jpg?enable-io=true&enable=upscale&crop=1921%2C1440%2Cx0%2Cy0%2Csafe&width=980&height=735" alt="grow" onclick="animateSmile()">
+    <img src="https://primary.jwwb.nl/public/s/u/k/temp-yvrbihmllstbavaxngtg/a7hzus/inspire.jpg?enable-io=true&enable=upscale&crop=1328%2C747%2Cx0%2Cy0%2Csafe&width=980&height=551" alt="inspire" onclick="animateGift()">
+  </div>
+  <div class="gallery">
+    <img src="https://primary.jwwb.nl/public/r/w/b/temp-ieopfdslxmugkhlfpcxq/yffxfb/1pic.jpg?enable-io=true&enable=upscale&crop=1918%2C932%2Cx0%2Cy0%2Csafe&width=480&height=476" alt="Image 1" onclick="showImagePopup('https://primary.jwwb.nl/public/r/w/b/temp-ieopfdslxmugkhlfpcxq/yffxfb/1pic.jpg?enable-io=true&enable=upscale&crop=1918%2C932%2Cx0%2Cy0%2Csafe&width=480&height=476')">
+    <img src="https://primary.jwwb.nl/public/r/w/b/temp-ieopfdslxmugkhlfpcxq/2pic.jpg" alt="Image 2" onclick="showImagePopup('https://primary.jwwb.nl/public/r/w/b/temp-ieopfdslxmugkhlfpcxq/2pic.jpg')">
+    <img src="https://primary.jwwb.nl/public/r/w/b/temp-ieopfdslxmugkhlfpcxq/3pic.jpg" alt="Image 3" onclick="showImagePopup('https://primary.jwwb.nl/public/r/w/b/temp-ieopfdslxmugkhlfpcxq/3pic.jpg')">
+    <img src="https://primary.jwwb.nl/public/r/w/b/temp-ieopfdslxmugkhlfpcxq/a22kuj/4pic.jpg?enable-io=true&enable=upscale&crop=1600%2C776%2Cx0%2Cy0%2Csafe&width=980&height=475" alt="Image 4" onclick="showImagePopup('https://primary.jwwb.nl/public/r/w/b/temp-ieopfdslxmugkhlfpcxq/a22kuj/4pic.jpg?enable-io=true&enable=upscale&crop=1600%2C776%2Cx0%2Cy0%2Csafe&width=980&height=475')">
+    <img src="https://primary.jwwb.nl/public/r/w/b/temp-ieopfdslxmugkhlfpcxq/5c0pv0/5pic.jpg?enable-io=true&enable=upscale&crop=1600%2C1064%2Cx0%2Cy0%2Csafe&width=980&height=652" alt="Image 5" onclick="showImagePopup('https://primary.jwwb.nl/public/r/w/b/temp-ieopfdslxmugkhlfpcxq/5c0pv0/5pic.jpg?enable-io=true&enable=upscale&crop=1600%2C1064%2Cx0%2Cy0%2Csafe&width=980&height=652')">
+    <img src="https://primary.jwwb.nl/public/r/w/b/temp-ieopfdslxmugkhlfpcxq/8lkkjb/6pic.jpg?enable-io=true&enable=upscale&crop=1600%2C1064%2Cx0%2Cy0%2Csafe&width=980&height=652" alt="Image 6" onclick="showImagePopup('https://primary.jwwb.nl/public/r/w/b/temp-ieopfdslxmugkhlfpcxq/8lkkjb/6pic.jpg?enable-io=true&enable=upscale&crop=1600%2C1064%2Cx0%2Cy0%2Csafe&width=980&height=652')">
+  </div>
+</div>
+
+<div id="imagePopup" class="modal">
+  <span class="close" onclick="closeImagePopup()">&times;</span>
+  <img class="modal-content" id="popupImage">
+</div>
+
+<script>
+// JavaScript animations
+let heart = document.getElementById('heart');
+
+heart.addEventListener('click', () => {
+  heart.style.animation = 'pulse 1s infinite alternate';
+});
+
+function scrollToMom() {
+  window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: 'smooth'
+  });
+}
+
+function showPopup(imageSrc, description) {
+  let modal = document.getElementById("myModal");
+  let popupImage = document.getElementById("popupImage");
+  let popupDescription = document.getElementById("popupDescription");
+
+  popupImage.src = imageSrc;
+  popupDescription.innerText = description;
+
+  modal.style.display = "block";
+}
+
+function closePopup() {
+  let modal = document.getElementById("myModal");
+  modal.style.display = "none";
+}
+
+// Additional JavaScript functions and animations
+function animateHug() {
+  let hug = document.querySelector('.additional-feature img[src="hug.png"]');
+  hug.style.animation = 'spin 1s linear infinite';
+}
+
+function animateCook() {
+  let cook = document.querySelector('.additional-feature img[src="cook.png"]');
+  cook.style.animation = 'spin 1s linear infinite';
+}
+
+function animateSmile() {
+  let smile = document.querySelector('.additional-feature img[src="smile.png"]');
+  smile.style.animation = 'spin 1s linear infinite';
+}
+
+function animateGift() {
+  let gift = document.querySelector('.additional-feature img[src="gift.png"]');
+  gift.style.animation = 'spin 1s linear infinite';
+}
+
+function animateHeart() {
+  let heart = document.querySelector('.additional-feature img[src="heart.png"]');
+  heart.style.animation = 'spin 1s linear infinite';
+}
+
+function showImagePopup(imageSrc) {
+  let modal = document.getElementById("imagePopup");
+  let modalImg = document.getElementById("popupImage");
+
+  modal.style.display = "block";
+  modalImg.src = imageSrc;
+}
+
+function closeImagePopup() {
+  let modal = document.getElementById("imagePopup");
+  modal.style.display = "none";
+}
+</script>
+</body>
+</html>
