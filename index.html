@@ -1,3 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cookie Banner</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    min-height: 100vh;
+  }
+  #cookie-banner {
+    background-color: #f0f0f0;
+    padding: 20px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    display: none;
+  }
+  #cookie-banner p {
+    margin: 0;
+    font-size: 16px;
+  }
+  .cookie-button {
+    margin-right: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  #accept-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+  }
+  #deny-btn {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+  }
+  #privacy-btn {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+  }
+</style>
+</head>
+<body>
+
+<div id="cookie-banner">
+  <p>We use cookies to enhance your experience. By clicking "Accept", you agree to our use of cookies.</p>
+  <button id="accept-btn" class="cookie-button">Accept</button>
+  <button id="deny-btn" class="cookie-button">Deny</button>
+  <button id="privacy-btn" class="cookie-button">Privacy</button>
+</div>
+
+<script>
+  function setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+  }
+
+  function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+  }
+
+  function checkCookie() {
+    var cookieAccepted = getCookie("cookieAccepted");
+    if (!cookieAccepted) {
+      document.getElementById("cookie-banner").style.display = "block";
+    }
+  }
+
+  window.onload = function() {
+    checkCookie();
+  };
+
+  document.getElementById("accept-btn").addEventListener("click", function() {
+    setCookie("cookieAccepted", true, 365);
+    document.getElementById("cookie-banner").style.display = "none";
+  });
+
+  document.getElementById("deny-btn").addEventListener("click", function() {
+    window.location.href = "https://www.google.com/search?q=r9gpt&sca_esv=7de577393d04b1f4&sca_upv=1&sxsrf=ACQVn0-UxgvNm8JzPndonQ5Xb4PP9QTZ-A%3A1710704292663&source=hp&ei=pEb3ZbueJqWZhbIPtaej4AE&iflsig=ANes7DEAAAAAZfdUtAyA1rcyZxuBoqmvGW3xUXnpGNZK&ved=0ahUKEwi7gLaNhvyEAxWlTEEAHbXTCBwQ4dUDCBg&uact=5&oq=r9gpt&gs_lp=Egdnd3Mtd2l6IgVyOWdwdDIKECMYgAQYigUYJ0iDDFAAWPkEcAB4AJABAJgB0QGgAaUGqgEFMC40LjG4AQPIAQD4AQGYAgWgAr4GwgIEECMYJ8ICCxAAGIAEGIoFGJECwgIREC4YgAQYsQMYgwEYxwEY0QPCAgUQLhiABMICDhAuGIAEGIoFGLEDGIMBwgIIEC4YsQMYgATCAgoQABiABBiKBRhDwgIIEAAYgAQYsQPCAhYQLhgKGIMBGMcBGLEDGMkDGNEDGIAEwgIHEC4YgAQYCsICChAAGIAEGAoYkgPCAgsQABiABBiKBRiSA8ICChAuGIAEGAoYsQOYAwCSBwUwLjQuMaAHyDI&sclient=gws-wiz";
+  });
+
+  document.getElementById("privacy-btn").addEventListener("click", function() {
+    window.location.href = "https://ripples.ltd/privacy.html";
+  });
+</script>
+
+</body>
+</html>
 
 
 <html lang="en">
@@ -228,7 +333,9 @@
             <a href="tools/home.html" class="button purple">R9TOOLS</a>
             <a href="games/home.html" class="button green">R9GAMES</a>
             <a href="r9store/index.html" class="button black">R9DELI</a>
+            
         </div>
+        <a href="/privacy.html">Privacy Policy</a>
     </div>
 
     <div id="settings-popup">
