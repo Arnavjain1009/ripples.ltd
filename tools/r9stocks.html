@@ -141,12 +141,7 @@
 
     <table id="stockTable">
         <tr>
-            <th>Date</th>
-            <th>Open</th>
-            <th>High</th>
-            <th>Low</th>
             <th>Close</th>
-            <th>Volume</th>
         </tr>
     </table>
 
@@ -190,17 +185,11 @@
 
                 stockTable.innerHTML = ''; // Clear existing table data
 
-                stockData.forEach(stock => {
+                // Insert rows in reverse order to display latest stock at the top
+                for (let i = stockData.length - 1; i >= 0; i--) {
                     const row = stockTable.insertRow();
-                    const date = new Date(stock.t);
-                    const formattedDate = date.toLocaleString(); // Convert timestamp to human-readable format
-                    row.insertCell().textContent = formattedDate;
-                    row.insertCell().textContent = stock.o;
-                    row.insertCell().textContent = stock.h;
-                    row.insertCell().textContent = stock.l;
-                    row.insertCell().textContent = stock.c;
-                    row.insertCell().textContent = stock.v;
-                });
+                    row.insertCell().textContent = stockData[i].c; // Only insert the Close price
+                }
 
                 const dates = stockData.map(stock => stock.t);
                 const closingPrices = stockData.map(stock => stock.c);
