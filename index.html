@@ -1,120 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cookie Banner</title>
-<style>
-  body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    min-height: 100vh;
-  }
-  #cookie-banner {
-    background-color: #f0f0f0;
-    padding: 20px;
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-    display: none;
-  }
-  #cookie-banner p {
-    margin: 0;
-    font-size: 16px;
-  }
-  .cookie-button {
-    margin-right: 10px;
-    padding: 10px 20px;
-    cursor: pointer;
-  }
-  #accept-btn {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-  }
-  #deny-btn {
-    background-color: #dc3545;
-    color: #fff;
-    border: none;
-  }
-  #privacy-btn {
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-  }
-</style>
-</head>
-<body>
-
-<div id="cookie-banner">
-  <p>We use cookies to enhance your experience. By clicking "Accept", you agree to our use of cookies.</p>
-  <button id="accept-btn" class="cookie-button">Accept</button>
-  <button id="deny-btn" class="cookie-button">Deny</button>
-  <button id="privacy-btn" class="cookie-button">Privacy</button>
-</div>
-
-<script>
-  function setCookie(name, value, days) {
-    var expires = "";
-    if (days) {
-      var date = new Date();
-      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-      expires = "; expires=" + date.toUTCString();
-    }
-    document.cookie = name + "=" + (value || "") + expires + "; path=/";
-  }
-
-  function getCookie(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-    }
-    return null;
-  }
-
-  function checkCookie() {
-    var cookieAccepted = getCookie("cookieAccepted");
-    if (!cookieAccepted) {
-      document.getElementById("cookie-banner").style.display = "block";
-    }
-  }
-
-  window.onload = function() {
-    checkCookie();
-  };
-
-  document.getElementById("accept-btn").addEventListener("click", function() {
-    setCookie("cookieAccepted", true, 365);
-    document.getElementById("cookie-banner").style.display = "none";
-  });
-
-  document.getElementById("deny-btn").addEventListener("click", function() {
-    window.location.href = "https://www.google.com/search?q=r9gpt&sca_esv=7de577393d04b1f4&sca_upv=1&sxsrf=ACQVn0-UxgvNm8JzPndonQ5Xb4PP9QTZ-A%3A1710704292663&source=hp&ei=pEb3ZbueJqWZhbIPtaej4AE&iflsig=ANes7DEAAAAAZfdUtAyA1rcyZxuBoqmvGW3xUXnpGNZK&ved=0ahUKEwi7gLaNhvyEAxWlTEEAHbXTCBwQ4dUDCBg&uact=5&oq=r9gpt&gs_lp=Egdnd3Mtd2l6IgVyOWdwdDIKECMYgAQYigUYJ0iDDFAAWPkEcAB4AJABAJgB0QGgAaUGqgEFMC40LjG4AQPIAQD4AQGYAgWgAr4GwgIEECMYJ8ICCxAAGIAEGIoFGJECwgIREC4YgAQYsQMYgwEYxwEY0QPCAgUQLhiABMICDhAuGIAEGIoFGLEDGIMBwgIIEC4YsQMYgATCAgoQABiABBiKBRhDwgIIEAAYgAQYsQPCAhYQLhgKGIMBGMcBGLEDGMkDGNEDGIAEwgIHEC4YgAQYCsICChAAGIAEGAoYkgPCAgsQABiABBiKBRiSA8ICChAuGIAEGAoYsQOYAwCSBwUwLjQuMaAHyDI&sclient=gws-wiz";
-  });
-
-  document.getElementById("privacy-btn").addEventListener("click", function() {
-    window.location.href = "https://ripples.ltd/privacy.html";
-  });
-</script>
-
-</body>
-</html>
-
-
-<html lang="en">
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ripples by Arnav Jain - R9GPT, R9Chat, R9Learn, Arnav Jain v1.00</title>
     <meta name="description" content="Explore Ripples by Arnav Jain, featuring R9GPT, R9Chat, R9Learn, and more. Discover a world of technology and innovation.">
     <link rel="icon" type="image/svg+xml" href="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=1000&height=1000" />
     <style>
-      
-          html, body {
+        html, body {
             margin: 0;
             padding: 0;
             overflow: hidden; /* Prevent scrolling */
@@ -125,7 +18,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            height: 100vh;
+            justify-content: center;
+            min-height: 100vh;
             background: url('https://source.unsplash.com/1920x1080/?nature,water') fixed;
             background-size: cover;
             background-position: center;
@@ -308,80 +202,173 @@
                 top: 100vh;
             }
         }
-    
 
-
-    
-</style>
+        /* Cookie Banner Styles */
+        #cookie-banner {
+            background-color: #f0f0f0;
+            padding: 20px;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            display: none;
+            max-width: 400px; /* Limit the width of the banner */
+            text-align: center; /* Center the content inside */
+            position: fixed; /* Change to fixed position */
+            bottom: 50%; /* Center vertically */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, 50%); /* Center the banner */
+            z-index: 9999; /* Ensure the banner appears on top of everything */
+            border-radius: 20px; /* Rounded corners */
+        }
+        #cookie-banner p {
+            margin: 0;
+            font-size: 16px;
+        }
+        .cookie-button {
+            margin-right: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        #accept-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+        }
+        #deny-btn {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+        }
+        #privacy-btn {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+        }
+    </style>
 </head>
 <body>
 
-<body>
-    <div class="container">
-        <header>
-            <a href="https://play.google.com/store/apps/details?id=co.median.android.wqnqaq&pcampaignid=web_share" target="_blank">
-                <img src="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=1001&height=1000" alt="Logo">
-            </a>
-            <h1>Ripples by Arnav Jain v1.00</h1>
-            <div id="settings-icon">☰</div> <!-- Moved settings icon to the header -->
-        </header>
+<div class="container">
+    <header>
+        <a href="https://play.google.com/store/apps/details?id=co.median.android.wqnqaq&pcampaignid=web_share" target="_blank">
+            <img src="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=1001&height=1000" alt="Logo">
+        </a>
+        <h1>Ripples by Arnav Jain v1.00</h1>
+        <div id="settings-icon">☰</div> <!-- Moved settings icon to the header -->
+    </header>
 
-        <div class="buttons-container">
-            <a href="whattschat/index.html" class="button blue">R9CHAT</a>
-            <a href="learn/home.html" class="button pink">R9LEARN</a>
-            <a href="r9ai/r9gpt.html" class="button orange">R9GPT</a>
-            <a href="tools/home.html" class="button purple">R9TOOLS</a>
-            <a href="games/home.html" class="button green">R9GAMES</a>
-            <a href="r9store/index.html" class="button black">R9DELI</a>
-            
-        </div>
-        <a href="/privacy.html">Privacy Policy</a>
+    <div class="buttons-container">
+        <a href="whattschat/index.html" class="button blue">R9CHAT</a>
+        <a href="learn/home.html" class="button pink">R9LEARN</a>
+        <a href="r9ai/r9gpt.html" class="button orange">R9GPT</a>
+        <a href="tools/home.html" class="button purple">R9TOOLS</a>
+        <a href="games/home.html" class="button green">R9GAMES</a>
+        <a href="r9store/index.html" class="button black">R9DELI</a>
     </div>
+    <a href="/privacy.html">Privacy Policy</a>
+</div>
 
-    <div id="settings-popup">
-        <div id="close-button">✖️</div>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="https://reportaproblem.webador.co.uk">Contact</a>
-        <a href="https://ripples.ltd">back to home</a>
-    </div>
+<div id="cookie-banner">
+    <p>We use cookies to enhance your experience. By clicking "Accept", you agree to our use of cookies.</p>
+    <button id="accept-btn" class="cookie-button">Accept</button>
+    <button id="deny-btn" class="cookie-button">Deny</button>
+    <button id="privacy-btn" class="cookie-button">Privacy</button>
+</div>
 
-    <script>
-        // Add this script for handling settings popup
-        document.addEventListener('DOMContentLoaded', () => {
-            const settingsIcon = document.getElementById('settings-icon');
-            const settingsPopup = document.getElementById('settings-popup');
-            const closeButton = document.getElementById('close-button');
+<div id="settings-popup">
+    <div id="close-button">✖️</div>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="https://reportaproblem.webador.co.uk">Contact</a>
+    <a href="https://ripples.ltd">back to home</a>
+</div>
 
-            settingsIcon.addEventListener('click', () => {
-                settingsPopup.style.display = 'block';
-            });
+<script>
+    // Add this script for handling settings popup
+    document.addEventListener('DOMContentLoaded', () => {
+        const settingsIcon = document.getElementById('settings-icon');
+        const settingsPopup = document.getElementById('settings-popup');
+        const closeButton = document.getElementById('close-button');
 
-            closeButton.addEventListener('click', () => {
-                settingsPopup.style.display = 'none';
-            });
-
-            document.addEventListener('click', (event) => {
-                if (event.target !== settingsIcon && event.target !== settingsPopup && event.target !== closeButton) {
-                    settingsPopup.style.display = 'none';
-                }
-            });
+        settingsIcon.addEventListener('click', () => {
+            settingsPopup.style.display = 'block';
         });
-    </script>
 
-    <script>
-        // JavaScript to create circles dropping from the top of the screen
-        document.addEventListener('DOMContentLoaded', () => {
-            const container = document.querySelector('.container');
-            const numCircles = 20; // Change this value to adjust the number of circles
+        closeButton.addEventListener('click', () => {
+            settingsPopup.style.display = 'none';
+        });
 
-            for (let i = 0; i < numCircles; i++) {
-                const circle = document.createElement('div');
-                circle.classList.add('circle');
-                circle.style.left = `${Math.random() * 100}vw`; // Random horizontal position
-                circle.style.animationDuration = `${Math.random() * 2 + 1}s`; // Random animation duration
-                container.appendChild(circle);
+        document.addEventListener('click', (event) => {
+            if (event.target !== settingsIcon && event.target !== settingsPopup && event.target !== closeButton) {
+                settingsPopup.style.display = 'none';
             }
         });
-    </script>
+    });
+
+    // JavaScript to create circles dropping from the top of the screen
+    document.addEventListener('DOMContentLoaded', () => {
+        const container = document.querySelector('.container');
+        const numCircles = 20; // Change this value to adjust the number of circles
+
+        for (let i = 0; i < numCircles; i++) {
+            const circle = document.createElement('div');
+            circle.classList.add('circle');
+            circle.style.left = `${Math.random() * 100}vw`; // Random horizontal position
+            circle.style.animationDuration = `${Math.random() * 2 + 1}s`; // Random animation duration
+            container.appendChild(circle);
+        }
+    });
+
+    function setCookie(name, value, days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
+
+    function getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+
+    function checkCookie() {
+        var cookieAccepted = getCookie("cookieAccepted");
+        if (!cookieAccepted) {
+            document.getElementById("cookie-banner").style.display = "block";
+        }
+    }
+
+    window.onload = function() {
+        checkCookie();
+    };
+
+    document.getElementById("accept-btn").addEventListener("click", function() {
+        setCookie("cookieAccepted", true, 365);
+        document.getElementById("cookie-banner").style.display = "none";
+    });
+
+    document.getElementById("deny-btn").addEventListener("click", function() {
+        // Clear all existing cookies
+        var cookies = document.cookie.split(";");
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i];
+            var eqPos = cookie.indexOf("=");
+            var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        }
+        document.getElementById("cookie-banner").style.display = "none";
+    });
+
+    document.getElementById("privacy-btn").addEventListener("click", function() {
+        window.location.href = "https://ripples.ltd/privacy.html";
+    });
+</script>
+
 </body>
 </html>
