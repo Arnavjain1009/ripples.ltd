@@ -1,104 +1,8 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-
-<style>
-  /* Add this style for the settings icon */
-  #settings-icon {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      cursor: pointer;
-      z-index: 3;
-      font-size: 24px;
-  }
-
-  /* Add this style for the settings popup */
-  #settings-popup {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      padding: 20px;
-      background-color: rgba(255, 255, 255, 0.95);
-      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
-      border-radius: 15px;
-      z-index: 4;
-      max-width: 400px;
-      text-align: center;
-  }
-
-  /* Add this style to center the links in the popup */
-  #settings-popup a {
-      display: block;
-      margin-bottom: 15px;
-      text-align: center;
-      font-size: 18px;
-      color: #333;
-      text-decoration: none;
-      transition: color 0.3s ease;
-  }
-
-  /* Add this style for the close button */
-  #close-button {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      cursor: pointer;
-      font-size: 20px;
-      color: #555;
-      transition: color 0.3s ease;
-  }
-
-  /* Add hover effect for links and close button */
-  #settings-popup a:hover, #close-button:hover {
-      color: #777;
-  }
-</style>
-
-
-
-<script>
-// Add this script for handling settings popup
-document.addEventListener('DOMContentLoaded', () => {
-  const settingsIcon = document.getElementById('settings-icon');
-  const settingsPopup = document.getElementById('settings-popup');
-  const closeButton = document.getElementById('close-button');
-
-  settingsIcon.addEventListener('click', () => {
-      settingsPopup.style.display = 'block';
-  });
-
-  closeButton.addEventListener('click', () => {
-      settingsPopup.style.display = 'none';
-  });
-
-  document.addEventListener('click', (event) => {
-      if (event.target !== settingsIcon && event.target !== settingsPopup && event.target !== closeButton) {
-          settingsPopup.style.display = 'none';
-      }
-  });
-});
-</script>
-
-
-
-
-<div id="settings-icon">☰</div>
-
-<!-- Add the settings popup -->
-<div id="settings-popup">
-  <!-- Close button -->
-  <div id="close-button">✖️</div>
-
-  <!-- Links in the popup -->
-  <a href="/privacy.html">Privacy Policy</a>
-   <a href="https://reportaproblem.webador.co.uk">Contact</a> <a href="https://ripples.ltd">back to home</a>    
- 
-</div>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Market</title>
     <style>
         body {
@@ -164,164 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
         #company-logo:hover {
             transform: rotate(360deg);
         }
-    </style>
-</head>
 
-<body>
-    <div id="company-logo" onclick="window.location.href='https://ripples.ltd'"></div>
-    <canvas id="stockChart"></canvas>
-    <input type="text" id="stockInput" placeholder="Enter stock symbol">
-    <button onclick="loadStockData()">Load Stock</button>
-
-    <label for="timeFrameSelect">Time Frame:</label>
-    <select id="timeFrameSelect" onchange="loadStockData()">
-        <option value="1">1 Month</option>
-        <option value="3">3 Months</option>
-        <option value="6">6 Months</option>
-        <option value="12">1 Year</option>
-        <option value="36">3 Years</option>
-        <option value="60">5 Years</option>
-    </select>
-
-    <table id="stockTable">
-        <tr>
-            <th>Date</th>
-            <th>Open</th>
-            <th>High</th>
-            <th>Low</th>
-            <th>Close</th>
-            <th>Volume</th>
-        </tr>
-    </table>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-    const apiKey = 'LwOJltR_Q4RBuY7dAiKPArgd5r4KaNpF';
-
-    function loadStockData() {
-      const stockInput = document.getElementById('stockInput');
-      const ticker = stockInput.value.toUpperCase(); // Get the stock ticker and convert to uppercase
-      
-      const timeFrameSelect = document.getElementById('timeFrameSelect');
-      const selectedTimeFrame = timeFrameSelect.value;
-      
-      const currentDate = new Date();
-      const endDate = currentDate.toISOString().split('T')[0]; // Use the current date as the end date
-      
-      const startDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - selectedTimeFrame, 1);
-      const formattedStartDate = startDate.toISOString().split('T')[0]; // Set the start date based on the selected time frame
-      
-      const apiUrl = `https://api.polygon.io/v2/aggs/ticker/${ticker}/range/1/day/${formattedStartDate}/${endDate}?apiKey=${apiKey}`;
-
-      fetch(apiUrl)
-                .then(response => response.json())
-                .then(data => {
-                    const stockData = data.results;
-
-                    if (!stockData || stockData.length === 0) {
-                        alert("Sorry, no data available for this stock. Try TSLA.");
-                        return;
-                    }
-          const stockTable = document.getElementById('stockTable');
-
-          stockTable.innerHTML = ''; // Clear existing table data
-
-          stockData.forEach(stock => {
-            const row = stockTable.insertRow();
-            const date = new Date(stock.t);
-            const formattedDate = date.toLocaleString(); // Convert timestamp to human-readable format
-            row.insertCell().textContent = formattedDate;
-            row.insertCell().textContent = stock.o;
-            row.insertCell().textContent = stock.h;
-            row.insertCell().textContent = stock.l;
-            row.insertCell().textContent = stock.c;
-            row.insertCell().textContent = stock.v;
-          });
-
-          const dates = stockData.map(stock => stock.t);
-          const closingPrices = stockData.map(stock => stock.c);
-
-          const stockChart = document.getElementById('stockChart').getContext('2d');
-          new Chart(stockChart, {
-            type: 'line',
-            data: {
-              labels: dates,
-              datasets: [{
-                label: 'Closing Price',
-                data: closingPrices,
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-              }]
-            },
-            options: {
-              responsive: false, // Set responsive to false to maintain fixed size
-              scales: {
-                y: {
-                  beginAtZero: true
-                }
-              }
-            }
-          });
-        })
-        .catch(error => console.log(error));
-    }
-  </script>
-</body>
-</html><style>
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.9);
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .loading-logo {
-            animation: rotateLogo 0.33s linear infinite;
-            max-width: 100px;
-            height: auto;
-        }
-
-        @keyframes rotateLogo {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="loading-overlay" id="loading-overlay">
-        <img src="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=1000&height=1000" alt="Loading..." class="loading-logo">
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const loadingOverlay = document.getElementById('loading-overlay');
-
-            // Show loading animation on page load
-            loadingOverlay.style.display = 'flex';
-
-            // Hide loading animation after 1 second (adjust the duration as needed)
-            setTimeout(() => {
-                loadingOverlay.style.display = 'none';
-            }, 333); // 1 second duration
-        });
-    </script>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website with Loading Animation</title>
-    <style>
+        /* Add styles for loading overlay */
         .loading-overlay {
             position: fixed;
             top: 0;
@@ -349,4 +97,167 @@ document.addEventListener('DOMContentLoaded', () => {
                 transform: rotate(360deg);
             }
         }
+
+        /* Additional styles for forecast */
+        #forecast {
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
     </style>
+</head>
+
+<body>
+    <!-- Loading overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+        <img src="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=1000&height=1000" alt="Loading..." class="loading-logo">
+    </div>
+
+    <div id="company-logo" onclick="window.location.href='https://ripples.ltd'"></div>
+
+    <canvas id="stockChart"></canvas>
+    <div id="forecast"></div> <!-- Added for forecast -->
+
+    <input type="text" id="stockInput" placeholder="Enter stock symbol">
+    <button onclick="loadStockData()">Load Stock</button>
+
+    <div>
+        <label for="timeFrameSelect">Time Frame:</label>
+        <select id="timeFrameSelect" onchange="loadStockData()">
+            <option value="1">1 Month</option>
+            <option value="3">3 Months</option>
+            <option value="6">6 Months</option>
+            <option value="12">1 Year</option>
+            <option value="36">3 Years</option>
+            <option value="60">5 Years</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="daysInput">Days in the Future:</label>
+        <input type="number" id="daysInput" min="1" value="30">
+    </div>
+
+    <table id="stockTable">
+        <tr>
+            <th>Date</th>
+            <th>Open</th>
+            <th>High</th>
+            <th>Low</th>
+            <th>Close</th>
+            <th>Volume</th>
+        </tr>
+    </table>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+    const apiKey = 'LwOJltR_Q4RBuY7dAiKPArgd5r4KaNpF';
+
+    function loadStockData() {
+        const stockInput = document.getElementById('stockInput');
+        const ticker = stockInput.value.toUpperCase(); // Get the stock ticker and convert to uppercase
+
+        const timeFrameSelect = document.getElementById('timeFrameSelect');
+        const selectedTimeFrame = timeFrameSelect.value;
+
+        const currentDate = new Date();
+        const endDate = currentDate.toISOString().split('T')[0]; // Use the current date as the end date
+
+        const startDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - selectedTimeFrame, 1);
+        const formattedStartDate = startDate.toISOString().split('T')[0]; // Set the start date based on the selected time frame
+
+        const apiUrl = `https://api.polygon.io/v2/aggs/ticker/${ticker}/range/1/day/${formattedStartDate}/${endDate}?apiKey=${apiKey}`;
+
+        // Show loading overlay
+        const loadingOverlay = document.getElementById('loading-overlay');
+        loadingOverlay.style.display = 'flex';
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                // Hide loading overlay after data is loaded
+                loadingOverlay.style.display = 'none';
+
+                const stockData = data.results;
+
+                if (!stockData || stockData.length === 0) {
+                    alert("Sorry, no data available for this stock. Try TSLA.");
+                    return;
+                }
+
+                const stockTable = document.getElementById('stockTable');
+
+                stockTable.innerHTML = ''; // Clear existing table data
+
+                stockData.forEach(stock => {
+                    const row = stockTable.insertRow();
+                    const date = new Date(stock.t);
+                    const formattedDate = date.toLocaleString(); // Convert timestamp to human-readable format
+                    row.insertCell().textContent = formattedDate;
+                    row.insertCell().textContent = stock.o;
+                    row.insertCell().textContent = stock.h;
+                    row.insertCell().textContent = stock.l;
+                    row.insertCell().textContent = stock.c;
+                    row.insertCell().textContent = stock.v;
+                });
+
+                const dates = stockData.map(stock => stock.t);
+                const closingPrices = stockData.map(stock => stock.c);
+
+                const stockChart = document.getElementById('stockChart').getContext('2d');
+                new Chart(stockChart, {
+                    type: 'line',
+                    data: {
+                        labels: dates,
+                        datasets: [{
+                            label: 'Closing Price',
+                            data: closingPrices,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: false, // Set responsive to false to maintain fixed size
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+
+                // Calculate expectation based on historical trend
+                const averageChange = calculateAverageChange(closingPrices);
+                const daysInFuture = parseInt(document.getElementById('daysInput').value);
+                const futurePrice = closingPrices[closingPrices.length - 1] + averageChange * daysInFuture;
+
+                // Display the forecast, recommendation, and days to reach
+                const forecastElement = document.getElementById('forecast');
+                forecastElement.innerHTML = `Future Price (${daysInFuture} days): $${futurePrice.toFixed(2)}<br>`;
+                if (averageChange > 0) {
+                    forecastElement.innerHTML += "Recommendation: BUY<br>";
+                } else if (averageChange < 0) {
+                    forecastElement.innerHTML += "Recommendation: SELL<br>";
+                } else {
+                    forecastElement.innerHTML += "Recommendation: HOLD<br>";
+                }
+            })
+            .catch(error => {
+                // Hide loading overlay in case of an error
+                loadingOverlay.style.display = 'none';
+                console.log(error);
+            });
+    }
+
+    function calculateAverageChange(closingPrices) {
+        let sum = 0;
+        for (let i = 1; i < closingPrices.length; i++) {
+            sum += closingPrices[i] - closingPrices[i - 1];
+        }
+        return sum / (closingPrices.length - 1);
+    }
+  </script>
+</body>
+</html>
