@@ -19,7 +19,7 @@ const games = [
   { name: 'shapeshifter (computer)', image: 'https://cdn.dribbble.com/users/2475489/screenshots/9239848/media/ff48675e4dd24c950af1dda5ac3c6019.gif', url: '8.html' },
   { name: 'mymom.fun', image: 'https://th.bing.com/th/id/OIP.6ry2UChEUozCZjHXYdL97gHaFH?rs=1&pid=ImgDetMain', url: '9.html' },
   { name: 'your ip adress', image: 'https://media.proprofs.com/images/QM/user_images/1826446/1464866502.jpg', url: '10.html' },
-  { name: 'Coming Later', image: '', url: '11.html' },
+  { name: 'self notes', image: 'https://th.bing.com/th/id/OIP.SgBy5pmiLQHM-ngs1k0OTgHaHa?w=162&h=180&c=7&r=0&o=5&dpr=2&pid=1.7', url: '11.html' },
   { name: 'Coming Later', image: '', url: '12.html' },
   { name: 'Coming Later', image: '', url: '13.html' },
   { name: 'Coming Later', image: '', url: '14.html' },
