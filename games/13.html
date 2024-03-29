@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bouncing Ball</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #f0f0f0;
+    }
+
+    #container {
+        position: relative;
+        width: 400px; /* Adjust container size as needed */
+        height: 400px; /* Adjust container size as needed */
+        border-radius: 50%;
+        background-color: #fff;
+        margin: 50px auto;
+        overflow: hidden;
+    }
+
+    #ball {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #00f;
+        animation: bounce 2s infinite alternate;
+    }
+
+    #counter {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        font-size: 24px;
+    }
+
+    @keyframes bounce {
+        0% {
+            top: 0;
+            left: 0;
+            transform: scale(1);
+        }
+        100% {
+            top: calc(100% - 40px);
+            left: calc(100% - 40px);
+            transform: scale(2);
+        }
+    }
+</style>
+</head>
+<body>
+<div id="container">
+    <div id="ball"></div>
+</div>
+<div id="counter">Collisions: <span id="collisionCount">0</span></div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const ball = document.getElementById('ball');
+        const container = document.getElementById('container');
+        const counter = document.getElementById('collisionCount');
+        let collisions = 0;
+
+        ball.addEventListener('animationiteration', function() {
+            let ballSize = parseFloat(getComputedStyle(ball).getPropertyValue('width'));
+            let containerWidth = container.clientWidth;
+            let containerHeight = container.clientHeight;
+
+            if (ballSize * 2 < containerWidth && ballSize * 2 < containerHeight) {
+                ball.style.width = ball.style.height = (ballSize * 2) + 'px';
+            } 
+
+            // Check collision with container boundaries
+            let rect = container.getBoundingClientRect();
+            let ballRect = ball.getBoundingClientRect();
+
+            if (ballRect.left <= rect.left || ballRect.right >= rect.right || ballRect.top <= rect.top || ballRect.bottom >= rect.bottom) {
+                collisions++;
+                counter.textContent = collisions;
+            }
+        });
+    });
+</script>
+</body>
+</html>
