@@ -9,28 +9,105 @@
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 20px;
+        background-color: #f2f2f2;
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
     }
     #fileInput {
-        margin-bottom: 10px;
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+    #fileInput:focus {
+        outline: none;
+        border-color: dodgerblue;
+    }
+    #uploadButton {
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        padding: 10px 20px;
+        background-color: dodgerblue;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    #uploadButton:hover {
+        background-color: #007bff;
+    }
+    #clearButton {
+        display: block;
+        margin: 0 auto;
+        padding: 10px 20px;
+        background-color: tomato;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    #clearButton:hover {
+        background-color: #dc3545;
     }
     #fileList {
         list-style-type: none;
         padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
     }
     #fileList li {
-        margin-bottom: 10px;
+        margin: 10px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 10px;
+        text-align: center;
+        max-width: 200px;
+        position: relative;
+        border-radius: 5px;
     }
     .uploaded-image {
-        max-width: 200px;
-        max-height: 200px;
-        margin-right: 10px;
+        max-width: 100%;
+        max-height: 150px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+    }
+    .delete-button {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+        color: red;
+        font-size: 14px;
+    }
+    .delete-button:hover {
+        color: darkred;
+    }
+
+    @media screen and (max-width: 600px) {
+        #fileList li {
+            max-width: calc(50% - 20px);
+        }
     }
 </style>
 </head>
 <body>
     <h1>Online Image Storage</h1>
     <input type="file" id="fileInput">
-    <button onclick="uploadFile()">Upload</button>
+    <button id="uploadButton" onclick="uploadFile()">Upload</button>
+    <button id="clearButton" onclick="clearStorage()">Clear All</button>
     <ul id="fileList"></ul>
 
     <script>
@@ -50,12 +127,22 @@
             reader.onload = function(event) {
                 const fileData = event.target.result;
                 const fileName = file.name;
-                const fileItem = `<li><img class="uploaded-image" src="${fileData}" alt="${fileName}">${fileName}</li>`;
+                const fileItem = `<li><img class="uploaded-image" src="${fileData}" alt="${fileName}"><br>${fileName}<button class="delete-button" onclick="deleteFile('${fileName}')">Delete</button></li>`;
                 fileList.insertAdjacentHTML('beforeend', fileItem);
                 // Save data to localStorage
                 localStorage.setItem(fileName, fileData);
             };
             reader.readAsDataURL(file);
+        }
+
+        function deleteFile(fileName) {
+            localStorage.removeItem(fileName);
+            location.reload(); // Refresh the page to reflect changes
+        }
+
+        function clearStorage() {
+            localStorage.clear();
+            location.reload(); // Refresh the page to reflect changes
         }
 
         // Retrieve data from localStorage on page load
@@ -64,7 +151,7 @@
             for (let i = 0; i < localStorage.length; i++) {
                 const fileName = localStorage.key(i);
                 const fileData = localStorage.getItem(fileName);
-                const fileItem = `<li><img class="uploaded-image" src="${fileData}" alt="${fileName}">${fileName}</li>`;
+                const fileItem = `<li><img class="uploaded-image" src="${fileData}" alt="${fileName}"><br>${fileName}<button class="delete-button" onclick="deleteFile('${fileName}')">Delete</button></li>`;
                 fileList.insertAdjacentHTML('beforeend', fileItem);
             }
         };

@@ -24,7 +24,7 @@ const games = [
   { name: 'ball bounce', image: 'https://th.bing.com/th/id/R.95456d92a560f3bbb08faaba8b7a6175?rik=LAcC8X85Lp5axw&pid=ImgRaw&r=0', url: '13.html' },
   { name: 'r9search beta', image: 'https://th.bing.com/th/id/OIP.E1DlQTYJQhFp9r1laoIRNAAAAA?rs=1&pid=ImgDetMain', url: '14.html' },
   { name: 'r9gpt beta 2.0', image: 'https://th.bing.com/th/id/OIP.eehDXMZDLI5VUyJAchbiqQHaEQ?w=1392&h=800&rs=1&pid=ImgDetMain', url: '15.html' },
-  { name: 'Coming Later', image: '', url: '16.html' },
+  { name: 'image store', image: 'https://th.bing.com/th/id/OIP.dZfeyoxqlf91TCPz_-v1_QHaHa?rs=1&pid=ImgDetMain', url: '16.html' },
   { name: 'Coming Later', image: '', url: '17.html' },
   { name: 'Coming Later', image: '', url: '18.html' },
   { name: 'Coming Later', image: '', url: '19.html' },
