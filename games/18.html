@@ -5,126 +5,254 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Video Recorder</title>
 <style>
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 50px;
 }
 
 video {
-  width: 480px;
-  height: 360px;
-  margin-bottom: 10px;
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 button {
   margin: 5px;
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 25px;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
 .tab {
-  background-color: #f2f2f2;
+  background-color: #333;
   overflow: hidden;
   border-top: 1px solid #ccc;
+  display: flex;
+  justify-content: space-around;
   position: fixed;
-  left: 0;
   bottom: 0;
   width: 100%;
 }
 
 .tab button {
   background-color: inherit;
-  float: left;
   border: none;
   outline: none;
   cursor: pointer;
-  padding: 14px 16px;
-  transition: 0.3s;
+  padding: 16px 0;
+  width: 25%;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
 }
 
 .tab button:hover {
-  background-color: #ddd;
+  background-color: #555;
 }
 
 .tab button.active {
-  background-color: #ccc;
+  background-color: #007bff;
+  color: #fff;
+}
+
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 10px #4CAF50, 0 0 20px #4CAF50, 0 0 30px #4CAF50;
+  }
+  50% {
+    text-shadow: 0 0 20px #4CAF50, 0 0 30px #4CAF50, 0 0 40px #4CAF50;
+  }
+  100% {
+    text-shadow: 0 0 10px #4CAF50, 0 0 20px #4CAF50, 0 0 30px #4CAF50;
+  }
+}
+
+.animated {
+  animation: glow 1.5s infinite alternate;
+}
+
+.recording-mode {
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: bold;
 }
 </style>
 </head>
 <body>
 <div class="container">
-  <video id="video" playsinline autoplay></video>
-  <button id="startButton">Start Recording</button>
+  <video id="cameraVideo" playsinline autoplay></video>
+  <video id="screenVideo" playsinline autoplay></video>
+  <button id="startButton" class="animated">Start Recording</button>
   <button id="stopButton" disabled>Stop Recording</button>
   <button id="downloadButton" disabled>Download Video</button>
+  <div id="recordingMode" class="recording-mode">Recording Mode: Camera</div>
 </div>
 <div class="tab">
-  <button class="tablinks" onclick="openTab(event, 'camera')">Camera</button>
+  <button class="tablinks active" onclick="openTab(event, 'camera')">Camera</button>
   <button class="tablinks" onclick="openTab(event, 'screen')">Screen</button>
+  <button class="tablinks" onclick="openTab(event, 'volume')">Volume Only</button>
+  <button class="tablinks" onclick="openTab(event, 'camera_screen')">Camera & Screen</button>
 </div>
 <script>
-let mediaRecorder;
-let recordedBlobs;
+let mediaRecorderCamera;
+let mediaRecorderScreen;
+let recordedBlobsCamera;
+let recordedBlobsScreen;
 
-const video = document.getElementById('video');
+const cameraVideo = document.getElementById('cameraVideo');
+const screenVideo = document.getElementById('screenVideo');
 const startButton = document.getElementById('startButton');
 const stopButton = document.getElementById('stopButton');
 const downloadButton = document.getElementById('downloadButton');
-const cameraTab = document.getElementById('cameraTab');
-const screenTab = document.getElementById('screenTab');
+const recordingMode = document.getElementById('recordingMode');
 
 startButton.addEventListener('click', startRecording);
 stopButton.addEventListener('click', stopRecording);
 downloadButton.addEventListener('click', download);
 
 async function startRecording() {
-  const stream = await navigator.mediaDevices.getUserMedia({video: true, audio: true});
-  video.srcObject = stream;
-
-  const options = {mimeType: 'video/webm;codecs=vp9'};
-  recordedBlobs = [];
   try {
-    mediaRecorder = new MediaRecorder(stream, options);
-  } catch (e) {
-    console.error('Exception while creating MediaRecorder:', e);
-    return;
-  }
+    let constraints;
+    if (currentTab === 'camera') {
+      constraints = { video: true, audio: true };
+      const streamCamera = await navigator.mediaDevices.getUserMedia(constraints);
+      cameraVideo.srcObject = streamCamera;
+      recordedBlobsCamera = [];
+      mediaRecorderCamera = new MediaRecorder(streamCamera, { mimeType: 'video/webm;codecs=vp9' });
+      mediaRecorderCamera.ondataavailable = handleDataAvailableCamera;
+      mediaRecorderCamera.start();
+      startButton.disabled = true;
+      stopButton.disabled = false;
+      downloadButton.disabled = true;
+      updateRecordingMode('Camera');
+    } else if (currentTab === 'screen') {
+      constraints = { video: { mediaSource: "screen" } };
+      const streamScreen = await navigator.mediaDevices.getUserMedia(constraints);
+      screenVideo.srcObject = streamScreen;
+      recordedBlobsScreen = [];
+      mediaRecorderScreen = new MediaRecorder(streamScreen, { mimeType: 'video/webm;codecs=vp9' });
+      mediaRecorderScreen.ondataavailable = handleDataAvailableScreen;
+      mediaRecorderScreen.start();
+      startButton.disabled = true;
+      stopButton.disabled = false;
+      downloadButton.disabled = true;
+      updateRecordingMode('Screen');
+    } else if (currentTab === 'volume') {
+      constraints = { audio: true };
+      const streamVolume = await navigator.mediaDevices.getUserMedia(constraints);
+      cameraVideo.srcObject = streamVolume;
+      recordedBlobsCamera = [];
+      mediaRecorderCamera = new MediaRecorder(streamVolume, { mimeType: 'video/webm;codecs=vp9' });
+      mediaRecorderCamera.ondataavailable = handleDataAvailableCamera;
+      mediaRecorderCamera.start();
+      startButton.disabled = true;
+      stopButton.disabled = false;
+      downloadButton.disabled = true;
+      updateRecordingMode('Volume Only');
+    } else if (currentTab === 'camera_screen') {
+      const streamCamera = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+      const streamScreen = await navigator.mediaDevices.getDisplayMedia({ video: true });
 
-  mediaRecorder.ondataavailable = handleDataAvailable;
-  mediaRecorder.start();
-  startButton.disabled = true;
-  stopButton.disabled = false;
-  downloadButton.disabled = true;
+      cameraVideo.srcObject = streamCamera;
+      recordedBlobsCamera = [];
+      mediaRecorderCamera = new MediaRecorder(streamCamera, { mimeType: 'video/webm;codecs=vp9' });
+      mediaRecorderCamera.ondataavailable = handleDataAvailableCamera;
+      mediaRecorderCamera.start();
+
+      screenVideo.srcObject = streamScreen;
+      recordedBlobsScreen = [];
+      mediaRecorderScreen = new MediaRecorder(streamScreen, { mimeType: 'video/webm;codecs=vp9' });
+      mediaRecorderScreen.ondataavailable = handleDataAvailableScreen;
+      mediaRecorderScreen.start();
+
+      startButton.disabled = true;
+      stopButton.disabled = false;
+      downloadButton.disabled = true;
+      updateRecordingMode('Camera & Screen');
+    }
+  } catch (err) {
+    console.error('Error starting recording:', err);
+  }
 }
 
-function handleDataAvailable(event) {
+function handleDataAvailableCamera(event) {
   if (event.data && event.data.size > 0) {
-    recordedBlobs.push(event.data);
+    recordedBlobsCamera.push(event.data);
+  }
+}
+
+function handleDataAvailableScreen(event) {
+  if (event.data && event.data.size > 0) {
+    recordedBlobsScreen.push(event.data);
   }
 }
 
 function stopRecording() {
-  mediaRecorder.stop();
+  if (mediaRecorderCamera) {
+    mediaRecorderCamera.stop();
+  }
+  if (mediaRecorderScreen) {
+    mediaRecorderScreen.stop();
+  }
   stopButton.disabled = true;
   downloadButton.disabled = false;
 }
 
 function download() {
-  const blob = new Blob(recordedBlobs, {type: 'video/webm'});
-  const url = window.URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.style.display = 'none';
-  a.href = url;
-  a.download = 'recorded.mp4';
-  document.body.appendChild(a);
-  a.click();
+  const blobCamera = new Blob(recordedBlobsCamera, { type: 'video/webm' });
+  const blobScreen = new Blob(recordedBlobsScreen, { type: 'video/webm' });
+
+  const urlCamera = window.URL.createObjectURL(blobCamera);
+  const urlScreen = window.URL.createObjectURL(blobScreen);
+
+  const aCamera = document.createElement('a');
+  aCamera.style.display = 'none';
+  aCamera.href = urlCamera;
+  aCamera.download = 'recorded_camera.mp4';
+  document.body.appendChild(aCamera);
+  aCamera.click();
   setTimeout(() => {
-    document.body.removeChild(a);
-    window.URL.revokeObjectURL(url);
+    document.body.removeChild(aCamera);
+    window.URL.revokeObjectURL(urlCamera);
+  }, 100);
+
+  const aScreen = document.createElement('a');
+  aScreen.style.display = 'none';
+  aScreen.href = urlScreen;
+  aScreen.download = 'recorded_screen.webm';
+  document.body.appendChild(aScreen);
+  aScreen.click();
+  setTimeout(() => {
+    document.body.removeChild(aScreen);
+    window.URL.revokeObjectURL(urlScreen);
   }, 100);
 }
 
+let currentTab = 'camera';
+
 function openTab(evt, tabName) {
+  currentTab = tabName;
   if (tabName === 'screen') {
     startButton.removeEventListener('click', startRecording);
     startButton.addEventListener('click', startScreenRecording);
@@ -132,26 +260,28 @@ function openTab(evt, tabName) {
     startButton.removeEventListener('click', startScreenRecording);
     startButton.addEventListener('click', startRecording);
   }
+  updateRecordingMode(tabName);
 }
 
 async function startScreenRecording() {
-  const displayStream = await navigator.mediaDevices.getDisplayMedia({ video: true });
-  video.srcObject = displayStream;
-
-  const options = { mimeType: 'video/webm;codecs=vp9' };
-  recordedBlobs = [];
   try {
-    mediaRecorder = new MediaRecorder(displayStream, options);
-  } catch (e) {
-    console.error('Exception while creating MediaRecorder:', e);
-    return;
+    const displayStream = await navigator.mediaDevices.getDisplayMedia({ video: true });
+    screenVideo.srcObject = displayStream;
+    recordedBlobsScreen = [];
+    mediaRecorderScreen = new MediaRecorder(displayStream, { mimeType: 'video/webm;codecs=vp9' });
+    mediaRecorderScreen.ondataavailable = handleDataAvailableScreen;
+    mediaRecorderScreen.start();
+    startButton.disabled = true;
+    stopButton.disabled = false;
+    downloadButton.disabled = true;
+    updateRecordingMode('Screen');
+  } catch (err) {
+    console.error('Error starting screen recording:', err);
   }
+}
 
-  mediaRecorder.ondataavailable = handleDataAvailable;
-  mediaRecorder.start();
-  startButton.disabled = true;
-  stopButton.disabled = false;
-  downloadButton.disabled = true;
+function updateRecordingMode(mode) {
+  recordingMode.textContent = `Recording Mode: ${mode}`;
 }
 </script>
 </body>
