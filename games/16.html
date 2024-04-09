@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Online Image Storage</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+    }
+    #fileInput {
+        margin-bottom: 10px;
+    }
+    #fileList {
+        list-style-type: none;
+        padding: 0;
+    }
+    #fileList li {
+        margin-bottom: 10px;
+    }
+    .uploaded-image {
+        max-width: 200px;
+        max-height: 200px;
+        margin-right: 10px;
+    }
+</style>
+</head>
+<body>
+    <h1>Online Image Storage</h1>
+    <input type="file" id="fileInput">
+    <button onclick="uploadFile()">Upload</button>
+    <ul id="fileList"></ul>
+
+    <script>
+        function uploadFile() {
+            const fileInput = document.getElementById('fileInput');
+            const fileList = document.getElementById('fileList');
+            
+            const file = fileInput.files[0];
+            if (!file) return;
+            
+            if (!file.type.startsWith('image/')) {
+                alert('Please select an image file.');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const fileData = event.target.result;
+                const fileName = file.name;
+                const fileItem = `<li><img class="uploaded-image" src="${fileData}" alt="${fileName}">${fileName}</li>`;
+                fileList.insertAdjacentHTML('beforeend', fileItem);
+                // Save data to localStorage
+                localStorage.setItem(fileName, fileData);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Retrieve data from localStorage on page load
+        window.onload = function() {
+            const fileList = document.getElementById('fileList');
+            for (let i = 0; i < localStorage.length; i++) {
+                const fileName = localStorage.key(i);
+                const fileData = localStorage.getItem(fileName);
+                const fileItem = `<li><img class="uploaded-image" src="${fileData}" alt="${fileName}">${fileName}</li>`;
+                fileList.insertAdjacentHTML('beforeend', fileItem);
+            }
+        };
+    </script>
+</body>
+</html>
