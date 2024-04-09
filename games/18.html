@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Video Recorder</title>
+<style>
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+video {
+  width: 480px;
+  height: 360px;
+  margin-bottom: 10px;
+}
+
+button {
+  margin: 5px;
+}
+
+.tab {
+  background-color: #f2f2f2;
+  overflow: hidden;
+  border-top: 1px solid #ccc;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+.tab button:hover {
+  background-color: #ddd;
+}
+
+.tab button.active {
+  background-color: #ccc;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <video id="video" playsinline autoplay></video>
+  <button id="startButton">Start Recording</button>
+  <button id="stopButton" disabled>Stop Recording</button>
+  <button id="downloadButton" disabled>Download Video</button>
+</div>
+<div class="tab">
+  <button class="tablinks" onclick="openTab(event, 'camera')">Camera</button>
+  <button class="tablinks" onclick="openTab(event, 'screen')">Screen</button>
+</div>
+<script>
+let mediaRecorder;
+let recordedBlobs;
+
+const video = document.getElementById('video');
+const startButton = document.getElementById('startButton');
+const stopButton = document.getElementById('stopButton');
+const downloadButton = document.getElementById('downloadButton');
+const cameraTab = document.getElementById('cameraTab');
+const screenTab = document.getElementById('screenTab');
+
+startButton.addEventListener('click', startRecording);
+stopButton.addEventListener('click', stopRecording);
+downloadButton.addEventListener('click', download);
+
+async function startRecording() {
+  const stream = await navigator.mediaDevices.getUserMedia({video: true, audio: true});
+  video.srcObject = stream;
+
+  const options = {mimeType: 'video/webm;codecs=vp9'};
+  recordedBlobs = [];
+  try {
+    mediaRecorder = new MediaRecorder(stream, options);
+  } catch (e) {
+    console.error('Exception while creating MediaRecorder:', e);
+    return;
+  }
+
+  mediaRecorder.ondataavailable = handleDataAvailable;
+  mediaRecorder.start();
+  startButton.disabled = true;
+  stopButton.disabled = false;
+  downloadButton.disabled = true;
+}
+
+function handleDataAvailable(event) {
+  if (event.data && event.data.size > 0) {
+    recordedBlobs.push(event.data);
+  }
+}
+
+function stopRecording() {
+  mediaRecorder.stop();
+  stopButton.disabled = true;
+  downloadButton.disabled = false;
+}
+
+function download() {
+  const blob = new Blob(recordedBlobs, {type: 'video/webm'});
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.style.display = 'none';
+  a.href = url;
+  a.download = 'recorded.mp4';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => {
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  }, 100);
+}
+
+function openTab(evt, tabName) {
+  if (tabName === 'screen') {
+    startButton.removeEventListener('click', startRecording);
+    startButton.addEventListener('click', startScreenRecording);
+  } else {
+    startButton.removeEventListener('click', startScreenRecording);
+    startButton.addEventListener('click', startRecording);
+  }
+}
+
+async function startScreenRecording() {
+  const displayStream = await navigator.mediaDevices.getDisplayMedia({ video: true });
+  video.srcObject = displayStream;
+
+  const options = { mimeType: 'video/webm;codecs=vp9' };
+  recordedBlobs = [];
+  try {
+    mediaRecorder = new MediaRecorder(displayStream, options);
+  } catch (e) {
+    console.error('Exception while creating MediaRecorder:', e);
+    return;
+  }
+
+  mediaRecorder.ondataavailable = handleDataAvailable;
+  mediaRecorder.start();
+  startButton.disabled = true;
+  stopButton.disabled = false;
+  downloadButton.disabled = true;
+}
+</script>
+</body>
+</html>

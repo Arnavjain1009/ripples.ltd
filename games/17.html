@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Development Revision</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1, h2 {
+            color: #333;
+        }
+        
+        .content {
+            margin-bottom: 20px;
+        }
+        
+        .topic {
+            display: none;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Development Revision</h1>
+        <div class="content">
+            <div class="topic" id="topic1">
+                <h2>Development</h2>
+                <p>
+                    Development refers to the process of improving the quality of life and well-being of people within a society. It encompasses economic, social, and environmental aspects.
+                </p>
+            </div>
+            <div class="topic" id="topic2">
+                <h2>GNI (Gross National Income) and GNI per capita</h2>
+                <p>
+                    GNI is the total income earned by a country's residents, including income from abroad, minus income earned by foreign residents within the country.
+                </p>
+                <p>
+                    GNI per capita is the GNI divided by the population of the country. It's a measure of average income per person in a country.
+                </p>
+            </div>
+            <div class="topic" id="topic3">
+                <h2>HDI (Human Development Index)</h2>
+                <p>
+                    HDI is a composite index that measures a country's average achievements in three basic aspects of human development: health (life expectancy at birth), education (mean years of schooling and expected years of schooling), and standard of living (GNI per capita).
+                </p>
+                <p>
+                    The main measures used in HDI are life expectancy, education, and income.
+                </p>
+            </div>
+            <div class="topic" id="topic4">
+                <h2>Inequality</h2>
+                <p>
+                    Inequality refers to the unequal distribution of resources, opportunities, and wealth among individuals or groups within a society.
+                </p>
+                <p>
+                    In the context of development, high levels of inequality can hinder progress by limiting access to education, healthcare, and economic opportunities for certain groups.
+                </p>
+            </div>
+            <div class="topic" id="topic5">
+                <h2>UK Inequality by Region</h2>
+                <p>
+                    There is a regional divide in the UK due to historical, economic, and social factors. Regions with higher levels of economic activity, such as London and the Southeast, tend to have higher incomes and better access to resources compared to other regions.
+                </p>
+                <p>
+                    You can measure and prove differences across the UK by analyzing various indicators such as income levels, unemployment rates, educational attainment, healthcare access, and housing affordability.
+                </p>
+            </div>
+            <div class="topic" id="topic6">
+                <h2>Poverty</h2>
+                <p>
+                    Poverty refers to the condition of lacking basic necessities for a minimum standard of living, including adequate food, shelter, and access to healthcare and education.
+                </p>
+                <p>
+                    Poverty can be judged using various measures such as income level, access to basic services, housing conditions, and nutritional status.
+                </p>
+            </div>
+            <div class="topic" id="topic7">
+                <h2>Sustainable Development</h2>
+                <p>
+                    Sustainable development is development that meets the needs of the present without compromising the ability of future generations to meet their own needs. It involves balancing economic growth, social inclusion, and environmental protection.
+                </p>
+            </div>
+            <div class="topic" id="topic8">
+                <h2>Sustainable Development Goals (SDGs)</h2>
+                <p>
+                    The SDGs are a set of 17 global goals adopted by the United Nations in 2015 to address global challenges such as poverty, inequality, climate change, environmental degradation, peace, and justice.
+                </p>
+                <p>
+                    The goals cover a wide range of issues including ending poverty and hunger, ensuring access to education and healthcare, promoting gender equality, fostering sustainable economic growth, combating climate change, and protecting ecosystems.
+                </p>
+            </div>
+        </div>
+        <button id="nextBtn">Next</button>
+        <button id="startTestBtn">Start Test</button>
+    </div>
+
+    <script>
+        const topics = document.querySelectorAll('.topic');
+        let currentTopicIndex = 0;
+
+        function showNextTopic() {
+            if (currentTopicIndex < topics.length - 1) {
+                topics[currentTopicIndex].style.display = 'none';
+                currentTopicIndex++;
+                topics[currentTopicIndex].style.display = 'block';
+            } else {
+                alert('Congratulations! You have completed the revision.');
+            }
+        }
+
+        function startTest() {
+            // Code to start the test
+            // You can generate random questions from each topic here
+            alert('Test started!');
+        }
+
+        document.getElementById('nextBtn').addEventListener('click', showNextTopic);
+        document.getElementById('startTestBtn').addEventListener('click', startTest);
+
+        // Show the first topic initially
+        topics[currentTopicIndex].style.display = 'block';
+    </script>
+</body>
+</html>
