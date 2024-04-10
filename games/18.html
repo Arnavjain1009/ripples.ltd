@@ -229,7 +229,7 @@ function download() {
   const aCamera = document.createElement('a');
   aCamera.style.display = 'none';
   aCamera.href = urlCamera;
-  aCamera.download = 'recorded_camera.mp4';
+  aCamera.download = 'recorded_camera.webm';
   document.body.appendChild(aCamera);
   aCamera.click();
   setTimeout(() => {
@@ -247,7 +247,7 @@ function download() {
     document.body.removeChild(aScreen);
     window.URL.revokeObjectURL(urlScreen);
   }, 100);
-}
+} 
 
 let currentTab = 'camera';
 

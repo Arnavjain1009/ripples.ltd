@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Chat</title>
+</head>
+<body>
+  <h1>Video Chat</h1>
+
+  <div id="joinGroup">
+    <input type="text" id="displayName" placeholder="Enter your name">
+    <button onclick="joinGroup()">Join Video Chat</button>
+  </div>
+
+  <div id="videoContainer" style="display: none;">
+    <h2>Video Chat Room</h2>
+    <div id="localVideoContainer">
+      <video id="localVideo" autoplay muted style="width: 320px; height: 240px;"></video>
+      <div id="localDisplayName"></div>
+    </div>
+    <div id="remoteVideoContainer"></div>
+  </div>
+
+  <!-- Include Firebase JavaScript SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+  <script>
+    // Your Firebase configuration
+    const firebaseConfig = {
+  apiKey: "AIzaSyBlmVFCHt4Qh5B9OsvXksqCHSbJe26uh6w",
+  authDomain: "car-racing-game-2b76b.firebaseapp.com",
+  databaseURL: "https://car-racing-game-2b76b-default-rtdb.firebaseio.com",
+  projectId: "car-racing-game-2b76b",
+  storageBucket: "car-racing-game-2b76b.appspot.com",
+  messagingSenderId: "135593611106",
+  appId: "1:135593611106:web:29a7e0cf7ba121cae2a63b"
+};
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    var displayName;
+    var database = firebase.database();
+    var localStream;
+    var currentUserRef;
+
+    // Function to join the video chat room
+    function joinGroup() {
+      displayName = document.getElementById("displayName").value;
+
+      document.getElementById("joinGroup").style.display = "none";
+      document.getElementById("videoContainer").style.display = "block";
+
+      // Get user media
+      navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+        .then(stream => {
+          localStream = stream;
+          document.getElementById("localVideo").srcObject = stream;
+          document.getElementById("localDisplayName").innerText = displayName;
+
+          // Add local user to the database
+          var usersRef = database.ref('users');
+          currentUserRef = usersRef.push();
+          currentUserRef.set({
+            displayName: displayName,
+            stream: stream // Store local stream in the database
+          });
+
+          // Remove user from the database when they disconnect
+          currentUserRef.onDisconnect().remove();
+
+          // Listen for new users and display their video
+          usersRef.on('child_added', function(snapshot) {
+            var user = snapshot.val();
+            if (user.displayName !== displayName) {
+              displayRemoteVideo(user.displayName, user.stream); // Pass the user's stream to the displayRemoteVideo function
+            }
+          });
+        })
+        .catch(error => {
+          console.error('Error accessing media devices:', error);
+        });
+    }
+
+    // Function to display remote user's video
+    function displayRemoteVideo(displayName, stream) {
+      var remoteVideoContainer = document.getElementById("remoteVideoContainer");
+      var videoElement = document.createElement("video");
+      videoElement.autoplay = true;
+      videoElement.style.width = "320px";
+      videoElement.style.height = "240px";
+      var displayNameElement = document.createElement("div");
+      displayNameElement.innerText = displayName;
+      remoteVideoContainer.appendChild(videoElement);
+      remoteVideoContainer.appendChild(displayNameElement);
+
+      // Set remote user's stream to the video element
+      videoElement.srcObject = stream;
+    }
+  </script>
+</body>
+</html>
