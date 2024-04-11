@@ -1,104 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Video Chat</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Conference</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Video Chat</h1>
-
-  <div id="joinGroup">
-    <input type="text" id="displayName" placeholder="Enter your name">
-    <button onclick="joinGroup()">Join Video Chat</button>
-  </div>
-
-  <div id="videoContainer" style="display: none;">
-    <h2>Video Chat Room</h2>
-    <div id="localVideoContainer">
-      <video id="localVideo" autoplay muted style="width: 320px; height: 240px;"></video>
-      <div id="localDisplayName"></div>
+    <div class="container">
+        <h1>Video Conference</h1>
+        <video class="local-video" autoplay muted></video>
+        <div class="remote-videos">
+            <video class="remote-video" autoplay></video>
+            <video class="remote-video" autoplay></video>
+        </div>
+        <div class="controls">
+            <button id="start-call">Start Call</button>
+            <button id="hang-up">Hang Up</button>
+        </div>
     </div>
-    <div id="remoteVideoContainer"></div>
-  </div>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-database.js"></script>
+    <script>
+        // Add Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyBlmVFCHt4Qh5B9OsvXksqCHSbJe26uh6w",
+          authDomain: "car-racing-game-2b76b.firebaseapp.com",
+          databaseURL: "https://car-racing-game-2b76b-default-rtdb.firebaseio.com",
+          projectId: "car-racing-game-2b76b",
+          storageBucket: "car-racing-game-2b76b.appspot.com",
+          messagingSenderId: "135593611106",
+          appId: "1:135593611106:web:29a7e0cf7ba121cae2a63b"
+        };
 
-  <!-- Include Firebase JavaScript SDK -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
 
-  <script>
-    // Your Firebase configuration
-    const firebaseConfig = {
-  apiKey: "AIzaSyBlmVFCHt4Qh5B9OsvXksqCHSbJe26uh6w",
-  authDomain: "car-racing-game-2b76b.firebaseapp.com",
-  databaseURL: "https://car-racing-game-2b76b-default-rtdb.firebaseio.com",
-  projectId: "car-racing-game-2b76b",
-  storageBucket: "car-racing-game-2b76b.appspot.com",
-  messagingSenderId: "135593611106",
-  appId: "1:135593611106:web:29a7e0cf7ba121cae2a63b"
-};
+        const localVideo = document.querySelector('.local-video');
+        const remoteVideos = document.querySelectorAll('.remote-video');
+        const startCallButton = document.getElementById('start-call');
+        const hangUpButton = document.getElementById('hang-up');
 
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
+        let localStream;
+        let peerConnection;
 
-    var displayName;
-    var database = firebase.database();
-    var localStream;
-    var currentUserRef;
+        const configuration = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] };
 
-    // Function to join the video chat room
-    function joinGroup() {
-      displayName = document.getElementById("displayName").value;
-
-      document.getElementById("joinGroup").style.display = "none";
-      document.getElementById("videoContainer").style.display = "block";
-
-      // Get user media
-      navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-        .then(stream => {
-          localStream = stream;
-          document.getElementById("localVideo").srcObject = stream;
-          document.getElementById("localDisplayName").innerText = displayName;
-
-          // Add local user to the database
-          var usersRef = database.ref('users');
-          currentUserRef = usersRef.push();
-          currentUserRef.set({
-            displayName: displayName,
-            stream: stream // Store local stream in the database
-          });
-
-          // Remove user from the database when they disconnect
-          currentUserRef.onDisconnect().remove();
-
-          // Listen for new users and display their video
-          usersRef.on('child_added', function(snapshot) {
-            var user = snapshot.val();
-            if (user.displayName !== displayName) {
-              displayRemoteVideo(user.displayName, user.stream); // Pass the user's stream to the displayRemoteVideo function
+        async function getLocalStream() {
+            try {
+                localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+                localVideo.srcObject = localStream;
+            } catch (error) {
+                console.error('Error getting user media:', error);
             }
-          });
-        })
-        .catch(error => {
-          console.error('Error accessing media devices:', error);
+        }
+
+        getLocalStream();
+
+        startCallButton.addEventListener('click', () => {
+            const constraints = { offerToReceiveAudio: true, offerToReceiveVideo: true };
+            peerConnection = new RTCPeerConnection(configuration);
+
+            localStream.getTracks().forEach(track => {
+                peerConnection.addTrack(track, localStream);
+            });
+
+            peerConnection.addEventListener('icecandidate', (event) => {
+                if (event.candidate) {
+                    database.ref('ice-candidates').push(event.candidate.toJSON());
+                }
+            });
+
+            peerConnection.addEventListener('track', (event) => {
+                remoteVideos.forEach(video => {
+                    if (video !== event.target) {
+                        video.srcObject = event.streams[0];
+                    }
+                });
+            });
+
+            peerConnection.onnegotiationneeded = async () => {
+                try {
+                    const offer = await peerConnection.createOffer(constraints);
+                    await peerConnection.setLocalDescription(offer);
+                    database.ref('offer').set(peerConnection.localDescription);
+                } catch (error) {
+                    console.error('Error creating offer:', error);
+                }
+            };
         });
-    }
 
-    // Function to display remote user's video
-    function displayRemoteVideo(displayName, stream) {
-      var remoteVideoContainer = document.getElementById("remoteVideoContainer");
-      var videoElement = document.createElement("video");
-      videoElement.autoplay = true;
-      videoElement.style.width = "320px";
-      videoElement.style.height = "240px";
-      var displayNameElement = document.createElement("div");
-      displayNameElement.innerText = displayName;
-      remoteVideoContainer.appendChild(videoElement);
-      remoteVideoContainer.appendChild(displayNameElement);
+        function createPeerConnection(offer) {
+            const peerConnection = new RTCPeerConnection(configuration);
 
-      // Set remote user's stream to the video element
-      videoElement.srcObject = stream;
-    }
-  </script>
+            peerConnection.addEventListener('icecandidate', (event) => {
+                if (event.candidate) {
+                    database.ref('ice-candidates').push(event.candidate.toJSON());
+                }
+            });
+
+            peerConnection.addEventListener('track', (event) => {
+                remoteVideos.forEach(video => {
+                    if (video !== event.target) {
+                        video.srcObject = event.streams[0];
+                    }
+                });
+            });
+
+            peerConnection.setRemoteDescription(offer).then(() => {
+                const answer = peerConnection.createAnswer(constraints);
+                return peerConnection.setLocalDescription(answer);
+            }).then(() => {
+                database.ref('answer').set(peerConnection.localDescription);
+            }).catch(error => {
+                console.error('Error setting remote description:', error);
+            });
+        }
+
+        database.ref('offer').on('value', async (snapshot) => {
+            if (snapshot.val()) {
+                const offer = new RTCSessionDescription(snapshot.val());
+                await peerConnection.setRemoteDescription(offer);
+                createPeerConnection(offer);
+                database.ref('offer').remove();
+            }
+        });
+
+        database.ref('answer').on('value', (snapshot) => {
+            if (snapshot.val()) {
+                const answer = new RTCSessionDescription(snapshot.val());
+                peerConnection.setRemoteDescription(answer);
+                database.ref('answer').remove();
+            }
+        });
+
+        database.ref('ice-candidates').on('child_added', (snapshot) => {
+            const candidate = new RTCIceCandidate(snapshot.val());
+            if (peerConnection && candidate) {
+                peerConnection.addIceCandidate(candidate);
+            }
+        });
+
+        hangUpButton.addEventListener('click', () => {
+            peerConnection.close();
+            peerConnection = null;
+        });
+    </script>
 </body>
 </html>
