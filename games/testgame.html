@@ -1,151 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Conference</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Meeting</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Video Conference</h1>
-        <video class="local-video" autoplay muted></video>
-        <div class="remote-videos">
-            <video class="remote-video" autoplay></video>
-            <video class="remote-video" autoplay></video>
-        </div>
-        <div class="controls">
-            <button id="start-call">Start Call</button>
-            <button id="hang-up">Hang Up</button>
-        </div>
-    </div>
-    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-database.js"></script>
-    <script>
-        // Add Firebase configuration
-        const firebaseConfig = {
-          apiKey: "AIzaSyBlmVFCHt4Qh5B9OsvXksqCHSbJe26uh6w",
-          authDomain: "car-racing-game-2b76b.firebaseapp.com",
-          databaseURL: "https://car-racing-game-2b76b-default-rtdb.firebaseio.com",
-          projectId: "car-racing-game-2b76b",
-          storageBucket: "car-racing-game-2b76b.appspot.com",
-          messagingSenderId: "135593611106",
-          appId: "1:135593611106:web:29a7e0cf7ba121cae2a63b"
-        };
+  <h1>Video Meeting</h1>
+  
+  <div id="joinGroup">
+    <input type="text" id="username" placeholder="Enter your name">
+    <input type="text" id="roomCode" placeholder="Enter room code">
+    <button onclick="joinMeeting()">Join Meeting</button>
+    <button onclick="createRoom()">Create Room</button>
+  </div>
 
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const database = firebase.database();
+  <div id="videoContainer" style="display: none;">
+    <h2>Meeting Room</h2>
+    <div id="videos"></div>
+  </div>
 
-        const localVideo = document.querySelector('.local-video');
-        const remoteVideos = document.querySelectorAll('.remote-video');
-        const startCallButton = document.getElementById('start-call');
-        const hangUpButton = document.getElementById('hang-up');
+  <!-- Include Firebase JavaScript SDK -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
-        let localStream;
-        let peerConnection;
+  <script>
+    const firebaseConfig = {
+  apiKey: "AIzaSyBlmVFCHt4Qh5B9OsvXksqCHSbJe26uh6w",
+  authDomain: "car-racing-game-2b76b.firebaseapp.com",
+  databaseURL: "https://car-racing-game-2b76b-default-rtdb.firebaseio.com",
+  projectId: "car-racing-game-2b76b",
+  storageBucket: "car-racing-game-2b76b.appspot.com",
+  messagingSenderId: "135593611106",
+  appId: "1:135593611106:web:29a7e0cf7ba121cae2a63b"
+};
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
 
-        const configuration = { iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] };
+    let localStream;
+    let remoteStreams = {};
 
-        async function getLocalStream() {
-            try {
-                localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-                localVideo.srcObject = localStream;
-            } catch (error) {
-                console.error('Error getting user media:', error);
-            }
+    // Function to join a meeting
+    function joinMeeting() {
+      const username = document.getElementById("username").value.trim();
+      const roomCode = document.getElementById("roomCode").value.trim();
+      if (username === "" || roomCode === "") {
+        alert("Please enter your name and room code.");
+        return;
+      }
+
+      const roomRef = database.ref('rooms/' + roomCode);
+      roomRef.once('value', function(snapshot) {
+        const data = snapshot.val();
+        if (!data) {
+          alert("Room does not exist.");
+          return;
         }
 
-        getLocalStream();
+        document.getElementById("joinGroup").style.display = "none";
+        document.getElementById("videoContainer").style.display = "block";
 
-        startCallButton.addEventListener('click', () => {
-            const constraints = { offerToReceiveAudio: true, offerToReceiveVideo: true };
-            peerConnection = new RTCPeerConnection(configuration);
-
-            localStream.getTracks().forEach(track => {
-                peerConnection.addTrack(track, localStream);
+        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+          .then(stream => {
+            localStream = stream;
+            document.getElementById("videos").appendChild(createVideoElement(username, stream));
+            sendLocalStreamToDatabase(username, stream);
+            roomRef.child('participants').child(username).set(true);
+            roomRef.child('participants').on('child_added', function(childSnapshot) {
+              const participantName = childSnapshot.key;
+              if (participantName !== username && !remoteStreams[participantName]) {
+                listenForStream(participantName);
+              }
             });
+          })
+          .catch(error => {
+            console.error('Error accessing media devices:', error);
+            alert('Error accessing media devices. Please allow camera and microphone access.');
+          });
+      });
+    }
 
-            peerConnection.addEventListener('icecandidate', (event) => {
-                if (event.candidate) {
-                    database.ref('ice-candidates').push(event.candidate.toJSON());
-                }
-            });
+    // Function to create a room
+    function createRoom() {
+      const username = document.getElementById("username").value.trim();
+      if (username === "") {
+        alert("Please enter your name.");
+        return;
+      }
 
-            peerConnection.addEventListener('track', (event) => {
-                remoteVideos.forEach(video => {
-                    if (video !== event.target) {
-                        video.srcObject = event.streams[0];
-                    }
-                });
-            });
+      const roomCode = generateRoomCode();
+      const roomRef = database.ref('rooms/' + roomCode);
+      roomRef.set({ host: username });
+      alert("Room created! Your room code is: " + roomCode);
+      joinMeeting();
+    }
 
-            peerConnection.onnegotiationneeded = async () => {
-                try {
-                    const offer = await peerConnection.createOffer(constraints);
-                    await peerConnection.setLocalDescription(offer);
-                    database.ref('offer').set(peerConnection.localDescription);
-                } catch (error) {
-                    console.error('Error creating offer:', error);
-                }
-            };
-        });
+    // Function to generate a random room code
+    function generateRoomCode() {
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      let code = '';
+      for (let i = 0; i < 6; i++) {
+        code += characters.charAt(Math.floor(Math.random() * characters.length));
+      }
+      return code;
+    }
 
-        function createPeerConnection(offer) {
-            const peerConnection = new RTCPeerConnection(configuration);
-
-            peerConnection.addEventListener('icecandidate', (event) => {
-                if (event.candidate) {
-                    database.ref('ice-candidates').push(event.candidate.toJSON());
-                }
-            });
-
-            peerConnection.addEventListener('track', (event) => {
-                remoteVideos.forEach(video => {
-                    if (video !== event.target) {
-                        video.srcObject = event.streams[0];
-                    }
-                });
-            });
-
-            peerConnection.setRemoteDescription(offer).then(() => {
-                const answer = peerConnection.createAnswer(constraints);
-                return peerConnection.setLocalDescription(answer);
-            }).then(() => {
-                database.ref('answer').set(peerConnection.localDescription);
-            }).catch(error => {
-                console.error('Error setting remote description:', error);
-            });
+    // Function to listen for remote streams
+    function listenForStream(participantName) {
+      const participantRef = database.ref('streams/' + participantName);
+      participantRef.on('value', function(snapshot) {
+        const streamData = snapshot.val();
+        if (streamData) {
+          const mediaStream = new MediaStream(streamData);
+          if (!remoteStreams[participantName]) {
+            remoteStreams[participantName] = mediaStream;
+            document.getElementById("videos").appendChild(createVideoElement(participantName, mediaStream));
+          } else {
+            document.getElementById(participantName + "-video").srcObject = mediaStream;
+          }
         }
+      });
+    }
 
-        database.ref('offer').on('value', async (snapshot) => {
-            if (snapshot.val()) {
-                const offer = new RTCSessionDescription(snapshot.val());
-                await peerConnection.setRemoteDescription(offer);
-                createPeerConnection(offer);
-                database.ref('offer').remove();
-            }
-        });
+    // Function to send local stream frames to database
+    function sendLocalStreamToDatabase(username, stream) {
+      const framesRef = database.ref('streams/' + username);
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+      setInterval(() => {
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        canvas.toBlob(blob => {
+          const reader = new FileReader();
+          reader.onload = function() {
+            const base64data = reader.result.split(',')[1];
+            framesRef.set(base64data);
+          };
+          reader.readAsDataURL(blob);
+        }, 'image/jpeg', 0.95);
+      }, 33); // 30 frames per second (1000 ms / 30 frames ≈ 33 ms per frame)
+    }
 
-        database.ref('answer').on('value', (snapshot) => {
-            if (snapshot.val()) {
-                const answer = new RTCSessionDescription(snapshot.val());
-                peerConnection.setRemoteDescription(answer);
-                database.ref('answer').remove();
-            }
-        });
+    // Function to create video element
+    function createVideoElement(username, stream) {
+      const container = document.createElement("div");
+      container.className = "video-container";
 
-        database.ref('ice-candidates').on('child_added', (snapshot) => {
-            const candidate = new RTCIceCandidate(snapshot.val());
-            if (peerConnection && candidate) {
-                peerConnection.addIceCandidate(candidate);
-            }
-        });
+      const videoElement = document.createElement("video");
+      videoElement.id = username + "-video";
+      videoElement.srcObject = stream;
+      videoElement.autoplay = true;
+      videoElement.playsInline = true;
 
-        hangUpButton.addEventListener('click', () => {
-            peerConnection.close();
-            peerConnection = null;
-        });
-    </script>
+      const nameElement = document.createElement("div");
+      nameElement.className = "participant-name";
+      nameElement.textContent = username;
+
+      container.appendChild(videoElement);
+      container.appendChild(nameElement);
+
+      return container;
+    }
+  </script>
+
+  <style>
+    .video-container {
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    .participant-name {
+      font-size: 14px;
+      text-align: center;
+    }
+  </style>
 </body>
 </html>
