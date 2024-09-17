@@ -1,250 +1,188 @@
-  <!DOCTYPE html>                                                              <link rel="icon" type="image/svg+xml" href=" https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=811&height=800" />
-<html lang="en">
+<html>
 <head>
-  
- <style>
-  /* Add this style for the settings icon */
-  #settings-icon {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      cursor: pointer;
-      z-index: 3;
-      font-size: 24px;
-  }
-
-  /* Add this style for the settings popup */
-  #settings-popup {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      padding: 20px;
-      background-color: rgba(255, 255, 255, 0.95);
-      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
-      border-radius: 15px;
-      z-index: 4;
-      max-width: 400px;
-      text-align: center;
-  }
-
-  /* Add this style to center the links in the popup */
-  #settings-popup a {
-      display: block;
-      margin-bottom: 15px;
-      text-align: center;
-      font-size: 18px;
-      color: #333;
-      text-decoration: none;
-      transition: color 0.3s ease;
-  }
-
-  /* Add this style for the close button */
-  #close-button {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      cursor: pointer;
-      font-size: 20px;
-      color: #555;
-      transition: color 0.3s ease;
-  }
-
-  /* Add hover effect for links and close button */
-  #settings-popup a:hover, #close-button:hover {
-      color: #777;
-  }
-</style>
-
-
-
-<script>
-// Add this script for handling settings popup
-document.addEventListener('DOMContentLoaded', () => {
-  const settingsIcon = document.getElementById('settings-icon');
-  const settingsPopup = document.getElementById('settings-popup');
-  const closeButton = document.getElementById('close-button');
-
-  settingsIcon.addEventListener('click', () => {
-      settingsPopup.style.display = 'block';
-  });
-
-  closeButton.addEventListener('click', () => {
-      settingsPopup.style.display = 'none';
-  });
-
-  document.addEventListener('click', (event) => {
-      if (event.target !== settingsIcon && event.target !== settingsPopup && event.target !== closeButton) {
-          settingsPopup.style.display = 'none';
-      }
-  });
-});
-</script>
-
-
-
-
-<div id="settings-icon">☰</div>
-
-<!-- Add the settings popup -->
-<div id="settings-popup">
-  <!-- Close button -->
-  <div id="close-button">✖️</div>
-
-  <!-- Links in the popup -->
-  <a href="/privacy.html">Privacy Policy</a>
-   <a href="https://reportaproblem.webador.co.uk">Contact</a> <a href="https://ripples.ltd">back to home</a>    
- 
-</div>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simple Calculator</title>
-  <style>
-    /* Add some basic styling for the calculator */
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-    }
-    .calculator {
-      width: 200px;
-      margin: 0 auto;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    input[type="button"] {
-      width: 40px;
-      height: 40px;
-      font-size: 18px;
-    }
-  </style>
-</head>
-<body>
-  <div class="calculator">
-    <input type="text" id="result" readonly>
-    <br>
-    <input type="button" value="7" onclick="appendToResult('7')">
-    <input type="button" value="8" onclick="appendToResult('8')">
-    <input type="button" value="9" onclick="appendToResult('9')">
-    <input type="button" value="+" onclick="appendToResult('+')">
-    <br>
-    <input type="button" value="4" onclick="appendToResult('4')">
-    <input type="button" value="5" onclick="appendToResult('5')">
-    <input type="button" value="6" onclick="appendToResult('6')">
-    <input type="button" value="-" onclick="appendToResult('-')">
-    <br>
-    <input type="button" value="1" onclick="appendToResult('1')">
-    <input type="button" value="2" onclick="appendToResult('2')">
-    <input type="button" value="3" onclick="appendToResult('3')">
-    <input type="button" value="*" onclick="appendToResult('*')">
-    <br>
-    <input type="button" value="0" onclick="appendToResult('0')">
-    <input type="button" value="." onclick="appendToResult('.')">
-    <input type="button" value="=" onclick="calculateResult()">
-    <input type="button" value="/" onclick="appendToResult('/')">
-    <br>
-    <input type="button" value="C" onclick="clearResult()">
-  </div>
-
-  <script>
-    function appendToResult(value) {
-      document.getElementById('result').value += value;
-    }
-
-    function calculateResult() {
-      try {
-        const result = eval(document.getElementById('result').value);
-        document.getElementById('result').value = result;
-      } catch (error) {
-        document.getElementById('result').value = 'Error';
-      }
-    }
-
-    function clearResult() {
-      document.getElementById('result').value = '';
-    }
-  </script>
-</body>
-</html><style>
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.9);
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .loading-logo {
-            animation: rotateLogo 0.33s linear infinite;
-            max-width: 100px;
-            height: auto;
-        }
-
-        @keyframes rotateLogo {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="loading-overlay" id="loading-overlay">
-        <img src="https://primary.jwwb.nl/public/p/o/q/temp-ltqbhvxiogcjtmhhoqte/y2fmvv/logo.png?enable-io=true&enable=upscale&crop=1015%2C1001%2Cx0%2Cy0%2Csafe&width=1000&height=1000" alt="Loading..." class="loading-logo">
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const loadingOverlay = document.getElementById('loading-overlay');
-
-            // Show loading animation on page load
-            loadingOverlay.style.display = 'flex';
-
-            // Hide loading animation after 1 second (adjust the duration as needed)
-            setTimeout(() => {
-                loadingOverlay.style.display = 'none';
-            }, 333); // 1 second duration
-        });
-    </script>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website with Loading Animation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+        .button {
             width: 100%;
             height: 100%;
-            background-color: rgba(255, 255, 255, 0.9);
-            z-index: 9999;
-            display: none;
-            justify-content: center;
+            border-radius: 50%;
+            display: flex;
             align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0.5rem;
+            transition: background-color 0.2s;
         }
-
-        .loading-logo {
-            animation: rotateLogo 0.33s linear infinite;
-            max-width: 100px;
-            height: auto;
+        .button-operator {
+            background-color: #f1a33c;
+            color: white;
         }
-
-        @keyframes rotateLogo {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
+        .button-operator:hover {
+            background-color: #d18b2e;
+        }
+        .button-number, .button-function {
+            background-color: #505050;
+            color: white;
+        }
+        .button-number:hover, .button-function:hover {
+            background-color: #3e3e3e;
+        }
+        .button-zero {
+            width: 100%;
+            border-radius: 50px;
         }
     </style>
+</head>
+<body class="bg-black flex items-center justify-center h-screen">
+    <div class="w-full max-w-xs h-full p-4">
+        <div id="calculation" class="text-gray-400 text-right text-2xl p-2"></div>
+        <div id="display" class="text-white text-right text-6xl p-4">0</div>
+        <div class="grid grid-cols-4 gap-2">
+            <div class="col-span-1">
+                <div class="button button-function" onclick="clearDisplay()">AC</div>
+            </div>
+            <div class="col-span-1">
+                <div class="button button-function" onclick="toggleSign()">+/-</div>
+            </div>
+            <div class="col-span-1">
+                <div class="button button-function" onclick="percentage()">%</div>
+            </div>
+            <div class="col-span-1">
+                <div class="button button-operator" onclick="appendOperator('÷')">÷</div>
+            </div>
+            <div class="col-span-1">
+                <div class="button button-number" onclick="appendNumber(7)">7</div>
+            </div>
+            <div class="col-span-1">
+                <div class="button button-number" onclick="appendNumber(8)">8</div>
+            </div>
+            <div class="col-span-1">
+                <div class="button button-number" onclick="appendNumber(9)">9</div>
+            </div>
+            <div class="col-span-1">
+                <div class="button button-operator" onclick="appendOperator('×')">×</div>
+            </div>
+            <div class="col-span-1">
+                <div class="button button-number" onclick="appendNumber(4)">4</div>
+            </div>
+            <div class="col-span-1">
+                <div class="button button-number" onclick="appendNumber(5)">5</div>
+            </div>
+            <div class="col-span-1">
+                <div class="button button-number" onclick="appendNumber(6)">6</div>
+            </div>
+            <div class="col-span-1">
+                <div class="button button-operator" onclick="appendOperator('−')">−</div>
+            </div>
+            <div class="col-span-1">
+                <div class="button button-number" onclick="appendNumber(1)">1</div>
+            </div>
+            <div class="col-span-1">
+                <div class="button button-number" onclick="appendNumber(2)">2</div>
+            </div>
+            <div class="col-span-1">
+                <div class="button button-number" onclick="appendNumber(3)">3</div>
+            </div>
+            <div class="col-span-1">
+                <div class="button button-operator" onclick="appendOperator('+')">+</div>
+            </div>
+            <div class="col-span-2">
+                <div class="button button-zero button-number" onclick="appendNumber(0)">0</div>
+            </div>
+            <div class="col-span-1">
+                <div class="button button-number" onclick="appendDot()">.</div>
+            </div>
+            <div class="col-span-1">
+                <div class="button button-operator" onclick="calculate()">=</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let display = document.getElementById('display');
+        let calculation = document.getElementById('calculation');
+        let currentInput = '0';
+        let operator = null;
+        let previousInput = null;
+
+        function updateDisplay() {
+            display.innerText = currentInput;
+            calculation.innerText = previousInput ? `${previousInput} ${operator || ''} ${currentInput}` : currentInput;
+        }
+
+        function clearDisplay() {
+            currentInput = '0';
+            operator = null;
+            previousInput = null;
+            updateDisplay();
+        }
+
+        function appendNumber(number) {
+            if (currentInput === '0') {
+                currentInput = number.toString();
+            } else {
+                currentInput += number.toString();
+            }
+            updateDisplay();
+        }
+
+        function appendDot() {
+            if (!currentInput.includes('.')) {
+                currentInput += '.';
+            }
+            updateDisplay();
+        }
+
+        function appendOperator(op) {
+            if (operator !== null) {
+                calculate();
+            }
+            previousInput = currentInput;
+            currentInput = '0';
+            operator = op;
+            updateDisplay();
+        }
+
+        function calculate() {
+            if (operator === null || previousInput === null) {
+                return;
+            }
+            let result;
+            const prev = parseFloat(previousInput);
+            const current = parseFloat(currentInput);
+            switch (operator) {
+                case '+':
+                    result = prev + current;
+                    break;
+                case '−':
+                    result = prev - current;
+                    break;
+                case '×':
+                    result = prev * current;
+                    break;
+                case '÷':
+                    result = prev / current;
+                    break;
+                default:
+                    return;
+            }
+            currentInput = result.toString();
+            operator = null;
+            previousInput = null;
+            updateDisplay();
+        }
+
+        function toggleSign() {
+            currentInput = (parseFloat(currentInput) * -1).toString();
+            updateDisplay();
+        }
+
+        function percentage() {
+            currentInput = (parseFloat(currentInput) / 100).toString();
+            updateDisplay();
+        }
+    </script>
+</body>
+</html>
