@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Camera App</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .controls {
+            position: absolute;
+            bottom: 120px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .switch {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 5px;
+            padding: 8px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s;
+        }
+
+        .switch:hover {
+            background-color: rgba(255, 255, 255, 1);
+        }
+
+        .switch.active {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        #photoButton {
+            position: absolute;
+            bottom: 30px;
+            background-color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 22px;
+            transition: transform 0.2s;
+        }
+
+        #photoButton:active {
+            transform: scale(0.95);
+        }
+
+        #timer {
+            position: absolute;
+            bottom: 80px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .thumbnail {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            width: 80px;
+            height: auto;
+            cursor: pointer;
+            border: 2px solid white;
+            display: none;
+        }
+
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .popup-content {
+            position: relative;
+        }
+
+        .popup-content img,
+        .popup-content video {
+            max-width: 95%;
+            max-height: 95%;
+        }
+
+        .close-popup {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 600px) {
+            #photoButton {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+
+            .controls {
+                bottom: 100px;
+                gap: 5px;
+            }
+
+            .switch {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+
+            #timer {
+                bottom: 60px;
+                font-size: 14px;
+            }
+
+            .thumbnail {
+                width: 60px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <video id="video" autoplay playsinline muted></video>
+    <canvas id="canvas"></canvas>
+    <img id="thumbnail" class="thumbnail" alt="Thumbnail" />
+
+    <div class="controls">
+        <button id="photoMode" class="switch active">Photo</button>
+        <button id="videoMode" class="switch">Video</button>
+        <button id="flashToggle" class="switch">Flash</button>
+        <button id="switchCamera" class="switch">🔁</button>
+    </div>
+
+    <div id="timer"></div>
+    <button id="photoButton">📸</button>
+
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <button class="close-popup" id="closePopup">Close</button>
+            <img id="popupImage" alt="Captured Media" style="display: none;" />
+            <video id="popupVideo" controls style="display: none;"></video>
+        </div>
+    </div>
+
+    <script>
+      const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const photoButton = document.getElementById('photoButton');
+        const photoMode = document.getElementById('photoMode');
+        const videoMode = document.getElementById('videoMode');
+        const timer = document.getElementById('timer');
+        const thumbnail = document.getElementById('thumbnail');
+        const flashToggle = document.getElementById('flashToggle');
+        const switchCamera = document.getElementById('switchCamera');
+        const popup = document.getElementById('popup');
+        const popupImage = document.getElementById('popupImage');
+        const popupVideo = document.getElementById('popupVideo');
+        const closePopup = document.getElementById('closePopup');
+
+        let isPhotoMode = true;
+        let recording = false;
+        let recordedChunks = [];
+        let mediaRecorder;
+        let startTime;
+        let currentStream;
+        let isFlashOn = false;
+        let isFrontCamera = true;
+        let lastCapturedMedia;
+
+        function startCamera() {
+            const constraints = {
+                video: {
+                    facingMode: isFrontCamera ? 'user' : 'environment'
+                },
+                audio: true
+            };
+
+            navigator.mediaDevices.getUserMedia(constraints)
+                .then(stream => {
+                    currentStream = stream;
+                    video.srcObject = stream;
+
+                    mediaRecorder = new MediaRecorder(stream);
+                    mediaRecorder.ondataavailable = event => {
+                        if (event.data.size > 0) {
+                            recordedChunks.push(event.data);
+                        }
+                    };
+                    mediaRecorder.onstop = () => {
+                        const blob = new Blob(recordedChunks, { type: 'video/mp4' });
+                        const url = URL.createObjectURL(blob);
+                        lastCapturedMedia = { type: 'video', url: url };
+                        thumbnail.src = lastCapturedMedia.url;
+                        thumbnail.style.display = 'block';
+                        const a = document.createElement('a');
+                        a.href = lastCapturedMedia.url;
+                        a.download = 'video.mp4';
+                        a.click();
+                        recordedChunks = [];
+                    };
+                })
+                .catch(error => {
+                    console.error('Error accessing the camera:', error);
+                    alert('Unable to access the camera. Please ensure it is enabled and not in use by another app.');
+                });
+        }
+
+        startCamera();
+
+        photoButton.addEventListener('click', () => {
+            if (isPhotoMode) {
+                const context = canvas.getContext('2d');
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                const dataURL = canvas.toDataURL('image/png');
+
+                lastCapturedMedia = { type: 'image', url: dataURL };
+                thumbnail.src = dataURL;
+                thumbnail.style.display = 'block';
+                const a = document.createElement('a');
+                a.href = dataURL;
+                a.download = 'photo.png';
+                a.click();
+            } else {
+                if (!recording) {
+                    const context = canvas.getContext('2d');
+                    canvas.width = video.videoWidth;
+                    canvas.height = video.videoHeight;
+                    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                    const dataURL = canvas.toDataURL('image/png');
+                    lastCapturedMedia = { type: 'image', url: dataURL };
+                    thumbnail.src = dataURL;
+                    thumbnail.style.display = 'block';
+
+                    recordedChunks = [];
+                    mediaRecorder.start();
+                    startTime = Date.now();
+                    updateTimer();
+                    photoButton.textContent = '⏹️';
+                    recording = true;
+                } else {
+                    mediaRecorder.stop();
+                    timer.textContent = '';
+                    photoButton.textContent = '📹';
+                    recording = false;
+                }
+            }
+        });
+
+        function updateTimer() {
+            if (recording) {
+                const elapsed = Math.floor((Date.now() - startTime) / 1000);
+                timer.textContent = `Recording: ${elapsed}s`;
+                requestAnimationFrame(updateTimer);
+            }
+        }
+
+        photoMode.addEventListener('click', () => {
+            isPhotoMode = true;
+            photoMode.classList.add('active');
+            videoMode.classList.remove('active');
+            photoButton.textContent = '📸';
+            timer.textContent = '';
+            thumbnail.style.display = 'none';
+        });
+
+        videoMode.addEventListener('click', () => {
+            isPhotoMode = false;
+            videoMode.classList.add('active');
+            photoMode.classList.remove('active');
+            photoButton.textContent = '📹';
+        });
+
+        thumbnail.addEventListener('click', () => {
+            if (lastCapturedMedia) {
+                if (lastCapturedMedia.type === 'image') {
+                    popupImage.src = lastCapturedMedia.url;
+                    popupImage.style.display = 'block';
+                    popupVideo.style.display = 'none';
+                } else if (lastCapturedMedia.type === 'video') {
+                    popupVideo.src = lastCapturedMedia.url;
+                    popupVideo.style.display = 'block';
+                    popupImage.style.display = 'none';
+                }
+                popup.style.display = 'flex';
+            }
+        });
+
+        closePopup.addEventListener('click', () => {
+            popup.style.display = 'none';
+            popupImage.src = '';
+            popupVideo.src = '';
+        });
+
+        flashToggle.addEventListener('click', () => {
+            isFlashOn = !isFlashOn;
+            flashToggle.textContent = isFlashOn ? 'Flash On' : 'Flash Off';
+            // Implement flash functionality if supported
+        });
+
+        switchCamera.addEventListener('click', () => {
+            isFrontCamera = !isFrontCamera;
+            currentStream.getTracks().forEach(track => track.stop()); // Stop current stream
+            startCamera(); // Restart camera with the new facing mode
+        });
+    </script>
+</body>
+</html>
